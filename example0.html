@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Set Theory — Slide 2 (EN/HU)</title>
+<title>Set Theory — Slide 2 (EN/HU with Examples)</title>
 <style>
   :root{
     --bg: #f7f9fb;
@@ -93,6 +93,7 @@
     padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,0.15); color:#0369a1; margin-left:.5rem;
   }
   .hint{color:var(--muted); font-size:.9rem}
+  .sym{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
   @media (max-width:720px){
     body{padding:1rem}
     thead th{font-size:.95rem}
@@ -102,6 +103,12 @@
   }
 </style>
 <script>
+  function toggleExamples(){
+    const rows = document.querySelectorAll('tr[data-ex="1"]');
+    const on = [...rows].some(r => r.style.display === 'none');
+    rows.forEach(r => r.style.display = on ? '' : 'none');
+    document.getElementById('exBtn').textContent = on ? 'Hide examples' : 'Show examples';
+  }
   function printPage(){ window.print(); }
 </script>
 </head>
@@ -131,9 +138,10 @@
           <div id="slide-title" class="subtitle">
             Slide 2 — The Concept of a Set / A halmaz fogalma
           </div>
-          <div class="hint">Bilingual bullets (EN/HU)</div>
+          <div class="hint">Bilingual bullets with geoscience examples (toggle below)</div>
         </div>
         <div class="tools">
+          <button id="exBtn" class="btn" onclick="toggleExamples()">Hide examples</button>
           <button class="btn" onclick="printPage()">Print</button>
         </div>
       </div>
@@ -154,40 +162,79 @@
             <td>A <strong>set</strong> = a collection of objects taken as one whole</td>
             <td>A <strong>halmaz</strong> = dolgok összessége, egy egységként kezelve</td>
           </tr>
+          <tr data-ex="1">
+            <td><em>Example:</em> “Formation F rock set” = {all rock samples collected from Formation F}.</td>
+            <td><em>Példa:</em> „F formáció kőzet-halmaza” = {az F formációból gyűjtött összes kőzetminta}.</td>
+          </tr>
+
           <tr>
             <td>The objects inside are called <strong>elements</strong></td>
             <td>A halmazban lévő dolgok: <strong>elemek</strong></td>
           </tr>
+          <tr data-ex="1">
+            <td><em>Example:</em> Elements of the set could be basalt, andesite, sandstone samples.</td>
+            <td><em>Példa:</em> A halmaz elemei lehetnek bazalt, andezit, homokkő minták.</td>
+          </tr>
+
           <tr>
             <td>“Set” and “element” are <strong>basic concepts</strong> (not defined further)</td>
             <td>„Halmaz” és „elem” = <strong>alapfogalmak</strong> (nem vezetjük vissza másra)</td>
           </tr>
+          <tr data-ex="1">
+            <td><em>Example:</em> We don’t define “set” via other notions; we just use it to group samples.</td>
+            <td><em>Példa:</em> A „halmazt” nem más fogalmakkal definiáljuk; egyszerűen a minták csoportosítására használjuk.</td>
+          </tr>
+
           <tr>
             <td>The branch of math that studies sets = <strong>Set Theory</strong></td>
             <td>A halmazokkal foglalkozó matematikai ág: <strong>Halmazelmélet</strong></td>
           </tr>
+          <tr data-ex="1">
+            <td><em>Example:</em> We model “rock types in a formation” using sets and set operations.</td>
+            <td><em>Példa:</em> A „formáció kőzettípusai” fogalmat halmazokkal és halmazműveletekkel modellezzük.</td>
+          </tr>
+
           <tr>
             <td>• Founded by <strong>Georg Cantor (1845–1918)</strong></td>
             <td>• Alapítója: <strong>Georg Cantor (1845–1918)</strong></td>
           </tr>
+          <tr data-ex="1">
+            <td><em>Example:</em> Cantor’s ideas let us reason about finite/inf inite collections (e.g., all outcrops).</td>
+            <td><em>Példa:</em> Cantor elméletei segítenek véges/végtelen gyűjteményekről gondolkodni (pl. összes feltárás).</td>
+          </tr>
+
           <tr>
             <td>In naive set theory, a set can contain <strong>any kind of objects</strong></td>
             <td>A naiv halmazelmélet szerint a halmaz elemei <strong>bármi lehetnek</strong></td>
           </tr>
+          <tr data-ex="1">
+            <td><em>Example:</em> A set may mix samples, mineral names, GPS coordinates, even photos of outcrops.</td>
+            <td><em>Példa:</em> Egy halmaz tartalmazhat mintákat, ásványneveket, GPS-koordinátákat, sőt feltárás-fotókat is.</td>
+          </tr>
+
           <tr>
             <td>A set is <strong>completely determined</strong> by its elements</td>
             <td>Egy halmazt az <strong>elemei teljesen meghatároznak</strong></td>
           </tr>
+          <tr data-ex="1">
+            <td><em>Example:</em> {granite, basalt} = {basalt, granite} — the rock list (elements) defines the set.</td>
+            <td><em>Példa:</em> {gránit, bazalt} = {bazalt, gránit} — az elemek listája meghatározza a halmazt.</td>
+          </tr>
+
           <tr>
             <td>Sets do <strong>not change over time</strong></td>
             <td>Halmazok <strong>nem változnak időben</strong></td>
+          </tr>
+          <tr data-ex="1">
+            <td><em>Example:</em> A cataloged “Field Day 1 sample set” stays the same; new finds go to a <span class="sym">new</span> set.</td>
+            <td><em>Példa:</em> A „1. terepnap mintahalmaza” rögzített; az új leletek egy <span class="sym">új</span> halmazba kerülnek.</td>
           </tr>
         </tbody>
       </table>
     </section>
 
     <p class="hint" style="margin-top:.75rem;">
-      Tip: If you want, I can merge Slides 2 & 3 into one printable sheet with matching styling.
+      Tip: Click “Hide examples” to elicit definitions first, then reveal the geology context.
     </p>
   </div>
 </body>
