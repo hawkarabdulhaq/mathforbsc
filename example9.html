@@ -15,13 +15,13 @@
     --accent3:#16a34a;   /* C */
     --border: #e2e8f0;
     --shadow: 0 10px 30px rgba(2,6,23,0.08);
-    --shade: rgba(2,6,23,.12);
+    --shade: rgba(15,23,42,0.40); /* shaded highlight */
   }
   @media (prefers-color-scheme: dark){
     :root{
       --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
       --accent:#60a5fa; --accent2:#f87171; --accent3:#4ade80;
-      --border:#1f2a44; --shadow: 0 10px 30px rgba(0,0,0,0.5); --shade: rgba(255,255,255,.12);
+      --border:#1f2a44; --shadow: 0 10px 30px rgba(0,0,0,0.5); --shade: rgba(255,255,255,0.35);
     }
   }
   *{box-sizing:border-box}
@@ -63,7 +63,6 @@
     display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
   }
   .bar .subtitle{font-weight:600}
-  .bar .tools{display:flex; gap:.5rem}
   .btn{
     border:1px solid var(--border); background:transparent; color:var(--ink);
     padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600;
@@ -81,7 +80,12 @@
     display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em;
     padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,0.15); color:#0369a1; margin-left:.5rem;
   }
-  .note{font-size:.95rem; color:var(--muted)}
+  .legend{display:flex; gap:1rem; align-items:center; flex-wrap:wrap; font-size:.95rem; color:var(--muted); padding:.25rem 1rem .75rem;}
+  .chip{display:inline-flex; align-items:center; gap:.35rem;}
+  .dot{width:12px; height:12px; border-radius:999px; display:inline-block;}
+  .dot.a{background:rgba(37,99,235,.8)}
+  .dot.b{background:rgba(220,38,38,.8)}
+  .dot.c{background:rgba(22,163,74,.8)}
 
   @media (max-width:720px){
     body{padding:1rem}
@@ -91,21 +95,14 @@
     .logo-chip.logo-dept img{height:48px}
   }
 
-  /* Venn base */
-  .venn { display:flex; justify-content:center; align-items:center; padding:.5rem 0 .9rem; background:linear-gradient(180deg,transparent, var(--shade)); }
+  /* Venn visuals (English-only labels inside SVGs) */
+  .venn { display:flex; justify-content:center; align-items:center; padding:.5rem 0 .9rem; }
   svg{max-width:300px; height:auto;}
-  .A{fill: rgba(37,99,235,0.25); stroke: var(--accent); stroke-width:2;}
-  .B{fill: rgba(220,38,38,0.25); stroke: var(--accent2); stroke-width:2;}
-  .C{fill: rgba(22,163,74,0.25); stroke: var(--accent3); stroke-width:2;}
-  .shade{fill: rgba(15,23,42,0.35);}              /* used for highlights */
-  .maskWhite{fill:#fff;}
+  .Aline{fill:none; stroke: var(--accent); stroke-width:2;}
+  .Bline{fill:none; stroke: var(--accent2); stroke-width:2;}
+  .Cline{fill:none; stroke: var(--accent3); stroke-width:2;}
+  .shade{fill: var(--shade);}
   .label{font-size:14px; font-weight:600; fill:var(--ink);}
-  .legend{display:flex; gap:.75rem; align-items:center; flex-wrap:wrap; font-size:.95rem; color:var(--muted); padding:.5rem 1rem;}
-  .chip{display:inline-flex; align-items:center; gap:.35rem;}
-  .dot{width:12px; height:12px; border-radius:999px; display:inline-block;}
-  .dot.a{background:rgba(37,99,235,.7)}
-  .dot.b{background:rgba(220,38,38,.7)}
-  .dot.c{background:rgba(22,163,74,.7)}
 </style>
 <script>
   function printPage(){ window.print(); }
@@ -128,20 +125,21 @@
           </span>
         </div>
       </div>
-      <h2>ABDULHAQ Hawkar — Sets A, B, C (Simple meanings + visuals)</h2>
+      <h2>ABDULHAQ Hawkar — Sets A, B, C (Simple meanings + precise visuals)</h2>
     </header>
 
     <section class="card" aria-labelledby="slide-title">
       <div class="bar">
         <div>
           <div id="slide-title" class="subtitle">
-            Slide 10 — Understand A, B, C with unions, intersections, differences / Értsük meg A, B, C halmazokat
-            <span class="hint">A: volcanic • B: intrusive igneous • C: sedimentary</span>
+            Slide 10 — Understand A, B, C with unions, intersections, differences
+            <span class="hint">A: volcanic • B: intrusive (plutonic) igneous • C: sedimentary</span>
           </div>
+          <!-- English-only legend (visual labels are English-only) -->
           <div class="legend">
-            <span class="chip"><span class="dot a"></span> A = volcanic rocks / vulkáni kőzetek</span>
-            <span class="chip"><span class="dot b"></span> B = intrusive (plutonic) / mélységi magmás</span>
-            <span class="chip"><span class="dot c"></span> C = sedimentary / üledékes</span>
+            <span class="chip"><span class="dot a"></span> A = volcanic rocks</span>
+            <span class="chip"><span class="dot b"></span> B = intrusive (plutonic) igneous rocks</span>
+            <span class="chip"><span class="dot c"></span> C = sedimentary rocks</span>
           </div>
         </div>
         <div class="tools">
@@ -161,37 +159,39 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Definitions of A, B, C -->
+          <!-- Define A, B, C -->
           <tr>
-            <td><strong>Let A</strong> be the set of <strong>volcanic rocks</strong>. <strong>Let B</strong> be the set of <strong>intrusive igneous rocks</strong>. <strong>Let C</strong> be the set of <strong>sedimentary rocks</strong>.</td>
-            <td><strong>Legyen A</strong> a <strong>vulkáni kőzetek</strong> halmaza. <strong>Legyen B</strong> a <strong>mélységi (intruzív) magmás kőzetek</strong> halmaza. <strong>Legyen C</strong> az <strong>üledékes kőzetek</strong> halmaza.</td>
+            <td><strong>Let A</strong> = set of <strong>volcanic rocks</strong>. <strong>Let B</strong> = set of <strong>intrusive igneous rocks</strong>. <strong>Let C</strong> = set of <strong>sedimentary rocks</strong>.</td>
+            <td><strong>Legyen A</strong> = a <strong>vulkáni kőzetek</strong> halmaza. <strong>Legyen B</strong> = a <strong>mélységi (intruzív) magmás kőzetek</strong> halmaza. <strong>Legyen C</strong> = az <strong>üledékes kőzetek</strong> halmaza.</td>
           </tr>
 
           <!-- A ∪ B -->
           <tr>
-            <td><strong>A ∪ B</strong>: everything that is volcanic <em>or</em> intrusive (or both). Simple: “volcanic + intrusive”.</td>
-            <td><strong>A ∪ B</strong>: minden, ami vulkáni <em>vagy</em> mélységi (vagy mindkettő). Egyszerűen: „vulkáni + intruzív”.</td>
+            <td><strong>A ∪ B</strong>: everything that is volcanic <em>or</em> intrusive (or both).</td>
+            <td><strong>A ∪ B</strong>: minden, ami vulkáni <em>vagy</em> intruzív (vagy mindkettő).</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="venn">
-                <!-- 3-set base + shade A and B -->
-                <svg viewBox="0 0 220 150" aria-label="A ∪ B">
+                <svg viewBox="0 0 220 150" aria-label="A union B">
+                  <!-- outlines -->
+                  <circle class="Aline" cx="70" cy="95" r="45"/>
+                  <circle class="Bline" cx="150" cy="95" r="45"/>
+                  <circle class="Cline" cx="110" cy="55" r="45"/>
+                  <!-- precise union mask of A and B -->
                   <defs>
-                    <!-- masks to keep circles rounded when we add white patches -->
-                    <clipPath id="clipAll"><rect x="0" y="0" width="220" height="150" rx="12"/></clipPath>
+                    <mask id="mask_union_AB">
+                      <rect x="0" y="0" width="220" height="150" fill="black"/>
+                      <circle cx="70" cy="95" r="45" fill="white"/>
+                      <circle cx="150" cy="95" r="45" fill="white"/>
+                    </mask>
                   </defs>
-                  <!-- base circles -->
-                  <circle class="A" cx="70" cy="95" r="45" />
-                  <circle class="B" cx="150" cy="95" r="45" />
-                  <circle class="C" cx="110" cy="55" r="45" />
-                  <!-- shade union A or B by overlaying semi-opaque patches exactly over A and B -->
-                  <circle class="shade" cx="70" cy="95" r="45" clip-path="url(#clipAll)"/>
-                  <circle class="shade" cx="150" cy="95" r="45" clip-path="url(#clipAll)"/>
-                  <text class="label" x="60" y="90">A</text>
-                  <text class="label" x="160" y="90">B</text>
-                  <text class="label" x="105" y="50">C</text>
-                  <text class="label" x="10" y="140">Shaded: A ∪ B / Besatírozva: A ∪ B</text>
+                  <rect class="shade" x="0" y="0" width="220" height="150" mask="url(#mask_union_AB)"/>
+                  <!-- English-only labels -->
+                  <text class="label" x="58" y="90">A</text>
+                  <text class="label" x="162" y="90">B</text>
+                  <text class="label" x="106" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A ∪ B</text>
                 </svg>
               </div>
             </td>
@@ -199,22 +199,30 @@
 
           <!-- A ∩ B -->
           <tr>
-            <td><strong>A ∩ B</strong>: things that are <em>both</em> volcanic and intrusive (if any). “Overlap of A and B”.</td>
-            <td><strong>A ∩ B</strong>: ami <em>egyszerre</em> vulkáni és mélységi (ha van ilyen). „A és B közös része”.</td>
+            <td><strong>A ∩ B</strong>: items that are in both A and B (their overlap).</td>
+            <td><strong>A ∩ B</strong>: azok az elemek, amelyek A-ban és B-ben is benne vannak (a közös rész).</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="venn">
-                <svg viewBox="0 0 220 150" aria-label="A ∩ B">
-                  <circle class="A" cx="70" cy="95" r="45" />
-                  <circle class="B" cx="150" cy="95" r="45" />
-                  <circle class="C" cx="110" cy="55" r="45" />
-                  <!-- highlight intersection of A & B by shading center lens -->
-                  <ellipse class="shade" cx="110" cy="95" rx="28" ry="45"/>
-                  <text class="label" x="60" y="90">A</text>
-                  <text class="label" x="160" y="90">B</text>
-                  <text class="label" x="105" y="50">C</text>
-                  <text class="label" x="10" y="140">Shaded: A ∩ B / Besatírozva: A ∩ B</text>
+                <svg viewBox="0 0 220 150" aria-label="A intersect B">
+                  <circle class="Aline" cx="70" cy="95" r="45"/>
+                  <circle class="Bline" cx="150" cy="95" r="45"/>
+                  <circle class="Cline" cx="110" cy="55" r="45"/>
+                  <!-- precise intersection using nested clipPaths -->
+                  <defs>
+                    <clipPath id="clipA"><circle cx="70" cy="95" r="45"/></clipPath>
+                    <clipPath id="clipB"><circle cx="150" cy="95" r="45"/></clipPath>
+                  </defs>
+                  <g clip-path="url(#clipA)">
+                    <g clip-path="url(#clipB)">
+                      <rect class="shade" x="0" y="0" width="220" height="150"/>
+                    </g>
+                  </g>
+                  <text class="label" x="58" y="90">A</text>
+                  <text class="label" x="162" y="90">B</text>
+                  <text class="label" x="106" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A ∩ B</text>
                 </svg>
               </div>
             </td>
@@ -222,22 +230,28 @@
 
           <!-- A ∪ C -->
           <tr>
-            <td><strong>A ∪ C</strong>: everything volcanic <em>or</em> sedimentary (or both). “Volcanic + sedimentary”.</td>
-            <td><strong>A ∪ C</strong>: minden vulkáni <em>vagy</em> üledékes (vagy mindkettő). „Vulkáni + üledékes”.</td>
+            <td><strong>A ∪ C</strong>: everything that is volcanic <em>or</em> sedimentary (or both).</td>
+            <td><strong>A ∪ C</strong>: minden, ami vulkáni <em>vagy</em> üledékes (vagy mindkettő).</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="venn">
-                <svg viewBox="0 0 220 150" aria-label="A ∪ C">
-                  <circle class="A" cx="70" cy="95" r="45" />
-                  <circle class="B" cx="150" cy="95" r="45" />
-                  <circle class="C" cx="110" cy="55" r="45" />
-                  <circle class="shade" cx="70" cy="95" r="45"/>
-                  <circle class="shade" cx="110" cy="55" r="45"/>
-                  <text class="label" x="60" y="90">A</text>
-                  <text class="label" x="160" y="90">B</text>
-                  <text class="label" x="105" y="50">C</text>
-                  <text class="label" x="10" y="140">Shaded: A ∪ C / Besatírozva: A ∪ C</text>
+                <svg viewBox="0 0 220 150" aria-label="A union C">
+                  <circle class="Aline" cx="70" cy="95" r="45"/>
+                  <circle class="Bline" cx="150" cy="95" r="45"/>
+                  <circle class="Cline" cx="110" cy="55" r="45"/>
+                  <defs>
+                    <mask id="mask_union_AC">
+                      <rect x="0" y="0" width="220" height="150" fill="black"/>
+                      <circle cx="70" cy="95" r="45" fill="white"/>
+                      <circle cx="110" cy="55" r="45" fill="white"/>
+                    </mask>
+                  </defs>
+                  <rect class="shade" x="0" y="0" width="220" height="150" mask="url(#mask_union_AC)"/>
+                  <text class="label" x="58" y="90">A</text>
+                  <text class="label" x="162" y="90">B</text>
+                  <text class="label" x="106" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A ∪ C</text>
                 </svg>
               </div>
             </td>
@@ -245,22 +259,28 @@
 
           <!-- B ∪ C -->
           <tr>
-            <td><strong>B ∪ C</strong>: everything intrusive <em>or</em> sedimentary (or both).</td>
-            <td><strong>B ∪ C</strong>: minden mélységi <em>vagy</em> üledékes (vagy mindkettő).</td>
+            <td><strong>B ∪ C</strong>: everything that is intrusive <em>or</em> sedimentary (or both).</td>
+            <td><strong>B ∪ C</strong>: minden, ami intruzív <em>vagy</em> üledékes (vagy mindkettő).</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="venn">
-                <svg viewBox="0 0 220 150" aria-label="B ∪ C">
-                  <circle class="A" cx="70" cy="95" r="45" />
-                  <circle class="B" cx="150" cy="95" r="45" />
-                  <circle class="C" cx="110" cy="55" r="45" />
-                  <circle class="shade" cx="150" cy="95" r="45"/>
-                  <circle class="shade" cx="110" cy="55" r="45"/>
-                  <text class="label" x="60" y="90">A</text>
-                  <text class="label" x="160" y="90">B</text>
-                  <text class="label" x="105" y="50">C</text>
-                  <text class="label" x="10" y="140">Shaded: B ∪ C / Besatírozva: B ∪ C</text>
+                <svg viewBox="0 0 220 150" aria-label="B union C">
+                  <circle class="Aline" cx="70" cy="95" r="45"/>
+                  <circle class="Bline" cx="150" cy="95" r="45"/>
+                  <circle class="Cline" cx="110" cy="55" r="45"/>
+                  <defs>
+                    <mask id="mask_union_BC">
+                      <rect x="0" y="0" width="220" height="150" fill="black"/>
+                      <circle cx="150" cy="95" r="45" fill="white"/>
+                      <circle cx="110" cy="55" r="45" fill="white"/>
+                    </mask>
+                  </defs>
+                  <rect class="shade" x="0" y="0" width="220" height="150" mask="url(#mask_union_BC)"/>
+                  <text class="label" x="58" y="90">A</text>
+                  <text class="label" x="162" y="90">B</text>
+                  <text class="label" x="106" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: B ∪ C</text>
                 </svg>
               </div>
             </td>
@@ -268,23 +288,29 @@
 
           <!-- A ∪ B ∪ C -->
           <tr>
-            <td><strong>A ∪ B ∪ C</strong>: everything in any of the three sets. “All volcanic or intrusive or sedimentary”.</td>
-            <td><strong>A ∪ B ∪ C</strong>: ami bármelyik három halmazban benne van. „Minden vulkáni vagy intruzív vagy üledékes”.</td>
+            <td><strong>A ∪ B ∪ C</strong>: everything in any of the three sets.</td>
+            <td><strong>A ∪ B ∪ C</strong>: ami bármelyik három halmazban benne van.</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="venn">
-                <svg viewBox="0 0 220 150" aria-label="A ∪ B ∪ C">
-                  <circle class="A" cx="70" cy="95" r="45" />
-                  <circle class="B" cx="150" cy="95" r="45" />
-                  <circle class="C" cx="110" cy="55" r="45" />
-                  <circle class="shade" cx="70" cy="95" r="45"/>
-                  <circle class="shade" cx="150" cy="95" r="45"/>
-                  <circle class="shade" cx="110" cy="55" r="45"/>
-                  <text class="label" x="60" y="90">A</text>
-                  <text class="label" x="160" y="90">B</text>
-                  <text class="label" x="105" y="50">C</text>
-                  <text class="label" x="10" y="140">Shaded: A ∪ B ∪ C / Besatírozva: A ∪ B ∪ C</text>
+                <svg viewBox="0 0 220 150" aria-label="A union B union C">
+                  <circle class="Aline" cx="70" cy="95" r="45"/>
+                  <circle class="Bline" cx="150" cy="95" r="45"/>
+                  <circle class="Cline" cx="110" cy="55" r="45"/>
+                  <defs>
+                    <mask id="mask_union_ABC">
+                      <rect x="0" y="0" width="220" height="150" fill="black"/>
+                      <circle cx="70" cy="95" r="45" fill="white"/>
+                      <circle cx="150" cy="95" r="45" fill="white"/>
+                      <circle cx="110" cy="55" r="45" fill="white"/>
+                    </mask>
+                  </defs>
+                  <rect class="shade" x="0" y="0" width="220" height="150" mask="url(#mask_union_ABC)"/>
+                  <text class="label" x="58" y="90">A</text>
+                  <text class="label" x="162" y="90">B</text>
+                  <text class="label" x="106" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A ∪ B ∪ C</text>
                 </svg>
               </div>
             </td>
@@ -292,21 +318,29 @@
 
           <!-- A ∩ C -->
           <tr>
-            <td><strong>A ∩ C</strong>: things that are both volcanic and sedimentary (if defined conceptually—overlap zone).</td>
-            <td><strong>A ∩ C</strong>: ami egyszerre vulkáni és üledékes (fogalmilag az átfedés).</td>
+            <td><strong>A ∩ C</strong>: items that are in both A and C.</td>
+            <td><strong>A ∩ C</strong>: azok az elemek, amelyek A-ban és C-ben is benne vannak.</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="venn">
-                <svg viewBox="0 0 220 150" aria-label="A ∩ C">
-                  <circle class="A" cx="70" cy="95" r="45" />
-                  <circle class="B" cx="150" cy="95" r="45" />
-                  <circle class="C" cx="110" cy="55" r="45" />
-                  <ellipse class="shade" cx="90" cy="75" rx="28" ry="32"/>
-                  <text class="label" x="60" y="90">A</text>
-                  <text class="label" x="160" y="90">B</text>
-                  <text class="label" x="105" y="50">C</text>
-                  <text class="label" x="10" y="140">Shaded: A ∩ C / Besatírozva: A ∩ C</text>
+                <svg viewBox="0 0 220 150" aria-label="A intersect C">
+                  <circle class="Aline" cx="70" cy="95" r="45"/>
+                  <circle class="Bline" cx="150" cy="95" r="45"/>
+                  <circle class="Cline" cx="110" cy="55" r="45"/>
+                  <defs>
+                    <clipPath id="clipC"><circle cx="110" cy="55" r="45"/></clipPath>
+                    <clipPath id="clipA2"><circle cx="70" cy="95" r="45"/></clipPath>
+                  </defs>
+                  <g clip-path="url(#clipA2)">
+                    <g clip-path="url(#clipC)">
+                      <rect class="shade" x="0" y="0" width="220" height="150"/>
+                    </g>
+                  </g>
+                  <text class="label" x="58" y="90">A</text>
+                  <text class="label" x="162" y="90">B</text>
+                  <text class="label" x="106" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A ∩ C</text>
                 </svg>
               </div>
             </td>
@@ -314,21 +348,29 @@
 
           <!-- B ∩ C -->
           <tr>
-            <td><strong>B ∩ C</strong>: both intrusive and sedimentary (overlap zone).</td>
-            <td><strong>B ∩ C</strong>: egyszerre intruzív és üledékes (átfedés).</td>
+            <td><strong>B ∩ C</strong>: items that are in both B and C.</td>
+            <td><strong>B ∩ C</strong>: azok az elemek, amelyek B-ben és C-ben is benne vannak.</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="venn">
-                <svg viewBox="0 0 220 150" aria-label="B ∩ C">
-                  <circle class="A" cx="70" cy="95" r="45" />
-                  <circle class="B" cx="150" cy="95" r="45" />
-                  <circle class="C" cx="110" cy="55" r="45" />
-                  <ellipse class="shade" cx="130" cy="75" rx="28" ry="32"/>
-                  <text class="label" x="60" y="90">A</text>
-                  <text class="label" x="160" y="90">B</text>
-                  <text class="label" x="105" y="50">C</text>
-                  <text class="label" x="10" y="140">Shaded: B ∩ C / Besatírozva: B ∩ C</text>
+                <svg viewBox="0 0 220 150" aria-label="B intersect C">
+                  <circle class="Aline" cx="70" cy="95" r="45"/>
+                  <circle class="Bline" cx="150" cy="95" r="45"/>
+                  <circle class="Cline" cx="110" cy="55" r="45"/>
+                  <defs>
+                    <clipPath id="clipB2"><circle cx="150" cy="95" r="45"/></clipPath>
+                    <clipPath id="clipC2"><circle cx="110" cy="55" r="45"/></clipPath>
+                  </defs>
+                  <g clip-path="url(#clipB2)">
+                    <g clip-path="url(#clipC2)">
+                      <rect class="shade" x="0" y="0" width="220" height="150"/>
+                    </g>
+                  </g>
+                  <text class="label" x="58" y="90">A</text>
+                  <text class="label" x="162" y="90">B</text>
+                  <text class="label" x="106" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: B ∩ C</text>
                 </svg>
               </div>
             </td>
@@ -336,21 +378,32 @@
 
           <!-- A ∩ B ∩ C -->
           <tr>
-            <td><strong>A ∩ B ∩ C</strong>: the tiny center where all three overlap (if any). “All three at once”.</td>
-            <td><strong>A ∩ B ∩ C</strong>: a középső, kicsi rész, ahol mindhárom átfed (ha van). „Mindhárom egyszerre”.</td>
+            <td><strong>A ∩ B ∩ C</strong>: the small center where all three overlap.</td>
+            <td><strong>A ∩ B ∩ C</strong>: a középső, kicsi rész, ahol mindhárom átfed.</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="venn">
-                <svg viewBox="0 0 220 150" aria-label="A ∩ B ∩ C">
-                  <circle class="A" cx="70" cy="95" r="45" />
-                  <circle class="B" cx="150" cy="95" r="45" />
-                  <circle class="C" cx="110" cy="55" r="45" />
-                  <circle class="shade" cx="110" cy="80" r="12"/>
-                  <text class="label" x="60" y="90">A</text>
-                  <text class="label" x="160" y="90">B</text>
-                  <text class="label" x="105" y="50">C</text>
-                  <text class="label" x="10" y="140">Shaded: A ∩ B ∩ C / Besatírozva: A ∩ B ∩ C</text>
+                <svg viewBox="0 0 220 150" aria-label="A intersect B intersect C">
+                  <circle class="Aline" cx="70" cy="95" r="45"/>
+                  <circle class="Bline" cx="150" cy="95" r="45"/>
+                  <circle class="Cline" cx="110" cy="55" r="45"/>
+                  <defs>
+                    <clipPath id="clipA3"><circle cx="70" cy="95" r="45"/></clipPath>
+                    <clipPath id="clipB3"><circle cx="150" cy="95" r="45"/></clipPath>
+                    <clipPath id="clipC3"><circle cx="110" cy="55" r="45"/></clipPath>
+                  </defs>
+                  <g clip-path="url(#clipA3)">
+                    <g clip-path="url(#clipB3)">
+                      <g clip-path="url(#clipC3)">
+                        <rect class="shade" x="0" y="0" width="220" height="150"/>
+                      </g>
+                    </g>
+                  </g>
+                  <text class="label" x="58" y="90">A</text>
+                  <text class="label" x="162" y="90">B</text>
+                  <text class="label" x="106" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A ∩ B ∩ C</text>
                 </svg>
               </div>
             </td>
@@ -358,23 +411,30 @@
 
           <!-- A \ B -->
           <tr>
-            <td><strong>A \ B</strong>: in A but not in B. “Volcanic, excluding intrusive”.</td>
-            <td><strong>A \ B</strong>: benne van A-ban, de nincs benne B-ben. „Vulkáni, az intruzív kivétele”.</td>
+            <td><strong>A \ B</strong>: in A but not in B (“A minus B”).</td>
+            <td><strong>A \ B</strong>: benne van A-ban, de nincs benne B-ben („A mínusz B”).</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="venn">
-                <svg viewBox="0 0 220 150" aria-label="A \ B">
-                  <circle class="A" cx="70" cy="95" r="45" />
-                  <circle class="B" cx="150" cy="95" r="45" />
-                  <circle class="C" cx="110" cy="55" r="45" />
-                  <!-- shade A, then erase the overlap with B by a white lens -->
-                  <circle class="shade" cx="70" cy="95" r="45"/>
-                  <ellipse class="maskWhite" cx="110" cy="95" rx="28" ry="45"/>
-                  <text class="label" x="60" y="90">A</text>
-                  <text class="label" x="160" y="90">B</text>
-                  <text class="label" x="105" y="50">C</text>
-                  <text class="label" x="10" y="140">Shaded: A \ B / Besatírozva: A \ B</text>
+                <svg viewBox="0 0 220 150" aria-label="A minus B">
+                  <circle class="Aline" cx="70" cy="95" r="45"/>
+                  <circle class="Bline" cx="150" cy="95" r="45"/>
+                  <circle class="Cline" cx="110" cy="55" r="45"/>
+                  <defs>
+                    <mask id="mask_A_minus_B">
+                      <rect x="0" y="0" width="220" height="150" fill="black"/>
+                      <!-- reveal A -->
+                      <circle cx="70" cy="95" r="45" fill="white"/>
+                      <!-- hide the A∩B part -->
+                      <circle cx="150" cy="95" r="45" fill="black"/>
+                    </mask>
+                  </defs>
+                  <rect class="shade" x="0" y="0" width="220" height="150" mask="url(#mask_A_minus_B)"/>
+                  <text class="label" x="58" y="90">A</text>
+                  <text class="label" x="162" y="90">B</text>
+                  <text class="label" x="106" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A \ B</text>
                 </svg>
               </div>
             </td>
@@ -382,24 +442,37 @@
 
           <!-- A Δ B -->
           <tr>
-            <td><strong>A Δ B</strong>: in A or in B, but not in both. “Parts of A and B that don’t overlap”.</td>
-            <td><strong>A Δ B</strong>: A-ban vagy B-ben, de nem mindkettőben. „A és B nem közös részei”.</td>
+            <td><strong>A Δ B</strong>: in A or in B, but not in both (the non-overlapping parts).</td>
+            <td><strong>A Δ B</strong>: A-ban vagy B-ben van, de nem mindkettőben (a nem közös részek).</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="venn">
-                <svg viewBox="0 0 220 150" aria-label="A Δ B">
-                  <circle class="A" cx="70" cy="95" r="45" />
-                  <circle class="B" cx="150" cy="95" r="45" />
-                  <circle class="C" cx="110" cy="55" r="45" />
-                  <!-- shade A and B, then unshade their intersection -->
-                  <circle class="shade" cx="70" cy="95" r="45"/>
-                  <circle class="shade" cx="150" cy="95" r="45"/>
-                  <ellipse class="maskWhite" cx="110" cy="95" rx="28" ry="45"/>
-                  <text class="label" x="60" y="90">A</text>
-                  <text class="label" x="160" y="90">B</text>
-                  <text class="label" x="105" y="50">C</text>
-                  <text class="label" x="10" y="140">Shaded: A Δ B / Besatírozva: A Δ B</text>
+                <svg viewBox="0 0 220 150" aria-label="A symmetric difference B">
+                  <circle class="Aline" cx="70" cy="95" r="45"/>
+                  <circle class="Bline" cx="150" cy="95" r="45"/>
+                  <circle class="Cline" cx="110" cy="55" r="45"/>
+                  <defs>
+                    <clipPath id="clipA4"><circle cx="70" cy="95" r="45"/></clipPath>
+                    <clipPath id="clipB4"><circle cx="150" cy="95" r="45"/></clipPath>
+                    <mask id="mask_symdiff_AB">
+                      <rect x="0" y="0" width="220" height="150" fill="black"/>
+                      <!-- union A and B -->
+                      <circle cx="70" cy="95" r="45" fill="white"/>
+                      <circle cx="150" cy="95" r="45" fill="white"/>
+                      <!-- subtract intersection -->
+                      <g clip-path="url(#clipA4)">
+                        <g clip-path="url(#clipB4)">
+                          <rect x="0" y="0" width="220" height="150" fill="black"/>
+                        </g>
+                      </g>
+                    </mask>
+                  </defs>
+                  <rect class="shade" x="0" y="0" width="220" height="150" mask="url(#mask_symdiff_AB)"/>
+                  <text class="label" x="58" y="90">A</text>
+                  <text class="label" x="162" y="90">B</text>
+                  <text class="label" x="106" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A Δ B</text>
                 </svg>
               </div>
             </td>
@@ -407,26 +480,30 @@
 
           <!-- U \ (A ∪ B ∪ C) -->
           <tr>
-            <td><strong>U \ (A ∪ B ∪ C)</strong>: everything outside A, B, and C (in the universe U). “Not volcanic, not intrusive, not sedimentary”.</td>
-            <td><strong>U \ (A ∪ B ∪ C)</strong>: minden A, B és C <em>külső</em> része (az alaphalmazban U). „Sem nem vulkáni, sem nem intruzív, sem nem üledékes”.</td>
+            <td><strong>U \ (A ∪ B ∪ C)</strong>: everything outside A, B, and C (in the universal set U).</td>
+            <td><strong>U \ (A ∪ B ∪ C)</strong>: minden, ami A, B és C halmazon <em>kívül</em> van (az alaphalmazban U).</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="venn">
-                <svg viewBox="0 0 220 150" aria-label="U minus (A ∪ B ∪ C)">
-                  <!-- shade whole frame as U -->
-                  <rect class="shade" x="5" y="5" width="210" height="140" rx="12"/>
-                  <!-- punch out A, B, C with white "holes" -->
-                  <circle class="maskWhite" cx="70" cy="95" r="45"/>
-                  <circle class="maskWhite" cx="150" cy="95" r="45"/>
-                  <circle class="maskWhite" cx="110" cy="55" r="45"/>
-                  <!-- draw outlines of sets on top -->
-                  <circle class="A" cx="70" cy="95" r="45" fill="none"/>
-                  <circle class="B" cx="150" cy="95" r="45" fill="none"/>
-                  <circle class="C" cx="110" cy="55" r="45" fill="none"/>
-                  <text class="label" x="60" y="90">A</text>
-                  <text class="label" x="160" y="90">B</text>
-                  <text class="label" x="105" y="50">C</text>
+                <svg viewBox="0 0 220 150" aria-label="U minus (A union B union C)">
+                  <circle class="Aline" cx="70" cy="95" r="45"/>
+                  <circle class="Bline" cx="150" cy="95" r="45"/>
+                  <circle class="Cline" cx="110" cy="55" r="45"/>
+                  <defs>
+                    <mask id="mask_outside_ABC">
+                      <!-- start visible everywhere -->
+                      <rect x="0" y="0" width="220" height="150" fill="white"/>
+                      <!-- punch holes where A, B, C are -->
+                      <circle cx="70" cy="95" r="45" fill="black"/>
+                      <circle cx="150" cy="95" r="45" fill="black"/>
+                      <circle cx="110" cy="55" r="45" fill="black"/>
+                    </mask>
+                  </defs>
+                  <rect class="shade" x="0" y="0" width="220" height="150" mask="url(#mask_outside_ABC)"/>
+                  <text class="label" x="58" y="90">A</text>
+                  <text class="label" x="162" y="90">B</text>
+                  <text class="label" x="106" y="50">C</text>
                   <text class="label" x="10" y="140">Shaded: U \ (A ∪ B ∪ C)</text>
                 </svg>
               </div>
@@ -438,8 +515,8 @@
     </section>
 
     <p class="hint" style="margin-top:.75rem;">
-      Tip: Read each line first (EN/HU), then use the shaded part of the picture to “see” the set. Simple rule of thumb:
-      ∪ means “add areas”, ∩ means “only the overlap”, \ means “take A and remove what’s in B”.
+      Tip: Read the line first. Then look at the picture: the <em>shaded</em> region shows exactly what the set means.
+      Remember: ∪ = “add areas”, ∩ = “only the overlap”, \ = “take A and remove the part that’s also in B”.
     </p>
   </div>
 </body>
