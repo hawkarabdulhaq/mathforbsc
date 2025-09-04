@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Empty Set & Sets of Sets — University of Szeged</title>
+<title>The Empty Set & Sets of Sets — University of Szeged</title>
 <style>
   :root{
     --bg: #f7f9fb;
@@ -37,23 +37,27 @@
   .header-top{
     display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
   }
-  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;}
+  .title{
+    display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
+  }
   .badge{
-    font-size:.8rem; letter-spacing:.04em; text-transform:uppercase;
+    font-size: .8rem; letter-spacing:.04em; text-transform:uppercase;
     background: rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
     padding:.25rem .5rem; border-radius:999px;
   }
   h1{margin:0; font-size:1.35rem; font-weight:700}
   h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
-  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;}
+  .logo-row{
+    display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
+  }
   .logo-chip{
     display:flex; align-items:center; justify-content:center;
     background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px;
     padding:.35rem .5rem; box-shadow: var(--shadow);
   }
-  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain;}
-  .logo-chip.logo-dept img{height:55px;}
-  .logo-chip.logo-szte img{height:42px;}
+  .logo-chip img{ display:block; height:42px; width:auto; object-fit:contain; }
+  .logo-chip.logo-dept img{ height:55px; }
+  .logo-chip.logo-szte img{ height:42px; }
 
   /* CARD + TABLE */
   .card{
@@ -71,7 +75,9 @@
     padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600;
   }
   .btn:hover{border-color:var(--accent); color:var(--accent)}
-  table{width:100%; border-collapse:separate; border-spacing:0; font-size:1rem;}
+  table{
+    width:100%; border-collapse:separate; border-spacing:0; font-size:1rem;
+  }
   thead th{
     background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(56,189,248,0.08));
     padding:0.9rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border);
@@ -93,7 +99,7 @@
     .logo-chip img{height:38px}
     .logo-chip.logo-dept img{height:48px}
   }
-  .note{font-size:.9rem; color:var(--muted)}
+  .note{font-size:.95rem; color:var(--muted)}
 </style>
 <script>
   function toggleExamples(){
@@ -122,15 +128,15 @@
           </span>
         </div>
       </div>
-      <h2>ABDULHAQ Hawkar — The Empty Set & Sets of Sets (Geoscience Anchors)</h2>
+      <h2>ABDULHAQ Hawkar — The Empty Set & Sets of Sets (Beginner Geology Examples)</h2>
     </header>
 
     <section class="card" aria-labelledby="slide-title">
       <div class="bar">
         <div>
           <div id="slide-title" class="subtitle">
-            Slide 5 — The Empty Set / Az üres halmaz
-            <span class="hint">Geoscience anchors: absent features, nested sample collections</span>
+            Slide 5 — Empty set and “sets of sets” / Üres halmaz és „halmazok halmaza”
+            <span class="hint">Geology anchor: simple field & lab situations</span>
           </div>
         </div>
         <div class="tools">
@@ -140,7 +146,10 @@
       </div>
 
       <table role="table" aria-describedby="slide-title">
-        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <colgroup>
+          <col style="width:50%">
+          <col style="width:50%">
+        </colgroup>
         <thead>
           <tr>
             <th scope="col">English <span class="lang-label">EN</span></th>
@@ -148,81 +157,92 @@
           </tr>
         </thead>
         <tbody>
-          <!-- 1 -->
+          <!-- Definition: empty set -->
           <tr>
             <td><strong>Definition:</strong> The empty set is the set that has <strong>no elements</strong>.</td>
             <td><strong>Definíció:</strong> Üres halmaznak mondjuk azt a halmazt, amelynek <strong>nincs egyetlen eleme sem</strong>.</td>
           </tr>
           <tr data-ex="1">
-            <td class="note"><em>Geo example:</em> The set of <span class="sym">diamonds</span> in a shale core is empty: <span class="sym">∅</span>.</td>
-            <td class="note"><em>Geós példa:</em> Egy agyagpala-magban található <span class="sym">gyémántok</span> halmaza üres: <span class="sym">∅</span>.</td>
+            <td class="note"><em>Beginner geo example:</em> “Fossils found in this pebble” = <span class="sym">∅</span> (none found in the pebble).</td>
+            <td class="note"><em>Kezdő geós példa:</em> „Ebben a kavicsban talált kövületek” = <span class="sym">∅</span> (nem találtunk).</td>
           </tr>
 
-          <!-- 2 -->
+          <!-- Algebra example kept -->
           <tr>
-            <td><strong>Example:</strong> <span class="sym">H = { real roots of x² + 1 = 0 }</span></td>
-            <td><strong>Példa:</strong> <span class="sym">H = { az x² + 1 = 0 egyenlet valós gyökei }</span></td>
+            <td><strong>Example:</strong> <span class="sym">H = { real roots of x² + 1 = 0 }</span>.</td>
+            <td><strong>Példa:</strong> <span class="sym">H = { az x² + 1 = 0 egyenlet valós gyökei }</span>.</td>
           </tr>
           <tr data-ex="1">
-            <td class="note"><em>Geo example:</em> The set of <span class="sym">volcanic bombs</span> in a sandstone drill core: <span class="sym">∅</span> (none observed).</td>
-            <td class="note"><em>Geós példa:</em> A homokkő fúrásmagban talált <span class="sym">vulkáni bombák</span> halmaza: <span class="sym">∅</span> (nem figyeltek meg ilyet).</td>
+            <td class="note"><em>Why empty?</em> The equation has no real solutions → <span class="sym">H = ∅</span>.</td>
+            <td class="note"><em>Miért üres?</em> Az egyenletnek nincs valós megoldása → <span class="sym">H = ∅</span>.</td>
           </tr>
 
-          <!-- 3 -->
+          <!-- No contradiction -->
           <tr>
             <td>This does not contradict the axiom: the elements are clearly defined — there are simply none.</td>
             <td>Ez nem mond ellent az axiómának: az elemek világosan definiáltak — egyszerűen <strong>nincsenek</strong>.</td>
           </tr>
           <tr data-ex="1">
-            <td class="note"><em>Geo example:</em> Define S = { stromatolite fossils younger than 10,000 years }. The definition is clear, but such fossils do not exist → S = ∅.</td>
-            <td class="note"><em>Geós példa:</em> Legyen S = { 10 000 évnél fiatalabb sztromatolit-fosszíliák }. A definíció világos, de ilyen fosszíliák nincsenek → S = ∅.</td>
+            <td class="note"><em>Beginner geo example:</em> “Volcanic bombs at this river outcrop” is clear; today we saw zero → the set is <span class="sym">∅</span>.</td>
+            <td class="note"><em>Kezdő geós példa:</em> „Vulkáni bombák ennél a folyóparti feltárásnál” jól értelmezett; ma nulla darab → a halmaz <span class="sym">∅</span>.</td>
           </tr>
 
-          <!-- 4 -->
+          <!-- Uniqueness of empty set -->
           <tr>
-            <td>All empty sets are <strong>identical</strong> (since none of them has elements) → There is only <strong>one empty set</strong>.</td>
-            <td>Minden üres halmaz <strong>azonos</strong> (mivel egyiknek sincs eleme) → <strong>csak egy üres halmaz van</strong>.</td>
+            <td>All empty sets are <strong>identical</strong> → There is only <strong>one empty set</strong>.</td>
+            <td>Minden üres halmaz <strong>azonos</strong> → <strong>csak egy üres halmaz van</strong>.</td>
           </tr>
           <tr data-ex="1">
-            <td class="note"><em>Geo example:</em> The empty set of “diamonds in sandstone” and the empty set of “dinosaurs alive today” are both ∅.</td>
-            <td class="note"><em>Geós példa:</em> A „homokkőben lévő gyémántok” üres halmaza és a „ma élő dinoszauruszok” üres halmaza ugyanaz: ∅.</td>
+            <td class="note"><em>Beginner geo example:</em> “Fossils in this pebble” and “Basalt crystals in this mud” are both empty → both are the same empty set, <span class="sym">∅</span>.</td>
+            <td class="note"><em>Kezdő geós példa:</em> „Kövületek ebben a kavicsban” és „Bazaltkristályok ebben az iszapban” mindkettő üres → ugyanaz az üres halmaz, <span class="sym">∅</span>.</td>
           </tr>
 
-          <!-- 5 -->
+          <!-- Notation -->
           <tr>
-            <td><strong>Notation:</strong> empty set = <span class="sym">∅</span></td>
-            <td><strong>Jelölés:</strong> üres halmaz = <span class="sym">∅</span></td>
+            <td><strong>Notation:</strong> empty set = <span class="sym">∅</span>.</td>
+            <td><strong>Jelölés:</strong> üres halmaz = <span class="sym">∅</span>.</td>
           </tr>
           <tr data-ex="1">
-            <td class="note"><em>Geo example:</em> Let F = { fossils of mammals in Precambrian strata }. Then F = ∅. (Notation shows ∅ directly.)</td>
-            <td class="note"><em>Geós példa:</em> Legyen F = { emlős-fosszíliák a prekambriumi rétegekben }. Ekkor F = ∅. (A jelölés közvetlenül ∅-t mutat.)</td>
+            <td class="note"><em>Beginner geo example:</em> “Minerals in a sealed empty sample bag” = <span class="sym">∅</span>.</td>
+            <td class="note"><em>Kezdő geós példa:</em> „Ásványok egy lezárt, üres mintazacskóban” = <span class="sym">∅</span>.</td>
           </tr>
 
-          <!-- 6 -->
+          <!-- Sets as elements -->
           <tr>
             <td>A set can have <strong>other sets as its elements</strong>.</td>
             <td>Egy halmaznak lehetnek <strong>más halmazok is</strong> az elemei.</td>
           </tr>
           <tr data-ex="1">
-            <td class="note"><em>Geo example:</em> Consider <span class="sym">S = { {∅}, {granite samples}, {fossil sets} }</span>. Each element is itself a set.</td>
-            <td class="note"><em>Geós példa:</em> Legyen <span class="sym">S = { {∅}, {gránitminta-halmaz}, {fosszília-halmazok} }</span>. Mindegyik elem maga is halmaz.</td>
+            <td class="note"><em>Beginner geo example:</em> Think of boxes: each box holds samples. The “collection” can be a set whose elements are the <em>boxes</em> (each box = a set of samples).</td>
+            <td class="note"><em>Kezdő geós példa:</em> Gondoljunk dobozokra: minden doboz mintákat tart. A „gyűjtemény” lehet egy halmaz, melynek elemei a <em>dobozok</em> (minden doboz = minták halmaza).</td>
           </tr>
 
-          <!-- 7 -->
+          <!-- Nested examples -->
           <tr>
-            <td><strong>Examples:</strong> {∅}, {{∅}}, {{{∅}}}, …</td>
-            <td><strong>Példák:</strong> {∅}, {{∅}}, {{{∅}}}, …</td>
+            <td><strong>Examples:</strong> <span class="sym">{∅}</span>, <span class="sym">{{∅}}</span>, <span class="sym">{{{∅}}}</span>, …</td>
+            <td><strong>Példák:</strong> <span class="sym">{∅}</span>, <span class="sym">{{∅}}</span>, <span class="sym">{{{∅}}}</span>, …</td>
           </tr>
           <tr data-ex="1">
-            <td class="note"><em>Geo example (nested):</em> Imagine hierarchical sample collections: <span class="sym">{∅}</span> = “a box containing no samples”; <span class="sym">{{∅}}</span> = “a warehouse containing that empty box”; <span class="sym>{{{∅}}}</span> = “a catalog entry referring to the warehouse”.</td>
-            <td class="note"><em>Geós példa (beágyazott):</em> Hierarchikus mintagyűjtemények: <span class="sym">{∅}</span> = „egy doboz, amelyben nincs minta”; <span class="sym">{{∅}}</span> = „egy raktár, amelyben ez az üres doboz van”; <span class="sym">{{{∅}}}</span> = „egy katalógustétel, amely a raktárra hivatkozik”.</td>
+            <td class="note"><em>Beginner geo example:</em> <span class="sym">{∅}</span> = a tray that contains one box, and that box is empty. <span class="sym">{{∅}}</span> = a tray with a box that contains one empty box, etc.</td>
+            <td class="note"><em>Kezdő geós példa:</em> <span class="sym">{∅}</span> = egy tálca, amelyben egy doboz van, és a doboz üres. <span class="sym">{{∅}}</span> = tálca, benne egy doboz, abban egy üres doboz, stb.</td>
+          </tr>
+
+          <!-- Extra beginner-friendly geology anchors -->
+          <tr data-ex="1">
+            <td class="note"><em>Extra:</em> “Basalt samples collected today from Site A” = <span class="sym">∅</span> if no one collected any.</td>
+            <td class="note"><em>Extra:</em> „Ma gyűjtött bazaltminták az A helyszínről” = <span class="sym">∅</span>, ha senki sem gyűjtött.</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Extra:</em> Let <span class="sym">B₁, B₂</span> be boxes of samples. Then <span class="sym">S = {B₁, B₂}</span> is a set <em>of sets</em> (each box is itself a set of rocks).</td>
+            <td class="note"><em>Extra:</em> Legyenek <span class="sym">B₁, B₂</span> mintadobozok. Ekkor <span class="sym">S = {B₁, B₂}</span> egy <em>halmazokból álló halmaz</em> (minden doboz önmagában kőzetek halmaza).</td>
           </tr>
         </tbody>
       </table>
     </section>
 
     <p class="hint" style="margin-top:.75rem;">
-      Teaching tip: Emphasize that ∅ is unique and well-defined. Use the geology anchors (absent features, nested containers) to make abstract set concepts concrete.
+      Teaching tip: Start with examples hidden. Ask students to decide whether each situation is empty or not,
+      then reveal the simple geology stories to check understanding.
     </p>
   </div>
 </body>
