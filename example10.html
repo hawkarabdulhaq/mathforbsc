@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ordered Pairs & n-Tuples — University of Szeged</title>
+<style>
+  :root{
+    --bg: #f7f9fb;
+    --card: #ffffff;
+    --ink: #0f172a;
+    --muted: #475569;
+    --accent:#2563eb; --accent-2:#38bdf8;
+    --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --shade: rgba(37,99,235,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
+      --shade: rgba(96,165,250,.25);
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+       font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";}
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  /* HEADER */
+  header{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; border-radius:16px; padding:1rem 1.25rem 1rem; box-shadow:var(--shadow)}
+  .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .badge{font-size:.8rem; letter-spacing:.04em; text-transform:uppercase; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+         padding:.25rem .5rem; border-radius:999px}
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow)}
+  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain}
+  .logo-chip.logo-dept img{height:55px} .logo-chip.logo-szte img{height:42px}
+
+  /* CARD + TABLE */
+  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; margin-top:1rem; box-shadow:var(--shadow); overflow:hidden}
+  .bar{padding:.9rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .subtitle{font-weight:600}
+  .tools{display:flex; gap:.5rem}
+  .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600}
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+  table{width:100%; border-collapse:separate; border-spacing:0; font-size:1rem}
+  thead th{background:linear-gradient(180deg,rgba(37,99,235,.08),rgba(56,189,248,.08)); padding:.9rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border)}
+  tbody td{padding:.85rem 1rem; vertical-align:top; border-bottom:1px solid var(--border)}
+  tbody tr:nth-child(odd) td{background:rgba(148,163,184,.06)}
+  code,kbd,.sym{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+  .hint{color:var(--muted); font-size:.9rem}
+  .lang-label{display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em; padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,.15); color:#0369a1; margin-left:.5rem}
+  .note{font-size:.95rem; color:var(--muted)}
+  @media (max-width:720px){body{padding:1rem} thead th{font-size:.95rem} tbody td{font-size:.95rem} .logo-chip img{height:38px} .logo-chip.logo-dept img{height:48px}}
+
+  /* Visuals */
+  .viz{display:flex; gap:1rem; flex-wrap:wrap; align-items:center; justify-content:center; padding:.6rem 1rem}
+  .cardlet{background:var(--bg); border:1px dashed var(--border); border-radius:12px; padding:.6rem .8rem}
+  svg{max-width:280px; height:auto}
+  .axis{stroke:#94a3b8; stroke-width:1}
+  .pt{fill:var(--shade); stroke:var(--accent); stroke-width:2}
+  .lab{font: 600 13px/1 system-ui, -apple-system, Segoe UI, Roboto; fill: var(--ink)}
+  .box{fill:var(--shade); stroke:var(--accent); stroke-width:2}
+  .arrow{marker-end:url(#arrow)}
+</style>
+<script>
+  function toggleExamples(){
+    const rows = document.querySelectorAll('tr[data-ex="1"]');
+    const on = [...rows].some(r => r.style.display === 'none');
+    rows.forEach(r => r.style.display = on ? '' : 'none');
+    document.getElementById('exBtn').textContent = on ? 'Hide examples' : 'Show examples';
+  }
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>Department of Atmospheric and Geospatial Data Science</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>ABDULHAQ Hawkar — Ordered pairs & n-tuples (with simple visuals)</h2>
+    </header>
+
+    <section class="card" aria-labelledby="slide-title">
+      <div class="bar">
+        <div>
+          <div id="slide-title" class="subtitle">
+            Slide 11 — Ordered pairs / Rendezett párok
+            <span class="hint">Order matters: (a, b) ≠ (b, a) in general</span>
+          </div>
+        </div>
+        <div class="tools">
+          <button id="exBtn" class="btn" onclick="toggleExamples()">Hide examples</button>
+          <button class="btn" onclick="printPage()">Print</button>
+        </div>
+      </div>
+
+      <div class="viz" aria-label="Visuals">
+        <!-- Visual A: Order matters on a grid: (2,3) vs (3,2) -->
+        <div class="cardlet">
+          <svg viewBox="0 0 200 160" role="img" aria-label="(2,3) and (3,2) on axes (English-only)">
+            <!-- axes -->
+            <line x1="20" y1="140" x2="190" y2="140" class="axis"/>
+            <line x1="20" y1="140" x2="20"  y2="20"  class="axis"/>
+            <!-- ticks -->
+            <g class="lab">
+              <text x="20" y="155">0</text>
+              <text x="60" y="155">1</text>
+              <text x="100" y="155">2</text>
+              <text x="140" y="155">3</text>
+              <text x="180" y="155">4</text>
+              <text x="5" y="144">0</text>
+              <text x="5" y="104">1</text>
+              <text x="5" y="64">2</text>
+              <text x="5" y="24">3</text>
+            </g>
+            <!-- points -->
+            <!-- scale: x -> 20 + 40*x, y -> 140 - 40*y -->
+            <circle cx="100" cy="20"  r="6" class="pt"/>
+            <text class="lab" x="110" y="24">(2,3)</text>
+            <circle cx="140" cy="60"  r="6" class="pt"/>
+            <text class="lab" x="150" y="64">(3,2)</text>
+            <!-- labels -->
+            <text class="lab" x="100" y="12">different positions → order matters</text>
+          </svg>
+        </div>
+
+        <!-- Visual B: Fraction as ordered pair (numerator, denominator) -->
+        <div class="cardlet">
+          <svg viewBox="0 0 220 160" role="img" aria-label="Fraction as ordered pair (English-only)">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+              </marker>
+            </defs>
+            <!-- fraction 2/3 -->
+            <rect x="20" y="30" width="60" height="40" class="box"/>
+            <rect x="20" y="80" width="60" height="40" class="box"/>
+            <text class="lab" x="50" y="57" text-anchor="middle">2</text>
+            <text class="lab" x="50" y="107" text-anchor="middle">3</text>
+            <text class="lab" x="50" y="22" text-anchor="middle">2/3</text>
+            <!-- arrow to pair -->
+            <line x1="85" y1="75" x2="150" y2="75" stroke="#334155" stroke-width="2" class="arrow"/>
+            <!-- pair -->
+            <rect x="150" y="50" width="50" height="50" rx="8" class="box"/>
+            <text class="lab" x="175" y="80" text-anchor="middle">(2,3)</text>
+            <text class="lab" x="20" y="135">numerator → first, denominator → second</text>
+          </svg>
+        </div>
+      </div>
+
+      <table role="table" aria-describedby="slide-title">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead>
+          <tr>
+            <th scope="col">English <span class="lang-label">EN</span></th>
+            <th scope="col">Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Definition:</strong> Two objects <span class="sym">a</span> and <span class="sym">b</span> form an <strong>ordered pair</strong> if we specify which is first and which is second.</td>
+            <td><strong>Definíció:</strong> Két tetszőleges dolog (<span class="sym">a</span> és <span class="sym">b</span>) <strong>rendezett párt</strong> alkot, ha megmondjuk, melyik az első és melyik a második.</td>
+          </tr>
+          <tr>
+            <td><strong>Notation:</strong> <span class="sym">(a, b)</span>.</td>
+            <td><strong>Jelölés:</strong> <span class="sym">(a, b)</span>.</td>
+          </tr>
+          <tr>
+            <td>Here, <span class="sym">a</span> is the <strong>first element</strong>, <span class="sym">b</span> is the <strong>second element</strong>.</td>
+            <td>Itt <span class="sym">a</span> az <strong>első tag</strong>, <span class="sym">b</span> a <strong>második tag</strong>.</td>
+          </tr>
+          <tr>
+            <td><span class="sym">a</span> and <span class="sym">b</span> may also be equal, e.g. <span class="sym">(2, 2)</span>.</td>
+            <td><span class="sym">a</span> és <span class="sym">b</span> lehetnek azonosak is, pl. <span class="sym">(2, 2)</span>.</td>
+          </tr>
+
+          <tr>
+            <td><strong>Example:</strong> Fractions can be seen as ordered pairs of natural numbers.</td>
+            <td><strong>Példa:</strong> A törtek felfoghatók természetes számokból képzett rendezett pároknak.</td>
+          </tr>
+          <tr data-ex="1">
+            <td>Numerator = first element; Denominator = second element.</td>
+            <td>Számláló = első tag; Nevező = második tag.</td>
+          </tr>
+          <tr data-ex="1">
+            <td>So <span class="sym">2/3</span> corresponds to <span class="sym">(2, 3)</span>; <span class="sym">3/2</span> corresponds to <span class="sym">(3, 2)</span>.</td>
+            <td>Így a <span class="sym">2/3</span> megfelel a <span class="sym">(2, 3)</span> párnak; a <span class="sym">3/2</span> megfelel a <span class="sym">(3, 2)</span> párnak.</td>
+          </tr>
+
+          <tr>
+            <td><strong>Generalization:</strong> Ordered triples, quadruples, …, ordered <span class="sym">n</span>-tuples (<span class="sym">n ≥ 2</span>).</td>
+            <td><strong>Általánosítás:</strong> Rendezett 3-as, 4-es, …, rendezett <span class="sym">n</span>-es (<span class="sym">n ≥ 2</span>).</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note">Example: GPS coordinate as a triple <span class="sym">(lat, lon, alt)</span>; time stamp as <span class="sym">(year, month, day)</span>.</td>
+            <td class="note">Példa: GPS-koordináta mint hármas <span class="sym">(szél., hossz., mag.)</span>; dátum mint <span class="sym">(év, hónap, nap)</span>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="hint" style="margin-top:.75rem;">
+      Read the rule, then check the pictures: (2,3) and (3,2) are in different places → order matters. For fractions, “top” is first, “bottom” is second.
+    </p>
+  </div>
+</body>
+</html>
