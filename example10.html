@@ -12,34 +12,32 @@
     --muted: #475569;
     --accent: #2563eb;
     --accent-2:#dc2626;
-    --accent-3:#16a34a;
     --border: #e2e8f0;
     --shadow: 0 10px 30px rgba(2,6,23,0.08);
   }
   @media (prefers-color-scheme: dark){
     :root{
       --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
-      --accent:#60a5fa; --accent-2:#f87171; --accent-3:#4ade80;
-      --border:#1f2a44; --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      --accent:#60a5fa; --accent-2:#f87171; --border:#1f2a44; --shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
   }
   *{box-sizing:border-box}
   body{
     margin:0; padding:2rem; background:var(--bg); color:var(--ink);
-    font: 16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+    font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
   }
   .wrap{max-width:1100px; margin-inline:auto}
 
   /* HEADER */
   header{
     background: linear-gradient(135deg, var(--accent), #38bdf8);
-    color:#fff; border-radius:16px; padding:1rem 1.25rem 1rem; box-shadow:var(--shadow);
+    color:white; border-radius:16px; padding:1rem 1.25rem 1rem; box-shadow:var(--shadow);
   }
   .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;}
   .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;}
   .badge{
     font-size:.8rem; letter-spacing:.04em; text-transform:uppercase;
-    background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+    background: rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
     padding:.25rem .5rem; border-radius:999px;
   }
   h1{margin:0; font-size:1.35rem; font-weight:700}
@@ -48,17 +46,18 @@
   .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow);}
   .logo-chip img{display:block; height:42px; width:auto; object-fit:contain;}
   .logo-chip.logo-dept img{height:55px}
+  .logo-chip.logo-szte img{height:42px}
 
   /* CARD + TABLE */
   .card{
     background:var(--card); border:1px solid var(--border); border-radius:16px;
     margin-top:1rem; box-shadow:var(--shadow); overflow:hidden;
   }
-  .card .bar{
+  .bar{
     padding:.9rem 1rem; border-bottom:1px solid var(--border);
     display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
   }
-  .bar .subtitle{font-weight:600}
+  .subtitle{font-weight:600}
   .btn{
     border:1px solid var(--border); background:transparent; color:var(--ink);
     padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600;
@@ -66,17 +65,16 @@
   .btn:hover{border-color:var(--accent); color:var(--accent)}
   table{width:100%; border-collapse:separate; border-spacing:0; font-size:1rem;}
   thead th{
-    background:linear-gradient(180deg, rgba(37,99,235,0.08), rgba(56,189,248,0.08));
+    background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(56,189,248,0.08));
     padding:0.9rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border);
   }
   tbody td{padding:0.85rem 1rem; vertical-align:top; border-bottom:1px solid var(--border);}
-  tbody tr:nth-child(odd) td{background:rgba(148,163,184,0.06)}
+  tbody tr:nth-child(odd) td{background: rgba(148,163,184,0.06)}
+  .hint{color:var(--muted); font-size:.9rem}
   .lang-label{
     display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em;
     padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,0.15); color:#0369a1; margin-left:.5rem;
   }
-  .hint{color:var(--muted); font-size:.9rem}
-
   @media (max-width:720px){
     body{padding:1rem}
     thead th{font-size:.95rem}
@@ -85,22 +83,27 @@
     .logo-chip.logo-dept img{height:48px}
   }
 
-  /* VISUALS (English-only labels inside SVGs) */
-  .diagram{display:flex; justify-content:center; padding:.6rem 0 .9rem;}
-  svg{max-width:340px; height:auto;}
-  .box{fill:#fff; stroke:#1e293b; stroke-width:2;}
-  .label{font:600 13px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial; fill:#0f172a;}
-  .small{font-size:11px; font-weight:600; fill:#334155;}
-  .axis{stroke:#0f172a; stroke-width:2;}
-  .grid{stroke:#cbd5e1; stroke-width:1;}
-  .pointA{fill:var(--accent);}
-  .pointB{fill:var(--accent-2);}
-  .diag{stroke:#64748b; stroke-width:1.5; stroke-dasharray:4 3;}
-  .fracText{font:700 18px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill:#0f172a;}
-  .arrow{fill:none; stroke:#0f172a; stroke-width:1.8; marker-end:url(#arrowhead);}
-  .tupleBox{fill:#fff; stroke:#1e293b; stroke-width:2;}
+  /* Simple circle visuals (English-only labels inside SVG) */
+  .visual{display:flex; justify-content:center; padding:.5rem 0 .9rem;}
+  svg{max-width:420px; height:auto;}
+  .node{
+    fill:#fff; stroke:#0f172a; stroke-width:2;
+  }
+  .node.equal{
+    fill:#f1f5f9;
+  }
+  .label{font-size:14px; font-weight:700; fill:var(--ink);}
+  .note{font-size:12px; fill:#475569;}
+  .paren{font-size:20px; fill:var(--ink); font-weight:700;}
+  .sep{font-size:20px; fill:var(--ink); font-weight:700;}
 </style>
 <script>
+  function toggleExamples(){
+    const rows = document.querySelectorAll('tr[data-ex="1"]');
+    const on = [...rows].some(r => r.style.display === 'none');
+    rows.forEach(r => r.style.display = on ? '' : 'none');
+    document.getElementById('exBtn').textContent = on ? 'Hide visuals' : 'Show visuals';
+  }
   function printPage(){ window.print(); }
 </script>
 </head>
@@ -121,7 +124,7 @@
           </span>
         </div>
       </div>
-      <h2>ABDULHAQ Hawkar — Ordered Pairs & n‑tuples (simple text + visuals)</h2>
+      <h2>ABDULHAQ Hawkar — Ordered Pairs & n‑tuples (simple circle visuals)</h2>
     </header>
 
     <section class="card" aria-labelledby="slide-title">
@@ -129,61 +132,45 @@
         <div>
           <div id="slide-title" class="subtitle">
             Slide 11 — Ordered pairs and n‑tuples / Rendezett párok és n‑esek
-            <span class="hint">Visuals show only English labels for clarity</span>
+            <span class="hint">Visuals show: first (left circle) → second (right circle)</span>
           </div>
         </div>
         <div class="tools">
+          <button id="exBtn" class="btn" onclick="toggleExamples()">Hide visuals</button>
           <button class="btn" onclick="printPage()">Print</button>
         </div>
       </div>
 
       <table role="table" aria-describedby="slide-title">
-        <colgroup>
-          <col style="width:50%">
-          <col style="width:50%">
-        </colgroup>
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
         <thead>
-          <tr>
-            <th scope="col">English <span class="lang-label">EN</span></th>
-            <th scope="col">Magyar <span class="lang-label">HU</span></th>
-          </tr>
+          <tr><th>English <span class="lang-label">EN</span></th><th>Magyar <span class="lang-label">HU</span></th></tr>
         </thead>
         <tbody>
           <!-- Definition -->
           <tr>
             <td><strong>Definition:</strong> Two objects <em>a</em> and <em>b</em> form an <strong>ordered pair</strong> if we specify which is first and which is second.</td>
-            <td><strong>Definíció:</strong> Két dolog (<em>a</em> és <em>b</em>) <strong>rendezett párt</strong> alkot, ha megmondjuk, melyik az első és melyik a második.</td>
+            <td><strong>Definíció:</strong> Két tetszőleges dolog (<em>a</em> és <em>b</em>) <strong>rendezett párt</strong> alkot, ha megmondjuk, melyik az első és melyik a második.</td>
           </tr>
-          <tr>
+          <tr data-ex="1">
             <td colspan="2">
-              <!-- Visual 1: Order matters — two boxes left-to-right -->
-              <div class="diagram">
-                <svg viewBox="0 0 360 120" aria-label="Order matters: (a,b) vs (b,a)">
-                  <defs>
-                    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                      <polygon points="0,0 8,4 0,8" fill="#0f172a"></polygon>
-                    </marker>
-                  </defs>
-                  <!-- (a,b) -->
-                  <rect class="box" x="30" y="40" width="70" height="45" rx="6" />
-                  <rect class="box" x="110" y="40" width="70" height="45" rx="6" />
-                  <text class="small" x="45" y="32">first</text>
-                  <text class="small" x="130" y="32">second</text>
-                  <text class="label" x="65" y="68" text-anchor="middle">a</text>
-                  <text class="label" x="145" y="68" text-anchor="middle">b</text>
-                  <text class="label" x="90" y="100" text-anchor="middle">(a, b)</text>
+              <div class="visual">
+                <!-- Visual: (a,b) -->
+                <svg viewBox="0 0 420 120" aria-label="(a, b): first is a, second is b">
+                  <text class="paren" x="20"  y="66">(</text>
+                  <circle class="node" cx="90"  cy="60" r="28"/>
+                  <text class="label" x="90" y="64" text-anchor="middle">a</text>
+                  <text class="note"  x="90" y="30" text-anchor="middle">1st</text>
 
-                  <!-- arrow -->
-                  <path class="arrow" d="M190,62 H235"></path>
+                  <text class="sep" x="150" y="66">,</text>
 
-                  <!-- (b,a) -->
-                  <rect class="box" x="245" y="40" width="70" height="45" rx="6" />
-                  <rect class="box" x="325" y="40" width="70" height="45" rx="6" />
-                  <text class="small" x="260" y="32">first</text>
-                  <text class="small" x="345" y="32">second</text>
-                  <text class="label" x="280" y="68" text-anchor="middle">b</text>
-                  <text class="label" x="360" y="68" text-anchor="middle">a</text>
-                  <text class="label" x="290" y="100" text-anchor="middle">(b, a)</text>
+                  <circle class="node" cx="220" cy="60" r="28"/>
+                  <text class="label" x="220" y="64" text-anchor="middle">b</text>
+                  <text class="note"  x="220" y="30" text-anchor="middle">2nd</text>
+                  <text class="paren" x="280" y="66">)</text>
+
+                  <text class="label" x="340" y="40">Order matters</text>
+                  <text class="note"  x="340" y="62">first ≠ second</text>
                 </svg>
               </div>
             </td>
@@ -191,8 +178,37 @@
 
           <!-- Notation -->
           <tr>
-            <td><strong>Notation:</strong> <span class="label">(a, b)</span>. Here <em>a</em> is the <strong>first element</strong>, <em>b</em> is the <strong>second element</strong>.</td>
-            <td><strong>Jelölés:</strong> <span class="label">(a, b)</span>. Itt <em>a</em> az <strong>első tag</strong>, <em>b</em> a <strong>második tag</strong>.</td>
+            <td><strong>Notation:</strong> <span class="label" style="font-family:ui-monospace">(<em>a</em>, <em>b</em>)</span>.</td>
+            <td><strong>Jelölés:</strong> <span class="label" style="font-family:ui-monospace">(<em>a</em>, <em>b</em>)</span>.</td>
+          </tr>
+
+          <!-- First / Second -->
+          <tr>
+            <td>Here, <em>a</em> is the <strong>first element</strong>, <em>b</em> is the <strong>second element</strong>.</td>
+            <td>Itt <em>a</em> az <strong>első tag</strong>, <em>b</em> a <strong>második tag</strong>.</td>
+          </tr>
+          <tr data-ex="1">
+            <td colspan="2">
+              <div class="visual">
+                <!-- Visual: (b,a) to contrast -->
+                <svg viewBox="0 0 420 120" aria-label="(b, a): reversed order">
+                  <text class="paren" x="20"  y="66">(</text>
+                  <circle class="node" cx="90"  cy="60" r="28"/>
+                  <text class="label" x="90" y="64" text-anchor="middle">b</text>
+                  <text class="note"  x="90" y="30" text-anchor="middle">1st</text>
+
+                  <text class="sep" x="150" y="66">,</text>
+
+                  <circle class="node" cx="220" cy="60" r="28"/>
+                  <text class="label" x="220" y="64" text-anchor="middle">a</text>
+                  <text class="note"  x="220" y="30" text-anchor="middle">2nd</text>
+                  <text class="paren" x="280" y="66">)</text>
+
+                  <text class="label" x="340" y="40">(b, a)</text>
+                  <text class="note"  x="340" y="62">usually ≠ (a, b)</text>
+                </svg>
+              </div>
+            </td>
           </tr>
 
           <!-- a and b may be equal -->
@@ -200,62 +216,24 @@
             <td><em>a</em> and <em>b</em> may also be equal.</td>
             <td><em>a</em> és <em>b</em> lehetnek azonosak is.</td>
           </tr>
-          <tr>
+          <tr data-ex="1">
             <td colspan="2">
-              <!-- Visual 2: Coordinate view: (2,3) vs (3,2) and diagonal showing (a,a) -->
-              <div class="diagram">
-                <svg viewBox="0 0 320 200" aria-label="Points (2,3), (3,2), and the diagonal (a,a)">
-                  <!-- axes and grid (scale 20 px/unit, origin at 40,160) -->
-                  <defs>
-                    <marker id="arrowhead2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                      <polygon points="0,0 8,4 0,8" fill="#0f172a"></polygon>
-                    </marker>
-                  </defs>
-                  <!-- grid -->
-                  <g>
-                    <!-- vertical grid lines -->
-                    <line class="grid" x1="60" y1="20" x2="60" y2="160"/>
-                    <line class="grid" x1="80" y1="20" x2="80" y2="160"/>
-                    <line class="grid" x1="100" y1="20" x2="100" y2="160"/>
-                    <line class="grid" x1="120" y1="20" x2="120" y2="160"/>
-                    <line class="grid" x1="140" y1="20" x2="140" y2="160"/>
-                    <line class="grid" x1="160" y1="20" x2="160" y2="160"/>
-                    <line class="grid" x1="180" y1="20" x2="180" y2="160"/>
-                    <line class="grid" x1="200" y1="20" x2="200" y2="160"/>
-                    <line class="grid" x1="220" y1="20" x2="220" y2="160"/>
-                    <line class="grid" x1="240" y1="20" x2="240" y2="160"/>
-                    <line class="grid" x1="260" y1="20" x2="260" y2="160"/>
-                  </g>
-                  <!-- horizontal grid lines -->
-                  <g>
-                    <line class="grid" x1="40" y1="140" x2="280" y2="140"/>
-                    <line class="grid" x1="40" y1="120" x2="280" y2="120"/>
-                    <line class="grid" x1="40" y1="100" x2="280" y2="100"/>
-                    <line class="grid" x1="40" y1="80" x2="280" y2="80"/>
-                    <line class="grid" x1="40" y1="60" x2="280" y2="60"/>
-                    <line class="grid" x1="40" y1="40" x2="280" y2="40"/>
-                    <line class="grid" x1="40" y1="20" x2="280" y2="20"/>
-                  </g>
-                  <!-- axes -->
-                  <line class="axis" x1="40" y1="160" x2="285" y2="160" marker-end="url(#arrowhead2)"/>
-                  <line class="axis" x1="40" y1="160" x2="40" y2="15" marker-end="url(#arrowhead2)"/>
-                  <text class="small" x="288" y="172">x</text>
-                  <text class="small" x="28" y="16">y</text>
+              <div class="visual">
+                <!-- Visual: (a,a) -->
+                <svg viewBox="0 0 420 120" aria-label="(a, a): both entries the same">
+                  <text class="paren" x="20"  y="66">(</text>
+                  <circle class="node equal" cx="120" cy="60" r="28"/>
+                  <text class="label" x="120" y="64" text-anchor="middle">a</text>
+                  <text class="note"  x="120" y="30" text-anchor="middle">1st</text>
 
-                  <!-- diagonal y=x -->
-                  <line class="diag" x1="40" y1="160" x2="280" y2="20"/>
-                  <text class="small" x="250" y="32">y = x</text>
+                  <text class="sep" x="180" y="66">,</text>
 
-                  <!-- points: origin at (40,160), scale = 20 -->
-                  <!-- (2,3) => (40+40, 160-60) = (80,100) -->
-                  <circle class="pointA" cx="80" cy="100" r="4"/>
-                  <text class="small" x="86" y="96">(2, 3)</text>
-                  <!-- (3,2) => (40+60, 160-40) = (100,120) -->
-                  <circle class="pointB" cx="100" cy="120" r="4"/>
-                  <text class="small" x="106" y="116">(3, 2)</text>
-                  <!-- (2,2) on diagonal -->
-                  <circle class="pointA" cx="80" cy="120" r="3"/>
-                  <text class="small" x="86" y="132">(a, a) example</text>
+                  <circle class="node equal" cx="240" cy="60" r="28"/>
+                  <text class="label" x="240" y="64" text-anchor="middle">a</text>
+                  <text class="note"  x="240" y="30" text-anchor="middle">2nd</text>
+                  <text class="paren" x="300" y="66">)</text>
+
+                  <text class="label" x="345" y="62">(a, a)</text>
                 </svg>
               </div>
             </td>
@@ -263,66 +241,52 @@
 
           <!-- Fractions as ordered pairs -->
           <tr>
-            <td><strong>Example:</strong> Fractions can be seen as ordered pairs of natural numbers: numerator = first element, denominator = second element.</td>
-            <td><strong>Példa:</strong> A törtek felfoghatók természetes számokból álló rendezett pároknak: számláló = első tag, nevező = második tag.</td>
+            <td><strong>Example:</strong> Fractions can be seen as ordered pairs of natural numbers.</td>
+            <td><strong>Példa:</strong> A törtek felfoghatók természetes számokból képzett rendezett pároknak.</td>
           </tr>
           <tr>
+            <td>– Numerator = first element</td>
+            <td>– Számláló = első tag</td>
+          </tr>
+          <tr>
+            <td>– Denominator = second element</td>
+            <td>– Nevező = második tag</td>
+          </tr>
+          <tr>
+            <td>So 2/3 corresponds to (2,3); 3/2 corresponds to (3,2).</td>
+            <td>Így 2/3 megfelel a (2,3) párnak; 3/2 megfelel a (3,2) párnak.</td>
+          </tr>
+          <tr data-ex="1">
             <td colspan="2">
-              <!-- Visual 3: 2/3 -> (2,3) and 3/2 -> (3,2) -->
-              <div class="diagram">
+              <div class="visual">
+                <!-- Visual: 2/3 -> (2,3) and 3/2 -> (3,2) -->
                 <svg viewBox="0 0 420 140" aria-label="Fractions as ordered pairs">
-                  <defs>
-                    <marker id="arrowhead3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                      <polygon points="0,0 8,4 0,8" fill="#0f172a"></polygon>
-                    </marker>
-                  </defs>
+                  <!-- Left pair (2,3) -->
+                  <text class="paren" x="10"  y="66">(</text>
+                  <circle class="node" cx="70"  cy="60" r="26"/>
+                  <text class="label" x="70" y="64" text-anchor="middle">2</text>
+                  <text class="note"  x="70" y="28" text-anchor="middle">num (1st)</text>
 
-                  <!-- 2/3 -->
-                  <text class="fracText" x="30" y="50">2</text>
-                  <line class="axis" x1="24" y1="56" x2="56" y2="56"/>
-                  <text class="fracText" x="30" y="76">3</text>
-                  <text class="small" x="20" y="92">fraction</text>
+                  <text class="sep" x="120" y="66">,</text>
 
-                  <!-- arrow -->
-                  <path class="arrow" d="M70,60 H130" marker-end="url(#arrowhead3)"/>
+                  <circle class="node" cx="170" cy="60" r="26"/>
+                  <text class="label" x="170" y="64" text-anchor="middle">3</text>
+                  <text class="note"  x="170" y="28" text-anchor="middle">den (2nd)</text>
+                  <text class="paren" x="220" y="66">)</text>
+                  <text class="label" x="115" y="110">2/3 ↔ (2, 3)</text>
 
-                  <!-- pair (2,3) -->
-                  <rect class="box" x="140" y="40" width="60" height="40" rx="6"/>
-                  <rect class="box" x="206" y="40" width="60" height="40" rx="6"/>
-                  <text class="small" x="155" y="32">first</text>
-                  <text class="small" x="222" y="32">second</text>
-                  <text class="label" x="170" y="66" text-anchor="middle">2</text>
-                  <text class="label" x="236" y="66" text-anchor="middle">3</text>
-                  <text class="label" x="188" y="102" text-anchor="middle">(2, 3)</text>
+                  <!-- Right pair (3,2) -->
+                  <text class="paren" x="250"  y="66">(</text>
+                  <circle class="node" cx="310" cy="60" r="26"/>
+                  <text class="label" x="310" y="64" text-anchor="middle">3</text>
+                  <text class="note"  x="310" y="28" text-anchor="middle">num (1st)</text>
 
-                  <!-- spacer -->
-                  <text class="label" x="270" y="65">and</text>
+                  <text class="sep" x="360" y="66">,</text>
 
-                  <!-- 3/2 -->
-                  <text class="fracText" x="300" y="50">3</text>
-                  <line class="axis" x1="294" y1="56" x2="326" y2="56"/>
-                  <text class="fracText" x="300" y="76">2</text>
-
-                  <!-- arrow -->
-                  <path class="arrow" d="M340,60 H390" marker-end="url(#arrowhead3)"/>
-
-                  <!-- pair (3,2) -->
-                  <rect class="box" x="395" y="40" width="60" height="40" rx="6"/>
-                  <rect class="box" x="461" y="40" width="60" height="40" rx="6"/>
-                  <!-- viewBox ends at 420; keep inside: adjust to fit -->
-                </svg>
-              </div>
-
-              <!-- A second tiny SVG just for the (3,2) box pair to stay inside width -->
-              <div class="diagram">
-                <svg viewBox="0 0 220 80" aria-label="(3,2) pair">
-                  <rect class="box" x="20" y="20" width="60" height="40" rx="6"/>
-                  <rect class="box" x="86" y="20" width="60" height="40" rx="6"/>
-                  <text class="small" x="35" y="12">first</text>
-                  <text class="small" x="102" y="12">second</text>
-                  <text class="label" x="50" y="46" text-anchor="middle">3</text>
-                  <text class="label" x="116" y="46" text-anchor="middle">2</text>
-                  <text class="label" x="86" y="74" text-anchor="middle">(3, 2)</text>
+                  <circle class="node" cx="410" cy="60" r="26"/>
+                  <text class="label" x="410" y="64" text-anchor="middle">2</text>
+                  <text class="note"  x="410" y="28" text-anchor="middle">den (2nd)</text>
+                  <!-- right paren omitted due to viewBox; shrink a bit: -->
                 </svg>
               </div>
             </td>
@@ -330,28 +294,35 @@
 
           <!-- Generalization -->
           <tr>
-            <td><strong>Generalization:</strong> Ordered triples, quadruples, … ordered <em>n</em>-tuples (<em>n</em> ≥ 2).</td>
-            <td><strong>Általánosítás:</strong> Rendezett 3-as, 4-es, … rendezett <em>n</em>-es (<em>n</em> ≥ 2).</td>
+            <td><strong>Generalization:</strong> Ordered triples, quadruples, …, ordered n‑tuples (n ≥ 2).</td>
+            <td><strong>Általánosítás:</strong> Rendezett 3-as, 4-es, …, rendezett n‑es (n ≥ 2).</td>
           </tr>
-          <tr>
+          <tr data-ex="1">
             <td colspan="2">
-              <!-- Visual 4: (x1, x2, x3, …, xn) as boxes in order -->
-              <div class="diagram">
-                <svg viewBox="0 0 520 110" aria-label="Ordered n-tuples">
-                  <rect class="tupleBox" x="20" y="40" width="70" height="40" rx="6"/>
-                  <rect class="tupleBox" x="100" y="40" width="70" height="40" rx="6"/>
-                  <rect class="tupleBox" x="180" y="40" width="70" height="40" rx="6"/>
-                  <text class="label" x="55" y="66" text-anchor="middle">x₁</text>
-                  <text class="label" x="135" y="66" text-anchor="middle">x₂</text>
-                  <text class="label" x="215" y="66" text-anchor="middle">x₃</text>
-                  <text class="label" x="260" y="66">…</text>
-                  <rect class="tupleBox" x="300" y="40" width="70" height="40" rx="6"/>
-                  <text class="label" x="335" y="66" text-anchor="middle">xₙ</text>
-                  <text class="small" x="28" y="30">1st</text>
-                  <text class="small" x="108" y="30">2nd</text>
-                  <text class="small" x="187" y="30">3rd</text>
-                  <text class="small" x="308" y="30">n‑th</text>
-                  <text class="label" x="210" y="100">(x₁, x₂, x₃, …, xₙ)</text>
+              <div class="visual">
+                <!-- Visual: (x, y, z) -->
+                <svg viewBox="0 0 420 120" aria-label="Ordered triple (x, y, z)">
+                  <text class="paren" x="20"  y="66">(</text>
+
+                  <circle class="node" cx="100" cy="60" r="24"/>
+                  <text class="label" x="100" y="64" text-anchor="middle">x</text>
+                  <text class="note"  x="100" y="28" text-anchor="middle">1st</text>
+
+                  <text class="sep" x="145" y="66">,</text>
+
+                  <circle class="node" cx="190" cy="60" r="24"/>
+                  <text class="label" x="190" y="64" text-anchor="middle">y</text>
+                  <text class="note"  x="190" y="28" text-anchor="middle">2nd</text>
+
+                  <text class="sep" x="235" y="66">,</text>
+
+                  <circle class="node" cx="280" cy="60" r="24"/>
+                  <text class="label" x="280" y="64" text-anchor="middle">z</text>
+                  <text class="note"  x="280" y="28" text-anchor="middle">3rd</text>
+
+                  <text class="paren" x="320" y="66">)</text>
+
+                  <text class="note" x="350" y="64">… n‑tuples</text>
                 </svg>
               </div>
             </td>
@@ -362,7 +333,7 @@
     </section>
 
     <p class="hint" style="margin-top:.75rem;">
-      Tip: In text, (a, b) means “first = a, second = b”. In pictures, read left‑to‑right or x‑then‑y. Swapping the order usually changes the pair.
+      Read the text, then look at the circles: left = 1st element, right = 2nd element (and so on). Order matters: swapping the circles makes a different ordered pair.
     </p>
   </div>
 </body>
