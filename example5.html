@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Subsets & Proper Subsets — University of Szeged</title>
+<style>
+  :root{
+    --bg: #f7f9fb;
+    --card: #ffffff;
+    --ink: #0f172a;
+    --muted: #475569;
+    --accent: #2563eb;
+    --accent-2: #38bdf8;
+    --border: #e2e8f0;
+    --shadow: 0 10px 30px rgba(2,6,23,0.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+    font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  /* HEADER */
+  header{
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:white; border-radius:16px; padding:1rem 1.25rem 1rem; box-shadow:var(--shadow);
+  }
+  .header-top{
+    display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  }
+  .title{
+    display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
+  }
+  .badge{
+    font-size: .8rem; letter-spacing:.04em; text-transform:uppercase;
+    background: rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+    padding:.25rem .5rem; border-radius:999px;
+  }
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{
+    display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
+  }
+  .logo-chip{
+    display:flex; align-items:center; justify-content:center;
+    background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px;
+    padding:.35rem .5rem; box-shadow: var(--shadow);
+  }
+  .logo-chip img{ display:block; height:42px; width:auto; object-fit:contain; }
+  .logo-chip.logo-dept img{ height:55px; }
+  .logo-chip.logo-szte img{ height:42px; }
+
+  /* CARD + TABLE */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    margin-top:1rem; box-shadow:var(--shadow); overflow:hidden;
+  }
+  .card .bar{
+    padding:.9rem 1rem; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  }
+  .bar .subtitle{font-weight:600}
+  .bar .tools{display:flex; gap:.5rem}
+  .btn{
+    border:1px solid var(--border); background:transparent; color:var(--ink);
+    padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600;
+  }
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+  table{
+    width:100%; border-collapse:separate; border-spacing:0; font-size:1rem;
+  }
+  thead th{
+    background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(56,189,248,0.08));
+    padding:0.9rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border);
+  }
+  tbody td{
+    padding:0.85rem 1rem; vertical-align:top; border-bottom:1px solid var(--border);
+  }
+  tbody tr:nth-child(odd) td{ background: rgba(148,163,184,0.06) }
+  code, kbd, .sym{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+  .hint{color:var(--muted); font-size:.9rem}
+  .lang-label{
+    display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em;
+    padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,0.15); color:#0369a1; margin-left:.5rem;
+  }
+  @media (max-width:720px){
+    body{padding:1rem}
+    thead th{font-size:.95rem}
+    tbody td{font-size:.95rem}
+    .logo-chip img{height:38px}
+    .logo-chip.logo-dept img{height:48px}
+  }
+  .note{font-size:.95rem; color:var(--muted)}
+</style>
+<script>
+  function toggleExamples(){
+    const rows = document.querySelectorAll('tr[data-ex="1"]');
+    const on = [...rows].some(r => r.style.display === 'none');
+    rows.forEach(r => r.style.display = on ? '' : 'none');
+    document.getElementById('exBtn').textContent = on ? 'Hide examples' : 'Show examples';
+  }
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>Department of Atmospheric and Geospatial Data Science</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>ABDULHAQ Hawkar — Subsets & Proper Subsets</h2>
+    </header>
+
+    <section class="card" aria-labelledby="slide-title">
+      <div class="bar">
+        <div>
+          <div id="slide-title" class="subtitle">
+            Slide 6 — Subsets / Részhalmazok
+            <span class="hint">Geology context: rock groups & samples</span>
+          </div>
+        </div>
+        <div class="tools">
+          <button id="exBtn" class="btn" onclick="toggleExamples()">Hide examples</button>
+          <button class="btn" onclick="printPage()">Print</button>
+        </div>
+      </div>
+
+      <table role="table" aria-describedby="slide-title">
+        <colgroup>
+          <col style="width:50%">
+          <col style="width:50%">
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">English <span class="lang-label">EN</span></th>
+            <th scope="col">Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Definition -->
+          <tr>
+            <td><strong>Definition:</strong> A set A is a <strong>subset</strong> of a set B if every element of A is also an element of B.</td>
+            <td><strong>Definíció:</strong> Egy A halmaz <strong>részhalmaza</strong> egy B halmaznak, ha A minden eleme eleme B-nek is.</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Example:</em> The set of <span class="sym">{basalt, granite}</span> is a subset of <span class="sym">{basalt, granite, limestone, sandstone}</span>.</td>
+            <td class="note"><em>Példa:</em> A <span class="sym">{bazalt, gránit}</span> részhalmaza a <span class="sym">{bazalt, gránit, mészkő, homokkő}</span> halmaznak.</td>
+          </tr>
+
+          <!-- Notation -->
+          <tr>
+            <td><strong>Notation:</strong> <span class="sym">A ⊆ B</span>.</td>
+            <td><strong>Jelölés:</strong> <span class="sym">A ⊆ B</span>.</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Example:</em> <span class="sym">{igneous rocks} ⊆ {all rocks}</span>.</td>
+            <td class="note"><em>Példa:</em> <span class="sym">{magmás kőzetek} ⊆ {összes kőzet}</span>.</td>
+          </tr>
+
+          <!-- Reflexivity -->
+          <tr>
+            <td>Every set is a subset of itself: <span class="sym">A ⊆ A</span> (<strong>reflexivity</strong>).</td>
+            <td>Minden halmaz része önmagának: <span class="sym">A ⊆ A</span> (<strong>reflexivitás</strong>).</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Example:</em> <span class="sym">{sandstone, shale} ⊆ {sandstone, shale}</span>.</td>
+            <td class="note"><em>Példa:</em> <span class="sym">{homokkő, pala} ⊆ {homokkő, pala}</span>.</td>
+          </tr>
+
+          <!-- Empty set -->
+          <tr>
+            <td>The empty set is a subset of every set.</td>
+            <td>Az üres halmaz minden halmaznak része.</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Example:</em> ∅ ⊆ {granite, basalt}.</td>
+            <td class="note"><em>Példa:</em> ∅ ⊆ {gránit, bazalt}.</td>
+          </tr>
+
+          <!-- Proper subset -->
+          <tr>
+            <td><strong>Definition:</strong> A set A is a <strong>proper subset</strong> of a set B if A is a subset of B but not equal to B.</td>
+            <td><strong>Definíció:</strong> Egy A halmaz <strong>valódi részhalmaza</strong> egy B halmaznak, ha A része B-nek, de nem azonos vele.</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Example:</em> <span class="sym">{granite, basalt} ⊂ {granite, basalt, limestone}</span>.</td>
+            <td class="note"><em>Példa:</em> <span class="sym">{gránit, bazalt} ⊂ {gránit, bazalt, mészkő}</span>.</td>
+          </tr>
+
+          <!-- Examples general -->
+          <tr>
+            <td><strong>Examples:</strong> • The set of prime numbers ⊂ natural numbers. • The set of parallelograms ⊂ quadrilaterals.</td>
+            <td><strong>Példák:</strong> • A prímszámok halmaza ⊂ a természetes számok halmazának. • A paralelogrammák halmaza ⊂ a négyszögek halmazának.</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Example (geology):</em> The set of <span class="sym">{igneous rocks}</span> ⊂ {igneous, sedimentary, metamorphic}.</td>
+            <td class="note"><em>Példa (geológia):</em> A <span class="sym">{magmás kőzetek}</span> ⊂ {magmás, üledékes, metamorf}.</td>
+          </tr>
+
+          <!-- Properties -->
+          <tr>
+            <td><strong>Properties of ⊂ (proper subset):</strong></td>
+            <td><strong>A ⊂ reláció tulajdonságai:</strong></td>
+          </tr>
+          <tr>
+            <td>– If A ⊂ B, then A ⊆ B (proper subset implies subset).</td>
+            <td>– Ha A ⊂ B, akkor A ⊆ B (a valódi rész mindig rész is).</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Example:</em> If {basalt} ⊂ {basalt, granite}, then {basalt} ⊆ {basalt, granite}.</td>
+            <td class="note"><em>Példa:</em> Ha {bazalt} ⊂ {bazalt, gránit}, akkor {bazalt} ⊆ {bazalt, gránit}.</td>
+          </tr>
+
+          <tr>
+            <td>– A ⊂ A is never true (<strong>irreflexivity</strong>).</td>
+            <td>– A ⊂ A sohasem igaz (<strong>irreflexivitás</strong>).</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Example:</em> {granite, basalt} ⊄ {granite, basalt}.</td>
+            <td class="note"><em>Példa:</em> {gránit, bazalt} ⊄ {gránit, bazalt}.</td>
+          </tr>
+
+          <tr>
+            <td>– If A ⊂ B, then B ⊃ A (<strong>asymmetry</strong>).</td>
+            <td>– Ha A ⊂ B, akkor B ⊃ A (<strong>aszimmetria</strong>).</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Example:</em> {basalt} ⊂ {basalt, granite} ⇒ {basalt, granite} ⊃ {basalt}.</td>
+            <td class="note"><em>Példa:</em> {bazalt} ⊂ {bazalt, gránit} ⇒ {bazalt, gránit} ⊃ {bazalt}.</td>
+          </tr>
+
+          <tr>
+            <td>– If A ⊂ B and B ⊂ C, then A ⊂ C (<strong>transitivity</strong>).</td>
+            <td>– Ha A ⊂ B és B ⊂ C, akkor A ⊂ C (<strong>tranzitivitás</strong>).</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Example:</em> {basalt} ⊂ {igneous rocks}, {igneous rocks} ⊂ {all rocks} ⇒ {basalt} ⊂ {all rocks}.</td>
+            <td class="note"><em>Példa:</em> {bazalt} ⊂ {magmás kőzetek}, {magmás kőzetek} ⊂ {összes kőzet} ⇒ {bazalt} ⊂ {összes kőzet}.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="hint" style="margin-top:.75rem;">
+      Teaching tip: Hide examples first, let students try to state geological subsets, then reveal to confirm and expand.
+    </p>
+  </div>
+</body>
+</html>
