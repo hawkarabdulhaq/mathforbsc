@@ -100,6 +100,15 @@
     .logo-chip.logo-dept img{height:48px}
   }
   .note{font-size:.95rem; color:var(--muted)}
+
+  /* Simple Venn diagram style */
+  .venn{
+    display:flex; justify-content:center; margin:1rem 0;
+  }
+  svg{max-width:260px; height:auto;}
+  .circleA{fill:rgba(37,99,235,0.25); stroke:#2563eb; stroke-width:2;}
+  .circleB{fill:rgba(248,113,113,0.25); stroke:#dc2626; stroke-width:2;}
+  .label{font-size:14px; font-weight:600; fill:var(--ink);}
 </style>
 <script>
   function toggleExamples(){
@@ -187,21 +196,26 @@
             <td class="note"><em>Példa:</em> Ásványhalmaz A = {kvarc, földpát}, B = {földpát}. Ekkor A \ B = {kvarc}.</td>
           </tr>
 
-          <!-- Diagram idea -->
+          <!-- Diagram -->
           <tr>
-            <td><strong>Diagram idea:</strong> A circle for A, a circle for B, shading the part of A outside B.</td>
-            <td><strong>Ábra-ötlet:</strong> Egy kör A-ra, egy kör B-re, besatírozva A B-n kívüli része.</td>
-          </tr>
-          <tr data-ex="1">
-            <td class="note"><em>Example (visual):</em> Imagine a circle of “igneous rocks” and another for “basalt.” Shaded part = all igneous rocks except basalt.</td>
-            <td class="note"><em>Példa (vizuális):</em> Képzeljünk el egy kört a „magmás kőzetekre” és egy másikat a „bazaltra”. A satírozott rész = minden magmás kőzet bazalt nélkül.</td>
+            <td colspan="2">
+              <div class="venn">
+                <svg viewBox="0 0 200 120">
+                  <circle class="circleA" cx="80" cy="60" r="45"></circle>
+                  <circle class="circleB" cx="120" cy="60" r="45"></circle>
+                  <text class="label" x="65" y="55">A</text>
+                  <text class="label" x="135" y="55">B</text>
+                  <text class="label" x="40" y="105">Shaded: A \ B</text>
+                </svg>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
     </section>
 
     <p class="hint" style="margin-top:.75rem;">
-      Teaching tip: Hide examples first, ask students to think which elements remain when subtracting one rock set from another, then reveal.
+      Teaching tip: Hide examples first, ask students to predict what remains after subtracting one rock set from another, then reveal.
     </p>
   </div>
 </body>
