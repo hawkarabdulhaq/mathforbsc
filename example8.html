@@ -106,8 +106,8 @@
     display:flex; justify-content:center; margin:1rem 0;
   }
   svg{max-width:260px; height:auto;}
-  .circleA{fill:rgba(37,99,235,0.25); stroke:#2563eb; stroke-width:2;}
-  .circleB{fill:rgba(248,113,113,0.25); stroke:#dc2626; stroke-width:2;}
+  .circleA{fill:rgba(37,99,235,0.5); stroke:#2563eb; stroke-width:2;}
+  .circleB{fill:rgba(248,113,113,0.5); stroke:#dc2626; stroke-width:2;}
   .overlap{fill:var(--bg);}
   .label{font-size:14px; font-weight:600; fill:var(--ink);}
 </style>
@@ -214,7 +214,7 @@
                 <svg viewBox="0 0 200 120">
                   <circle class="circleA" cx="80" cy="60" r="45"></circle>
                   <circle class="circleB" cx="120" cy="60" r="45"></circle>
-                  <!-- Overlay a white overlap to unshade intersection -->
+                  <!-- Cover the overlap with background to show only non-overlapping shaded parts -->
                   <ellipse class="overlap" cx="100" cy="60" rx="25" ry="45"></ellipse>
                   <text class="label" x="65" y="55">A</text>
                   <text class="label" x="135" y="55">B</text>
