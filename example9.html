@@ -3,23 +3,25 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Set Operations with Rock Types — University of Szeged</title>
+<title>Unions, Intersections & Differences (A,B,C) — University of Szeged</title>
 <style>
   :root{
     --bg: #f7f9fb;
     --card: #ffffff;
     --ink: #0f172a;
     --muted: #475569;
-    --accent: #2563eb;
-    --accent-2: #38bdf8;
+    --accent: #2563eb;   /* A */
+    --accent2:#dc2626;   /* B */
+    --accent3:#16a34a;   /* C */
     --border: #e2e8f0;
     --shadow: 0 10px 30px rgba(2,6,23,0.08);
+    --shade: rgba(2,6,23,.12);
   }
   @media (prefers-color-scheme: dark){
     :root{
       --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
-      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44;
-      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      --accent:#60a5fa; --accent2:#f87171; --accent3:#4ade80;
+      --border:#1f2a44; --shadow: 0 10px 30px rgba(0,0,0,0.5); --shade: rgba(255,255,255,.12);
     }
   }
   *{box-sizing:border-box}
@@ -31,15 +33,13 @@
 
   /* HEADER */
   header{
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    background: linear-gradient(135deg, var(--accent), #38bdf8);
     color:white; border-radius:16px; padding:1rem 1.25rem 1rem; box-shadow:var(--shadow);
   }
   .header-top{
     display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
   }
-  .title{
-    display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
-  }
+  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;}
   .badge{
     font-size: .8rem; letter-spacing:.04em; text-transform:uppercase;
     background: rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
@@ -47,14 +47,8 @@
   }
   h1{margin:0; font-size:1.35rem; font-weight:700}
   h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
-  .logo-row{
-    display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
-  }
-  .logo-chip{
-    display:flex; align-items:center; justify-content:center;
-    background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px;
-    padding:.35rem .5rem; box-shadow: var(--shadow);
-  }
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow);}
   .logo-chip img{ display:block; height:42px; width:auto; object-fit:contain; }
   .logo-chip.logo-dept img{ height:55px; }
   .logo-chip.logo-szte img{ height:42px; }
@@ -75,23 +69,20 @@
     padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600;
   }
   .btn:hover{border-color:var(--accent); color:var(--accent)}
-  table{
-    width:100%; border-collapse:separate; border-spacing:0; font-size:1rem;
-  }
+  table{ width:100%; border-collapse:separate; border-spacing:0; font-size:1rem; }
   thead th{
     background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(56,189,248,0.08));
     padding:0.9rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border);
   }
-  tbody td{
-    padding:0.85rem 1rem; vertical-align:top; border-bottom:1px solid var(--border);
-  }
+  tbody td{ padding:0.85rem 1rem; vertical-align:top; border-bottom:1px solid var(--border); }
   tbody tr:nth-child(odd) td{ background: rgba(148,163,184,0.06) }
-  code, kbd, .sym{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
   .hint{color:var(--muted); font-size:.9rem}
   .lang-label{
     display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em;
     padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,0.15); color:#0369a1; margin-left:.5rem;
   }
+  .note{font-size:.95rem; color:var(--muted)}
+
   @media (max-width:720px){
     body{padding:1rem}
     thead th{font-size:.95rem}
@@ -99,15 +90,24 @@
     .logo-chip img{height:38px}
     .logo-chip.logo-dept img{height:48px}
   }
-  .note{font-size:.95rem; color:var(--muted)}
+
+  /* Venn base */
+  .venn { display:flex; justify-content:center; align-items:center; padding:.5rem 0 .9rem; background:linear-gradient(180deg,transparent, var(--shade)); }
+  svg{max-width:300px; height:auto;}
+  .A{fill: rgba(37,99,235,0.25); stroke: var(--accent); stroke-width:2;}
+  .B{fill: rgba(220,38,38,0.25); stroke: var(--accent2); stroke-width:2;}
+  .C{fill: rgba(22,163,74,0.25); stroke: var(--accent3); stroke-width:2;}
+  .shade{fill: rgba(15,23,42,0.35);}              /* used for highlights */
+  .maskWhite{fill:#fff;}
+  .label{font-size:14px; font-weight:600; fill:var(--ink);}
+  .legend{display:flex; gap:.75rem; align-items:center; flex-wrap:wrap; font-size:.95rem; color:var(--muted); padding:.5rem 1rem;}
+  .chip{display:inline-flex; align-items:center; gap:.35rem;}
+  .dot{width:12px; height:12px; border-radius:999px; display:inline-block;}
+  .dot.a{background:rgba(37,99,235,.7)}
+  .dot.b{background:rgba(220,38,38,.7)}
+  .dot.c{background:rgba(22,163,74,.7)}
 </style>
 <script>
-  function toggleExamples(){
-    const rows = document.querySelectorAll('tr[data-ex="1"]');
-    const on = [...rows].some(r => r.style.display === 'none');
-    rows.forEach(r => r.style.display = on ? '' : 'none');
-    document.getElementById('exBtn').textContent = on ? 'Hide explanations' : 'Show explanations';
-  }
   function printPage(){ window.print(); }
 </script>
 </head>
@@ -128,19 +128,23 @@
           </span>
         </div>
       </div>
-      <h2>ABDULHAQ Hawkar — Rock Sets and Operations (Simple Explanations)</h2>
+      <h2>ABDULHAQ Hawkar — Sets A, B, C (Simple meanings + visuals)</h2>
     </header>
 
     <section class="card" aria-labelledby="slide-title">
       <div class="bar">
         <div>
           <div id="slide-title" class="subtitle">
-            Slide 10 — Rock groups as sets / Kőzettípusok mint halmazok
-            <span class="hint">Volcanic (A), Plutonic (B), Sedimentary (C)</span>
+            Slide 10 — Understand A, B, C with unions, intersections, differences / Értsük meg A, B, C halmazokat
+            <span class="hint">A: volcanic • B: intrusive igneous • C: sedimentary</span>
+          </div>
+          <div class="legend">
+            <span class="chip"><span class="dot a"></span> A = volcanic rocks / vulkáni kőzetek</span>
+            <span class="chip"><span class="dot b"></span> B = intrusive (plutonic) / mélységi magmás</span>
+            <span class="chip"><span class="dot c"></span> C = sedimentary / üledékes</span>
           </div>
         </div>
         <div class="tools">
-          <button id="exBtn" class="btn" onclick="toggleExamples()">Hide explanations</button>
           <button class="btn" onclick="printPage()">Print</button>
         </div>
       </div>
@@ -157,126 +161,285 @@
           </tr>
         </thead>
         <tbody>
+          <!-- Definitions of A, B, C -->
           <tr>
-            <td>Let A = set of volcanic rocks</td>
-            <td>Legyen A = a vulkáni kőzetek halmaza</td>
-          </tr>
-          <tr>
-            <td>Let B = set of intrusive (plutonic) igneous rocks</td>
-            <td>Legyen B = a mélységi magmás (intruzív) kőzetek halmaza</td>
-          </tr>
-          <tr>
-            <td>Let C = set of sedimentary rocks</td>
-            <td>Legyen C = az üledékes kőzetek halmaza</td>
-          </tr>
-          <tr>
-            <td colspan="2" class="note">Now we ask: what do these operations mean?</td>
+            <td><strong>Let A</strong> be the set of <strong>volcanic rocks</strong>. <strong>Let B</strong> be the set of <strong>intrusive igneous rocks</strong>. <strong>Let C</strong> be the set of <strong>sedimentary rocks</strong>.</td>
+            <td><strong>Legyen A</strong> a <strong>vulkáni kőzetek</strong> halmaza. <strong>Legyen B</strong> a <strong>mélységi (intruzív) magmás kőzetek</strong> halmaza. <strong>Legyen C</strong> az <strong>üledékes kőzetek</strong> halmaza.</td>
           </tr>
 
+          <!-- A ∪ B -->
           <tr>
-            <td><span class="sym">A ∪ B</span></td>
-            <td><span class="sym">A ∪ B</span></td>
+            <td><strong>A ∪ B</strong>: everything that is volcanic <em>or</em> intrusive (or both). Simple: “volcanic + intrusive”.</td>
+            <td><strong>A ∪ B</strong>: minden, ami vulkáni <em>vagy</em> mélységi (vagy mindkettő). Egyszerűen: „vulkáni + intruzív”.</td>
           </tr>
-          <tr data-ex="1">
-            <td class="note">All volcanic rocks plus all plutonic rocks, together.</td>
-            <td class="note">Minden vulkáni kőzet és minden mélységi magmás kőzet együtt.</td>
+          <tr>
+            <td colspan="2">
+              <div class="venn">
+                <!-- 3-set base + shade A and B -->
+                <svg viewBox="0 0 220 150" aria-label="A ∪ B">
+                  <defs>
+                    <!-- masks to keep circles rounded when we add white patches -->
+                    <clipPath id="clipAll"><rect x="0" y="0" width="220" height="150" rx="12"/></clipPath>
+                  </defs>
+                  <!-- base circles -->
+                  <circle class="A" cx="70" cy="95" r="45" />
+                  <circle class="B" cx="150" cy="95" r="45" />
+                  <circle class="C" cx="110" cy="55" r="45" />
+                  <!-- shade union A or B by overlaying semi-opaque patches exactly over A and B -->
+                  <circle class="shade" cx="70" cy="95" r="45" clip-path="url(#clipAll)"/>
+                  <circle class="shade" cx="150" cy="95" r="45" clip-path="url(#clipAll)"/>
+                  <text class="label" x="60" y="90">A</text>
+                  <text class="label" x="160" y="90">B</text>
+                  <text class="label" x="105" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A ∪ B / Besatírozva: A ∪ B</text>
+                </svg>
+              </div>
+            </td>
           </tr>
 
+          <!-- A ∩ B -->
           <tr>
-            <td><span class="sym">A ∩ B</span></td>
-            <td><span class="sym">A ∩ B</span></td>
+            <td><strong>A ∩ B</strong>: things that are <em>both</em> volcanic and intrusive (if any). “Overlap of A and B”.</td>
+            <td><strong>A ∩ B</strong>: ami <em>egyszerre</em> vulkáni és mélységi (ha van ilyen). „A és B közös része”.</td>
           </tr>
-          <tr data-ex="1">
-            <td class="note">Rocks that are both volcanic and plutonic (usually none, since they are separate types).</td>
-            <td class="note">Azok a kőzetek, amelyek egyszerre vulkániak és mélységi magmásak (általában nincs ilyen).</td>
+          <tr>
+            <td colspan="2">
+              <div class="venn">
+                <svg viewBox="0 0 220 150" aria-label="A ∩ B">
+                  <circle class="A" cx="70" cy="95" r="45" />
+                  <circle class="B" cx="150" cy="95" r="45" />
+                  <circle class="C" cx="110" cy="55" r="45" />
+                  <!-- highlight intersection of A & B by shading center lens -->
+                  <ellipse class="shade" cx="110" cy="95" rx="28" ry="45"/>
+                  <text class="label" x="60" y="90">A</text>
+                  <text class="label" x="160" y="90">B</text>
+                  <text class="label" x="105" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A ∩ B / Besatírozva: A ∩ B</text>
+                </svg>
+              </div>
+            </td>
           </tr>
 
+          <!-- A ∪ C -->
           <tr>
-            <td><span class="sym">A ∪ C</span></td>
-            <td><span class="sym">A ∪ C</span></td>
+            <td><strong>A ∪ C</strong>: everything volcanic <em>or</em> sedimentary (or both). “Volcanic + sedimentary”.</td>
+            <td><strong>A ∪ C</strong>: minden vulkáni <em>vagy</em> üledékes (vagy mindkettő). „Vulkáni + üledékes”.</td>
           </tr>
-          <tr data-ex="1">
-            <td class="note">All volcanic rocks plus all sedimentary rocks.</td>
-            <td class="note">Minden vulkáni és minden üledékes kőzet együtt.</td>
+          <tr>
+            <td colspan="2">
+              <div class="venn">
+                <svg viewBox="0 0 220 150" aria-label="A ∪ C">
+                  <circle class="A" cx="70" cy="95" r="45" />
+                  <circle class="B" cx="150" cy="95" r="45" />
+                  <circle class="C" cx="110" cy="55" r="45" />
+                  <circle class="shade" cx="70" cy="95" r="45"/>
+                  <circle class="shade" cx="110" cy="55" r="45"/>
+                  <text class="label" x="60" y="90">A</text>
+                  <text class="label" x="160" y="90">B</text>
+                  <text class="label" x="105" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A ∪ C / Besatírozva: A ∪ C</text>
+                </svg>
+              </div>
+            </td>
           </tr>
 
+          <!-- B ∪ C -->
           <tr>
-            <td><span class="sym">B ∪ C</span></td>
-            <td><span class="sym">B ∪ C</span></td>
+            <td><strong>B ∪ C</strong>: everything intrusive <em>or</em> sedimentary (or both).</td>
+            <td><strong>B ∪ C</strong>: minden mélységi <em>vagy</em> üledékes (vagy mindkettő).</td>
           </tr>
-          <tr data-ex="1">
-            <td class="note">All plutonic rocks plus all sedimentary rocks.</td>
-            <td class="note">Minden mélységi magmás és minden üledékes kőzet együtt.</td>
+          <tr>
+            <td colspan="2">
+              <div class="venn">
+                <svg viewBox="0 0 220 150" aria-label="B ∪ C">
+                  <circle class="A" cx="70" cy="95" r="45" />
+                  <circle class="B" cx="150" cy="95" r="45" />
+                  <circle class="C" cx="110" cy="55" r="45" />
+                  <circle class="shade" cx="150" cy="95" r="45"/>
+                  <circle class="shade" cx="110" cy="55" r="45"/>
+                  <text class="label" x="60" y="90">A</text>
+                  <text class="label" x="160" y="90">B</text>
+                  <text class="label" x="105" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: B ∪ C / Besatírozva: B ∪ C</text>
+                </svg>
+              </div>
+            </td>
           </tr>
 
+          <!-- A ∪ B ∪ C -->
           <tr>
-            <td><span class="sym">A ∪ B ∪ C</span></td>
-            <td><span class="sym">A ∪ B ∪ C</span></td>
+            <td><strong>A ∪ B ∪ C</strong>: everything in any of the three sets. “All volcanic or intrusive or sedimentary”.</td>
+            <td><strong>A ∪ B ∪ C</strong>: ami bármelyik három halmazban benne van. „Minden vulkáni vagy intruzív vagy üledékes”.</td>
           </tr>
-          <tr data-ex="1">
-            <td class="note">All volcanic, plutonic, and sedimentary rocks — basically, all the main rock groups.</td>
-            <td class="note">Minden vulkáni, mélységi magmás és üledékes kőzet — az összes fő kőzettípus.</td>
+          <tr>
+            <td colspan="2">
+              <div class="venn">
+                <svg viewBox="0 0 220 150" aria-label="A ∪ B ∪ C">
+                  <circle class="A" cx="70" cy="95" r="45" />
+                  <circle class="B" cx="150" cy="95" r="45" />
+                  <circle class="C" cx="110" cy="55" r="45" />
+                  <circle class="shade" cx="70" cy="95" r="45"/>
+                  <circle class="shade" cx="150" cy="95" r="45"/>
+                  <circle class="shade" cx="110" cy="55" r="45"/>
+                  <text class="label" x="60" y="90">A</text>
+                  <text class="label" x="160" y="90">B</text>
+                  <text class="label" x="105" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A ∪ B ∪ C / Besatírozva: A ∪ B ∪ C</text>
+                </svg>
+              </div>
+            </td>
           </tr>
 
+          <!-- A ∩ C -->
           <tr>
-            <td><span class="sym">A ∩ C</span></td>
-            <td><span class="sym">A ∩ C</span></td>
+            <td><strong>A ∩ C</strong>: things that are both volcanic and sedimentary (if defined conceptually—overlap zone).</td>
+            <td><strong>A ∩ C</strong>: ami egyszerre vulkáni és üledékes (fogalmilag az átfedés).</td>
           </tr>
-          <tr data-ex="1">
-            <td class="note">Rocks that are both volcanic and sedimentary (none — categories don’t overlap).</td>
-            <td class="note">Azok a kőzetek, amelyek egyszerre vulkániak és üledékesek (nincs ilyen).</td>
+          <tr>
+            <td colspan="2">
+              <div class="venn">
+                <svg viewBox="0 0 220 150" aria-label="A ∩ C">
+                  <circle class="A" cx="70" cy="95" r="45" />
+                  <circle class="B" cx="150" cy="95" r="45" />
+                  <circle class="C" cx="110" cy="55" r="45" />
+                  <ellipse class="shade" cx="90" cy="75" rx="28" ry="32"/>
+                  <text class="label" x="60" y="90">A</text>
+                  <text class="label" x="160" y="90">B</text>
+                  <text class="label" x="105" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A ∩ C / Besatírozva: A ∩ C</text>
+                </svg>
+              </div>
+            </td>
           </tr>
 
+          <!-- B ∩ C -->
           <tr>
-            <td><span class="sym">B ∩ C</span></td>
-            <td><span class="sym">B ∩ C</span></td>
+            <td><strong>B ∩ C</strong>: both intrusive and sedimentary (overlap zone).</td>
+            <td><strong>B ∩ C</strong>: egyszerre intruzív és üledékes (átfedés).</td>
           </tr>
-          <tr data-ex="1">
-            <td class="note">Rocks that are both plutonic and sedimentary (none — categories don’t overlap).</td>
-            <td class="note">Azok a kőzetek, amelyek egyszerre mélységi magmásak és üledékesek (nincs ilyen).</td>
+          <tr>
+            <td colspan="2">
+              <div class="venn">
+                <svg viewBox="0 0 220 150" aria-label="B ∩ C">
+                  <circle class="A" cx="70" cy="95" r="45" />
+                  <circle class="B" cx="150" cy="95" r="45" />
+                  <circle class="C" cx="110" cy="55" r="45" />
+                  <ellipse class="shade" cx="130" cy="75" rx="28" ry="32"/>
+                  <text class="label" x="60" y="90">A</text>
+                  <text class="label" x="160" y="90">B</text>
+                  <text class="label" x="105" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: B ∩ C / Besatírozva: B ∩ C</text>
+                </svg>
+              </div>
+            </td>
           </tr>
 
+          <!-- A ∩ B ∩ C -->
           <tr>
-            <td><span class="sym">A ∩ B ∩ C</span></td>
-            <td><span class="sym">A ∩ B ∩ C</span></td>
+            <td><strong>A ∩ B ∩ C</strong>: the tiny center where all three overlap (if any). “All three at once”.</td>
+            <td><strong>A ∩ B ∩ C</strong>: a középső, kicsi rész, ahol mindhárom átfed (ha van). „Mindhárom egyszerre”.</td>
           </tr>
-          <tr data-ex="1">
-            <td class="note">Rocks that are volcanic, plutonic, and sedimentary at the same time (none).</td>
-            <td class="note">Olyan kőzetek, amelyek egyszerre vulkániak, mélységi magmásak és üledékesek (nincs ilyen).</td>
+          <tr>
+            <td colspan="2">
+              <div class="venn">
+                <svg viewBox="0 0 220 150" aria-label="A ∩ B ∩ C">
+                  <circle class="A" cx="70" cy="95" r="45" />
+                  <circle class="B" cx="150" cy="95" r="45" />
+                  <circle class="C" cx="110" cy="55" r="45" />
+                  <circle class="shade" cx="110" cy="80" r="12"/>
+                  <text class="label" x="60" y="90">A</text>
+                  <text class="label" x="160" y="90">B</text>
+                  <text class="label" x="105" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A ∩ B ∩ C / Besatírozva: A ∩ B ∩ C</text>
+                </svg>
+              </div>
+            </td>
           </tr>
 
+          <!-- A \ B -->
           <tr>
-            <td><span class="sym">A \ B</span></td>
-            <td><span class="sym">A \ B</span></td>
+            <td><strong>A \ B</strong>: in A but not in B. “Volcanic, excluding intrusive”.</td>
+            <td><strong>A \ B</strong>: benne van A-ban, de nincs benne B-ben. „Vulkáni, az intruzív kivétele”.</td>
           </tr>
-          <tr data-ex="1">
-            <td class="note">Volcanic rocks that are not plutonic.</td>
-            <td class="note">Vulkáni kőzetek, amelyek nem mélységi magmásak.</td>
+          <tr>
+            <td colspan="2">
+              <div class="venn">
+                <svg viewBox="0 0 220 150" aria-label="A \ B">
+                  <circle class="A" cx="70" cy="95" r="45" />
+                  <circle class="B" cx="150" cy="95" r="45" />
+                  <circle class="C" cx="110" cy="55" r="45" />
+                  <!-- shade A, then erase the overlap with B by a white lens -->
+                  <circle class="shade" cx="70" cy="95" r="45"/>
+                  <ellipse class="maskWhite" cx="110" cy="95" rx="28" ry="45"/>
+                  <text class="label" x="60" y="90">A</text>
+                  <text class="label" x="160" y="90">B</text>
+                  <text class="label" x="105" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A \ B / Besatírozva: A \ B</text>
+                </svg>
+              </div>
+            </td>
           </tr>
 
+          <!-- A Δ B -->
           <tr>
-            <td><span class="sym">A Δ B</span></td>
-            <td><span class="sym">A Δ B</span></td>
+            <td><strong>A Δ B</strong>: in A or in B, but not in both. “Parts of A and B that don’t overlap”.</td>
+            <td><strong>A Δ B</strong>: A-ban vagy B-ben, de nem mindkettőben. „A és B nem közös részei”.</td>
           </tr>
-          <tr data-ex="1">
-            <td class="note">Rocks that are either volcanic or plutonic, but not both (all volcanic + all plutonic, without overlap).</td>
-            <td class="note">Olyan kőzetek, amelyek vulkániak vagy mélységi magmásak, de nem mindkettő (az összes vulkáni + az összes mélységi magmás, átfedés nélkül).</td>
+          <tr>
+            <td colspan="2">
+              <div class="venn">
+                <svg viewBox="0 0 220 150" aria-label="A Δ B">
+                  <circle class="A" cx="70" cy="95" r="45" />
+                  <circle class="B" cx="150" cy="95" r="45" />
+                  <circle class="C" cx="110" cy="55" r="45" />
+                  <!-- shade A and B, then unshade their intersection -->
+                  <circle class="shade" cx="70" cy="95" r="45"/>
+                  <circle class="shade" cx="150" cy="95" r="45"/>
+                  <ellipse class="maskWhite" cx="110" cy="95" rx="28" ry="45"/>
+                  <text class="label" x="60" y="90">A</text>
+                  <text class="label" x="160" y="90">B</text>
+                  <text class="label" x="105" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: A Δ B / Besatírozva: A Δ B</text>
+                </svg>
+              </div>
+            </td>
           </tr>
 
+          <!-- U \ (A ∪ B ∪ C) -->
           <tr>
-            <td><span class="sym">U \ (A ∪ B ∪ C)</span> (U = universal set)</td>
-            <td><span class="sym">U \ (A ∪ B ∪ C)</span> (U = alaphalmaz)</td>
+            <td><strong>U \ (A ∪ B ∪ C)</strong>: everything outside A, B, and C (in the universe U). “Not volcanic, not intrusive, not sedimentary”.</td>
+            <td><strong>U \ (A ∪ B ∪ C)</strong>: minden A, B és C <em>külső</em> része (az alaphalmazban U). „Sem nem vulkáni, sem nem intruzív, sem nem üledékes”.</td>
           </tr>
-          <tr data-ex="1">
-            <td class="note">All things in the universe that are not volcanic, not plutonic, and not sedimentary (e.g. metamorphic rocks, minerals, fossils, etc.).</td>
-            <td class="note">Minden, ami az alaphalmazban van, de nem vulkáni, nem mélységi magmás és nem üledékes (pl. metamorf kőzetek, ásványok, kövületek stb.).</td>
+          <tr>
+            <td colspan="2">
+              <div class="venn">
+                <svg viewBox="0 0 220 150" aria-label="U minus (A ∪ B ∪ C)">
+                  <!-- shade whole frame as U -->
+                  <rect class="shade" x="5" y="5" width="210" height="140" rx="12"/>
+                  <!-- punch out A, B, C with white "holes" -->
+                  <circle class="maskWhite" cx="70" cy="95" r="45"/>
+                  <circle class="maskWhite" cx="150" cy="95" r="45"/>
+                  <circle class="maskWhite" cx="110" cy="55" r="45"/>
+                  <!-- draw outlines of sets on top -->
+                  <circle class="A" cx="70" cy="95" r="45" fill="none"/>
+                  <circle class="B" cx="150" cy="95" r="45" fill="none"/>
+                  <circle class="C" cx="110" cy="55" r="45" fill="none"/>
+                  <text class="label" x="60" y="90">A</text>
+                  <text class="label" x="160" y="90">B</text>
+                  <text class="label" x="105" y="50">C</text>
+                  <text class="label" x="10" y="140">Shaded: U \ (A ∪ B ∪ C)</text>
+                </svg>
+              </div>
+            </td>
           </tr>
+
         </tbody>
       </table>
     </section>
 
     <p class="hint" style="margin-top:.75rem;">
-      Teaching tip: Use simple words — “together” for union, “common” for intersection, “left over” for difference, and “either-or” for symmetric difference.
+      Tip: Read each line first (EN/HU), then use the shaded part of the picture to “see” the set. Simple rule of thumb:
+      ∪ means “add areas”, ∩ means “only the overlap”, \ means “take A and remove what’s in B”.
     </p>
   </div>
 </body>
