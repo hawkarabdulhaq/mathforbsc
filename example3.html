@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Finite & Infinite Sets — University of Szeged</title>
+<style>
+  :root{
+    --bg: #f7f9fb;
+    --card: #ffffff;
+    --ink: #0f172a;
+    --muted: #475569;
+    --accent: #2563eb;
+    --accent-2: #38bdf8;
+    --border: #e2e8f0;
+    --shadow: 0 10px 30px rgba(2,6,23,0.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+    font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  /* HEADER */
+  header{
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:white; border-radius:16px; padding:1rem 1.25rem 1rem; box-shadow:var(--shadow);
+  }
+  .header-top{
+    display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  }
+  .title{
+    display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
+  }
+  .badge{
+    font-size: .8rem; letter-spacing:.04em; text-transform:uppercase;
+    background: rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+    padding:.25rem .5rem; border-radius:999px;
+  }
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{
+    display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
+  }
+  .logo-chip{
+    display:flex; align-items:center; justify-content:center;
+    background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px;
+    padding:.35rem .5rem; box-shadow: var(--shadow);
+  }
+  .logo-chip img{ display:block; height:42px; width:auto; object-fit:contain; }
+  .logo-chip.logo-dept img{ height:55px; }
+  .logo-chip.logo-szte img{ height:42px; }
+
+  /* CARD + TABLE */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    margin-top:1rem; box-shadow:var(--shadow); overflow:hidden;
+  }
+  .card .bar{
+    padding:.9rem 1rem; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  }
+  .bar .subtitle{font-weight:600}
+  .bar .tools{display:flex; gap:.5rem}
+  .btn{
+    border:1px solid var(--border); background:transparent; color:var(--ink);
+    padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600;
+  }
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+  table{
+    width:100%; border-collapse:separate; border-spacing:0; font-size:1rem;
+  }
+  thead th{
+    background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(56,189,248,0.08));
+    padding:0.9rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border);
+  }
+  tbody td{
+    padding:0.85rem 1rem; vertical-align:top; border-bottom:1px solid var(--border);
+  }
+  tbody tr:nth-child(odd) td{ background: rgba(148,163,184,0.06) }
+  code, kbd, .sym{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+  .hint{color:var(--muted); font-size:.9rem}
+  .lang-label{
+    display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em;
+    padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,0.15); color:#0369a1; margin-left:.5rem;
+  }
+  @media (max-width:720px){
+    body{padding:1rem}
+    thead th{font-size:.95rem}
+    tbody td{font-size:.95rem}
+    .logo-chip img{height:38px}
+    .logo-chip.logo-dept img{height:48px}
+  }
+  .note{font-size:.9rem; color:var(--muted)}
+</style>
+<script>
+  function toggleExamples(){
+    const rows = document.querySelectorAll('tr[data-ex="1"]');
+    const on = [...rows].some(r => r.style.display === 'none');
+    rows.forEach(r => r.style.display = on ? '' : 'none');
+    document.getElementById('exBtn').textContent = on ? 'Hide examples' : 'Show examples';
+  }
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>Department of Atmospheric and Geospatial Data Science</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>ABDULHAQ Hawkar — Finite & Infinite Sets (with Geology Context)</h2>
+    </header>
+
+    <section class="card" aria-labelledby="slide-title">
+      <div class="bar">
+        <div>
+          <div id="slide-title" class="subtitle">
+            Slide 4 — Finite and Infinite Sets / Véges és végtelen halmazok
+            <span class="hint">Geoscience anchor: samples, layers, points in space</span>
+          </div>
+        </div>
+        <div class="tools">
+          <button id="exBtn" class="btn" onclick="toggleExamples()">Hide examples</button>
+          <button class="btn" onclick="printPage()">Print</button>
+        </div>
+      </div>
+
+      <table role="table" aria-describedby="slide-title">
+        <colgroup>
+          <col style="width:50%">
+          <col style="width:50%">
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">English <span class="lang-label">EN</span></th>
+            <th scope="col">Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 1 -->
+          <tr>
+            <td><strong>No restriction:</strong> There is no limit on how many or how few elements a set may have.</td>
+            <td><strong>Nincs megszorítás:</strong> Semmiféle korlát nincs arra, hogy egy halmaznak mennyire sok vagy kevés eleme lehet.</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Geo example:</em> The set of <span class="sym">rock samples</span> collected on a field day might have 0, 1, or hundreds of elements, depending on how much you sampled.</td>
+            <td class="note"><em>Geós példa:</em> A terepnapon gyűjtött <span class="sym">kőzetminták</span> halmaza lehet 0, 1 vagy akár több száz elemű attól függően, mennyit gyűjtöttünk.</td>
+          </tr>
+
+          <!-- 2 -->
+          <tr>
+            <td>A set can have <strong>any number of elements</strong>, even infinitely many.</td>
+            <td>Egy halmaznak lehet <strong>akár végtelen sok</strong> eleme is.</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Geo example:</em> The set of <span class="sym">points</span> in a basalt column’s cross-section is infinite—there are infinitely many distinct points in that region.</td>
+            <td class="note"><em>Geós példa:</em> Egy bazaltoszlop keresztmetszetének <span class="sym">pontjai</span> végtelen halmazt alkotnak—végtelenül sok különböző pont található abban a tartományban.</td>
+          </tr>
+
+          <!-- 3 -->
+          <tr>
+            <td><strong>Definition (finite):</strong> A set is <strong>finite</strong> if it has a finite number of elements (countable by a natural number).</td>
+            <td><strong>Definíció (véges):</strong> Egy halmaz <strong>véges</strong>, ha véges sok eleme van (azaz egy természetes számmal megadható az elemszám).</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Geo example:</em> The set of <span class="sym">cores</span> recovered by a drilling campaign this season: e.g. <span class="sym">C = {core₁, core₂, …, core₄₂}</span> (42 cores → finite).</td>
+            <td class="note"><em>Geós példa:</em> Egy fúrási szezonban kiemelt <span class="sym">magminták</span> halmaza: pl. <span class="sym">C = {mag₁, mag₂, …, mag₄₂}</span> (42 mag → véges).</td>
+          </tr>
+
+          <!-- 4 -->
+          <tr>
+            <td><strong>Definition (infinite):</strong> A set is <strong>infinite</strong> if it has infinitely many elements (not countable by any natural number).</td>
+            <td><strong>Definíció (végtelen):</strong> Egy halmaz <strong>végtelen</strong>, ha végtelen sok eleme van (azaz semmilyen természetes számmal nem adható meg az elemszám).</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Geo example:</em> The set of <span class="sym">points</span> within a sediment layer between depths <span class="sym">z₁</span> and <span class="sym">z₂</span> is infinite (a 3-D region contains infinitely many points).</td>
+            <td class="note"><em>Geós példa:</em> A <span class="sym">pontok</span> halmaza egy üledékes rétegben <span class="sym">z₁</span> és <span class="sym">z₂</span> mélységek között végtelen (egy 3D tartomány végtelen sok pontot tartalmaz).</td>
+          </tr>
+
+          <!-- 5 -->
+          <tr>
+            <td><strong>Examples:</strong> the set of real numbers; the set of points on a line segment.</td>
+            <td><strong>Példák:</strong> a valós számok halmaza; egy szakasz pontjainak halmaza.</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Geo example A:</em> The set of possible <span class="sym">grain sizes</span> for sands can be modeled by a real interval, e.g. <span class="sym">[0.0625&nbsp;mm, 2&nbsp;mm]</span> (continuum).</td>
+            <td class="note"><em>Geós példa A:</em> A homok szemcseméreteinek <span class="sym">lehetséges értékei</span> modellezhetők egy valós intervallummal, pl. <span class="sym">[0,0625&nbsp;mm, 2&nbsp;mm]</span> (folytonos).</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Geo example B:</em> The set of <span class="sym">points</span> along a mapped fault segment from A to B is the set of points on a line segment (infinite).</td>
+            <td class="note"><em>Geós példa B:</em> Az A és B pontok közti <span class="sym">vetőszakasz</span> pontjai egy szakasz pontjainak halmazát adják (végtelen).</td>
+          </tr>
+
+          <!-- 6 -->
+          <tr>
+            <td>A set can also have very few elements: e.g. a <strong>one-element set</strong> or the <strong>empty set</strong>.</td>
+            <td>Egy halmaznak lehet nagyon kevés eleme is: pl. <strong>egyelemű halmaz</strong> vagy az <strong>üres halmaz</strong>.</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Geo example (1-element):</em> <span class="sym">{“Sample&nbsp;#47”}</span> — a bag that contains exactly one rock specimen.</td>
+            <td class="note"><em>Geós példa (egyelemű):</em> <span class="sym">{„47-es minta”}</span> — egy tasakban pontosan egy kőzetminta található.</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Geo example (empty):</em> In a given dataset, the set of <span class="sym">volcanic bombs</span> recorded in a shale core may be <span class="sym">∅</span> (none observed).</td>
+            <td class="note"><em>Geós példa (üres):</em> Egy adott adathalmazban a <span class="sym">vulkáni bombák</span> halmaza egy agyagpala-magban lehet <span class="sym">∅</span> (nem figyeltek meg ilyet).</td>
+          </tr>
+
+          <!-- 7: extra extended geology anchors -->
+          <tr data-ex="1">
+            <td class="note"><em>Extra (finite):</em> Mineral species identified in one thin-section: <span class="sym">M = {quartz, feldspar, mica}</span> (finite; order doesn’t matter).</td>
+            <td class="note"><em>Extra (véges):</em> Egy vékonycsiszolatban azonosított ásványfajok: <span class="sym">M = {kvarc, földpát, csillám}</span> (véges; a sorrend nem számít).</td>
+          </tr>
+          <tr data-ex="1">
+            <td class="note"><em>Extra (infinite):</em> All <span class="sym">points</span> of a quartz grain’s boundary curve are infinitely many; zooming in yields still more distinct points.</td>
+            <td class="note"><em>Extra (végtelen):</em> Egy kvarcszemcse <span class="sym">határvonalának</span> összes pontja végtelen; nagyítva is mindig találunk újabb különböző pontokat.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="hint" style="margin-top:.75rem;">
+      Teaching tip: Start with examples hidden (click “Show examples”). Ask students to classify each statement as finite vs. infinite,
+      then reveal the geology anchors to connect abstract ideas to real field/lab contexts.
+    </p>
+  </div>
+</body>
+</html>
