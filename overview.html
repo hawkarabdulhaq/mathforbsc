@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Foundations of Set Theory — Overview Diagram | University of Szeged</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+    --accent:#2563eb; --accent2:#dc2626; --accent3:#16a34a; --accent4:#f59e0b;
+    --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --sh: rgba(15,23,42,.35);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent2:#f87171; --accent3:#4ade80; --accent4:#fbbf24;
+      --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5); --sh: rgba(255,255,255,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+    font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1200px; margin-inline:auto}
+
+  /* HEADER */
+  header{
+    background:linear-gradient(135deg,var(--accent),#38bdf8);
+    color:#fff; border-radius:16px; padding:1rem 1.25rem; box-shadow:var(--shadow);
+  }
+  .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .badge{font-size:.8rem; letter-spacing:.04em; text-transform:uppercase; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:.25rem .5rem; border-radius:999px}
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow)}
+  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain}
+  .logo-chip.logo-dept img{height:55px}
+
+  /* LAYOUT */
+  .grid{
+    display:grid; grid-template-columns: 340px 1fr; gap:1rem; margin-top:1rem;
+  }
+  @media (max-width:960px){ .grid{grid-template-columns: 1fr} }
+
+  /* CARDS */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    box-shadow:var(--shadow); overflow:hidden;
+  }
+  .card .bar{
+    padding:.8rem 1rem; border-bottom:1px solid var(--border); font-weight:700;
+    display:flex; align-items:center; justify-content:space-between; gap:.5rem;
+  }
+  .card .content{padding:1rem}
+  .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.35rem .6rem; border-radius:10px; cursor:pointer; font-weight:600}
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+  .muted{color:var(--muted)}
+  .small{font-size:.95rem}
+  .list{margin:0; padding-left:1.05rem}
+  .list li{margin:.25rem 0}
+
+  /* OVERVIEW MAP */
+  .map-wrap{padding:0}
+  .map-head{padding:.8rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .lang{font-size:.8rem; color:#fff; background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.45); padding:.12rem .45rem; border-radius:999px}
+  .map{width:100%; display:block}
+  .legend{
+    display:grid; grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
+    gap:.5rem .75rem; padding: .75rem 1rem 1rem;
+  }
+  .chip{display:flex; gap:.45rem; align-items:center; padding:.35rem .55rem; border:1px solid var(--border); border-radius:999px; background:rgba(148,163,184,.1)}
+  .dot{width:12px; height:12px; border-radius:999px; display:inline-block}
+  .dot.a{background:rgba(37,99,235,.9)}   /* A */
+  .dot.b{background:rgba(220,38,38,.9)}   /* B */
+  .dot.c{background:rgba(22,163,74,.9)}   /* C */
+
+  /* SVG node styling */
+  .hub{fill:#fff; stroke:var(--accent); stroke-width:2}
+  .node{fill:#fff; stroke:var(--border); stroke-width:2}
+  .node-title{font-size:13px; font-weight:700; fill:var(--ink)}
+  .node-sub{font-size:11px; fill:var(--muted)}
+  .center-title{font-size:18px; font-weight:800; fill:var(--ink)}
+  .center-sub{font-size:12px; fill:var(--muted)}
+  .arm{stroke:var(--border); stroke-width:2}
+  .miniA{fill:rgba(37,99,235,.22); stroke:var(--accent); stroke-width:1.5}
+  .miniB{fill:rgba(220,38,38,.22); stroke:var(--accent2); stroke-width:1.5}
+  .miniStroke{stroke:var(--muted); stroke-width:1.5; fill:none}
+  .shade{fill:var(--sh)}
+</style>
+<script>
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>HALMAZELMÉLETI ALAPOK — Foundations of Set Theory</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>ABDULHAQ Hawkar • Department of Atmospheric and Geospatial Data Sciences</h2>
+    </header>
+
+    <div class="grid">
+      <!-- Instructor / Course Info -->
+      <section class="card">
+        <div class="bar">Meet Your Instructor / Oktató</div>
+        <div class="content small">
+          <p><strong>Hawkar Abdulhaq</strong> — Assistant Lecturer<br>
+          <span class="muted">Department of Atmospheric and Geospatial Data Sciences, University of Szeged</span></p>
+          <p><strong>Contact:</strong><br>
+            Room 1214, 1st Floor • +36‑70‑789‑5714 • <a href="mailto:hawkar.ali.abdulhaq@szte.hu">hawkar.ali.abdulhaq@szte.hu</a>
+          </p>
+          <p><strong>Education & Career / Tanulmányok:</strong></p>
+          <ul class="list">
+            <li>BSc Geology — University of Salahadeen, Erbil (2011)</li>
+            <li>MSc Earth Science Engineering — University of Miskolc (2017)</li>
+            <li>PhD Student — University of Szeged (2021)</li>
+            <li>Research Assistant (2022) → Assistant Lecturer (2025)</li>
+          </ul>
+          <p><strong>Expertise / Kutatási fókusz:</strong><br>
+          Geological Mapping, Reservoir Modelling, Geostatistics; Underground Thermal Storage, Groundwater Modeling, GeoScience Python, Climate Modeling</p>
+          <hr style="border:none; border-top:1px solid var(--border); margin:1rem 0">
+          <p><strong>Warm‑up question / Kérdés:</strong><br>
+          “If I say <em>igneous rocks</em>, what types come to mind? Can we treat them as <em>elements of a set</em>?”</p>
+          <button class="btn" onclick="printPage()">Print</button>
+        </div>
+      </section>
+
+      <!-- Overview Map -->
+      <section class="card map-card">
+        <div class="map-head">
+          <div>
+            <strong>Today’s Overview Map</strong> <span class="muted">/ Mai áttekintő ábra</span>
+          </div>
+          <div class="lang">EN / HU</div>
+        </div>
+
+        <!-- HUB-&-SPOKE DIAGRAM (simple, compact, bilingual labels below each node) -->
+        <svg class="map" viewBox="0 0 1000 740" aria-labelledby="mapTitle mapDesc" role="img">
+          <title id="mapTitle">Foundations of Set Theory — Overview</title>
+          <desc id="mapDesc">Central topic with ten surrounding concepts: set concept, axiom & notation, cardinality, empty set, subset, union, intersection, difference, symmetric difference, ordered pair.</desc>
+
+          <!-- center -->
+          <circle cx="500" cy="360" r="84" class="hub"/>
+          <text x="500" y="352" text-anchor="middle" class="center-title">Set Theory</text>
+          <text x="500" y="372" text-anchor="middle" class="center-sub">Halmazelmélet</text>
+          <text x="500" y="395" text-anchor="middle" class="center-sub">A — volcanic • B — intrusive • C — sedimentary (symbols in minis)</text>
+
+          <!-- spokes (arms) -->
+          <!-- positions around a ring radius ≈ 260 -->
+          <!-- top -->
+          <line x1="500" y1="360" x2="500" y2="100" class="arm"/>
+          <!-- 306 -->
+          <line x1="500" y1="360" x2="653" y2="150" class="arm"/>
+          <!-- 342 -->
+          <line x1="500" y1="360" x2="747" y2="280" class="arm"/>
+          <!-- 18 -->
+          <line x1="500" y1="360" x2="747" y2="440" class="arm"/>
+          <!-- 54 -->
+          <line x1="500" y1="360" x2="653" y2="570" class="arm"/>
+          <!-- 90 -->
+          <line x1="500" y1="360" x2="500" y2="620" class="arm"/>
+          <!-- 126 -->
+          <line x1="500" y1="360" x2="347" y2="570" class="arm"/>
+          <!-- 162 -->
+          <line x1="500" y1="360" x2="253" y2="440" class="arm"/>
+          <!-- 198 -->
+          <line x1="500" y1="360" x2="253" y2="280" class="arm"/>
+          <!-- 234 -->
+          <line x1="500" y1="360" x2="347" y2="150" class="arm"/>
+
+          <!-- ===== NODES (10) ===== -->
+
+          <!-- 1. Concept of a Set -->
+          <g transform="translate(500,100)">
+            <circle r="62" class="node"/>
+            <!-- icon: curly braces & dots -->
+            <text y="-4" text-anchor="middle" class="center-title">{ … }</text>
+            <text y="18" text-anchor="middle" class="node-sub">elements / elemek</text>
+            <text y="40" text-anchor="middle" class="node-title">Set / Halmaz</text>
+          </g>
+
+          <!-- 2. Axiom & Notation -->
+          <g transform="translate(653,150)">
+            <circle r="62" class="node"/>
+            <text y="-6" text-anchor="middle" class="center-title">d ∈ H</text>
+            <text y="12" text-anchor="middle" class="center-sub">d ∉ H , A = B</text>
+            <text y="36" text-anchor="middle" class="node-title">Axiom & Notation</text>
+            <text y="52" text-anchor="middle" class="node-sub">Axióma & jelölés</text>
+          </g>
+
+          <!-- 3. Number of Elements (Cardinality) -->
+          <g transform="translate(747,280)">
+            <circle r="62" class="node"/>
+            <text y="-8" text-anchor="middle" class="center-title">|A|</text>
+            <text y="12" text-anchor="middle" class="center-sub">finite / véges • ∞</text>
+            <text y="36" text-anchor="middle" class="node-title">Cardinality</text>
+            <text y="52" text-anchor="middle" class="node-sub">Elemszám</text>
+          </g>
+
+          <!-- 4. Empty set & sets of sets -->
+          <g transform="translate(747,440)">
+            <circle r="62" class="node"/>
+            <text y="-4" text-anchor="middle" class="center-title">∅</text>
+            <text y="16" text-anchor="middle" class="center-sub">{∅}, {{∅}}</text>
+            <text y="40" text-anchor="middle" class="node-title">Empty / Üres</text>
+          </g>
+
+          <!-- 5. Subset & Proper subset -->
+          <g transform="translate(653,570)">
+            <circle r="62" class="node"/>
+            <!-- icon: small circle fully inside big -->
+            <circle cx="-8" cy="-4" r="18" class="miniStroke"/>
+            <circle cx="8" cy="8" r="30" class="miniStroke"/>
+            <text y="30" text-anchor="middle" class="center-sub">A ⊆ B • A ⊂ B</text>
+            <text y="50" text-anchor="middle" class="node-title">Subset / Részhalmaz</text>
+          </g>
+
+          <!-- 6. Union -->
+          <g transform="translate(500,620)">
+            <circle r="62" class="node"/>
+            <!-- mini Venn and shaded union -->
+            <defs>
+              <mask id="uMask">
+                <rect x="-40" y="-40" width="80" height="80" fill="black"/>
+                <circle cx="-14" cy="0" r="18" fill="white"/>
+                <circle cx="14" cy="0" r="18" fill="white"/>
+              </mask>
+            </defs>
+            <circle cx="-14" cy="0" r="18" class="miniA"/>
+            <circle cx="14" cy="0" r="18" class="miniB"/>
+            <rect x="-40" y="-40" width="80" height="80" class="shade" mask="url(#uMask)"/>
+            <text y="34" text-anchor="middle" class="node-title">Union / Unió</text>
+            <text y="50" text-anchor="middle" class="node-sub">A ∪ B</text>
+          </g>
+
+          <!-- 7. Intersection -->
+          <g transform="translate(347,570)">
+            <circle r="62" class="node"/>
+            <!-- mini Venn and shaded intersection -->
+            <defs>
+              <clipPath id="iA"><circle cx="-14" cy="0" r="18"/></clipPath>
+              <clipPath id="iB"><circle cx="14" cy="0" r="18"/></clipPath>
+            </defs>
+            <circle cx="-14" cy="0" r="18" class="miniA"/>
+            <circle cx="14" cy="0" r="18" class="miniB"/>
+            <g clip-path="url(#iA)"><g clip-path="url(#iB)"><rect x="-40" y="-40" width="80" height="80" class="shade"/></g></g>
+            <text y="34" text-anchor="middle" class="node-title">Intersection / Metszet</text>
+            <text y="50" text-anchor="middle" class="node-sub">A ∩ B</text>
+          </g>
+
+          <!-- 8. Difference -->
+          <g transform="translate(253,440)">
+            <circle r="62" class="node"/>
+            <!-- A\B -->
+            <defs>
+              <mask id="dMask">
+                <rect x="-40" y="-40" width="80" height="80" fill="black"/>
+                <circle cx="-14" cy="0" r="18" fill="white"/>
+                <circle cx="14" cy="0" r="18" fill="black"/>
+              </mask>
+            </defs>
+            <circle cx="-14" cy="0" r="18" class="miniA"/>
+            <circle cx="14" cy="0" r="18" class="miniB"/>
+            <rect x="-40" y="-40" width="80" height="80" class="shade" mask="url(#dMask)"/>
+            <text y="34" text-anchor="middle" class="node-title">Difference / Különbség</text>
+            <text y="50" text-anchor="middle" class="node-sub">A \ B</text>
+          </g>
+
+          <!-- 9. Symmetric difference -->
+          <g transform="translate(253,280)">
+            <circle r="62" class="node"/>
+            <!-- Δ : union minus intersection -->
+            <defs>
+              <clipPath id="sA"><circle cx="-14" cy="0" r="18"/></clipPath>
+              <clipPath id="sB"><circle cx="14" cy="0" r="18"/></clipPath>
+              <mask id="sMask">
+                <rect x="-40" y="-40" width="80" height="80" fill="black"/>
+                <!-- union -->
+                <circle cx="-14" cy="0" r="18" fill="white"/>
+                <circle cx="14" cy="0" r="18" fill="white"/>
+                <!-- remove intersection -->
+                <g clip-path="url(#sA)"><g clip-path="url(#sB)"><rect x="-40" y="-40" width="80" height="80" fill="black"/></g></g>
+              </mask>
+            </defs>
+            <circle cx="-14" cy="0" r="18" class="miniA"/>
+            <circle cx="14" cy="0" r="18" class="miniB"/>
+            <rect x="-40" y="-40" width="80" height="80" class="shade" mask="url(#sMask)"/>
+            <text y="34" text-anchor="middle" class="node-title">Sym. Diff. / Szimm. diff.</text>
+            <text y="50" text-anchor="middle" class="node-sub">A Δ B</text>
+          </g>
+
+          <!-- 10. Ordered pair -->
+          <g transform="translate(347,150)">
+            <circle r="62" class="node"/>
+            <!-- two small slots -->
+            <rect x="-28" y="-18" width="24" height="24" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+            <rect x="4" y="-18" width="24" height="24" rx="6" fill="none" stroke="var(--accent2)" stroke-width="1.8"/>
+            <text x="-16" y="-2" text-anchor="middle" class="node-sub">1st</text>
+            <text x="16" y="-2" text-anchor="middle" class="node-sub">2nd</text>
+            <text y="34" text-anchor="middle" class="node-title">Ordered pair</text>
+            <text y="50" text-anchor="middle" class="node-sub">(a, b) / rendezett pár</text>
+          </g>
+        </svg>
+
+        <!-- KEY (short bilingual one-liners) -->
+        <div class="legend">
+          <span class="chip"><span class="dot a"></span> A ∪ B — Union / Unió</span>
+          <span class="chip"><span class="dot b"></span> A ∩ B — Intersection / Metszet</span>
+          <span class="chip"><span class="dot c"></span> A \ B — Difference / Különbség</span>
+          <span class="chip"><span class="dot a"></span> A Δ B — Symmetric difference / Szimmetrikus differencia</span>
+          <span class="chip"><span class="dot b"></span> ∅ — Empty set / Üres halmaz</span>
+          <span class="chip"><span class="dot c"></span> A ⊆ B, A ⊂ B — Subset / Részhalmaz</span>
+          <span class="chip"><span class="dot a"></span> |A| — Cardinality / Elemszám</span>
+          <span class="chip"><span class="dot b"></span> d ∈ H — Element of / Eleme</span>
+          <span class="chip"><span class="dot c"></span> (a, b) — Ordered pair / Rendezett pár</span>
+        </div>
+      </section>
+    </div>
+
+    <p class="muted small" style="margin-top:.75rem">
+      Tip: Use the center hub to recall today’s theme. Each bubble shows the symbol, a tiny visual, and a short bilingual label. Read clockwise for the lecture flow.
+    </p>
+  </div>
+</body>
+</html>
