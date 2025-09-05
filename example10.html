@@ -3,106 +3,101 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ordered Pairs & n-tuples — University of Szeged</title>
+<title>Ordered Pairs & n‑tuples — University of Szeged</title>
 <style>
   :root{
-    --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
-    --accent:#2563eb;      /* primary accent */
-    --accent2:#dc2626;     /* secondary accent */
-    --accent3:#16a34a;     /* tertiary accent */
-    --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,0.08);
-    --fill:rgba(2,6,23,.08);
+    --bg: #f7f9fb;
+    --card: #ffffff;
+    --ink: #0f172a;
+    --muted: #475569;
+    --accent1: #2563eb;  /* first */
+    --accent2: #dc2626;  /* second */
+    --accent3: #16a34a;  /* third */
+    --border: #e2e8f0;
+    --shadow: 0 10px 30px rgba(2,6,23,0.08);
+    --slotfill: rgba(15,23,42,0.08);
   }
   @media (prefers-color-scheme: dark){
     :root{
       --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
-      --accent:#60a5fa; --accent2:#f87171; --accent3:#4ade80;
-      --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
-      --fill:rgba(255,255,255,.08);
+      --accent1:#60a5fa; --accent2:#f87171; --accent3:#4ade80;
+      --border:#1f2a44; --shadow: 0 10px 30px rgba(0,0,0,0.5); --slotfill: rgba(255,255,255,0.10);
     }
   }
   *{box-sizing:border-box}
   body{
     margin:0; padding:2rem; background:var(--bg); color:var(--ink);
-    font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
   }
   .wrap{max-width:1100px; margin-inline:auto}
 
   /* HEADER */
   header{
-    background:linear-gradient(135deg,var(--accent),#38bdf8);
-    color:#fff; border-radius:16px; padding:1rem 1.25rem 1rem; box-shadow:var(--shadow);
+    background: linear-gradient(135deg, var(--accent1), #38bdf8);
+    color:white; border-radius:16px; padding:1rem 1.25rem 1rem; box-shadow:var(--shadow);
   }
   .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;}
   .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;}
   .badge{
     font-size:.8rem; letter-spacing:.04em; text-transform:uppercase;
-    background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+    background: rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
     padding:.25rem .5rem; border-radius:999px;
   }
   h1{margin:0; font-size:1.35rem; font-weight:700}
   h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
   .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;}
   .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow);}
-  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain;}
-  .logo-chip.logo-dept img{height:55px}
-  .logo-chip.logo-szte img{height:42px}
+  .logo-chip img{ display:block; height:42px; width:auto; object-fit:contain; }
+  .logo-chip.logo-dept img{ height:55px; }
+  .logo-chip.logo-szte img{ height:42px; }
 
-  /* CARD */
+  /* CARD + TABLE */
   .card{
     background:var(--card); border:1px solid var(--border); border-radius:16px;
     margin-top:1rem; box-shadow:var(--shadow); overflow:hidden;
   }
-  .bar{
+  .card .bar{
     padding:.9rem 1rem; border-bottom:1px solid var(--border);
     display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
   }
-  .subtitle{font-weight:600}
+  .bar .subtitle{font-weight:600}
   .btn{
     border:1px solid var(--border); background:transparent; color:var(--ink);
     padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600;
   }
-  .btn:hover{border-color:var(--accent); color:var(--accent)}
-
-  table{width:100%; border-collapse:separate; border-spacing:0; font-size:1rem;}
+  .btn:hover{border-color:var(--accent1); color:var(--accent1)}
+  table{ width:100%; border-collapse:separate; border-spacing:0; font-size:1rem; }
   thead th{
-    background:linear-gradient(180deg,rgba(37,99,235,.08),rgba(56,189,248,.08));
-    padding:.9rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border);
+    background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(56,189,248,0.08));
+    padding:0.9rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border);
   }
-  tbody td{padding:.85rem 1rem; vertical-align:top; border-bottom:1px solid var(--border)}
-  tbody tr:nth-child(odd) td{background:rgba(148,163,184,.06)}
+  tbody td{ padding:0.85rem 1rem; vertical-align:top; border-bottom:1px solid var(--border); }
+  tbody tr:nth-child(odd) td{ background: rgba(148,163,184,0.06) }
   .hint{color:var(--muted); font-size:.9rem}
   .lang-label{
     display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em;
-    padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,.15); color:#0369a1; margin-left:.5rem;
+    padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,0.15); color:#0369a1; margin-left:.5rem;
   }
-
-  /* NEW VISUAL LOGIC */
-  /* We switch from two circles to a tiny "rail" with numbered slots + arrows.
-     Also add a coordinate-plane micro-plot to link (x,y) → (first,second). */
-  .visual{display:flex; justify-content:center; padding:.6rem 0 .9rem; background:linear-gradient(180deg,transparent,var(--fill))}
-  svg{max-width:460px; height:auto}
-
-  /* Rail visuals */
-  .slot{fill:#fff; stroke:var(--border); stroke-width:2}
-  .slotLabel{font-size:12px; fill:var(--muted)}
-  .value{font-size:16px; font-weight:700; fill:var(--ink)}
-  .cap{font-size:12px; fill:var(--muted)}
-  .arrow{stroke:var(--accent); stroke-width:2; marker-end:url(#arrowHead)}
-  .arrow2{stroke:var(--accent2); stroke-width:2; marker-end:url(#arrowHead2)}
-
-  /* Coordinate plane */
-  .axis{stroke:var(--muted); stroke-width:1}
-  .tick{stroke:var(--muted); stroke-width:.6}
-  .pt{fill:var(--accent2)}
-  .planeLabel{font-size:12px; fill:var(--muted)}
 
   @media (max-width:720px){
     body{padding:1rem}
-    thead th, tbody td{font-size:.95rem}
+    thead th{font-size:.95rem}
+    tbody td{font-size:.95rem}
     .logo-chip img{height:38px}
     .logo-chip.logo-dept img{height:48px}
   }
+
+  /* === SIMPLER VISUAL LOGIC: "POSITION SLOTS" (little cards on a belt) === */
+  .visual{ display:flex; justify-content:center; padding:.7rem 0 1rem; }
+  svg{max-width:420px; height:auto;}
+  .belt{fill:none; stroke:var(--muted); stroke-width:2; stroke-dasharray:6 6}
+  .slot{fill:var(--slotfill); stroke:var(--border); stroke-width:2;}
+  .slot.first{stroke:var(--accent1)}
+  .slot.second{stroke:var(--accent2)}
+  .slot.third{stroke:var(--accent3)}
+  .lab{font-size:12px; fill:var(--muted);}
+  .val{font-size:18px; font-weight:700; fill:var(--ink);}
+  .arrow{stroke:var(--muted); stroke-width:2; marker-end:url(#arrowhead)}
 </style>
 <script>
   function printPage(){ window.print(); }
@@ -125,7 +120,7 @@
           </span>
         </div>
       </div>
-      <h2>ABDULHAQ Hawkar — Ordered pairs & n-tuples (new visual logic)</h2>
+      <h2>ABDULHAQ Hawkar — Ordered pairs & n‑tuples (simpler “position slots” visuals)</h2>
     </header>
 
     <section class="card" aria-labelledby="slide-title">
@@ -133,7 +128,7 @@
         <div>
           <div id="slide-title" class="subtitle">
             Slide 11 — Ordered pairs / Rendezett párok
-            <span class="hint">New visuals: a 2-slot “rail”, a swap demo, and a tiny (x,y) plane</span>
+            <span class="hint">Think of two labeled slots on a conveyor: 1st slot (left), 2nd slot (right)</span>
           </div>
         </div>
         <div class="tools">
@@ -142,106 +137,85 @@
       </div>
 
       <table role="table" aria-describedby="slide-title">
-        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <colgroup>
+          <col style="width:50%">
+          <col style="width:50%">
+        </colgroup>
         <thead>
           <tr>
-            <th>English <span class="lang-label">EN</span></th>
-            <th>Magyar <span class="lang-label">HU</span></th>
+            <th scope="col">English <span class="lang-label">EN</span></th>
+            <th scope="col">Magyar <span class="lang-label">HU</span></th>
           </tr>
         </thead>
         <tbody>
           <!-- Definition -->
           <tr>
-            <td><strong>Definition:</strong> Two objects <em>a</em> and <em>b</em> form an <strong>ordered pair</strong> if we specify which is first and which is second.</td>
-            <td><strong>Definíció:</strong> Két tetszőleges dolog (<em>a</em> és <em>b</em>) <strong>rendezett párt</strong> alkot, ha megmondjuk, melyik az első és melyik a második.</td>
+            <td><strong>Definition:</strong> Two objects <em>a</em> and <em>b</em> form an <strong>ordered pair</strong> if we say which is first and which is second.</td>
+            <td><strong>Definíció:</strong> Két tetszőleges dolog (<em>a</em>, <em>b</em>) <strong>rendezett párt</strong> alkot, ha megmondjuk, melyik az első és melyik a második.</td>
           </tr>
 
           <!-- Notation -->
           <tr>
-            <td><strong>Notation:</strong> (a, b).</td>
-            <td><strong>Jelölés:</strong> (a, b).</td>
+            <td><strong>Notation:</strong> <span class="val">(a, b)</span>.</td>
+            <td><strong>Jelölés:</strong> <span class="val">(a, b)</span>.</td>
           </tr>
 
-          <!-- Rail visual: shows positions clearly -->
+          <!-- a first, b second + visual (slot cards) -->
+          <tr>
+            <td>Here, <em>a</em> is the <strong>first element</strong>, <em>b</em> is the <strong>second element</strong>.</td>
+            <td>Itt <em>a</em> az <strong>első tag</strong>, <em>b</em> a <strong>második tag</strong>.</td>
+          </tr>
           <tr>
             <td colspan="2">
               <div class="visual">
-                <svg viewBox="0 0 460 140" aria-label="Ordered pair rail visualization">
+                <svg viewBox="0 0 460 130" aria-label="Ordered pair (a,b) with two slots">
+                  <title>Ordered pair (a, b): 1st slot holds a, 2nd slot holds b</title>
                   <defs>
-                    <marker id="arrowHead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                      <polygon points="0 0, 8 4, 0 8" fill="currentColor" style="color:var(--accent)"/>
-                    </marker>
-                    <marker id="arrowHead2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                      <polygon points="0 0, 8 4, 0 8" fill="currentColor" style="color:var(--accent2)"/>
+                    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                      <polygon points="0 0, 8 4, 0 8" fill="currentColor"></polygon>
                     </marker>
                   </defs>
-
-                  <!-- caption -->
-                  <text x="20" y="20" class="cap">Think of two numbered slots:</text>
-                  <text x="20" y="36" class="cap">Slot 1 holds the 1st element; Slot 2 holds the 2nd element.</text>
-
+                  <!-- belt -->
+                  <rect x="30" y="70" width="400" height="8" class="belt"/>
                   <!-- slots -->
-                  <rect class="slot" x="60" y="60" rx="10" ry="10" width="120" height="50"></rect>
-                  <rect class="slot" x="280" y="60" rx="10" ry="10" width="120" height="50"></rect>
-                  <!-- slot numbers -->
-                  <text class="slotLabel" x="120" y="56" text-anchor="middle">Slot 1 (first)</text>
-                  <text class="slotLabel" x="340" y="56" text-anchor="middle">Slot 2 (second)</text>
-
-                  <!-- example values a,b -->
-                  <text class="value" x="120" y="92" text-anchor="middle">a</text>
-                  <text class="value" x="340" y="92" text-anchor="middle">b</text>
-
-                  <!-- arrows mapping (a,b) to slots -->
-                  <line class="arrow" x1="120" y1="38" x2="120" y2="56"></line>
-                  <line class="arrow2" x1="340" y1="38" x2="340" y2="56"></line>
-
-                  <!-- top labels -->
-                  <text class="label" x="120" y="34" text-anchor="middle">(a, b): 1st → a</text>
-                  <text class="label" x="340" y="34" text-anchor="middle">(a, b): 2nd → b</text>
+                  <rect x="80"  y="30" width="120" height="60" rx="10" class="slot first"/>
+                  <rect x="260" y="30" width="120" height="60" rx="10" class="slot second"/>
+                  <!-- labels -->
+                  <text x="140" y="26" text-anchor="middle" class="lab">1st</text>
+                  <text x="320" y="26" text-anchor="middle" class="lab">2nd</text>
+                  <!-- values -->
+                  <text x="140" y="66" text-anchor="middle" class="val">a</text>
+                  <text x="320" y="66" text-anchor="middle" class="val">b</text>
+                  <!-- arrow of order -->
+                  <line x1="205" y1="60" x2="255" y2="60" class="arrow"/>
                 </svg>
               </div>
             </td>
           </tr>
 
-          <!-- a and b may be equal -->
+          <!-- a and b equal -->
           <tr>
-            <td><em>a</em> and <em>b</em> may also be equal.</td>
-            <td><em>a</em> és <em>b</em> lehetnek azonosak is.</td>
+            <td><em>a</em> and <em>b</em> may be equal.</td>
+            <td><em>a</em> és <em>b</em> lehetnek azonosak.</td>
           </tr>
-
-          <!-- Swap demo: shows (a,b) ≠ (b,a) with animated-like arrows (static SVG) -->
           <tr>
             <td colspan="2">
               <div class="visual">
-                <svg viewBox="0 0 460 160" aria-label="Swap demonstration: (a,b) vs (b,a)">
+                <svg viewBox="0 0 460 130" aria-label="(x,x) example with two slots">
+                  <title>(x, x): both slots show the same value</title>
                   <defs>
-                    <marker id="arrowHead3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                      <polygon points="0 0, 8 4, 0 8" fill="currentColor" style="color:var(--accent)"/>
+                    <marker id="arrowhead2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                      <polygon points="0 0, 8 4, 0 8" fill="currentColor"></polygon>
                     </marker>
                   </defs>
-                  <text class="cap" x="20" y="22">(a, b) and (b, a) place the same items in different slots.</text>
-
-                  <!-- (a,b) rail -->
-                  <text class="slotLabel" x="110" y="46" text-anchor="middle">(a, b)</text>
-                  <rect class="slot" x="40" y="58" rx="10" ry="10" width="100" height="46"></rect>
-                  <rect class="slot" x="150" y="58" rx="10" ry="10" width="100" height="46"></rect>
-                  <text class="slotLabel" x="90" y="54" text-anchor="middle">1st</text>
-                  <text class="slotLabel" x="200" y="54" text-anchor="middle">2nd</text>
-                  <text class="value" x="90" y="86" text-anchor="middle">a</text>
-                  <text class="value" x="200" y="86" text-anchor="middle">b</text>
-
-                  <!-- (b,a) rail -->
-                  <text class="slotLabel" x="350" y="46" text-anchor="middle">(b, a)</text>
-                  <rect class="slot" x="280" y="58" rx="10" ry="10" width="100" height="46"></rect>
-                  <rect class="slot" x="390" y="58" rx="10" ry="10" width="100" height="46"></rect>
-                  <text class="slotLabel" x="330" y="54" text-anchor="middle">1st</text>
-                  <text class="slotLabel" x="440" y="54" text-anchor="middle">2nd</text>
-                  <text class="value" x="330" y="86" text-anchor="middle">b</text>
-                  <text class="value" x="440" y="86" text-anchor="middle">a</text>
-
-                  <!-- connecting arrows -->
-                  <line class="arrow" x1="100" y1="112" x2="200" y2="112" marker-end="url(#arrowHead3)"></line>
-                  <text class="slotLabel" x="150" y="128" text-anchor="middle">swap positions</text>
+                  <rect x="30" y="70" width="400" height="8" class="belt"/>
+                  <rect x="80"  y="30" width="120" height="60" rx="10" class="slot first"/>
+                  <rect x="260" y="30" width="120" height="60" rx="10" class="slot second"/>
+                  <text x="140" y="26" text-anchor="middle" class="lab">1st</text>
+                  <text x="320" y="26" text-anchor="middle" class="lab">2nd</text>
+                  <text x="140" y="66" text-anchor="middle" class="val">x</text>
+                  <text x="320" y="66" text-anchor="middle" class="val">x</text>
+                  <line x1="205" y1="60" x2="255" y2="60" class="arrow" marker-end="url(#arrowhead2)"/>
                 </svg>
               </div>
             </td>
@@ -249,80 +223,44 @@
 
           <!-- Fractions as ordered pairs -->
           <tr>
-            <td><strong>Example:</strong> Fractions can be seen as ordered pairs of natural numbers. Numerator = first, Denominator = second.</td>
-            <td><strong>Példa:</strong> A törtek felfoghatók rendezett pároknak. Számláló = első, Nevező = második.</td>
+            <td><strong>Example:</strong> A fraction is an ordered pair of natural numbers: numerator = first, denominator = second.</td>
+            <td><strong>Példa:</strong> A tört egy rendezett pár: számláló = első, nevező = második.</td>
+          </tr>
+          <tr>
+            <td>So 2/3 ↔ (2, 3); and 3/2 ↔ (3, 2).</td>
+            <td>Tehát 2/3 ↔ (2, 3); és 3/2 ↔ (3, 2).</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="visual">
-                <svg viewBox="0 0 460 160" aria-label="Fractions mapped onto the rail">
-                  <!-- 2/3 -->
-                  <text class="label" x="120" y="24" text-anchor="middle">2/3  ↔  (2, 3)</text>
-                  <rect class="slot" x="60" y="36" rx="10" ry="10" width="120" height="50"></rect>
-                  <rect class="slot" x="200" y="36" rx="10" ry="10" width="120" height="50"></rect>
-                  <text class="slotLabel" x="120" y="32" text-anchor="middle">1st (numerator)</text>
-                  <text class="slotLabel" x="260" y="32" text-anchor="middle">2nd (denominator)</text>
-                  <text class="value" x="120" y="68" text-anchor="middle">2</text>
-                  <text class="value" x="260" y="68" text-anchor="middle">3</text>
-
-                  <!-- 3/2 -->
-                  <text class="label" x="340" y="24" text-anchor="middle">3/2  ↔  (3, 2)</text>
-                  <rect class="slot" x="280" y="36" rx="10" ry="10" width="120" height="50"></rect>
-                  <rect class="slot" x="420" y="36" rx="10" ry="10" width="120" height="50" transform="translate(-120,0)"></rect> <!-- visual balance -->
-                  <!-- For symmetry in small canvas, render second pair below -->
-                  <rect class="slot" x="280" y="100" rx="10" ry="10" width="120" height="50"></rect>
-                  <rect class="slot" x="400" y="100" rx="10" ry="10" width="120" height="50"></rect>
-                  <text class="slotLabel" x="340" y="96" text-anchor="middle">1st (numerator)</text>
-                  <text class="slotLabel" x="460" y="96" text-anchor="middle">2nd (denominator)</text>
-                  <text class="value" x="340" y="132" text-anchor="middle">3</text>
-                  <text class="value" x="460" y="132" text-anchor="middle">2</text>
-                </svg>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Coordinate plane micro-visual to reinforce (x,y) -->
-          <tr>
-            <td><strong>See it on a tiny coordinate plane:</strong> in (x, y), <em>x</em> (first) moves along the horizontal axis; <em>y</em> (second) moves along the vertical axis.</td>
-            <td><strong>Kis koordináta-síkon:</strong> (x, y) esetén az <em>x</em> (első) vízszintesen, az <em>y</em> (második) függőlegesen helyez el.</td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <div class="visual">
-                <svg viewBox="0 0 420 180" aria-label="Tiny coordinate plane for (x,y)">
-                  <!-- axes -->
-                  <line class="axis" x1="60" y1="140" x2="360" y2="140"></line>
-                  <line class="axis" x1="60" y1="40"  x2="60"  y2="140"></line>
-                  <!-- ticks -->
-                  <line class="tick" x1="100" y1="136" x2="100" y2="144"></line>
-                  <line class="tick" x1="140" y1="136" x2="140" y2="144"></line>
-                  <line class="tick" x1="180" y1="136" x2="180" y2="144"></line>
-                  <line class="tick" x1="220" y1="136" x2="220" y2="144"></line>
-                  <line class="tick" x1="60" y1="120" x2="56"  y2="120"></line>
-                  <line class="tick" x1="60" y1="100" x2="56"  y2="100"></line>
-                  <line class="tick" x1="60" y1="80"  x2="56"  y2="80"></line>
-
-                  <!-- labels -->
-                  <text class="planeLabel" x="362" y="148">x (first)</text>
-                  <text class="planeLabel" x="26"  y="44">y (second)</text>
-
-                  <!-- example point (3,2): move 3 right, 2 up -->
-                  <text class="planeLabel" x="250" y="28">(3, 2)</text>
-                  <circle class="pt" cx="220" cy="100" r="5"></circle>
-                  <line class="arrow" x1="60" y1="100" x2="220" y2="100" marker-end="url(#arrowHead)"></line>
-                  <line class="arrow2" x1="220" y1="140" x2="220" y2="100" marker-end="url(#arrowHead2)"></line>
-                  <text class="planeLabel" x="140" y="96">3 right</text>
-                  <text class="planeLabel" x="226" y="120">2 up</text>
-
-                  <!-- arrowheads -->
+                <svg viewBox="0 0 520 160" aria-label="Fractions as ordered pairs: 2/3 and 3/2">
+                  <title>Fractions as ordered pairs: 2/3 is (2,3); 3/2 is (3,2)</title>
                   <defs>
-                    <marker id="arrowHead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                      <polygon points="0 0, 8 4, 0 8" fill="currentColor" style="color:var(--accent)"/>
-                    </marker>
-                    <marker id="arrowHead2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                      <polygon points="0 0, 8 4, 0 8" fill="currentColor" style="color:var(--accent2)"/>
+                    <marker id="arrowhead3" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                      <polygon points="0 0, 8 4, 0 8" fill="currentColor"></polygon>
                     </marker>
                   </defs>
+                  <!-- left card: 2/3 -->
+                  <text x="120" y="28" text-anchor="middle" class="lab">2/3</text>
+                  <rect x="50"  y="40" width="140" height="8" class="belt"/>
+                  <rect x="50"  y="50" width="60" height="60" rx="10" class="slot first"/>
+                  <rect x="130" y="50" width="60" height="60" rx="10" class="slot second"/>
+                  <text x="80"  y="46" text-anchor="middle" class="lab">1st</text>
+                  <text x="160" y="46" text-anchor="middle" class="lab">2nd</text>
+                  <text x="80"  y="86" text-anchor="middle" class="val">2</text>
+                  <text x="160" y="86" text-anchor="middle" class="val">3</text>
+                  <line x1="110" y1="80" x2="130" y2="80" class="arrow" marker-end="url(#arrowhead3)"/>
+
+                  <!-- right card: 3/2 -->
+                  <text x="400" y="28" text-anchor="middle" class="lab">3/2</text>
+                  <rect x="330" y="40" width="140" height="8" class="belt"/>
+                  <rect x="330" y="50" width="60" height="60" rx="10" class="slot first"/>
+                  <rect x="410" y="50" width="60" height="60" rx="10" class="slot second"/>
+                  <text x="360" y="46" text-anchor="middle" class="lab">1st</text>
+                  <text x="440" y="46" text-anchor="middle" class="lab">2nd</text>
+                  <text x="360" y="86" text-anchor="middle" class="val">3</text>
+                  <text x="440" y="86" text-anchor="middle" class="val">2</text>
+                  <line x1="390" y1="80" x2="410" y2="80" class="arrow" marker-end="url(#arrowhead3)"/>
                 </svg>
               </div>
             </td>
@@ -330,23 +268,31 @@
 
           <!-- Generalization -->
           <tr>
-            <td><strong>Generalization:</strong> Ordered triples, quadruples, …, ordered n-tuples (n ≥ 2).</td>
-            <td><strong>Általánosítás:</strong> Rendezett 3-as, 4-es, …, rendezett n-es (n ≥ 2).</td>
+            <td><strong>Generalization:</strong> Ordered triples, quadruples, …, ordered <em>n</em>-tuples (<em>n</em> ≥ 2).</td>
+            <td><strong>Általánosítás:</strong> Rendezett 3-as, 4-es, …, rendezett <em>n</em>-es (<em>n</em> ≥ 2).</td>
           </tr>
           <tr>
             <td colspan="2">
               <div class="visual">
-                <svg viewBox="0 0 460 120" aria-label="3-slot rail for (a,b,c)">
-                  <text class="cap" x="20" y="20">3 slots for (a, b, c):</text>
-                  <rect class="slot" x="40"  y="36" rx="10" ry="10" width="110" height="46"></rect>
-                  <rect class="slot" x="170" y="36" rx="10" ry="10" width="110" height="46"></rect>
-                  <rect class="slot" x="300" y="36" rx="10" ry="10" width="110" height="46"></rect>
-                  <text class="slotLabel" x="95"  y="32" text-anchor="middle">1st</text>
-                  <text class="slotLabel" x="225" y="32" text-anchor="middle">2nd</text>
-                  <text class="slotLabel" x="355" y="32" text-anchor="middle">3rd</text>
-                  <text class="value" x="95"  y="64" text-anchor="middle">a</text>
-                  <text class="value" x="225" y="64" text-anchor="middle">b</text>
-                  <text class="value" x="355" y="64" text-anchor="middle">c</text>
+                <svg viewBox="0 0 540 140" aria-label="Ordered triple (a,b, c) with three slots">
+                  <title>Ordered triple (a, b, c): 1st, 2nd, 3rd slots</title>
+                  <defs>
+                    <marker id="arrowhead4" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                      <polygon points="0 0, 8 4, 0 8" fill="currentColor"></polygon>
+                    </marker>
+                  </defs>
+                  <rect x="60" y="80" width="420" height="8" class="belt"/>
+                  <rect x="80"  y="40" width="100" height="60" rx="10" class="slot first"/>
+                  <rect x="210" y="40" width="100" height="60" rx="10" class="slot second"/>
+                  <rect x="340" y="40" width="100" height="60" rx="10" class="slot third"/>
+                  <text x="130" y="36" text-anchor="middle" class="lab">1st</text>
+                  <text x="260" y="36" text-anchor="middle" class="lab">2nd</text>
+                  <text x="390" y="36" text-anchor="middle" class="lab">3rd</text>
+                  <text x="130" y="76" text-anchor="middle" class="val">a</text>
+                  <text x="260" y="76" text-anchor="middle" class="val">b</text>
+                  <text x="390" y="76" text-anchor="middle" class="val">c</text>
+                  <line x1="180" y1="70" x2="210" y2="70" class="arrow" marker-end="url(#arrowhead4)"/>
+                  <line x1="310" y1="70" x2="340" y2="70" class="arrow" marker-end="url(#arrowhead4)"/>
                 </svg>
               </div>
             </td>
@@ -357,8 +303,8 @@
     </section>
 
     <p class="hint" style="margin-top:.75rem;">
-      Tip: Picture an ordered pair as a rail with two numbered slots. The 1st slot holds the first element, the 2nd slot holds the second.
-      Swapping the values changes the pair. The tiny (x,y) plane shows the same idea: first → horizontal, second → vertical.
+      Teaching tip: The slots make order obvious—fill the 1st slot, then the 2nd. Swapping the values changes the pair.
+      (2, 3) is not the same as (3, 2), even though they use the same numbers.
     </p>
   </div>
 </body>
