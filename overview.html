@@ -41,20 +41,12 @@
   .logo-chip.logo-dept img{height:55px}
 
   /* LAYOUT */
-  .grid{
-    display:grid; grid-template-columns: 340px 1fr; gap:1rem; margin-top:1rem;
-  }
+  .grid{ display:grid; grid-template-columns: 340px 1fr; gap:1rem; margin-top:1rem; }
   @media (max-width:960px){ .grid{grid-template-columns: 1fr} }
 
   /* CARDS */
-  .card{
-    background:var(--card); border:1px solid var(--border); border-radius:16px;
-    box-shadow:var(--shadow); overflow:hidden;
-  }
-  .card .bar{
-    padding:.8rem 1rem; border-bottom:1px solid var(--border); font-weight:700;
-    display:flex; align-items:center; justify-content:space-between; gap:.5rem;
-  }
+  .card{ background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); overflow:hidden; }
+  .card .bar{ padding:.8rem 1rem; border-bottom:1px solid var(--border); font-weight:700; display:flex; align-items:center; justify-content:space-between; gap:.5rem; }
   .card .content{padding:1rem}
   .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.35rem .6rem; border-radius:10px; cursor:pointer; font-weight:600}
   .btn:hover{border-color:var(--accent); color:var(--accent)}
@@ -63,10 +55,13 @@
   .list{margin:0; padding-left:1.05rem}
   .list li{margin:.25rem 0}
 
-  /* OVERVIEW MAP */
-  .map-wrap{padding:0}
+  /* MAP CARD */
   .map-head{padding:.8rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
   .lang{font-size:.8rem; color:#fff; background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.45); padding:.12rem .45rem; border-radius:999px}
+  .pretitle{padding: .8rem 1rem .4rem; text-align:center}
+  .pretitle .l1{font-size:1.15rem; font-weight:800}
+  .pretitle .l2{font-size:1rem; font-weight:600; opacity:.9}
+  .pretitle .l3{font-size:.95rem; color:var(--muted); margin-top:.2rem}
   .map{width:100%; display:block}
   .legend{
     display:grid; grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
@@ -123,7 +118,7 @@
           <p><strong>Hawkar Abdulhaq</strong> — Assistant Lecturer<br>
           <span class="muted">Department of Atmospheric and Geospatial Data Sciences, University of Szeged</span></p>
           <p><strong>Contact:</strong><br>
-            Room 1214, 1st Floor • +36‑70‑789‑5714 • <a href="mailto:hawkar.ali.abdulhaq@szte.hu">hawkar.ali.abdulhaq@szte.hu</a>
+            Room 1214, 1st Floor • +36-70-789-5714 • <a href="mailto:hawkar.ali.abdulhaq@szte.hu">hawkar.ali.abdulhaq@szte.hu</a>
           </p>
           <p><strong>Education & Career / Tanulmányok:</strong></p>
           <ul class="list">
@@ -135,7 +130,7 @@
           <p><strong>Expertise / Kutatási fókusz:</strong><br>
           Geological Mapping, Reservoir Modelling, Geostatistics; Underground Thermal Storage, Groundwater Modeling, GeoScience Python, Climate Modeling</p>
           <hr style="border:none; border-top:1px solid var(--border); margin:1rem 0">
-          <p><strong>Warm‑up question / Kérdés:</strong><br>
+          <p><strong>Warm-up question / Kérdés:</strong><br>
           “If I say <em>igneous rocks</em>, what types come to mind? Can we treat them as <em>elements of a set</em>?”</p>
           <button class="btn" onclick="printPage()">Print</button>
         </div>
@@ -144,52 +139,42 @@
       <!-- Overview Map -->
       <section class="card map-card">
         <div class="map-head">
-          <div>
-            <strong>Today’s Overview Map</strong> <span class="muted">/ Mai áttekintő ábra</span>
-          </div>
+          <div><strong>Today’s Overview Map</strong> <span class="muted">/ Mai áttekintő ábra</span></div>
           <div class="lang">EN / HU</div>
         </div>
 
-        <!-- HUB-&-SPOKE DIAGRAM (simple, compact, bilingual labels below each node) -->
+        <!-- >>> MOVED TEXT ABOVE THE DIAGRAM <<< -->
+        <div class="pretitle" aria-label="Overview text above diagram">
+          <div class="l1">Set Theory</div>
+          <div class="l2">Halmazelmélet</div>
+          <div class="l3">A — volcanic • B — intrusive • C — sedimentary (symbols in minis)</div>
+        </div>
+
+        <!-- HUB-&-SPOKE DIAGRAM -->
         <svg class="map" viewBox="0 0 1000 740" aria-labelledby="mapTitle mapDesc" role="img">
           <title id="mapTitle">Foundations of Set Theory — Overview</title>
           <desc id="mapDesc">Central topic with ten surrounding concepts: set concept, axiom & notation, cardinality, empty set, subset, union, intersection, difference, symmetric difference, ordered pair.</desc>
 
           <!-- center -->
           <circle cx="500" cy="360" r="84" class="hub"/>
-          <text x="500" y="352" text-anchor="middle" class="center-title">Set Theory</text>
-          <text x="500" y="372" text-anchor="middle" class="center-sub">Halmazelmélet</text>
-          <text x="500" y="395" text-anchor="middle" class="center-sub">A — volcanic • B — intrusive • C — sedimentary (symbols in minis)</text>
+          <text x="500" y="352" text-anchor="middle" class="center-title">Overview</text>
+          <text x="500" y="372" text-anchor="middle" class="center-sub">Áttekintés</text>
 
           <!-- spokes (arms) -->
-          <!-- positions around a ring radius ≈ 260 -->
-          <!-- top -->
           <line x1="500" y1="360" x2="500" y2="100" class="arm"/>
-          <!-- 306 -->
           <line x1="500" y1="360" x2="653" y2="150" class="arm"/>
-          <!-- 342 -->
           <line x1="500" y1="360" x2="747" y2="280" class="arm"/>
-          <!-- 18 -->
           <line x1="500" y1="360" x2="747" y2="440" class="arm"/>
-          <!-- 54 -->
           <line x1="500" y1="360" x2="653" y2="570" class="arm"/>
-          <!-- 90 -->
           <line x1="500" y1="360" x2="500" y2="620" class="arm"/>
-          <!-- 126 -->
           <line x1="500" y1="360" x2="347" y2="570" class="arm"/>
-          <!-- 162 -->
           <line x1="500" y1="360" x2="253" y2="440" class="arm"/>
-          <!-- 198 -->
           <line x1="500" y1="360" x2="253" y2="280" class="arm"/>
-          <!-- 234 -->
           <line x1="500" y1="360" x2="347" y2="150" class="arm"/>
-
-          <!-- ===== NODES (10) ===== -->
 
           <!-- 1. Concept of a Set -->
           <g transform="translate(500,100)">
             <circle r="62" class="node"/>
-            <!-- icon: curly braces & dots -->
             <text y="-4" text-anchor="middle" class="center-title">{ … }</text>
             <text y="18" text-anchor="middle" class="node-sub">elements / elemek</text>
             <text y="40" text-anchor="middle" class="node-title">Set / Halmaz</text>
@@ -204,7 +189,7 @@
             <text y="52" text-anchor="middle" class="node-sub">Axióma & jelölés</text>
           </g>
 
-          <!-- 3. Number of Elements (Cardinality) -->
+          <!-- 3. Cardinality -->
           <g transform="translate(747,280)">
             <circle r="62" class="node"/>
             <text y="-8" text-anchor="middle" class="center-title">|A|</text>
@@ -213,7 +198,7 @@
             <text y="52" text-anchor="middle" class="node-sub">Elemszám</text>
           </g>
 
-          <!-- 4. Empty set & sets of sets -->
+          <!-- 4. Empty set -->
           <g transform="translate(747,440)">
             <circle r="62" class="node"/>
             <text y="-4" text-anchor="middle" class="center-title">∅</text>
@@ -221,10 +206,9 @@
             <text y="40" text-anchor="middle" class="node-title">Empty / Üres</text>
           </g>
 
-          <!-- 5. Subset & Proper subset -->
+          <!-- 5. Subset -->
           <g transform="translate(653,570)">
             <circle r="62" class="node"/>
-            <!-- icon: small circle fully inside big -->
             <circle cx="-8" cy="-4" r="18" class="miniStroke"/>
             <circle cx="8" cy="8" r="30" class="miniStroke"/>
             <text y="30" text-anchor="middle" class="center-sub">A ⊆ B • A ⊂ B</text>
@@ -234,7 +218,6 @@
           <!-- 6. Union -->
           <g transform="translate(500,620)">
             <circle r="62" class="node"/>
-            <!-- mini Venn and shaded union -->
             <defs>
               <mask id="uMask">
                 <rect x="-40" y="-40" width="80" height="80" fill="black"/>
@@ -252,7 +235,6 @@
           <!-- 7. Intersection -->
           <g transform="translate(347,570)">
             <circle r="62" class="node"/>
-            <!-- mini Venn and shaded intersection -->
             <defs>
               <clipPath id="iA"><circle cx="-14" cy="0" r="18"/></clipPath>
               <clipPath id="iB"><circle cx="14" cy="0" r="18"/></clipPath>
@@ -267,7 +249,6 @@
           <!-- 8. Difference -->
           <g transform="translate(253,440)">
             <circle r="62" class="node"/>
-            <!-- A\B -->
             <defs>
               <mask id="dMask">
                 <rect x="-40" y="-40" width="80" height="80" fill="black"/>
@@ -285,16 +266,13 @@
           <!-- 9. Symmetric difference -->
           <g transform="translate(253,280)">
             <circle r="62" class="node"/>
-            <!-- Δ : union minus intersection -->
             <defs>
               <clipPath id="sA"><circle cx="-14" cy="0" r="18"/></clipPath>
               <clipPath id="sB"><circle cx="14" cy="0" r="18"/></clipPath>
               <mask id="sMask">
                 <rect x="-40" y="-40" width="80" height="80" fill="black"/>
-                <!-- union -->
                 <circle cx="-14" cy="0" r="18" fill="white"/>
                 <circle cx="14" cy="0" r="18" fill="white"/>
-                <!-- remove intersection -->
                 <g clip-path="url(#sA)"><g clip-path="url(#sB)"><rect x="-40" y="-40" width="80" height="80" fill="black"/></g></g>
               </mask>
             </defs>
@@ -308,7 +286,6 @@
           <!-- 10. Ordered pair -->
           <g transform="translate(347,150)">
             <circle r="62" class="node"/>
-            <!-- two small slots -->
             <rect x="-28" y="-18" width="24" height="24" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
             <rect x="4" y="-18" width="24" height="24" rx="6" fill="none" stroke="var(--accent2)" stroke-width="1.8"/>
             <text x="-16" y="-2" text-anchor="middle" class="node-sub">1st</text>
@@ -318,7 +295,7 @@
           </g>
         </svg>
 
-        <!-- KEY (short bilingual one-liners) -->
+        <!-- KEY -->
         <div class="legend">
           <span class="chip"><span class="dot a"></span> A ∪ B — Union / Unió</span>
           <span class="chip"><span class="dot b"></span> A ∩ B — Intersection / Metszet</span>
@@ -334,7 +311,7 @@
     </div>
 
     <p class="muted small" style="margin-top:.75rem">
-      Tip: Use the center hub to recall today’s theme. Each bubble shows the symbol, a tiny visual, and a short bilingual label. Read clockwise for the lecture flow.
+      Tip: The three lines above the diagram tell you the context; the shaded mini-Venns inside each bubble show the operation at a glance.
     </p>
   </div>
 </body>
