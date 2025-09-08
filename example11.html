@@ -3,82 +3,119 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Granite Comparison — Ordered 10-tuple (EN/HU) | University of Szeged</title>
+<title>Granite comparison as an ordered 10‑tuple — University of Szeged</title>
 <style>
   :root{
     --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
-    --accent:#2563eb; --accent2:#16a34a; --accent3:#dc2626;
-    --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
-    --slot:#eef2f7; --slot-d:#1f2a44;
+    --accent:#2563eb; --accent-2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --chip:#e2e8f0; --slotfill:rgba(15,23,42,.06);
+
+    /* mineral accent colors */
+    --qz:#0ea5e9;   /* Quartz */
+    --kf:#f59e0b;   /* K‑feldspar */
+    --ab:#a855f7;   /* Albite */
+    --bt:#ef4444;   /* Biotite */
+    --ms:#10b981;   /* Muscovite */
   }
   @media (prefers-color-scheme: dark){
     :root{
       --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
-      --accent:#60a5fa; --accent2:#4ade80; --accent3:#f87171;
-      --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5); --slot:#0f172a; --slot-d:#334155;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
+      --chip:#1f2a44; --slotfill:rgba(255,255,255,.07);
+
+      --qz:#7dd3fc; --kf:#fbbf24; --ab:#c084fc; --bt:#f87171; --ms:#34d399;
     }
   }
+
   *{box-sizing:border-box}
   body{
     margin:0; padding:2rem; background:var(--bg); color:var(--ink);
-    font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+    font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
   }
-  .wrap{max-width:1200px; margin-inline:auto}
+  .wrap{max-width:1100px; margin-inline:auto}
 
-  /* HEADER */
+  /* Header */
   header{
-    background:linear-gradient(135deg,var(--accent),#38bdf8);
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
     color:#fff; border-radius:16px; padding:1rem 1.25rem; box-shadow:var(--shadow);
   }
   .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
   .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
-  .badge{font-size:.8rem; letter-spacing:.04em; text-transform:uppercase; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:.25rem .5rem; border-radius:999px}
-  h1{margin:0; font-size:1.35rem; font-weight:700}
+  .badge{
+    font-size:.8rem; letter-spacing:.04em; text-transform:uppercase;
+    background: rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+    padding:.25rem .5rem; border-radius:999px;
+  }
+  h1{margin:0; font-size:1.3rem; font-weight:700}
   h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow)}
+  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain}
+  .logo-chip.logo-dept img{height:55px}
+  .logo-chip.logo-szte img{height:42px}
 
-  /* CARDS */
+  /* Card */
   .card{
     background:var(--card); border:1px solid var(--border); border-radius:16px;
-    box-shadow:var(--shadow); overflow:hidden; margin-top:1rem;
+    margin-top:1rem; box-shadow:var(--shadow); overflow:hidden;
   }
-  .bar{padding:.8rem 1rem; border-bottom:1px solid var(--border); font-weight:700; display:flex; align-items:center; justify-content:space-between; gap:.5rem;}
-  .content{padding:1rem}
-  .muted{color:var(--muted)}
-  .lang{display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em; padding:.18rem .45rem; border-radius:999px; background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.45)}
-  .grid-images{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:.75rem}
-  .grid-images figure{margin:0; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:var(--card)}
-  .grid-images img{display:block; width:100%; height:170px; object-fit:cover}
-  .grid-images figcaption{padding:.5rem .7rem; font-size:.9rem; color:var(--muted)}
-
-  /* TWO-COL BILINGUAL */
-  .twocol{display:grid; grid-template-columns:1fr 1fr; gap:1rem}
-  @media (max-width:900px){ .twocol{grid-template-columns:1fr} }
-
-  /* 10-SLOT TUPLE VISUAL */
-  .tuple{
-    background:linear-gradient(180deg, rgba(37,99,235,.07), transparent);
-    border:1px dashed var(--border); border-radius:12px; padding:1rem;
+  .bar{
+    padding:.9rem 1rem; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
   }
-  .slots{
-    display:grid; grid-template-columns:repeat(5,1fr); gap:.6rem; margin-top:.6rem;
+  .subtitle{font-weight:600}
+  .hint{color:var(--muted); font-size:.92rem}
+  .btn{
+    border:1px solid var(--border); background:transparent; color:var(--ink);
+    padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600;
   }
-  @media (max-width:900px){ .slots{grid-template-columns:repeat(2,1fr)} }
-  .slot{
-    background:var(--slot); border:1px solid var(--border); border-radius:10px; padding:.6rem .7rem;
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+
+  /* Gallery */
+  .gallery{display:grid; gap:.75rem; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); padding:1rem}
+  .gallery figure{margin:0; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:var(--card); box-shadow:var(--shadow)}
+  .gallery img{display:block; width:100%; height:180px; object-fit:cover; background:#0002}
+  .gallery figcaption{padding:.5rem .65rem; font-size:.9rem; color:var(--muted)}
+
+  /* Two-column content */
+  table.twocol{width:100%; border-collapse:separate; border-spacing:0}
+  table.twocol thead th{
+    background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(56,189,248,0.08));
+    padding:.85rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border);
   }
-  .slot h4{margin:.1rem 0 .25rem; font-size:.95rem}
-  .slot .tag{display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em; padding:.12rem .38rem; border-radius:6px; margin-right:.35rem}
-  .tag.amount{background:rgba(34,197,94,.15); color:#047857}
-  .tag.size{background:rgba(59,130,246,.15); color:#1d4ed8}
-  .tip{font-size:.9rem; color:var(--muted)}
+  table.twocol td{padding:.85rem 1rem; vertical-align:top; border-bottom:1px solid var(--border)}
+  table.twocol tbody tr:nth-child(odd) td{background: rgba(148,163,184,0.06)}
+  .lang-label{
+    display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em;
+    padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,0.15); color:#0369a1; margin-left:.5rem;
+  }
+  ul{margin:.4rem 0 .2rem 1.2rem}
+  code, kbd, .sym{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
 
-  /* INLINE CODE / MATHY LINE */
-  .sym{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+  /* Chips legend */
+  .legend{display:flex; flex-wrap:wrap; gap:.5rem .65rem; padding:.6rem 1rem 1rem}
+  .chip{display:inline-flex; align-items:center; gap:.4rem; padding:.25rem .55rem; border-radius:999px; border:1px solid var(--border); background:var(--chip); font-size:.9rem}
+  .dot{width:10px; height:10px; border-radius:999px; display:inline-block}
+  .dot.qz{background:var(--qz)} .dot.kf{background:var(--kf)} .dot.ab{background:var(--ab)} .dot.bt{background:var(--bt)} .dot.ms{background:var(--ms)}
 
-  /* MINI LIST */
-  ul.clean{margin:.4rem 0 0 1.1rem}
-  ul.clean li{margin:.15rem 0}
+  /* Tuple visual (English-only labels inside SVG for clarity) */
+  .visual{display:flex; justify-content:center; padding:1rem}
+  svg.tuple{max-width:860px; width:100%; height:auto}
+  .rowlabel{font-size:12px; fill:var(--muted)}
+  .box{fill:var(--slotfill); stroke-width:2}
+  .box.qz{stroke:var(--qz)} .box.kf{stroke:var(--kf)} .box.ab{stroke:var(--ab)} .box.bt{stroke:var(--bt)} .box.ms{stroke:var(--ms)}
+  .abbr{font-size:13px; font-weight:700; fill:var(--ink)}
+  .idx{font-size:11px; fill:var(--muted)}
+  .caption{font-size:12px; fill:var(--muted)}
+  .titleEN{font-size:13px; font-weight:700; fill:var(--muted)}
+  @media (max-width:720px){
+    body{padding:1rem}
+    .gallery img{height:160px}
+  }
 </style>
+<script>
+  function printPage(){ window.print(); }
+</script>
 </head>
 <body>
   <div class="wrap">
@@ -86,172 +123,214 @@
       <div class="header-top">
         <div class="title">
           <span class="badge">University of Szeged</span>
-          <h1>Granite Comparison — Ordered 10-tuple</h1>
+          <h1>Department of Atmospheric and Geospatial Data Science</h1>
         </div>
-        <span class="lang">EN / HU</span>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
       </div>
-      <h2>Department of Atmospheric and Geospatial Data Sciences • Foundations of Set Theory</h2>
+      <h2>ABDULHAQ Hawkar — Granite comparison as an ordered 10‑tuple / Gránitminták rendezett 10‑esként</h2>
     </header>
 
-    <!-- INTRO -->
-    <section class="card">
-      <div class="bar">Overview / Áttekintés</div>
-      <div class="content twocol">
-        <div>
-          <p><strong>We compare different granite samples.</strong></p>
-          <p>Each granite contains common minerals: <em>quartz, K-feldspar, albite, biotite, muscovite.</em></p>
-          <p>To describe one granite completely, we track for <em>each mineral</em>:</p>
-          <ul class="clean">
-            <li>its <strong>amount</strong> (e.g., % quartz, % K-feldspar, …)</li>
-            <li>its <strong>characteristic grain size</strong> (how big the crystals are)</li>
-          </ul>
-          <p>Altogether this makes <strong>10 variables</strong> (5 minerals × 2 properties) — we can treat this as an <strong>ordered 10-tuple</strong>.</p>
-        </div>
-        <div>
-          <p><strong>Különböző gránitminta-típusokat hasonlítunk össze.</strong></p>
-          <p>Minden gránit gyakori ásványokat tartalmaz: <em>kvarc, K-földpát, albit, biotit, muszkovit.</em></p>
-          <p>Egy minta teljes leírásához <em>minden ásványhoz</em> megadjuk:</p>
-          <ul class="clean">
-            <li><strong>mennyiséget</strong> (pl. % kvarc, % K-földpát, …)</li>
-            <li><strong>jellemző szemcseméretet</strong> (mekkora kristályok)</li>
-          </ul>
-          <p>Összesen ez <strong>10 változó</strong> (5 ásvány × 2 tulajdonság) — ezt <strong>rendezett 10-esként</strong> ábrázoljuk.</p>
-        </div>
+    <!-- Image gallery -->
+    <section class="card" aria-labelledby="gallery-title">
+      <div class="bar">
+        <div class="subtitle" id="gallery-title">Granite samples (hand specimen & thin section views) / Gránitminták (kéziminta & vékonycsiszolat)</div>
+        <div><button class="btn" onclick="printPage()">Print</button></div>
+      </div>
+      <div class="gallery">
+        <figure>
+          <img src="https://i.imgur.com/Z8pwwFn.jpeg" alt="Granite sample photo 1" />
+          <figcaption>Sample 1 — Granite texture / Gránit szövet</figcaption>
+        </figure>
+        <figure>
+          <img src="https://i.imgur.com/9m0yky9.jpeg" alt="Granite sample photo 2" />
+          <figcaption>Sample 2 — Quartz & feldspar / Kvarc és földpát</figcaption>
+        </figure>
+        <figure>
+          <img src="https://i.imgur.com/FvkpQuw.jpeg" alt="Granite sample photo 3" />
+          <figcaption>Sample 3 — Biotite flakes / Biotit lemezek</figcaption>
+        </figure>
+        <figure>
+          <img src="https://i.imgur.com/aAyC9Q1.jpeg" alt="Granite sample photo 4" />
+          <figcaption>Sample 4 — Muscovite mica / Muszkovit</figcaption>
+        </figure>
       </div>
     </section>
 
-    <!-- IMAGE STRIP -->
-    <section class="card">
-      <div class="bar">Granite photo board / Gránit fotótábla</div>
-      <div class="content">
-        <div class="grid-images">
-          <figure>
-            <img src="https://i.imgur.com/Z8pwwFn.jpeg" alt="Granite close-up sample 1">
-            <figcaption>Sample / Minta 1</figcaption>
-          </figure>
-          <figure>
-            <img src="https://i.imgur.com/9m0yky9.jpeg" alt="Granite close-up sample 2">
-            <figcaption>Sample / Minta 2</figcaption>
-          </figure>
-          <figure>
-            <img src="https://i.imgur.com/FvkpQuw.jpeg" alt="Granite close-up sample 3">
-            <figcaption>Sample / Minta 3</figcaption>
-          </figure>
-          <figure>
-            <img src="https://i.imgur.com/aAyC9Q1.jpeg" alt="Granite close-up sample 4">
-            <figcaption>Sample / Minta 4</figcaption>
-          </figure>
+    <!-- Main bilingual content -->
+    <section class="card" aria-labelledby="slide-title">
+      <div class="bar">
+        <div>
+          <div id="slide-title" class="subtitle">
+            Slide — From minerals to a 10‑tuple / Ásványoktól a 10‑es rendezett n‑esig
+          </div>
+          <div class="hint">We compare granite samples using amounts (%) and grain sizes of five minerals / Gránitmintákat hasonlítunk össze öt ásvány százaléka és szemcsemérete alapján</div>
         </div>
-        <p class="tip" style="margin-top:.6rem;">Photos help us see texture and grain size differences / A fotók mutatják a szövetet és szemcseméretet.</p>
       </div>
+
+      <div class="legend" aria-label="Mineral legend">
+        <span class="chip"><span class="dot qz"></span>QZ = Quartz / Kvarc</span>
+        <span class="chip"><span class="dot kf"></span>KF = K‑feldspar / K‑földpát</span>
+        <span class="chip"><span class="dot ab"></span>AB = Albite / Albit</span>
+        <span class="chip"><span class="dot bt"></span>BT = Biotite / Biotit</span>
+        <span class="chip"><span class="dot ms"></span>MS = Muscovite / Muszkovit</span>
+      </div>
+
+      <table class="twocol" role="table" aria-describedby="slide-title">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead>
+          <tr>
+            <th scope="col">English <span class="lang-label">EN</span></th>
+            <th scope="col">Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>We compare different granite samples.</strong></td>
+            <td><strong>Különböző gránitmintákat hasonlítunk össze.</strong></td>
+          </tr>
+          <tr>
+            <td>Each granite contains minerals like: <strong>quartz, K‑feldspar, albite, biotite, muscovite</strong>.</td>
+            <td>Minden gránit olyan ásványokat tartalmazhat, mint: <strong>kvarc, K‑földpát, albit, biotit, muszkovit</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong>To describe one granite completely, we need to know:</strong>
+              <ul>
+                <li>The <em>amount</em> of each mineral (e.g. % quartz, % K‑feldspar, …).</li>
+                <li>The <em>characteristic grain size</em> of each mineral (how big the crystals are).</li>
+              </ul>
+            </td>
+            <td><strong>Egy gránit teljes leírásához tudnunk kell:</strong>
+              <ul>
+                <li>Az egyes ásványok <em>mennyiségét</em> (pl. % kvarc, % K‑földpát, …).</li>
+                <li>Az egyes ásványok <em>jellemző szemcseméretét</em> (mekkorák a kristályok).</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Altogether, there are 10 variables</strong> (5 minerals × 2 properties each = 10). These can be seen as an <strong>ordered 10‑tuple</strong> (like a 10‑item list).</td>
+            <td><strong>Összesen 10 változó</strong> van (5 ásvány × 2 tulajdonság = 10). Ez felfogható <strong>rendezett 10‑esként</strong> (10 elemű lista).</td>
+          </tr>
+          <tr>
+            <td><strong>Breaking it down.</strong> In set theory, a <em>tuple</em> (like <span class="sym">(a,b,c,…)</span>) records order and position. Unlike a plain set, the first, second, … positions matter.</td>
+            <td><strong>Lebontva.</strong> A halmazelméletben a <em>tuple</em> (pl. <span class="sym">(a,b,c,…)</span>) a sorrendet és a pozíciót rögzíti. Egy egyszerű halmazzal ellentétben számít, melyik az első, második, stb.</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>So a granite sample can be represented as:</strong><br/>
+              <span class="sym">(QZ&nbsp;amount, KF&nbsp;amount, AB&nbsp;amount, BT&nbsp;amount, MS&nbsp;amount, QZ&nbsp;size, KF&nbsp;size, AB&nbsp;size, BT&nbsp;size, MS&nbsp;size)</span><br/>
+              That’s <strong>10 slots</strong> in total.
+            </td>
+            <td>
+              <strong>Tehát egy gránitminta így írható le:</strong><br/>
+              <span class="sym">(QZ&nbsp;százalék, KF&nbsp;százalék, AB&nbsp;százalék, BT&nbsp;százalék, MS&nbsp;százalék, QZ&nbsp;méret, KF&nbsp;méret, AB&nbsp;méret, BT&nbsp;méret, MS&nbsp;méret)</span><br/>
+              Összesen <strong>10 „hely”</strong>.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Visual: 10 ordered slots (English-only inside) -->
+      <div class="visual" aria-label="Ordered 10-tuple slots (amounts then sizes)">
+        <svg class="tuple" viewBox="0 0 860 310">
+          <!-- Row labels -->
+          <text class="titleEN" x="20" y="40">AMOUNTS (positions 1–5)</text>
+          <text class="titleEN" x="20" y="180">SIZES (positions 6–10)</text>
+
+          <!-- Amounts row boxes -->
+          <!-- x positions -->
+          <g transform="translate(20,60)">
+            <!-- QZ -->
+            <rect class="box qz" x="0"   y="0" width="150" height="70" rx="10"/>
+            <text class="idx"  x="10"  y="16">1</text>
+            <text class="abbr" x="75"  y="42" text-anchor="middle">QZ</text>
+            <text class="caption" x="75" y="62" text-anchor="middle">amount (%)</text>
+
+            <!-- KF -->
+            <rect class="box kf" x="170" y="0" width="150" height="70" rx="10"/>
+            <text class="idx"  x="180" y="16">2</text>
+            <text class="abbr" x="245" y="42" text-anchor="middle">KF</text>
+            <text class="caption" x="245" y="62" text-anchor="middle">amount (%)</text>
+
+            <!-- AB -->
+            <rect class="box ab" x="340" y="0" width="150" height="70" rx="10"/>
+            <text class="idx"  x="350" y="16">3</text>
+            <text class="abbr" x="415" y="42" text-anchor="middle">AB</text>
+            <text class="caption" x="415" y="62" text-anchor="middle">amount (%)</text>
+
+            <!-- BT -->
+            <rect class="box bt" x="510" y="0" width="150" height="70" rx="10"/>
+            <text class="idx"  x="520" y="16">4</text>
+            <text class="abbr" x="585" y="42" text-anchor="middle">BT</text>
+            <text class="caption" x="585" y="62" text-anchor="middle">amount (%)</text>
+
+            <!-- MS -->
+            <rect class="box ms" x="680" y="0" width="150" height="70" rx="10"/>
+            <text class="idx"  x="690" y="16">5</text>
+            <text class="abbr" x="755" y="42" text-anchor="middle">MS</text>
+            <text class="caption" x="755" y="62" text-anchor="middle">amount (%)</text>
+          </g>
+
+          <!-- Sizes row boxes -->
+          <g transform="translate(20,200)">
+            <!-- QZ size -->
+            <rect class="box qz" x="0"   y="0" width="150" height="70" rx="10"/>
+            <text class="idx"  x="10"  y="16">6</text>
+            <text class="abbr" x="75"  y="42" text-anchor="middle">QZ</text>
+            <text class="caption" x="75" y="62" text-anchor="middle">size</text>
+
+            <!-- KF size -->
+            <rect class="box kf" x="170" y="0" width="150" height="70" rx="10"/>
+            <text class="idx"  x="180" y="16">7</text>
+            <text class="abbr" x="245" y="42" text-anchor="middle">KF</text>
+            <text class="caption" x="245" y="62" text-anchor="middle">size</text>
+
+            <!-- AB size -->
+            <rect class="box ab" x="340" y="0" width="150" height="70" rx="10"/>
+            <text class="idx"  x="350" y="16">8</text>
+            <text class="abbr" x="415" y="42" text-anchor="middle">AB</text>
+            <text class="caption" x="415" y="62" text-anchor="middle">size</text>
+
+            <!-- BT size -->
+            <rect class="box bt" x="510" y="0" width="150" height="70" rx="10"/>
+            <text class="idx"  x="520" y="16">9</text>
+            <text class="abbr" x="585" y="42" text-anchor="middle">BT</text>
+            <text class="caption" x="585" y="62" text-anchor="middle">size</text>
+
+            <!-- MS size -->
+            <rect class="box ms" x="680" y="0" width="150" height="70" rx="10"/>
+            <text class="idx"  x="690" y="16">10</text>
+            <text class="abbr" x="755" y="42" text-anchor="middle">MS</text>
+            <text class="caption" x="755" y="62" text-anchor="middle">size</text>
+          </g>
+        </svg>
+      </div>
+
+      <table class="twocol" role="table" aria-label="Why this matters">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Why this matters <span class="lang-label">EN</span></th>
+            <th scope="col">Miért fontos <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>This example shows how <strong>set theory</strong> and <strong>ordered tuples</strong> can describe real‑world data like rock composition. Each granite is not just “a set of minerals” but a <strong>structured collection of properties</strong>. Two granites are different if <em>any</em> of the 10 values differ.</td>
+            <td>Ez a példa megmutatja, hogy a <strong>halmazelmélet</strong> és a <strong>rendezett n‑esek</strong> alkalmasak a valós adatok, például a kőzetösszetétel leírására. Egy gránit nem csupán „ásványok halmaza”, hanem <strong>tulajdonságok strukturált együttese</strong>. Két gránit akkor különbözik, ha a 10 érték közül <em>bármelyik</em> eltér.</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
-    <!-- TUPLE IDEA -->
-    <section class="card">
-      <div class="bar">From geology to math / Geológiából matematikába</div>
-      <div class="content twocol">
-        <div>
-          <p><strong>In set theory, an ordered tuple</strong> like <span class="sym">(a, b, c, …)</span> captures both <em>which values</em> we have and <em>their positions</em> (1st, 2nd, …).</p>
-          <p><em>Unlike a plain set</em>, order matters: swapping positions gives a different tuple.</p>
-          <p>For one granite sample, define the ordered 10-tuple as:</p>
-          <p class="sym" style="margin:.5rem 0; line-height:1.6">
-            ( qtz_amt, kfs_amt, alb_amt, bio_amt, mus_amt, qtz_size, kfs_size, alb_size, bio_size, mus_size )
-          </p>
-          <p class="tip">That’s 10 slots in total — 5 amounts + 5 sizes.</p>
-        </div>
-        <div>
-          <p><strong>A halmazelméletben a rendezett n-es</strong> (pl. <span class="sym">(a, b, c, …)</span>) a <em>konkrét értékeket</em> és a <em>pozíciójukat</em> is rögzíti (1., 2., …).</p>
-          <p><em>Nem úgy, mint egy egyszerű halmaznál</em>, itt számít a sorrend: felcserélve másik n-est kapunk.</p>
-          <p>Egy gránitminta rendezett 10-ese:</p>
-          <p class="sym" style="margin:.5rem 0; line-height:1.6">
-            ( kvarc_menny, K-földpát_menny, albit_menny, biotit_menny, muszkovit_menny, kvarc_méret, K-földpát_méret, albit_méret, biotit_méret, muszkovit_méret )
-          </p>
-          <p class="tip">Összesen 10 pozíció — 5 mennyiség + 5 méret.</p>
-        </div>
-      </div>
-
-      <!-- VISUAL: TEN ORDERED SLOTS -->
-      <div class="content tuple">
-        <div class="muted"><strong>10 ordered slots / 10 rendezett pozíció</strong> (left→right = 1→10 / balról jobbra = 1→10)</div>
-        <div class="slots" aria-label="ten ordered slots">
-          <!-- amounts -->
-          <div class="slot">
-            <h4>Quartz / Kvarc</h4>
-            <span class="tag amount">amount</span> <span class="muted">% of total</span>
-          </div>
-          <div class="slot">
-            <h4>K-feldspar / K-földpát</h4>
-            <span class="tag amount">amount</span> <span class="muted">% of total</span>
-          </div>
-          <div class="slot">
-            <h4>Albite / Albit</h4>
-            <span class="tag amount">amount</span> <span class="muted">% of total</span>
-          </div>
-          <div class="slot">
-            <h4>Biotite / Biotit</h4>
-            <span class="tag amount">amount</span> <span class="muted">% of total</span>
-          </div>
-          <div class="slot">
-            <h4>Muscovite / Muszkovit</h4>
-            <span class="tag amount">amount</span> <span class="muted">% of total</span>
-          </div>
-          <!-- sizes -->
-          <div class="slot">
-            <h4>Quartz / Kvarc</h4>
-            <span class="tag size">size</span> <span class="muted">grain size</span>
-          </div>
-          <div class="slot">
-            <h4>K-feldspar / K-földpát</h4>
-            <span class="tag size">size</span> <span class="muted">grain size</span>
-          </div>
-          <div class="slot">
-            <h4>Albite / Albit</h4>
-            <span class="tag size">size</span> <span class="muted">grain size</span>
-          </div>
-          <div class="slot">
-            <h4>Biotite / Biotit</h4>
-            <span class="tag size">size</span> <span class="muted">grain size</span>
-          </div>
-          <div class="slot">
-            <h4>Muscovite / Muszkovit</h4>
-            <span class="tag size">size</span> <span class="muted">grain size</span>
-          </div>
-        </div>
-        <p class="tip" style="margin-top:.7rem">
-          Two granites are <strong>different</strong> if any of these 10 values differ. / Két gránit <strong>különböző</strong>, ha bármelyik érték eltér a 10 közül.
-        </p>
-      </div>
-    </section>
-
-    <!-- WHY IT MATTERS -->
-    <section class="card">
-      <div class="bar">Why this matters / Miért fontos?</div>
-      <div class="content twocol">
-        <div>
-          <ul class="clean">
-            <li>This shows how <strong>ordered tuples</strong> model real data.</li>
-            <li>A granite is more than “a set of minerals” — it’s a <strong>structured collection</strong> of values.</li>
-            <li>We can compare samples scientifically: check all 10 positions.</li>
-          </ul>
-        </div>
-        <div>
-          <ul class="clean">
-            <li>Megmutatja, hogyan írhatók le valós adatok <strong>rendezett n-esekkel</strong>.</li>
-            <li>A gránit nem csak „ásványok halmaza”, hanem <strong>strukturált tulajdonsághalmaz</strong>.</li>
-            <li>Tudományos összehasonlítás: mind a 10 pozíciót ellenőrizzük.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="content">
-        <p class="sym" style="margin:0">
-          EN: <em>granite</em> = (qtz_amt, kfs_amt, alb_amt, bio_amt, mus_amt, qtz_size, kfs_size, alb_size, bio_size, mus_size)<br/>
-          HU: <em>gránit</em> = (kvarc_menny, K-földpát_menny, albit_menny, biotit_menny, muszkovit_menny, kvarc_méret, K-földpát_méret, albit_méret, biotit_méret, muszkovit_méret)
-        </p>
-      </div>
-    </section>
-
-    <p class="muted" style="margin-top:.75rem">
-      Note / Megjegyzés: the exact list of feldspars can be refined in petrology (e.g., separating K-feldspar types). This simple 5-mineral scheme keeps the math clear.
+    <p class="hint" style="margin-top:.75rem;">
+      Tip: read the tuple left‑to‑right, top row first (positions 1–5: amounts), then bottom row (positions 6–10: sizes). / Tipp: balról jobbra olvassuk, először a felső sor (1–5: százalékok), majd az alsó sor (6–10: méretek).
     </p>
   </div>
 </body>
