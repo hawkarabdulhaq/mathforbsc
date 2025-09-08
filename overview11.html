@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Granite as a 10-Tuple — Set Theory Meets Geology</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+    --accent:#2563eb; --accent2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --slot:#eef2f7; --slotline:#cbd5e1; --slotfill: rgba(37,99,235,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent2:#22d3ee; --border:#1f2a44; --slot:#0f172a; --slotline:#24324a; --slotfill: rgba(96,165,250,.18);
+      --shadow:0 10px 30px rgba(0,0,0,.5);
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; padding:2rem; background:var(--bg); color:var(--ink); font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji"}
+  .wrap{max-width:1100px; margin-inline:auto}
+  header{
+    background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border-radius:16px; padding:1rem 1.25rem;
+    box-shadow:var(--shadow);
+  }
+  h1{margin:0; font-size:1.35rem}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); overflow:hidden; margin-top:1rem}
+  .bar{padding:.85rem 1rem; border-bottom:1px solid var(--border); font-weight:700; display:flex; align-items:center; justify-content:space-between; gap:.75rem; flex-wrap:wrap}
+  .content{padding:1rem}
+  .muted{color:var(--muted)}
+  .grid{display:grid; gap:1rem}
+  .grid.two{grid-template-columns: 1fr 1fr}
+  @media (max-width:900px){ .grid.two{grid-template-columns: 1fr} }
+  ul{margin:.4rem 0 .8rem 1rem}
+  li{margin:.2rem 0}
+  .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600}
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+  /* 10-tuple visual */
+  .tuple{display:grid; grid-template-columns: repeat(5, 1fr); gap:.6rem; padding:1rem}
+  .lane{grid-column: 1 / -1; height:6px; background:linear-gradient(90deg, transparent 0, transparent 12px, var(--slotline) 12px, var(--slotline) 13px) left center / 26px 6px repeat-x; border-radius:4px; opacity:.6; margin:.4rem 0 .2rem}
+  .slot{
+    background:var(--slot); border:1px solid var(--slotline); border-radius:10px; padding:.55rem .6rem; box-shadow:inset 0 1px 0 rgba(255,255,255,.5);
+    display:flex; flex-direction:column; gap:.25rem; min-height:74px; position:relative;
+  }
+  .slot::after{content:""; position:absolute; inset:0; border-radius:10px; background:var(--slotfill); opacity:0; transition:.2s}
+  .slot:hover::after{opacity:1}
+  .tag{font-size:.75rem; font-weight:700; letter-spacing:.04em; color:#0b4ebf; opacity:.9}
+  .tag.size{color:#0f766e}
+  .key{font-weight:700}
+  .small{font-size:.95rem}
+  .foot{color:var(--muted); font-size:.9rem; padding:0 1rem 1rem}
+  /* Image strip */
+  .imgs{display:grid; grid-template-columns: repeat(4, 1fr); gap:.5rem; padding:1rem}
+  .imgs img{width:100%; height:130px; object-fit:cover; border-radius:10px; border:1px solid var(--border)}
+  @media (max-width:900px){ .imgs{grid-template-columns: repeat(2, 1fr)} .imgs img{height:150px} }
+  @media (max-width:520px){ .imgs{grid-template-columns: 1fr} .imgs img{height:180px} }
+  .caption{padding:0 1rem 1rem; color:var(--muted); font-size:.9rem; text-align:center}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; background:rgba(148,163,184,.18); padding:.06rem .35rem; border-radius:6px}
+</style>
+<script>
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Granite as a 10-Tuple — Set Theory Meets Geology</h1>
+      <h2 class="muted">An intuitive slide that connects ordered tuples to rock composition</h2>
+    </header>
+
+    <!-- What the slide says -->
+    <section class="card">
+      <div class="bar">
+        <span>What the slide says</span>
+        <button class="btn" onclick="printPage()">Print</button>
+      </div>
+      <div class="content grid two">
+        <div>
+          <p>We compare different granite samples.</p>
+          <p>Each granite contains minerals like: <strong>quartz, K-feldspar, albite, biotite, muscovite</strong>.</p>
+          <p>To describe one granite completely, we need to know:</p>
+          <ul>
+            <li>The <strong>amount</strong> of each mineral (e.g. % quartz, % feldspar, …)</li>
+            <li>The characteristic <strong>grain size</strong> of each mineral (how big the crystals are)</li>
+          </ul>
+          <p>Altogether, there are <strong>10 variables</strong> (5 minerals × 2 properties each = 10).</p>
+          <p>These can be seen as an <strong>ordered 10-tuple</strong> (like a 10-item list).</p>
+        </div>
+        <div>
+          <p class="key">Breaking it down</p>
+          <p>In set theory, a tuple (like <code>(a,b,c,…)</code>) captures <em>order and position</em>.</p>
+          <p>Unlike a plain set (where order doesn’t matter), in an <strong>ordered tuple</strong> the 1st, 2nd, … positions matter.</p>
+          <p class="small">So a granite sample can be represented as:</p>
+          <p class="small"><code>(quartz&nbsp;amount, feldspar&nbsp;amount, …, muscovite&nbsp;amount, quartz&nbsp;size, feldspar&nbsp;size, …, muscovite&nbsp;size)</code></p>
+          <p>That’s <strong>10 slots</strong> in total.</p>
+        </div>
+      </div>
+
+      <!-- Visual: the ordered 10-tuple -->
+      <div class="content">
+        <h3 style="margin:.2rem 0 .6rem">Visual: “10 slots” for one granite</h3>
+        <!-- Row 1: amounts -->
+        <div class="tuple">
+          <div class="lane" aria-hidden="true"></div>
+          <div class="slot">
+            <div class="tag">amount</div>
+            <div><span class="key">Quartz</span> — %</div>
+          </div>
+          <div class="slot">
+            <div class="tag">amount</div>
+            <div><span class="key">K-feldspar</span> — %</div>
+          </div>
+          <div class="slot">
+            <div class="tag">amount</div>
+            <div><span class="key">Albite</span> — %</div>
+          </div>
+          <div class="slot">
+            <div class="tag">amount</div>
+            <div><span class="key">Biotite</span> — %</div>
+          </div>
+          <div class="slot">
+            <div class="tag">amount</div>
+            <div><span class="key">Muscovite</span> — %</div>
+          </div>
+          <!-- Row 2: sizes -->
+          <div class="lane" aria-hidden="true"></div>
+          <div class="slot">
+            <div class="tag size">size</div>
+            <div><span class="key">Quartz</span> — μm / mm</div>
+          </div>
+          <div class="slot">
+            <div class="tag size">size</div>
+            <div><span class="key">K-feldspar</span> — μm / mm</div>
+          </div>
+          <div class="slot">
+            <div class="tag size">size</div>
+            <div><span class="key">Albite</span> — μm / mm</div>
+          </div>
+          <div class="slot">
+            <div class="tag size">size</div>
+            <div><span class="key">Biotite</span> — μm / mm</div>
+          </div>
+          <div class="slot">
+            <div class="tag size">size</div>
+            <div><span class="key">Muscovite</span> — μm / mm</div>
+          </div>
+        </div>
+        <p class="foot">Read left → right, top row then bottom row: that’s an ordered 10-tuple. Swapping two values changes the tuple (and the granite’s description).</p>
+      </div>
+
+      <!-- Why this matters -->
+      <div class="content">
+        <h3 style="margin:.2rem 0 .6rem">Why this matters</h3>
+        <ul>
+          <li>This shows how <strong>set theory</strong> and <strong>ordered tuples</strong> describe real-world data like rock composition.</li>
+          <li>Each granite is not just “a set of minerals” but a <strong>structured collection</strong> of properties.</li>
+          <li>Geologists can compare granites scientifically: two granites are different if <em>any</em> of the 10 values differ.</li>
+        </ul>
+      </div>
+
+      <!-- Image strip (provided references) -->
+      <div class="imgs">
+        <img src="https://i.imgur.com/Z8pwwFn.jpeg" alt="Granite close-up 1">
+        <img src="https://i.imgur.com/9m0yky9.jpeg" alt="Granite close-up 2">
+        <img src="https://i.imgur.com/FvkpQuw.jpeg" alt="Granite close-up 3">
+        <img src="https://i.imgur.com/aAyC9Q1.jpeg" alt="Granite thin-section or hand sample">
+      </div>
+      <div class="caption">Granite textures & minerals (illustrative). Use the 10 slots to record composition and grain size for each mineral.</div>
+    </section>
+  </div>
+</body>
+</html>
