@@ -58,9 +58,29 @@
   .logo-chip img{
     display:block; height:42px; width:auto; object-fit:contain;
   }
-  /* Specific sizing for the two logos */
   .logo-chip.logo-dept img{ height:55px; }   /* department logo is naturally ~55px high */
   .logo-chip.logo-szte img{ height:42px; }   /* SZTE wordmark a bit shorter for balance */
+
+  /* HERO IMAGE */
+  .hero{
+    position:relative; margin-top:1rem; border-radius:16px; overflow:hidden;
+    box-shadow:var(--shadow); border:1px solid var(--border); background:#000;
+  }
+  .hero img{
+    display:block; width:100%; height:min(48vh, 460px); object-fit:cover;
+  }
+  .hero .overlay{
+    position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.45));
+    pointer-events:none;
+  }
+  .hero .label{
+    position:absolute; left:1rem; bottom:1rem; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.6);
+    background: rgba(2,6,23,.45); backdrop-filter: blur(4px);
+    border:1px solid rgba(255,255,255,.25); border-radius:10px;
+    padding:.5rem .65rem; font-size:.95rem; line-height:1.25;
+  }
+  .hero .label strong{font-weight:700}
+  .hero .label .hu{opacity:.9; display:block; font-size:.9em}
 
   /* CARD + TABLE */
   .card{
@@ -119,7 +139,7 @@
       <div class="header-top">
         <div class="title">
           <span class="badge">University of Szeged</span>
-          <h1>Departement of Atmospheric and Geospatial Data Science</h1>
+          <h1>Department of Atmospheric and Geospatial Data Science</h1>
         </div>
         <div class="logo-row" aria-label="Department and University logos">
           <span class="logo-chip logo-dept" title="Department logo">
@@ -132,6 +152,16 @@
       </div>
       <h2>ABDULHAQ Hawkar — Set Theory Example</h2>
     </header>
+
+    <!-- HERO image referencing a rock unit (olivine gabbro) -->
+    <figure class="hero" aria-labelledby="hero-cap">
+      <img src="https://geohubliverpool.org.uk/wp-content/uploads/2020/02/Olivine-gabbro5.2_banner-1600x900.jpg" alt="Olivine gabbro hand specimen from an intrusive igneous geological formation" />
+      <div class="overlay" aria-hidden="true"></div>
+      <figcaption id="hero-cap" class="label">
+        <strong>Geological formation</strong> — intrusive igneous unit (olivine gabbro), illustrative hand specimen
+        <span class="hu">Geológiai formáció — intruzív magmás egység (olivin‑gabbró), illusztratív kéziminta</span>
+      </figcaption>
+    </figure>
 
     <section class="card" aria-labelledby="slide-title">
       <div class="bar">
@@ -165,7 +195,7 @@
           </tr>
           <tr data-ex="1">
             <td><em>Example:</em> The “Basalt set” equals the collection of all basalt samples from the formation.</td>
-            <td><em>Példa:</em> A „bazalt-halmaz” megegyezik a formáció összes bazalt mintájának összességével.</td>
+            <td><em>Példa:</em> A „bazalt‑halmaz” megegyezik a formáció összes bazalt mintájának összességével.</td>
           </tr>
 
           <tr>
@@ -179,7 +209,7 @@
 
           <tr>
             <td>Notation: an element <span class="sym">d ∈ H</span> (“d is in H”).</td>
-            <td>Jelölés: <span class="sym">d ∈ H</span> („d eleme H-nak”).</td>
+            <td>Jelölés: <span class="sym">d ∈ H</span> („d eleme H‑nak”).</td>
           </tr>
           <tr data-ex="1">
             <td><em>Example:</em> <span class="sym">granite ∈ IgneousRocks</span></td>
@@ -188,7 +218,7 @@
 
           <tr>
             <td>Negation: <span class="sym">d ∉ H</span> (“d is not in H”).</td>
-            <td>Tagadás: <span class="sym">d ∉ H</span> („d nem eleme H-nak”).</td>
+            <td>Tagadás: <span class="sym">d ∉ H</span> („d nem eleme H‑nak”).</td>
           </tr>
           <tr data-ex="1">
             <td><em>Example:</em> <span class="sym">sandstone ∉ IgneousRocks</span></td>
@@ -217,7 +247,7 @@
     </section>
 
     <p class="hint" style="margin-top:.75rem;">
-      Teaching tip: Start with examples hidden (click “Show examples”) to let students state the rule first, then reveal the geology context to anchor understanding.
+      Teaching tip: Start with examples hidden (click “Show examples”) to let students state the rule first, then reveal the geology context tied to a geological formation (e.g., intrusive units like olivine gabbro).
     </p>
   </div>
 </body>
