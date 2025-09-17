@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Set Theory — Slide 2 (EN/HU with Examples)</title>
+<title>Set Theory — Slide 2 (EN/HU with Geology Formation)</title>
 <style>
   :root{
     --bg: #f7f9fb;
@@ -60,6 +60,27 @@
   }
   .logo-chip.logo-dept img{ height:55px; }
   .logo-chip.logo-szte img{ height:42px; }
+
+  /* HERO IMAGE */
+  .hero{
+    position:relative; margin-top:1rem; border-radius:16px; overflow:hidden;
+    box-shadow:var(--shadow); border:1px solid var(--border); background:#000;
+  }
+  .hero img{
+    display:block; width:100%; height:min(48vh, 460px); object-fit:cover;
+  }
+  .hero .overlay{
+    position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.45));
+    pointer-events:none;
+  }
+  .hero .label{
+    position:absolute; left:1rem; bottom:1rem; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.6);
+    background: rgba(2,6,23,.45); backdrop-filter: blur(4px);
+    border:1px solid rgba(255,255,255,.25); border-radius:10px;
+    padding:.5rem .65rem; font-size:.95rem; line-height:1.25;
+  }
+  .hero .label strong{font-weight:700}
+  .hero .label .hu{opacity:.9; display:block; font-size:.9em}
 
   /* CARD + TABLE */
   .card{
@@ -132,13 +153,23 @@
       <h2>ABDULHAQ Hawkar — Set Theory (Slide 2)</h2>
     </header>
 
+    <!-- HERO Geological formation image -->
+    <figure class="hero" aria-labelledby="hero-cap">
+      <img src="https://www.worldatlas.com/r/w1200/upload/7b/7b/d6/shutterstock-366614801.jpg" alt="Geological formation: layered rock outcrops in a desert landscape" />
+      <div class="overlay" aria-hidden="true"></div>
+      <figcaption id="hero-cap" class="label">
+        <strong>Geological formation</strong> — layered rock sequence (illustrative)
+        <span class="hu">Geológiai formáció — rétegzett kőzettest (illusztráció)</span>
+      </figcaption>
+    </figure>
+
     <section class="card" aria-labelledby="slide-title">
       <div class="bar">
         <div>
           <div id="slide-title" class="subtitle">
             Slide 2 — The Concept of a Set / A halmaz fogalma
           </div>
-          <div class="hint">Bilingual bullets with geoscience examples (toggle below)</div>
+          <div class="hint">Bilingual bullets with geoscience examples (toggle below) — examples refer to a geological formation</div>
         </div>
         <div class="tools">
           <button id="exBtn" class="btn" onclick="toggleExamples()">Hide examples</button>
@@ -159,35 +190,35 @@
         </thead>
         <tbody>
           <tr>
-            <td>A <strong>set</strong> = a collection of objects taken as one whole</td>
-            <td>A <strong>halmaz</strong> = dolgok összessége, egy egységként kezelve</td>
+            <td>A <strong>set</strong> = a collection of objects taken as one whole.</td>
+            <td>A <strong>halmaz</strong> = dolgok összessége, egy egységként kezelve.</td>
           </tr>
           <tr data-ex="1">
-            <td><em>Example:</em> “Formation F rock set” = {all rock samples collected from Formation F}.</td>
-            <td><em>Példa:</em> „F formáció kőzet-halmaza” = {az F formációból gyűjtött összes kőzetminta}.</td>
+            <td><em>Example (formation):</em> “Formation F rock set” = {all rock samples collected from <strong>Formation F</strong>}.</td>
+            <td><em>Példa (formáció):</em> „F formáció kőzet‑halmaza” = {az <strong>F formációból</strong> gyűjtött összes kőzetminta}.</td>
           </tr>
 
           <tr>
-            <td>The objects inside are called <strong>elements</strong></td>
-            <td>A halmazban lévő dolgok: <strong>elemek</strong></td>
+            <td>The objects inside are called <strong>elements</strong>.</td>
+            <td>A halmazban lévő dolgok: <strong>elemek</strong>.</td>
           </tr>
           <tr data-ex="1">
-            <td><em>Example:</em> Elements of the set could be basalt, andesite, sandstone samples.</td>
-            <td><em>Példa:</em> A halmaz elemei lehetnek bazalt, andezit, homokkő minták.</td>
+            <td><em>Example:</em> Elements could be basalt, andesite, sandstone samples from the same formation.</td>
+            <td><em>Példa:</em> Az elemek lehetnek bazalt, andezit, homokkő minták ugyanabból a formációból.</td>
           </tr>
 
           <tr>
-            <td>“Set” and “element” are <strong>basic concepts</strong> (not defined further)</td>
-            <td>„Halmaz” és „elem” = <strong>alapfogalmak</strong> (nem vezetjük vissza másra)</td>
+            <td>“Set” and “element” are <strong>basic concepts</strong> (not defined further).</td>
+            <td>„Halmaz” és „elem” = <strong>alapfogalmak</strong> (nem vezetjük vissza másra).</td>
           </tr>
           <tr data-ex="1">
-            <td><em>Example:</em> We don’t define “set” via other notions; we just use it to group samples.</td>
-            <td><em>Példa:</em> A „halmazt” nem más fogalmakkal definiáljuk; egyszerűen a minták csoportosítására használjuk.</td>
+            <td><em>Example:</em> We don’t define “set” via other notions; we use it to group formation samples.</td>
+            <td><em>Példa:</em> A „halmazt” nem más fogalmakkal definiáljuk; a formáció mintáinak csoportosítására használjuk.</td>
           </tr>
 
           <tr>
-            <td>The branch of math that studies sets = <strong>Set Theory</strong></td>
-            <td>A halmazokkal foglalkozó matematikai ág: <strong>Halmazelmélet</strong></td>
+            <td>The branch of math that studies sets = <strong>Set Theory</strong>.</td>
+            <td>A halmazokkal foglalkozó matematikai ág: <strong>Halmazelmélet</strong>.</td>
           </tr>
           <tr data-ex="1">
             <td><em>Example:</em> We model “rock types in a formation” using sets and set operations.</td>
@@ -195,46 +226,46 @@
           </tr>
 
           <tr>
-            <td>• Founded by <strong>Georg Cantor (1845–1918)</strong></td>
-            <td>• Alapítója: <strong>Georg Cantor (1845–1918)</strong></td>
+            <td>• Founded by <strong>Georg Cantor (1845–1918)</strong>.</td>
+            <td>• Alapítója: <strong>Georg Cantor (1845–1918)</strong>.</td>
           </tr>
           <tr data-ex="1">
-            <td><em>Example:</em> Cantor’s ideas let us reason about finite/inf inite collections (e.g., all outcrops).</td>
-            <td><em>Példa:</em> Cantor elméletei segítenek véges/végtelen gyűjteményekről gondolkodni (pl. összes feltárás).</td>
+            <td><em>Example:</em> Cantor’s ideas let us reason about finite and infinite collections (e.g., all outcrops of a formation).</td>
+            <td><em>Példa:</em> Cantor elméletei segítenek véges és végtelen gyűjteményekről gondolkodni (pl. egy formáció összes feltárása).</td>
           </tr>
 
           <tr>
-            <td>In naive set theory, a set can contain <strong>any kind of objects</strong></td>
-            <td>A naiv halmazelmélet szerint a halmaz elemei <strong>bármi lehetnek</strong></td>
+            <td>In naive set theory, a set can contain <strong>any kind of objects</strong>.</td>
+            <td>A naiv halmazelmélet szerint a halmaz elemei <strong>bármi lehetnek</strong>.</td>
           </tr>
           <tr data-ex="1">
-            <td><em>Example:</em> A set may mix samples, mineral names, GPS coordinates, even photos of outcrops.</td>
-            <td><em>Példa:</em> Egy halmaz tartalmazhat mintákat, ásványneveket, GPS-koordinátákat, sőt feltárás-fotókat is.</td>
+            <td><em>Example:</em> A set may mix samples, mineral names, GPS points, even outcrop photos from a formation.</td>
+            <td><em>Példa:</em> Egy halmaz tartalmazhat mintákat, ásványneveket, GPS‑pontokat, sőt feltárás‑fotókat is egy formációból.</td>
           </tr>
 
           <tr>
-            <td>A set is <strong>completely determined</strong> by its elements</td>
-            <td>Egy halmazt az <strong>elemei teljesen meghatároznak</strong></td>
+            <td>A set is <strong>completely determined</strong> by its elements.</td>
+            <td>Egy halmazt az <strong>elemei teljesen meghatároznak</strong>.</td>
           </tr>
           <tr data-ex="1">
-            <td><em>Example:</em> {granite, basalt} = {basalt, granite} — the rock list (elements) defines the set.</td>
+            <td><em>Example:</em> {granite, basalt} = {basalt, granite} — the element list defines the set.</td>
             <td><em>Példa:</em> {gránit, bazalt} = {bazalt, gránit} — az elemek listája meghatározza a halmazt.</td>
           </tr>
 
           <tr>
-            <td>Sets do <strong>not change over time</strong></td>
-            <td>Halmazok <strong>nem változnak időben</strong></td>
+            <td>Sets do <strong>not change over time</strong>.</td>
+            <td>Halmazok <strong>nem változnak időben</strong>.</td>
           </tr>
           <tr data-ex="1">
-            <td><em>Example:</em> A cataloged “Field Day 1 sample set” stays the same; new finds go to a <span class="sym">new</span> set.</td>
-            <td><em>Példa:</em> A „1. terepnap mintahalmaza” rögzített; az új leletek egy <span class="sym">új</span> halmazba kerülnek.</td>
+            <td><em>Example:</em> A cataloged “Field Day 1 sample set (Formation F)” stays the same; new finds go to a <span class="sym">new</span> set.</td>
+            <td><em>Példa:</em> Az „1. terepnap mintahalmaza (F formáció)” rögzített; az új leletek egy <span class="sym">új</span> halmazba kerülnek.</td>
           </tr>
         </tbody>
       </table>
     </section>
 
     <p class="hint" style="margin-top:.75rem;">
-      Tip: Click “Hide examples” to elicit definitions first, then reveal the geology context.
+      Tip: Click “Hide examples” to elicit definitions first, then reveal the geology context tied to a specific geological formation.
     </p>
   </div>
 </body>
