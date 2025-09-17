@@ -59,6 +59,27 @@
   .logo-chip.logo-dept img{ height:55px; }
   .logo-chip.logo-szte img{ height:42px; }
 
+  /* HERO GEOLOGICAL FORMATION IMAGE */
+  .hero{
+    position:relative; margin-top:1rem; border-radius:16px; overflow:hidden;
+    box-shadow:var(--shadow); border:1px solid var(--border); background:#000;
+  }
+  .hero img{
+    display:block; width:100%; height:min(48vh, 460px); object-fit:cover;
+  }
+  .hero .overlay{
+    position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.45));
+    pointer-events:none;
+  }
+  .hero .label{
+    position:absolute; left:1rem; bottom:1rem; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.6);
+    background: rgba(2,6,23,.45); backdrop-filter: blur(4px);
+    border:1px solid rgba(255,255,255,.25); border-radius:10px;
+    padding:.5rem .65rem; font-size:.95rem; line-height:1.25;
+  }
+  .hero .label strong{font-weight:700}
+  .hero .label .hu{opacity:.9; display:block; font-size:.9em}
+
   /* CARD + TABLE */
   .card{
     background:var(--card); border:1px solid var(--border); border-radius:16px;
@@ -131,12 +152,23 @@
       <h2>ABDULHAQ Hawkar — Finite & Infinite Sets (with Geology Context)</h2>
     </header>
 
+    <!-- HERO Geological formation image -->
+    <figure class="hero" aria-labelledby="hero-cap">
+      <img src="https://c.wallhere.com/photos/40/88/landscape_desert_rock-120730.jpg!d"
+           alt="Geological formation: desert rock landscape with layered cliffs (illustrative)" />
+      <div class="overlay" aria-hidden="true"></div>
+      <figcaption id="hero-cap" class="label">
+        <strong>Geological formation</strong> — desert rock escarpment, layered outcrops (illustrative)
+        <span class="hu">Geológiai formáció — sivatagi kőzetfal, rétegzett feltárások (illusztráció)</span>
+      </figcaption>
+    </figure>
+
     <section class="card" aria-labelledby="slide-title">
       <div class="bar">
         <div>
           <div id="slide-title" class="subtitle">
             Slide 4 — Finite and Infinite Sets / Véges és végtelen halmazok
-            <span class="hint">Geoscience anchor: samples, layers, points in space</span>
+            <span class="hint">Geoscience anchor: samples, layers, points in space (within a geological formation)</span>
           </div>
         </div>
         <div class="tools">
@@ -193,7 +225,7 @@
             <td><strong>Definíció (végtelen):</strong> Egy halmaz <strong>végtelen</strong>, ha végtelen sok eleme van (azaz semmilyen természetes számmal nem adható meg az elemszám).</td>
           </tr>
           <tr data-ex="1">
-            <td class="note"><em>Geo example:</em> The set of <span class="sym">points</span> within a sediment layer between depths <span class="sym">z₁</span> and <span class="sym">z₂</span> is infinite (a 3-D region contains infinitely many points).</td>
+            <td class="note"><em>Geo example:</em> The set of <span class="sym">points</span> within a sediment layer between depths <span class="sym">z₁</span> and <span class="sym">z₂</span> is infinite (a 3‑D region contains infinitely many points).</td>
             <td class="note"><em>Geós példa:</em> A <span class="sym">pontok</span> halmaza egy üledékes rétegben <span class="sym">z₁</span> és <span class="sym">z₂</span> mélységek között végtelen (egy 3D tartomány végtelen sok pontot tartalmaz).</td>
           </tr>
 
@@ -222,12 +254,12 @@
           </tr>
           <tr data-ex="1">
             <td class="note"><em>Geo example (empty):</em> In a given dataset, the set of <span class="sym">volcanic bombs</span> recorded in a shale core may be <span class="sym">∅</span> (none observed).</td>
-            <td class="note"><em>Geós példa (üres):</em> Egy adott adathalmazban a <span class="sym">vulkáni bombák</span> halmaza egy agyagpala-magban lehet <span class="sym">∅</span> (nem figyeltek meg ilyet).</td>
+            <td class="note"><em>Geós példa (üres):</em> Egy adott adathalmazban a <span class="sym">vulkáni bombák</span> halmaza egy agyagpala‑magban lehet <span class="sym">∅</span> (nem figyeltek meg ilyet).</td>
           </tr>
 
           <!-- 7: extra extended geology anchors -->
           <tr data-ex="1">
-            <td class="note"><em>Extra (finite):</em> Mineral species identified in one thin-section: <span class="sym">M = {quartz, feldspar, mica}</span> (finite; order doesn’t matter).</td>
+            <td class="note"><em>Extra (finite):</em> Mineral species identified in one thin‑section: <span class="sym">M = {quartz, feldspar, mica}</span> (finite; order doesn’t matter).</td>
             <td class="note"><em>Extra (véges):</em> Egy vékonycsiszolatban azonosított ásványfajok: <span class="sym">M = {kvarc, földpát, csillám}</span> (véges; a sorrend nem számít).</td>
           </tr>
           <tr data-ex="1">
@@ -239,8 +271,8 @@
     </section>
 
     <p class="hint" style="margin-top:.75rem;">
-      Teaching tip: Start with examples hidden (click “Show examples”). Ask students to classify each statement as finite vs. infinite,
-      then reveal the geology anchors to connect abstract ideas to real field/lab contexts.
+      Tip: Start with examples hidden (“Hide examples”). Ask students to classify each as finite vs. infinite, then reveal the geology anchors
+      connected to a specific <em>geological formation</em> (e.g., layers, fault segments, point sets in a rock body).
     </p>
   </div>
 </body>
