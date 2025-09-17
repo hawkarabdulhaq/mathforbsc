@@ -59,6 +59,27 @@
   .logo-chip.logo-dept img{ height:55px; }
   .logo-chip.logo-szte img{ height:42px; }
 
+  /* HERO GEOLOGICAL FORMATION IMAGE */
+  .hero{
+    position:relative; margin-top:1rem; border-radius:16px; overflow:hidden;
+    box-shadow:var(--shadow); border:1px solid var(--border); background:#000;
+  }
+  .hero img{
+    display:block; width:100%; height:min(48vh, 460px); object-fit:cover;
+  }
+  .hero .overlay{
+    position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.45));
+    pointer-events:none;
+  }
+  .hero .label{
+    position:absolute; left:1rem; bottom:1rem; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.6);
+    background: rgba(2,6,23,.45); backdrop-filter: blur(4px);
+    border:1px solid rgba(255,255,255,.25); border-radius:10px;
+    padding:.5rem .65rem; font-size:.95rem; line-height:1.25;
+  }
+  .hero .label strong{font-weight:700}
+  .hero .label .hu{opacity:.9; display:block; font-size:.9em}
+
   /* CARD + TABLE */
   .card{
     background:var(--card); border:1px solid var(--border); border-radius:16px;
@@ -130,6 +151,17 @@
       </div>
       <h2>ABDULHAQ Hawkar — The Empty Set & Sets of Sets</h2>
     </header>
+
+    <!-- HERO image: metamorphic geological formation (gneiss with foliation) -->
+    <figure class="hero" aria-labelledby="hero-cap">
+      <img src="https://cdn.britannica.com/70/190270-050-2327AD15/Gneiss-rock-foliation-schistosity-cleavage-gneiss-tendency.jpg"
+           alt="Metamorphic geological formation: gneiss rock showing pronounced foliation/schistosity" />
+      <div class="overlay" aria-hidden="true"></div>
+      <figcaption id="hero-cap" class="label">
+        <strong>Geological formation</strong> — metamorphic rock unit (gneiss) with foliation / schistosity (illustrative)
+        <span class="hu">Geológiai formáció — átalakult kőzettest (gneisz) jellegzetes palássággal / sávozottsággal (illusztráció)</span>
+      </figcaption>
+    </figure>
 
     <section class="card" aria-labelledby="slide-title">
       <div class="bar">
@@ -242,6 +274,7 @@
 
     <p class="hint" style="margin-top:.75rem;">
       Teaching tip: Start with examples hidden (click “Show examples”), let students decide if a situation is empty or not, then reveal.
+      The hero image anchors the abstract ideas to a metamorphic <em>geological formation</em> (gneiss with foliation).
     </p>
   </div>
 </body>
