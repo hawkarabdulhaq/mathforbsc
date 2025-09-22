@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Functions Made Simple (with Geology) — EN / HU — University of Szeged</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+    --accent:#2563eb; --accent-2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --shade:rgba(15,23,42,.06);
+    --good:#16a34a; --info:#0ea5e9;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
+      --shade:rgba(255,255,255,.06);
+      --good:#22c55e; --info:#38bdf8;
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+    font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  /* HEADER */
+  header{
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:#fff; border-radius:16px; padding:1rem 1.25rem; box-shadow:var(--shadow);
+  }
+  .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .badge{font-size:.8rem; letter-spacing:.04em; text-transform:uppercase; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:.25rem .5rem; border-radius:999px}
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow)}
+  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain}
+  .logo-chip.logo-dept img{height:55px}
+  .logo-chip.logo-szte img{height:42px}
+
+  /* HERO (soft gradient banner) */
+  .hero{
+    margin-top:1rem; border-radius:16px; overflow:hidden; box-shadow:var(--shadow);
+    border:1px solid var(--border);
+    background:
+      radial-gradient(120% 140% at 0% 100%, rgba(56,189,248,.20), transparent 55%),
+      radial-gradient(120% 140% at 100% 0%, rgba(37,99,235,.20), transparent 55%),
+      linear-gradient(135deg, #0ea5e9 0%, #2563eb 48%, #1e293b 100%);
+    color:#fff; position:relative;
+  }
+  .hero-inner{padding:1.6rem 1.25rem}
+  .pill{display:inline-flex; gap:.5rem; align-items:center; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.32); border-radius:999px; padding:.35rem .6rem; font-weight:600}
+  .hero h3{margin:.45rem 0 0; font-size:1.15rem; font-weight:600; opacity:.95}
+  .hero .blurb{margin:.3rem 0 0; opacity:.95}
+
+  /* CARDS & TABLE */
+  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; margin-top:1rem; box-shadow:var(--shadow); overflow:hidden}
+  .bar{padding:.9rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .subtitle{font-weight:600}
+  .hint{color:var(--muted); font-size:.92rem}
+  .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600}
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+
+  table.twocol{width:100%; border-collapse:separate; border-spacing:0}
+  thead th{background:linear-gradient(180deg, rgba(37,99,235,.08), rgba(56,189,248,.08)); padding:.85rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border)}
+  tbody td{padding:.8rem 1rem; vertical-align:top; border-bottom:1px solid var(--border)}
+  tbody tr:nth-child(odd) td{background:var(--shade)}
+  .lang-label{display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em; padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,.15); color:#0369a1; margin-left:.5rem}
+  .sym, code, kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+
+  /* VISUAL: two simple mapping diagrams */
+  .visuals{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1rem; padding:1rem}
+  svg.map{max-width:520px; height:auto}
+  .boxL{fill:#dbeafe; stroke:#60a5fa; stroke-width:1.2}
+  .boxR{fill:#dcfce7; stroke:#34d399; stroke-width:1.2}
+  .lbl{font-size:14.5px; font-weight:700; fill:var(--ink)}
+  .ttl{font-size:13px; fill:var(--muted)}
+  .wire{stroke:#334155; stroke-width:2}
+  .mini{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; padding:1rem}
+  .call{border-left:4px solid var(--good); background:rgba(22,163,74,.06); padding:.7rem .9rem; border-radius:10px}
+  .call2{border-left:4px solid var(--info); background:rgba(14,165,233,.08); padding:.7rem .9rem; border-radius:10px}
+  .check{color:var(--good); font-weight:800}
+  .dash{color:var(--muted)}
+  .em{font-weight:700}
+  .small{font-size:.95rem; color:var(--muted)}
+  @media (max-width:720px){
+    body{padding:1rem}
+    thead th, tbody td{font-size:.97rem}
+    .logo-chip img{height:38px}
+    .logo-chip.logo-dept img{height:48px}
+  }
+</style>
+<script>
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>Functions Made Simple — with Geology Examples (English & Hungarian)</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>Department of Atmospheric and Geospatial Data Science</h2>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Banner">
+      <div class="hero-inner">
+        <span class="pill">f : X → Y • One input → one output</span>
+        <h3>Explain it to a 15‑year‑old — with geology so it feels real</h3>
+        <p class="blurb">Two key ideas: outputs can repeat, and domain & codomain can even be the same kind of thing.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 1–4 (BILINGUAL) -->
+    <section class="card" aria-labelledby="tbl1">
+      <div class="bar">
+        <div>
+          <span id="tbl1" class="subtitle">Rules & Real‑world Geology Examples — EN / HU</span>
+          <div class="hint">Side‑by‑side for students. Print‑friendly.</div>
+        </div>
+        <div><button class="btn" onclick="printPage()">Print</button></div>
+      </div>
+      <table class="twocol" role="table" aria-describedby="tbl1">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead>
+          <tr>
+            <th>English <span class="lang-label">EN</span></th>
+            <th>Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 1. Rule -->
+          <tr>
+            <td><strong>1) Rule about functions (reminder)</strong><br/>A <em>function</em> just means: <span class="em">Every input gets exactly one output.</span> That’s the only rule!</td>
+            <td><strong>1) Emlékeztető a függvényekről</strong><br/>A <em>függvény</em> annyit jelent: <span class="em">Minden bemenethez pontosan egy kimenet tartozik.</span> Ennyi a szabály!</td>
+          </tr>
+
+          <!-- 2. Outputs can repeat -->
+          <tr>
+            <td><strong>2) Outputs don’t have to be different</strong><br/>Think of <em>mountains → highest rock type</em>.<br/><span class="sym">X</span>: mountains in Hungary (Mátra, Bükk, Börzsöny).<br/><span class="sym">Y</span>: main rock types (andesite, limestone, …).<br/><br/>
+              Example function:<br/>Mátra → Andesite<br/>Bükk → Limestone<br/>Börzsöny → Andesite<br/><br/>
+              <span class="check">Notice:</span> Mátra and Börzsöny both map to “Andesite”. That’s <strong>allowed</strong>.</td>
+            <td><strong>2) A kimenetek ismétlődhetnek</strong><br/>Gondoljunk a <em>hegység → uralkodó kőzettípus</em> párosításra!<br/><span class="sym">X</span>: magyarországi hegységek (Mátra, Bükk, Börzsöny).<br/><span class="sym">Y</span>: fő kőzettípusok (andezit, mészkő, …).<br/><br/>
+              Példa függvény:<br/>Mátra → Andezit<br/>Bükk → Mészkő<br/>Börzsöny → Andezit<br/><br/>
+              <span class="check">Megjegyzés:</span> Mátra és Börzsöny is „Andezit” → ez <strong>teljesen rendben van</strong>.</td>
+          </tr>
+
+          <!-- 3. Domain & codomain can be same kind -->
+          <tr>
+            <td><strong>3) Domain and codomain don’t have to be different</strong><br/>Try <em>minerals → minerals</em> (main alteration product).<br/><br/>Function <span class="sym">f</span>:<br/>Feldspar → Clay (clay mineral)<br/>Biotite → Chlorite<br/>Quartz → Quartz (sometimes stays itself)<br/><br/>
+              Here both domain and codomain are in the <em>set of minerals</em> — also fine.</td>
+            <td><strong>3) A tartomány és az értékkészlet lehet azonos típus</strong><br/>Példa: <em>ásvány → ásvány</em> (fő átalakulási termék).<br/><br/>Függvény <span class="sym">f</span>:<br/>Földpát → Agyagásvány<br/>Biotit → Klorit<br/>Kvarc → Kvarc (néha önmaga marad)<br/><br/>
+              Itt a tartomány és az értékkészlet is az <em>ásványok halmazából</em> való — ez is rendben.</td>
+          </tr>
+
+          <!-- 4. Big idea -->
+          <tr>
+            <td><strong>4) The Big Idea</strong><br/>A function is flexible.<br/>It only demands: <span class="em">one clear answer for each input</span>.<br/>It does <span class="em">not</span> demand unique answers or different worlds for input/output.<br/><br/>
+              <span class="em">In short:</span><br/>• Different mountains can share the same dominant rock — still a valid function.<br/>• A function can map minerals to minerals — domain & codomain may overlap.</td>
+            <td><strong>4) A lényeg</strong><br/>A függvény rugalmas fogalom.<br/>Csak azt követeli meg, hogy <span class="em">minden bemenethez egyértelmű kimenet tartozzon</span>.<br/>Nem követeli meg, hogy a kimenetek különbözőek legyenek, vagy más „világból” jöjjenek.<br/><br/>
+              <span class="em">Röviden:</span><br/>• Különböző hegységek kaphatnak azonos kőzettípust — a függvény ettől még helyes.<br/>• Függvény képezhet ásványt ásványra — a tartomány és értékkészlet átfedhet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- VISUALS: TWO SMALL MAPPING DIAGRAMS -->
+    <section class="card" aria-labelledby="vis">
+      <div class="bar">
+        <div>
+          <span id="vis" class="subtitle">Two mini visuals — outputs can repeat; domain = codomain</span>
+          <div class="hint">Simple diagrams to cement the ideas.</div>
+        </div>
+      </div>
+
+      <div class="visuals">
+        <!-- Mountains -> Rocks -->
+        <figure aria-labelledby="cap1">
+          <svg class="map" viewBox="0 0 520 220" role="img">
+            <defs>
+              <marker id="arrow1" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L12,4 L0,8 Z" fill="#334155"></path>
+              </marker>
+            </defs>
+            <text class="ttl" x="130" y="28" text-anchor="middle">X — Mountains</text>
+            <text class="ttl" x="390" y="28" text-anchor="middle">Y — Dominant rock type</text>
+
+            <rect class="boxL" x="40" y="50" rx="10" ry="10" width="180" height="36"></rect>
+            <rect class="boxL" x="40" y="98" rx="10" ry="10" width="180" height="36"></rect>
+            <rect class="boxL" x="40" y="146" rx="10" ry="10" width="180" height="36"></rect>
+            <text class="lbl" x="130" y="73" text-anchor="middle">Mátra</text>
+            <text class="lbl" x="130" y="121" text-anchor="middle">Bükk</text>
+            <text class="lbl" x="130" y="169" text-anchor="middle">Börzsöny</text>
+
+            <rect class="boxR" x="300" y="60" rx="10" ry="10" width="180" height="36"></rect>
+            <rect class="boxR" x="300" y="120" rx="10" ry="10" width="180" height="36"></rect>
+            <text class="lbl" x="390" y="83" text-anchor="middle">Andesite</text>
+            <text class="lbl" x="390" y="143" text-anchor="middle">Limestone</text>
+
+            <line class="wire" x1="220" y1="68" x2="300" y2="78" marker-end="url(#arrow1)"></line>
+            <line class="wire" x1="220" y1="116" x2="300" y2="136" marker-end="url(#arrow1)"></line>
+            <line class="wire" x1="220" y1="164" x2="300" y2="78" marker-end="url(#arrow1)"></line>
+          </svg>
+          <figcaption id="cap1" class="small" style="margin-top:.25rem">Two inputs (Mátra, Börzsöny) share the output “Andesite” → still a valid function.</figcaption>
+        </figure>
+
+        <!-- Minerals -> Minerals -->
+        <figure aria-labelledby="cap2">
+          <svg class="map" viewBox="0 0 520 220" role="img">
+            <defs>
+              <marker id="arrow2" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L12,4 L0,8 Z" fill="#334155"></path>
+              </marker>
+            </defs>
+            <text class="ttl" x="130" y="28" text-anchor="middle">X — Minerals (inputs)</text>
+            <text class="ttl" x="390" y="28" text-anchor="middle">Y — Minerals (outputs)</text>
+
+            <rect class="boxL" x="40" y="50" rx="10" ry="10" width="180" height="36"></rect>
+            <rect class="boxL" x="40" y="98" rx="10" ry="10" width="180" height="36"></rect>
+            <rect class="boxL" x="40" y="146" rx="10" ry="10" width="180" height="36"></rect>
+            <text class="lbl" x="130" y="73" text-anchor="middle">Feldspar</text>
+            <text class="lbl" x="130" y="121" text-anchor="middle">Biotite</text>
+            <text class="lbl" x="130" y="169" text-anchor="middle">Quartz</text>
+
+            <rect class="boxR" x="300" y="50" rx="10" ry="10" width="180" height="36"></rect>
+            <rect class="boxR" x="300" y="98" rx="10" ry="10" width="180" height="36"></rect>
+            <rect class="boxR" x="300" y="146" rx="10" ry="10" width="180" height="36"></rect>
+            <text class="lbl" x="390" y="73" text-anchor="middle">Clay</text>
+            <text class="lbl" x="390" y="121" text-anchor="middle">Chlorite</text>
+            <text class="lbl" x="390" y="169" text-anchor="middle">Quartz</text>
+
+            <line class="wire" x1="220" y1="68" x2="300" y2="68" marker-end="url(#arrow2)"></line>
+            <line class="wire" x1="220" y1="116" x2="300" y2="116" marker-end="url(#arrow2)"></line>
+            <line class="wire" x1="220" y1="164" x2="300" y2="164" marker-end="url(#arrow2)"></line>
+          </svg>
+          <figcaption id="cap2" class="small" style="margin-top:.25rem">Domain and codomain are both minerals → also valid.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- UNPACK THE SLIDE (TERMS, NOTATION) -->
+    <section class="card" aria-labelledby="tbl2">
+      <div class="bar">
+        <div>
+          <span id="tbl2" class="subtitle">Unpacking the slide — terms, mapping language, notation (EN / HU)</span>
+          <div class="hint">Key words: arguments, values, image; write it as y = f(x).</div>
+        </div>
+      </div>
+
+      <table class="twocol" role="table" aria-describedby="tbl2">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead>
+          <tr>
+            <th>English <span class="lang-label">EN</span></th>
+            <th>Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1) New words:</strong> Elements of the domain (<span class="sym">X</span>) are <em>arguments</em>. Elements of the codomain (<span class="sym">Y</span>) are <em>values</em> (outputs).</td>
+            <td><strong>1) Új szavak:</strong> Az értelmezési tartomány (<span class="sym">X</span>) elemei az <em>argumentumok</em>. Az értékkészlet (<span class="sym">Y</span>) elemei a <em>függvényértékek</em> (kimenetek).</td>
+          </tr>
+          <tr>
+            <td><strong>2) “Mapping” language:</strong> The function <em>f maps X to Y</em>. We say <em>Y is the image of X under f</em>.</td>
+            <td><strong>2) „Képezés”:</strong> A <em>f</em> függvény <em>X‑ből Y‑ba képez</em>. <em>Y X képe f alatt</em>.</td>
+          </tr>
+          <tr>
+            <td><strong>3) Notation:</strong> If <span class="sym">x ∈ X</span>, then the function assigns one value <span class="sym">f(x) ∈ Y</span>. We write <strong>y = f(x)</strong>.</td>
+            <td><strong>3) Jelölés:</strong> Ha <span class="sym">x ∈ X</span>, akkor a függvény egy <span class="sym">f(x) ∈ Y</span> értéket rendel hozzá. Írjuk: <strong>y = f(x)</strong>.</td>
+          </tr>
+
+          <!-- Geology example (same as earlier mapping) -->
+          <tr>
+            <td>
+              <strong>Geology example</strong><br/>
+              <span class="sym">X = {Granite, Basalt, Limestone}</span><br/>
+              <span class="sym">Y = {Quartz, Pyroxene, Calcite}</span><br/>
+              Rule: <span class="sym">f</span> assigns each rock its main mineral.<br/>
+              <span class="sym">f(Granite) = Quartz</span>, <span class="sym">f(Basalt) = Pyroxene</span>, <span class="sym">f(Limestone) = Calcite</span>.<br/>
+              “Granite” is an <em>argument</em>; “Quartz” is a <em>value</em>. We can write <strong>Quartz = f(Granite)</strong>.
+            </td>
+            <td>
+              <strong>Geológiai példa</strong><br/>
+              <span class="sym">X = {Gránit, Bazalt, Mészkő}</span><br/>
+              <span class="sym">Y = {Kvarc, Piroxén, Kalcit}</span><br/>
+              Szabály: <span class="sym">f</span> minden kőzethez a fő ásványt rendeli.<br/>
+              <span class="sym">f(Gránit) = Kvarc</span>, <span class="sym">f(Bazalt) = Piroxén</span>, <span class="sym">f(Mészkő) = Kalcit</span>.<br/>
+              A „Gránit” <em>argumentum</em>; a „Kvarc” <em>érték</em>. Írhatjuk: <strong>Kvarc = f(Gránit)</strong>.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- EXAMPLES & WHY IT MATTERS -->
+    <section class="card" aria-labelledby="examples">
+      <div class="bar">
+        <div>
+          <span id="examples" class="subtitle">Examples of functions in geology • Why it matters (EN / HU)</span>
+          <div class="hint">Many outputs are measurements — numbers let us analyze processes.</div>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="call2">
+          <strong>EN — Examples</strong><br/>
+          • <em>Metamorphic rock → mineral composition</em> (output: list of minerals)<br/>
+          • <em>A site → number of fossils</em> (output: integer count)<br/>
+          • <em>Depth → porosity of sandstone</em> (output: %)<br/>
+          • <em>(Pressure, Temperature) → mineral phase</em> (output: phase)
+        </div>
+        <div class="call2">
+          <strong>HU — Példák</strong><br/>
+          • <em>Metamorf kőzet → ásványos összetétel</em> (kimenet: ásványlista)<br/>
+          • <em>Helyszín → kövületek száma</em> (kimenet: egész szám)<br/>
+          • <em>Mélység → homokkő porozitása</em> (kimenet: %)<br/>
+          • <em>(Nyomás, Hőmérséklet) → ásványfázis</em> (kimenet: fázis)
+        </div>
+        <div class="call">
+          <strong>EN — Why it matters</strong><br/>
+          Many important functions in Earth science have <em>numeric</em> outputs (measurements). Numbers let us describe and analyze natural processes mathematically.
+        </div>
+        <div class="call">
+          <strong>HU — Miért fontos</strong><br/>
+          A földtudomány sok fontos függvénye <em>mérési</em> eredményt ad (számot). A számok segítségével írhatjuk le és elemezhetjük a természetes folyamatokat.
+        </div>
+      </div>
+      <p class="dash" style="padding:0 1rem 1rem">Student takeaway / Lényeg: When you see <span class="sym">y = f(x)</span>, think “the function takes an input (x) and gives one output (y).” In geology: “the rock type (x) determines the measured or named property (y).”</p>
+    </section>
+  </div>
+</body>
+</html>
