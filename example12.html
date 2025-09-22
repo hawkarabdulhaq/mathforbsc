@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Direct Product (A × B) — EN / HU — University of Szeged</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+    --accent:#2563eb; --accent-2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --shade:rgba(15,23,42,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
+      --shade:rgba(255,255,255,.06);
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+    font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  /* HEADER */
+  header{
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:#fff; border-radius:16px; padding:1rem 1.25rem; box-shadow:var(--shadow);
+  }
+  .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .badge{font-size:.8rem; letter-spacing:.04em; text-transform:uppercase; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:.25rem .5rem; border-radius:999px}
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow)}
+  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain}
+  .logo-chip.logo-dept img{height:55px}
+  .logo-chip.logo-szte img{height:42px}
+
+  /* HERO (soft gradient banner) */
+  .hero{
+    margin-top:1rem; border-radius:16px; overflow:hidden; box-shadow:var(--shadow);
+    border:1px solid var(--border);
+    background:
+      radial-gradient(120% 140% at 0% 100%, rgba(56,189,248,.20), transparent 55%),
+      radial-gradient(120% 140% at 100% 0%, rgba(37,99,235,.20), transparent 55%),
+      linear-gradient(135deg, #0ea5e9 0%, #2563eb 48%, #1e293b 100%);
+    color:#fff; position:relative;
+  }
+  .hero-inner{padding:1.6rem 1.25rem}
+  .pill{display:inline-flex; gap:.5rem; align-items:center; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.32); border-radius:999px; padding:.35rem .6rem; font-weight:600}
+  .hero h3{margin:.45rem 0 0; font-size:1.15rem; font-weight:600; opacity:.95}
+  .hero .blurb{margin:.3rem 0 0; opacity:.95}
+
+  /* CARDS & TABLE */
+  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; margin-top:1rem; box-shadow:var(--shadow); overflow:hidden}
+  .bar{padding:.9rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .subtitle{font-weight:600}
+  .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600}
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+  .hint{color:var(--muted); font-size:.92rem}
+
+  table.twocol{width:100%; border-collapse:separate; border-spacing:0}
+  thead th{background:linear-gradient(180deg, rgba(37,99,235,.08), rgba(56,189,248,.08)); padding:.85rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border)}
+  tbody td{padding:.8rem 1rem; vertical-align:top; border-bottom:1px solid var(--border)}
+  tbody tr:nth-child(odd) td{background:var(--shade)}
+  .lang-label{display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em; padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,.15); color:#0369a1; margin-left:.5rem}
+  .sym, code, kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+
+  /* VISUALS */
+  .visual{display:flex; justify-content:center; padding:1rem}
+  svg.grid{max-width:520px; height:auto}
+  .axis{font-size:14px; font-weight:700; fill:var(--ink)}
+  .cell{fill:none; stroke:#94a3b8; stroke-width:1.2}
+  .pair{font-size:14px; fill:var(--ink)}
+  .setlbl{font-size:13px; fill:var(--muted)}
+  .count{font-size:13px; fill:var(--muted); font-weight:700}
+  .badge-num{display:inline-block; background:#e2e8f0; color:#0f172a; border-radius:8px; padding:.05rem .4rem; margin:0 .15rem}
+
+  @media (max-width:720px){
+    body{padding:1rem}
+    .logo-chip img{height:38px}
+    .logo-chip.logo-dept img{height:48px}
+    thead th, tbody td{font-size:.97rem}
+  }
+</style>
+<script>
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>Direct Product of Sets (A × B) — English & Hungarian</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>Department of Atmospheric and Geospatial Data Science</h2>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Banner">
+      <div class="hero-inner">
+        <span class="pill">A × B • Cartesian Product</span>
+        <h3>“Every element of A paired with every element of B.”</h3>
+        <p class="blurb">Definition, notation, counted example, and a compact grid visual for A = {a, e, f}, B = {b, c}.</p>
+      </div>
+    </section>
+
+    <!-- BILINGUAL TABLE -->
+    <section class="card" aria-labelledby="tbl">
+      <div class="bar">
+        <div>
+          <span id="tbl" class="subtitle">Direct Product — EN / HU</span>
+          <div class="hint">Bilingual definitions and worked example.</div>
+        </div>
+        <div><button class="btn" onclick="printPage()">Print</button></div>
+      </div>
+
+      <table class="twocol" role="table" aria-describedby="tbl">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead>
+          <tr>
+            <th>English <span class="lang-label">EN</span></th>
+            <th>Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Definition:</strong> The <strong>direct product</strong> of sets A and B is the set of all <em>ordered pairs</em> where the first element comes from A and the second from B.</td>
+            <td><strong>Definíció:</strong> Két halmaz, A és B <strong>direkt szorzatán</strong> (Cartesian‑szorzatán) mindazon <em>rendezett párok</em> halmazát értjük, amelyek első tagja A‑ból, a második B‑ből való.</td>
+          </tr>
+          <tr>
+            <td><strong>Notation:</strong> <span class="sym">A × B</span></td>
+            <td><strong>Jelölés:</strong> <span class="sym">A × B</span></td>
+          </tr>
+          <tr>
+            <td><strong>Example:</strong> If <span class="sym">A = {a, e, f}</span>, <span class="sym">B = {b, c}</span></td>
+            <td><strong>Példa:</strong> Ha <span class="sym">A = {a, e, f}</span>, <span class="sym">B = {b, c}</span></td>
+          </tr>
+          <tr>
+            <td>Then <span class="sym">A × B = {(a,b), (a,c), (e,b), (e,c), (f,b), (f,c)}</span></td>
+            <td>Ekkor <span class="sym">A × B = {(a,b), (a,c), (e,b), (e,c), (f,b), (f,c)}</span></td>
+          </tr>
+          <tr>
+            <td>Also: <span class="sym">B × B = {(b,b), (b,c), (c,b), (c,c)}</span></td>
+            <td>Továbbá: <span class="sym">B × B = {(b,b), (b,c), (c,b), (c,c)}</span></td>
+          </tr>
+          <tr>
+            <td><strong>Observation:</strong> If A has <span class="badge-num">m</span> elements and B has <span class="badge-num">n</span> elements, then <span class="sym">|A × B| = m × n</span>.</td>
+            <td><strong>Megjegyzés:</strong> Ha A‑nak <span class="badge-num">m</span> eleme van és B‑nek <span class="badge-num">n</span> eleme, akkor <span class="sym">|A × B| = m × n</span>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- EXPLANATION + WORKED EXAMPLE -->
+    <section class="card" aria-labelledby="exp">
+      <div class="bar">
+        <div><span id="exp" class="subtitle">How the counting works / Hogyan számoljuk</span></div>
+      </div>
+      <div class="visual" aria-label="Grid visual for A × B">
+        <!-- Grid visual: English labels only (clean) -->
+        <svg class="grid" viewBox="0 0 540 260" role="img" aria-labelledby="cap">
+          <title id="cap">Grid of all ordered pairs for A = {a,e,f} and B = {b,c}</title>
+          <!-- Axes labels -->
+          <text class="axis" x="60" y="30">A = {a, e, f}</text>
+          <text class="axis" x="340" y="30">B = {b, c}</text>
+
+          <!-- Row labels (A) -->
+          <text class="setlbl" x="30" y="82">a</text>
+          <text class="setlbl" x="30" y="132">e</text>
+          <text class="setlbl" x="30" y="182">f</text>
+
+          <!-- Column labels (B) -->
+          <text class="setlbl" x="180" y="54">b</text>
+          <text class="setlbl" x="320" y="54">c</text>
+
+          <!-- Cells -->
+          <!-- Row a -->
+          <rect class="cell" x="120" y="60" width="120" height="50" rx="8"/>
+          <rect class="cell" x="260" y="60" width="120" height="50" rx="8"/>
+          <text class="pair" x="180" y="90" text-anchor="middle">(a,b)</text>
+          <text class="pair" x="320" y="90" text-anchor="middle">(a,c)</text>
+
+          <!-- Row e -->
+          <rect class="cell" x="120" y="110" width="120" height="50" rx="8"/>
+          <rect class="cell" x="260" y="110" width="120" height="50" rx="8"/>
+          <text class="pair" x="180" y="140" text-anchor="middle">(e,b)</text>
+          <text class="pair" x="320" y="140" text-anchor="middle">(e,c)</text>
+
+          <!-- Row f -->
+          <rect class="cell" x="120" y="160" width="120" height="50" rx="8"/>
+          <rect class="cell" x="260" y="160" width="120" height="50" rx="8"/>
+          <text class="pair" x="180" y="190" text-anchor="middle">(f,b)</text>
+          <text class="pair" x="320" y="190" text-anchor="middle">(f,c)</text>
+
+          <!-- Count strip -->
+          <text class="count" x="120" y="225">Rows (|A| = 3)</text>
+          <text class="count" x="330" y="225">Columns (|B| = 2)</text>
+          <text class="axis" x="470" y="225">Total = 3 × 2 = 6</text>
+        </svg>
+      </div>
+
+      <div class="bar" style="border-top:1px solid var(--border)">
+        <div class="hint">Short narrative (EN / HU)</div>
+      </div>
+      <div style="padding:1rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem">
+        <div>
+          <h3>English</h3>
+          <ol>
+            <li>When you take the direct product <span class="sym">A × B</span>, you match every element of <em>A</em> with every element of <em>B</em>.</li>
+            <li>Suppose <span class="sym">|A| = m</span> and <span class="sym">|B| = n</span>.</li>
+            <li>Each element of <em>A</em> pairs with all <em>n</em> elements of <em>B</em> → one row produces <em>n</em> pairs.</li>
+            <li>There are <em>m</em> rows (elements of <em>A</em>) → total pairs = <strong>m × n</strong>.</li>
+          </ol>
+          <p><strong>✅ Worked example:</strong> A = {a,e,f} (m = 3), B = {b,c} (n = 2) → |A × B| = 3 × 2 = 6.<br/>
+          Set of pairs: <span class="sym">{ (a,b), (a,c), (e,b), (e,c), (f,b), (f,c) }</span>.</p>
+        </div>
+        <div>
+          <h3>Magyar</h3>
+          <ol>
+            <li>A direkt szorzat <span class="sym">A × B</span> azt jelenti, hogy <em>A</em> minden elemét párosítjuk <em>B</em> minden elemével.</li>
+            <li>Tegyük fel, hogy <span class="sym">|A| = m</span> és <span class="sym">|B| = n</span>.</li>
+            <li><em>A</em> minden egyes eleme <em>n</em> elemmel párosítható <em>B</em>-ből → egy sor <em>n</em> párt ad.</li>
+            <li><em>m</em> sor van (az <em>A</em> elemei) → összes párok száma = <strong>m × n</strong>.</li>
+          </ol>
+          <p><strong>✅ Dolgozott példa:</strong> A = {a,e,f} (m = 3), B = {b,c} (n = 2) → |A × B| = 3 × 2 = 6.<br/>
+          Párok halmaza: <span class="sym">{ (a,b), (a,c), (e,b), (e,c), (f,b), (f,c) }</span>.</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="hint" style="margin-top:.75rem">
+      Tip: Emphasize that order matters: in general <span class="sym">(x,y) ≠ (y,x)</span>, and <span class="sym">A × B</span> and <span class="sym">B × A</span> list different pairs.
+    </p>
+  </div>
+</body>
+</html>
