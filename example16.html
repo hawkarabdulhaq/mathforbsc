@@ -85,6 +85,16 @@
   .pairline{stroke:#334155; stroke-width:2}
   .note{color:var(--muted); font-size:.95rem}
 
+  /* PHOTO CARD (English-only caption) */
+  .photo{
+    position:relative; overflow:hidden; border-radius:16px; border:1px solid var(--border); box-shadow:var(--shadow); background:#000;
+  }
+  .photo img{display:block; width:100%; height:min(46vh,420px); object-fit:cover}
+  .photo .cap{
+    position:absolute; left:1rem; bottom:1rem; color:#fff; background:rgba(2,6,23,.45);
+    border:1px solid rgba(255,255,255,.28); border-radius:10px; padding:.45rem .65rem; font-size:.95rem;
+  }
+
   @media (max-width:720px){
     body{padding:1rem}
     h1{font-size:1.2rem}
@@ -336,6 +346,51 @@
       </div>
     </section>
 
+    <!-- NEW SECTION 3B: Petrography — Point Counting (BILINGUAL + ENGLISH-ONLY PHOTO) -->
+    <section class="card" aria-labelledby="sec-point">
+      <div class="bar">
+        <div>
+          <span id="sec-point" class="subtitle">Petrography — Point Counting / Petrográfia — Pontszámlálás</span>
+          <div class="hint">Bilingual text; the photo caption below is English‑only.</div>
+        </div>
+      </div>
+
+      <!-- BILINGUAL TABLE -->
+      <table class="twocol" role="table" aria-describedby="sec-point">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead>
+          <tr>
+            <th>English <span class="lang-label">EN</span></th>
+            <th>Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Imagine a granite thin section under a microscope. Granite commonly contains quartz, feldspar, biotite, muscovite. Question: How much of each mineral?</td>
+            <td>Képzeljünk el egy gránit vékonycsiszolatot mikroszkóp alatt. A gránit gyakran tartalmaz kvarcot, földpátot, biotitot, muszkovitot. Kérdés: Mennyi van az egyes ásványokból?</td>
+          </tr>
+          <tr>
+            <td><strong>Method — Point Counting:</strong> In petrography we view a grid of points (e.g., 1000). For each point, we record which mineral lies beneath.</td>
+            <td><strong>Módszer — Pontszámlálás:</strong> Petrográfiában pont‑rácson vizsgáljuk a mintát (pl. 1000 pont). Minden pontnál feljegyezzük, melyik ásvány található alatta.</td>
+          </tr>
+          <tr>
+            <td>Example sequence of identifications: <span class="sym">Quartz, Quartz, Feldspar, Biotite, …</span> This is a sequence <span class="sym">a : ℕ → {Quartz, Feldspar, Biotite, Muscovite}</span>.</td>
+            <td>Azonosítási sorozat például: <span class="sym">Kvarc, Kvarc, Földpát, Biotit, …</span> Ez egy sorozat <span class="sym">a : ℕ → {Kvarc, Földpát, Biotit, Muszkovit}</span>.</td>
+          </tr>
+          <tr>
+            <td><strong>Why math matters:</strong> By counting many points we estimate mineral percentages. As the number of counted points grows, the estimated proportions approach the “true” proportions in the rock.</td>
+            <td><strong>Miért fontos a matematika:</strong> Sok pont számlálásával becsüljük az ásvány‑százalékokat. Ahogy a pontok száma nő, a becsült arányok közelítenek a kőzet „valódi” arányaihoz.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ENGLISH-ONLY PHOTO -->
+      <figure class="photo" aria-labelledby="thin-cap" style="margin:1rem">
+        <img src="https://i.imgur.com/QpdP1JL.png" alt="Granite thin section under the microscope showing a grid of points for counting" />
+        <figcaption id="thin-cap" class="cap">Granite thin section — point counting turns mineral IDs into a sequence (list) you can analyze.</figcaption>
+      </figure>
+    </section>
+
     <!-- SECTION 4: Takeaway (BILINGUAL) -->
     <section class="card" aria-labelledby="sec-take">
       <div class="bar">
@@ -355,12 +410,12 @@
             <td><strong>Megszámlálható végtelen</strong> azt jelenti, hogy az elemek sorszámozhatók, egyenként felsorolhatók.</td>
           </tr>
           <tr>
-            <td><strong>Sequences</strong> are just formal lists: a function <span class="sym">ℕ → X</span>.</td>
+            <td><strong>Sequences</strong> are formal lists: a function <span class="sym">ℕ → X</span>.</td>
             <td>A <strong>sorozat</strong> formális lista: egy függvény <span class="sym">ℕ → X</span>.</td>
           </tr>
           <tr>
-            <td><strong>Geology lens:</strong> Numbered samples, fossils, layers, or measurements naturally form countable sets and sequences.</td>
-            <td><strong>Geológiai nézőpont:</strong> A sorszámozott minták, kövületek, rétegek vagy mérések maguktól megszámlálható halmazokat és sorozatokat adnak.</td>
+            <td><strong>Geology lens:</strong> Numbered samples, fossils, layers, or point‑count measurements naturally form countable sets and sequences.</td>
+            <td><strong>Geológiai nézőpont:</strong> A sorszámozott minták, kövületek, rétegek vagy pontszámlálási adatok természetesen megszámlálható halmazokat és sorozatokat adnak.</td>
           </tr>
         </tbody>
       </table>
