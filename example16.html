@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Countable Sets & Sequences (with Geology) — University of Szeged</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+    --accent:#2563eb; --accent-2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --shade:rgba(15,23,42,.06); --good:#16a34a; --info:#0ea5e9; --warn:#f59e0b;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
+      --shade:rgba(255,255,255,.06); --good:#22c55e; --info:#38bdf8; --warn:#fbbf24;
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+    font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  /* HEADER */
+  header{
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#fff; border-radius:16px; padding:1rem 1.25rem; box-shadow:var(--shadow);
+  }
+  .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .badge{font-size:.8rem; letter-spacing:.04em; text-transform:uppercase; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:.25rem .5rem; border-radius:999px}
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow)}
+  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain}
+  .logo-chip.logo-dept img{height:55px}
+  .logo-chip.logo-szte img{height:42px}
+
+  /* HERO with image */
+  .hero{
+    position:relative; margin-top:1rem; border-radius:16px; overflow:hidden;
+    box-shadow:var(--shadow); border:1px solid var(--border); background:#000;
+  }
+  .hero img{display:block; width:100%; height:min(48vh,460px); object-fit:cover}
+  .hero .overlay{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.5)); pointer-events:none}
+  .hero .label{
+    position:absolute; left:1rem; bottom:1rem; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.6);
+    background:rgba(2,6,23,.45); backdrop-filter:blur(4px);
+    border:1px solid rgba(255,255,255,.28); border-radius:10px;
+    padding:.5rem .65rem; font-size:.95rem; line-height:1.25;
+  }
+
+  /* CARDS */
+  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; margin-top:1rem; box-shadow:var(--shadow); overflow:hidden}
+  .bar{padding:.9rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .subtitle{font-weight:600}
+  .hint{color:var(--muted); font-size:.92rem}
+  .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600}
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+  .section{padding:1rem}
+  .call{border-left:4px solid var(--good); background:rgba(22,163,74,.08); padding:.7rem .9rem; border-radius:10px}
+  .call-warn{border-left:4px solid var(--warn); background:rgba(245,158,11,.08); padding:.7rem .9rem; border-radius:10px}
+  .small{font-size:.95rem; color:var(--muted)}
+  .em{font-weight:700}
+  .sym, code, kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+
+  /* VISUALS */
+  .visuals{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:1rem; padding:1rem}
+  svg{max-width:100%; height:auto}
+  .ttl{font-size:13px; fill:#334155}
+  .lbl{font-size:14px; fill:#0f172a}
+  .axis{stroke:#334155; stroke-width:2}
+  .grid{stroke:#cbd5e1; stroke-width:1}
+  .tick{stroke:#94a3b8; stroke-width:1}
+  .pt{fill:#2563eb}
+  .line{stroke:#2563eb; stroke-width:2; fill:none}
+  .dash{stroke:#94a3b8; stroke-dasharray:4 4; fill:none}
+  .mapbox{fill:#eef2ff; stroke:#93c5fd; stroke-width:1.2}
+  .mapbox2{fill:#dcfce7; stroke:#34d399; stroke-width:1.2}
+  .pairline{stroke:#334155; stroke-width:2}
+  .note{color:var(--muted); font-size:.95rem}
+  .big{font-weight:800}
+
+  @media (max-width:720px){
+    body{padding:1rem}
+    h1{font-size:1.2rem}
+    .logo-chip img{height:38px}
+    .logo-chip.logo-dept img{height:48px}
+  }
+</style>
+<script>
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <!-- HEADER -->
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>Countable Sets & “Countable Sets I — Sequences” (with Geology)</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>Department of Atmospheric and Geospatial Data Science</h2>
+    </header>
+
+    <!-- HERO IMAGE -->
+    <figure class="hero" aria-labelledby="hero-cap">
+      <img src="https://i.imgur.com/dKtoAu7.png" alt="Lab shelf of rock samples labeled 1, 2, 3, … — numbering illustrates countability" />
+      <div class="overlay" aria-hidden="true"></div>
+      <figcaption id="hero-cap" class="label">
+        Geology lab: rock samples labeled <span class="sym">1, 2, 3, …</span> — “listable” means countable
+      </figcaption>
+    </figure>
+
+    <!-- SECTION: Countable sets — idea -->
+    <section class="card" aria-labelledby="sec-idea">
+      <div class="bar">
+        <div>
+          <span id="sec-idea" class="subtitle">Countable sets — the idea</span>
+          <div class="hint">If you can list elements one by one, it’s countable (even if the list never ends).</div>
+        </div>
+        <div><button class="btn" onclick="printPage()">Print</button></div>
+      </div>
+      <div class="section">
+        <p>Imagine you are working with a collection of rock samples in the lab. Each rock sample gets a number: <span class="sym">Sample 1, Sample 2, Sample 3, …</span></p>
+        <div class="call"><span class="big">👉 Big idea:</span> Even if your collection never ends, as long as you can list them one by one, the set of rocks is <strong>countable</strong> (countably infinite).</div>
+        <p>The natural numbers <span class="sym">ℕ = {1, 2, 3, …}</span> are the simplest infinite set. Other sets, like the evens <span class="sym">{2, 4, 6, …}</span> or odds <span class="sym">{1, 3, 5, …}</span>, have the same “size” of infinity because you can pair each natural number with exactly one even or odd number.</p>
+        <div class="call">👉 <strong>Geology analogy:</strong> Suppose every fossil in a database is numbered <span class="sym">1, 2, 3, …</span>. If we only look at the even‑numbered fossils, we can still list them in order <span class="sym">(2, 4, 6, …)</span>. That subset is infinite but still countable.</div>
+      </div>
+    </section>
+
+    <!-- SECTION: Pairings / bijections visuals -->
+    <section class="card" aria-labelledby="sec-maps">
+      <div class="bar">
+        <div>
+          <span id="sec-maps" class="subtitle">Pairing with ℕ — why evens & odds are “the same size”</span>
+          <div class="hint">A 1‑to‑1 matching (bijection) shows equal “sizes” of infinity.</div>
+        </div>
+      </div>
+
+      <div class="visuals">
+        <!-- N -> 2N -->
+        <figure aria-labelledby="cap-map1">
+          <svg viewBox="0 0 520 210" role="img">
+            <defs>
+              <marker id="arrow" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L12,4 L0,8 Z" fill="#334155"></path>
+              </marker>
+            </defs>
+            <text class="ttl" x="130" y="24" text-anchor="middle">ℕ = {1,2,3,4,5,…}</text>
+            <text class="ttl" x="390" y="24" text-anchor="middle">2ℕ = {2,4,6,8,10,…}</text>
+
+            <!-- left boxes -->
+            <rect class="mapbox" x="40" y="40" width="180" height="30" rx="8"/><text class="lbl" x="130" y="60" text-anchor="middle">1</text>
+            <rect class="mapbox" x="40" y="78" width="180" height="30" rx="8"/><text class="lbl" x="130" y="98" text-anchor="middle">2</text>
+            <rect class="mapbox" x="40" y="116" width="180" height="30" rx="8"/><text class="lbl" x="130" y="136" text-anchor="middle">3</text>
+            <rect class="mapbox" x="40" y="154" width="180" height="30" rx="8"/><text class="lbl" x="130" y="174" text-anchor="middle">4</text>
+
+            <!-- right boxes -->
+            <rect class="mapbox2" x="300" y="40" width="180" height="30" rx="8"/><text class="lbl" x="390" y="60" text-anchor="middle">2</text>
+            <rect class="mapbox2" x="300" y="78" width="180" height="30" rx="8"/><text class="lbl" x="390" y="98" text-anchor="middle">4</text>
+            <rect class="mapbox2" x="300" y="116" width="180" height="30" rx="8"/><text class="lbl" x="390" y="136" text-anchor="middle">6</text>
+            <rect class="mapbox2" x="300" y="154" width="180" height="30" rx="8"/><text class="lbl" x="390" y="174" text-anchor="middle">8</text>
+
+            <!-- arrows n -> 2n -->
+            <line class="pairline" x1="220" y1="55" x2="300" y2="55" marker-end="url(#arrow)"/>
+            <line class="pairline" x1="220" y1="93" x2="300" y2="93" marker-end="url(#arrow)"/>
+            <line class="pairline" x1="220" y1="131" x2="300" y2="131" marker-end="url(#arrow)"/>
+            <line class="pairline" x1="220" y1="169" x2="300" y2="169" marker-end="url(#arrow)"/>
+
+            <text class="ttl" x="260" y="200" text-anchor="middle">Rule: f(n) = 2n (bijection)</text>
+          </svg>
+          <figcaption id="cap-map1" class="note" style="margin-top:.25rem">Every natural number matches one even number — so evens are countable.</figcaption>
+        </figure>
+
+        <!-- N -> odd -->
+        <figure aria-labelledby="cap-map2">
+          <svg viewBox="0 0 520 210" role="img">
+            <defs>
+              <marker id="arrow2" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L12,4 L0,8 Z" fill="#334155"></path>
+              </marker>
+            </defs>
+            <text class="ttl" x="130" y="24" text-anchor="middle">ℕ = {1,2,3,4,5,…}</text>
+            <text class="ttl" x="390" y="24" text-anchor="middle">Odds = {1,3,5,7,9,…}</text>
+
+            <!-- left -->
+            <rect class="mapbox" x="40" y="40" width="180" height="30" rx="8"/><text class="lbl" x="130" y="60" text-anchor="middle">1</text>
+            <rect class="mapbox" x="40" y="78" width="180" height="30" rx="8"/><text class="lbl" x="130" y="98" text-anchor="middle">2</text>
+            <rect class="mapbox" x="40" y="116" width="180" height="30" rx="8"/><text class="lbl" x="130" y="136" text-anchor="middle">3</text>
+            <rect class="mapbox" x="40" y="154" width="180" height="30" rx="8"/><text class="lbl" x="130" y="174" text-anchor="middle">4</text>
+
+            <!-- right -->
+            <rect class="mapbox2" x="300" y="40" width="180" height="30" rx="8"/><text class="lbl" x="390" y="60" text-anchor="middle">1</text>
+            <rect class="mapbox2" x="300" y="78" width="180" height="30" rx="8"/><text class="lbl" x="390" y="98" text-anchor="middle">3</text>
+            <rect class="mapbox2" x="300" y="116" width="180" height="30" rx="8"/><text class="lbl" x="390" y="136" text-anchor="middle">5</text>
+            <rect class="mapbox2" x="300" y="154" width="180" height="30" rx="8"/><text class="lbl" x="390" y="174" text-anchor="middle">7</text>
+
+            <!-- arrows n -> 2n-1 -->
+            <line class="pairline" x1="220" y1="55" x2="300" y2="55" marker-end="url(#arrow2)"/>
+            <line class="pairline" x1="220" y1="93" x2="300" y2="93" marker-end="url(#arrow2)"/>
+            <line class="pairline" x1="220" y1="131" x2="300" y2="131" marker-end="url(#arrow2)"/>
+            <line class="pairline" x1="220" y1="169" x2="300" y2="169" marker-end="url(#arrow2)"/>
+
+            <text class="ttl" x="260" y="200" text-anchor="middle">Rule: g(n) = 2n − 1 (bijection)</text>
+          </svg>
+          <figcaption id="cap-map2" class="note" style="margin-top:.25rem">Odds also pair 1‑to‑1 with ℕ — countable.</figcaption>
+        </figure>
+      </div>
+      <div class="section note">
+        Geology tie‑in: “Even‑numbered fossils” are matched by n ↦ 2n. Listing them gives a sequence <span class="sym">(2,4,6, …)</span> — still countable.
+      </div>
+    </section>
+
+    <!-- SECTION: Sequences -->
+    <section class="card" aria-labelledby="sec-seq">
+      <div class="bar">
+        <div>
+          <span id="sec-seq" class="subtitle">“Countable sets I — Sequences”</span>
+          <div class="hint">A sequence is just a function from natural numbers to values: a<sub>n</sub> = value at index n.</div>
+        </div>
+      </div>
+      <div class="section">
+        <p>Mathematicians formalize “making a list” as a <strong>sequence</strong>. A sequence is a function <span class="sym">a : ℕ → X</span>. For each <span class="sym">n ∈ ℕ</span>, we assign a value <span class="sym">a<sub>n</sub></span>.</p>
+        <div class="call">
+          <strong>Geology analogy — porosity profile along a borehole</strong><br/>
+          Depth 0 m → <span class="sym">a₀ = 20%</span><br/>
+          Depth 1 m → <span class="sym">a₁ = 18%</span><br/>
+          Depth 2 m → <span class="sym">a₂ = 22%</span><br/>
+          … and so on. This is a sequence: each depth index (0,1,2,…) has exactly one measurement.
+        </div>
+      </div>
+
+      <!-- Sequence visual -->
+      <div class="visuals">
+        <figure aria-labelledby="cap-seq">
+          <svg viewBox="0 0 540 260" role="img">
+            <title id="cap-seq">Porosity (%) vs depth index — example sequence</title>
+            <!-- axes -->
+            <line x1="60" y1="200" x2="500" y2="200" class="axis"/>
+            <line x1="60" y1="40"  x2="60"  y2="200" class="axis"/>
+            <!-- grid -->
+            <g stroke-linecap="round">
+              <line x1="60" y1="160" x2="500" y2="160" class="grid"/>
+              <line x1="60" y1="120" x2="500" y2="120" class="grid"/>
+              <line x1="60" y1="80"  x2="500" y2="80"  class="grid"/>
+            </g>
+            <!-- ticks & labels -->
+            <text x="50" y="204" class="ttl" text-anchor="end">0</text>
+            <text x="110" y="214" class="ttl" text-anchor="middle">0</text>
+            <text x="160" y="214" class="ttl" text-anchor="middle">1</text>
+            <text x="210" y="214" class="ttl" text-anchor="middle">2</text>
+            <text x="260" y="214" class="ttl" text-anchor="middle">3</text>
+            <text x="310" y="214" class="ttl" text-anchor="middle">4</text>
+            <text x="360" y="214" class="ttl" text-anchor="middle">5</text>
+            <text x="410" y="214" class="ttl" text-anchor="middle">6</text>
+            <text x="460" y="214" class="ttl" text-anchor="middle">7</text>
+
+            <text x="46" y="164" class="ttl" text-anchor="end">20%</text>
+            <text x="46" y="124" class="ttl" text-anchor="end">30%</text>
+            <text x="46" y="84"  class="ttl" text-anchor="end">40%</text>
+            <text x="280" y="240" class="ttl" text-anchor="middle">Depth index (m)</text>
+            <text x="18"  y="110" class="ttl" transform="rotate(-90 18,110)">Porosity (%)</text>
+
+            <!-- data (indexes 0..7 with example values: 20,18,22,19,21,20,23,18) -->
+            <!-- Scale: y = 200 - (val-10)*4  (so 20%->160, 30%->120, 40%->80) -->
+            <polyline class="line" points="
+              110,160
+              160,168
+              210,152
+              260,164
+              310,156
+              360,160
+              410,148
+              460,168
+            "/>
+            <circle class="pt" cx="110" cy="160" r="4"/><text class="ttl" x="110" y="150" text-anchor="middle">20</text>
+            <circle class="pt" cx="160" cy="168" r="4"/><text class="ttl" x="160" y="180" text-anchor="middle">18</text>
+            <circle class="pt" cx="210" cy="152" r="4"/><text class="ttl" x="210" y="142" text-anchor="middle">22</text>
+            <circle class="pt" cx="260" cy="164" r="4"/><text class="ttl" x="260" y="176" text-anchor="middle">19</text>
+            <circle class="pt" cx="310" cy="156" r="4"/><text class="ttl" x="310" y="146" text-anchor="middle">21</text>
+            <circle class="pt" cx="360" cy="160" r="4"/><text class="ttl" x="360" y="150" text-anchor="middle">20</text>
+            <circle class="pt" cx="410" cy="148" r="4"/><text class="ttl" x="410" y="138" text-anchor="middle">23</text>
+            <circle class="pt" cx="460" cy="168" r="4"/><text class="ttl" x="460" y="180" text-anchor="middle">18</text>
+          </svg>
+          <figcaption class="note" style="margin-top:.25rem">
+            Each index has exactly one measurement → that’s a sequence <span class="sym">(a₀, a₁, a₂, …)</span>.
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="section">
+        <p>If your borehole goes on forever (in theory), you’d get an <strong>infinite sequence</strong>. If all values are the same (say porosity is always 20%), then the set of values is just <span class="sym">{20}</span>, which is finite. But if values keep varying infinitely often, the set of measurements is infinite and (under fixed precision) countable.</p>
+        <p class="small">Note: Mathematically, “countable” means finite <em>or</em> in 1‑to‑1 correspondence with <span class="sym">ℕ</span> (listable). If measurements are recorded to fixed decimal places (e.g., 0.1%), possible values form a countable set.</p>
+      </div>
+    </section>
+
+    <!-- SECTION: Big takeaway -->
+    <section class="card" aria-labelledby="sec-takeaway">
+      <div class="bar">
+        <div><span id="sec-takeaway" class="subtitle">✅ Big takeaway for beginners</span></div>
+      </div>
+      <div class="section">
+        <ul>
+          <li><strong>Countable infinity</strong> = you can number or list the elements one by one.</li>
+          <li><strong>Sequences</strong> are the formal way to describe such lists (<span class="sym">a : ℕ → X</span>).</li>
+          <li><strong>Geology lens:</strong> This shows up whenever you number <em>samples</em>, <em>fossils</em>, <em>layers</em>, or <em>measurements</em> in order.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
