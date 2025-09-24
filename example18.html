@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Assignment — Set Theory with Minerals (Interactive Venn) — EN / HU — University of Szeged</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+    --accent:#2563eb; --accent-2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --shade:rgba(15,23,42,.06); --info:#0ea5e9; --good:#16a34a; --warn:#f59e0b;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
+      --shade:rgba(255,255,255,.06); --info:#38bdf8; --good:#22c55e; --warn:#fbbf24;
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+    font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  /* HEADER */
+  header{
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#fff; border-radius:16px; padding:1rem 1.25rem; box-shadow:var(--shadow);
+  }
+  .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .badge{font-size:.8rem; letter-spacing:.04em; text-transform:uppercase; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:.25rem .5rem; border-radius:999px}
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow)}
+  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain}
+  .logo-chip.logo-dept img{height:55px}
+  .logo-chip.logo-szte img{height:42px}
+
+  /* CARDS */
+  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; margin-top:1rem; box-shadow:var(--shadow); overflow:hidden}
+  .bar{padding:.9rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .subtitle{font-weight:600}
+  .hint{color:var(--muted); font-size:.92rem}
+  .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600}
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+  .call{border-left:4px solid var(--info); background:rgba(14,165,233,.08); padding:.7rem .9rem; border-radius:10px}
+  .pts{display:inline-block; font-weight:800; background:rgba(22,163,74,.1); color:var(--good); border:1px solid rgba(22,163,74,.25); padding:.1rem .4rem; border-radius:6px; margin-left:.4rem}
+
+  /* BILINGUAL TABLE */
+  table.twocol{width:100%; border-collapse:separate; border-spacing:0}
+  thead th{background:linear-gradient(180deg, rgba(37,99,235,.08), rgba(56,189,248,.08)); padding:.85rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border)}
+  tbody td{padding:.85rem 1rem; vertical-align:top; border-bottom:1px solid var(--border)}
+  tbody tr:nth-child(odd) td{background:var(--shade)}
+  .lang-label{display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em; padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,.15); color:#0369a1; margin-left:.5rem}
+  .sym, code, kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+  ol, ul{margin:0; padding-left:1.2rem}
+  .small{font-size:.95rem; color:var(--muted)}
+</style>
+<script>
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <!-- HEADER -->
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>Assignment — Set Theory with Minerals (Interactive Venn) — English & Hungarian</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>Department of Atmospheric and Geospatial Data Science</h2>
+    </header>
+
+    <!-- DIRECTIONS -->
+    <section class="card" aria-labelledby="dir">
+      <div class="bar">
+        <div>
+          <span id="dir" class="subtitle">Quick directions / Gyors útmutató</span>
+          <div class="hint">Use your Set Theory Minerals Game with I (Igneous), S (Sedimentary), M (Metamorphic), U (Universe), incl. symmetric difference Δ.</div>
+        </div>
+        <div><button class="btn" onclick="printPage()">Print</button></div>
+      </div>
+      <table class="twocol" role="table" aria-describedby="dir">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead>
+          <tr>
+            <th>English <span class="lang-label">EN</span></th>
+            <th>Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <ol>
+                <li>Open the Set Theory game in your browser. Keep <em>“Show Labels”</em> on.</li>
+                <li>Click <em>“New Puzzle”</em> to start. Arrange minerals until your <strong>Score ≥ 90%</strong> (100% if you can).</li>
+                <li>Use the <em>“Regions & Intersections”</em> panel: click any row to highlight; <kbd>Esc</kbd> clears.</li>
+                <li>The <em>“Elements & Membership”</em> table shows which sets each mineral is currently in.</li>
+                <li>Unless a question asks you to resize/move sets, work in (or near) your solved state.</li>
+              </ol>
+              <p class="call"><strong>Submit:</strong> Numeric answers & lists. Paste screenshots where requested.</p>
+            </td>
+            <td>
+              <ol>
+                <li>Nyisd meg a Halmazelmélet játékot a böngészőben. Hagyd bekapcsolva a <em>„Show Labels”</em> opciót.</li>
+                <li>Kezdéshez kattints az <em>„New Puzzle”</em>-re. Rendezd az ásványokat, míg a <strong>pontszám ≥ 90%</strong> (vagy 100%).</li>
+                <li>Használd a <em>„Regions & Intersections”</em> panelt: kattints egy sorra kiemeléshez; <kbd>Esc</kbd> töröl.</li>
+                <li>Az <em>„Elements & Membership”</em> tábla mutatja, melyik ásvány mely halmaz(ok)ban van.</li>
+                <li>Ha nem kérjük külön a halmazok mozgatását/méretezését, a megoldott állapotban (vagy ahhoz közel) dolgozz.</li>
+              </ol>
+              <p class="call"><strong>Leadandó:</strong> Számok és listák; ahol kérjük, képernyőképek beillesztése.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Symbols:</strong> I = Igneous, S = Sedimentary, M = Metamorphic, U = Universe, Δ = symmetric difference, ∪, ∩, \.</td>
+            <td><strong>Jelek:</strong> I = magmás, S = üledékes, M = metamorf, U = alaphalmaz, Δ = szimmetrikus differencia, ∪, ∩, \.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Q1 -->
+    <section class="card" aria-labelledby="q1">
+      <div class="bar">
+        <div><span id="q1" class="subtitle">Q1 — Solve the puzzle / Oldd meg a feladványt <span class="pts">2 pts</span></span></div>
+      </div>
+      <table class="twocol">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tbody>
+          <tr>
+            <td>Reach <strong>Score ≥ 90%</strong>. <strong>Submit:</strong> One screenshot showing the canvas and the green score bar (score text visible).</td>
+            <td>Érd el a <strong>≥ 90%</strong> pontszámot. <strong>Leadandó:</strong> Egy képernyőkép a vászonról és a zöld pontszám‑sávról (szöveg látszódjon).</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Q2 -->
+    <section class="card" aria-labelledby="q2">
+      <div class="bar">
+        <div><span id="q2" class="subtitle">Q2 — Pairwise intersections / Páronkénti metszetek <span class="pts">6 pts</span></span></div>
+      </div>
+      <table class="twocol">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tbody>
+          <tr>
+            <td>
+              Using <em>Intersections (A ∩ B)</em>:<br/>
+              1) Record <span class="sym">|I∩S|, |I∩M|, |S∩M|</span>.<br/>
+              2) <strong>List all minerals</strong> in each pairwise intersection.
+            </td>
+            <td>
+              Az <em>Intersections (A ∩ B)</em> panel alapján:<br/>
+              1) Írd fel: <span class="sym">|I∩S|, |I∩M|, |S∩M|</span>.<br/>
+              2) <strong>Soroldd fel az összes ásványt</strong> mindhárom páronkénti metszetben.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Q3 -->
+    <section class="card" aria-labelledby="q3">
+      <div class="bar">
+        <div><span id="q3" class="subtitle">Q3 — Triple intersection / Hármas metszet <span class="pts">3 pts</span></span></div>
+      </div>
+      <table class="twocol">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tbody>
+          <tr>
+            <td>Click <em>Triple Intersections (A ∩ B ∩ C)</em>. Report <span class="sym">|I∩S∩M|</span> and <strong>list</strong> the minerals there.</td>
+            <td>Kattints a <em>Triple Intersections (A ∩ B ∩ C)</em> sorra. Írd fel <span class="sym">|I∩S∩M|</span> értékét és <strong>soroldd fel</strong> az ott lévő ásványokat.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Q4 -->
+    <section class="card" aria-labelledby="q4">
+      <div class="bar">
+        <div><span id="q4" class="subtitle">Q4 — Inclusion–exclusion (two sets) / Kizárás–bevonás (két halmaz) <span class="pts">4 pts</span></span></div>
+      </div>
+      <table class="twocol">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tbody>
+          <tr>
+            <td>
+              For I and S: read <span class="sym">|I|, |S|, |I∩S|</span>, and <span class="sym">|I∪S|</span>.<br/>
+              <strong>Verify:</strong> <span class="sym">|I∪S| = |I| + |S| − |I∩S|</span> (show both sides).
+            </td>
+            <td>
+              I és S esetén: olvasd le <span class="sym">|I|, |S|, |I∩S|</span>, valamint <span class="sym">|I∪S|</span> értékét.<br/>
+              <strong>Igazold:</strong> <span class="sym">|I∪S| = |I| + |S| − |I∩S|</span> (mindkét oldalt számmal).
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Q5 -->
+    <section class="card" aria-labelledby="q5">
+      <div class="bar">
+        <div><span id="q5" class="subtitle">Q5 — Symmetric difference (Δ) three ways / Szimmetrikus differencia (Δ) háromféleképp <span class="pts">8 pts</span></span></div>
+      </div>
+      <table class="twocol">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tbody>
+          <tr>
+            <td>
+              For I and S:<br/>
+              1) Record <span class="sym">|IΔS|</span> and <strong>list</strong> its minerals.<br/>
+              2) Verify: <span class="sym">|IΔS| = |I| + |S| − 2|I∩S|</span>.<br/>
+              3) Verify by construction: <span class="sym">IΔS = (I\S) ∪ (S\I)</span> using lists from the <em>Differences</em> rows.
+            </td>
+            <td>
+              I és S esetén:<br/>
+              1) Írd fel <span class="sym">|IΔS|</span> értékét és <strong>soroldd fel</strong> az ásványokat.<br/>
+              2) Igazold: <span class="sym">|IΔS| = |I| + |S| − 2|I∩S|</span>.<br/>
+              3) Konstruálással: <span class="sym">IΔS = (I\S) ∪ (S\I)</span> — a <em>Differences</em> sorok listáiból.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Q6 -->
+    <section class="card" aria-labelledby="q6">
+      <div class="bar">
+        <div><span id="q6" class="subtitle">Q6 — Differences with interpretation / Különbségek értelmezéssel <span class="pts">6 pts</span></span></div>
+      </div>
+      <table class="twocol">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tbody>
+          <tr>
+            <td>
+              For I and M:<br/>
+              1) Click <span class="sym">I \ M</span>, list 3 minerals.<br/>
+              2) Click <span class="sym">M \ I</span>, list 3 minerals.<br/>
+              3) In 2–3 sentences: geology‑aware interpretation of the two difference sets (formation environments/processes).
+            </td>
+            <td>
+              I és M esetén:<br/>
+              1) Kattints <span class="sym">I \ M</span> területre, sorolj fel 3 ásványt.<br/>
+              2) Kattints <span class="sym">M \ I</span> területre, sorolj fel 3 ásványt.<br/>
+              3) 2–3 mondatban: geológiai értelmezés (képződési környezet/folyamat).
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Q7 -->
+    <section class="card" aria-labelledby="q7">
+      <div class="bar">
+        <div><span id="q7" class="subtitle">Q7 — Outside vs. solved / Kívül vs. megoldott állapot <span class="pts">5 pts</span></span></div>
+      </div>
+      <table class="twocol">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tbody>
+          <tr>
+            <td>
+              1) <strong>Before</strong> solving (score &lt; 50%): record <em>Outside all sets</em> count.<br/>
+              2) <strong>After</strong> solving (score ≥ 90%): record it again.<br/>
+              3) Name two minerals that moved from outside to inside and state their final set(s).<br/>
+              <strong>Submit:</strong> One small screenshot of <em>Outside all sets</em> highlighted (before or after).
+            </td>
+            <td>
+              1) <strong>Megoldás előtt</strong> (pontszám &lt; 50%): írd fel a <em>Outside all sets</em> darabszámát.<br/>
+              2) <strong>Megoldás után</strong> (pontszám ≥ 90%): írd fel újra.<br/>
+              3) Nevezz meg két ásványt, amely kívülről belülre került, és add meg a végső halmaz(oka)t.<br/>
+              <strong>Leadandó:</strong> Egy kis képernyőkép a <em>Outside all sets</em> kiemeléséről (előtte vagy utána).
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Q8 -->
+    <section class="card" aria-labelledby="q8">
+      <div class="bar">
+        <div><span id="q8" class="subtitle">Q8 — Largest symmetric difference? / Melyik a legnagyobb Δ? <span class="pts">6 pts</span></span></div>
+      </div>
+      <table class="twocol">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tbody>
+          <tr>
+            <td>Compare <span class="sym">|IΔS|</span>, <span class="sym">|IΔM|</span>, <span class="sym">|SΔM|</span>. Which is largest and <strong>why</strong>? Explain briefly and refer to a few minerals.</td>
+            <td>Hasonlítsd össze: <span class="sym">|IΔS|</span>, <span class="sym">|IΔM|</span>, <span class="sym">|SΔM|</span>. Melyik a legnagyobb és <strong>miért</strong>? Rövid magyarázat néhány ásványra hivatkozva.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Q9 -->
+    <section class="card" aria-labelledby="q9">
+      <div class="bar">
+        <div><span id="q9" class="subtitle">Q9 — Sensitivity to set boundaries / Érzékenység a határokra <span class="pts">5 pts</span></span></div>
+      </div>
+      <table class="twocol">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tbody>
+          <tr>
+            <td>
+              From your solved state: slightly <em>increase</em> M’s radius (re‑center if needed). Note changes to <span class="sym">|IΔM|</span> and <span class="sym">|SΔM|</span> (↑/↓/same). Explain briefly.
+            </td>
+            <td>
+              A megoldott állapotból: <em>kismértékben növeld</em> M sugarát (szükség esetén középre igazítva). Jegyezd fel <span class="sym">|IΔM|</span> és <span class="sym">|SΔM|</span> változását (↑/↓/változatlan). Rövid magyarázat.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Q10 -->
+    <section class="card" aria-labelledby="q10">
+      <div class="bar">
+        <div><span id="q10" class="subtitle">Q10 — Inclusion–exclusion (three sets) / Kizárás–bevonás (három halmaz) <span class="pts">10 pts</span></span></div>
+      </div>
+      <table class="twocol">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tbody>
+          <tr>
+            <td>
+              Verify numerically:<br/>
+              <span class="sym">|I∪S∪M| = |I| + |S| + |M| − |I∩S| − |I∩M| − |S∩M| + |I∩S∩M|</span>.<br/>
+              LHS: <em>Union (all sets)</em>. RHS terms: from <em>Singles</em>, <em>Intersections</em>, <em>Triple Intersections</em>.<br/>
+              Also confirm: <span class="sym">|I∪S∪M| = (Total minerals) − (Outside all sets)</span>.
+            </td>
+            <td>
+              Számszerű igazolás:<br/>
+              <span class="sym">|I∪S∪M| = |I| + |S| + |M| − |I∩S| − |I∩M| − |S∩M| + |I∩S∩M|</span>.<br/>
+              Bal oldal: <em>Union (all sets)</em>. Jobb oldal: <em>Singles</em>, <em>Intersections</em>, <em>Triple Intersections</em> soraiból.<br/>
+              Igazold azt is: <span class="sym">|I∪S∪M| = (Összes ásvány) − (Outside all sets)</span>.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- EXTRA CREDIT + RUBRIC -->
+    <section class="card" aria-labelledby="extra">
+      <div class="bar">
+        <div><span id="extra" class="subtitle">Optional extra credit / Opcionális pluszpont <span class="pts">+4 pts</span></span></div>
+      </div>
+      <table class="twocol">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tbody>
+          <tr>
+            <td>
+              Pick any <span class="sym">A,B ∈ {I,S,M}</span> and demonstrate:<br/>
+              <span class="sym">A Δ B = (A ∪ B) \ (A ∩ B)</span> by listing minerals on LHS and RHS and matching them.
+            </td>
+            <td>
+              Válassz tetszőleges <span class="sym">A,B ∈ {I,S,M}</span> párost, és mutasd meg:<br/>
+              <span class="sym">A Δ B = (A ∪ B) \ (A ∩ B)</span> — sorold fel az ásványokat a bal és jobb oldalon, majd párosítsd őket.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" aria-labelledby="rubric">
+      <div class="bar">
+        <div><span id="rubric" class="subtitle">Rubric summary / Pontozási összefoglaló</span></div>
+      </div>
+      <table class="twocol">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tbody>
+          <tr>
+            <td>
+              Q1 (2), Q2 (6), Q3 (3), Q4 (4), Q5 (8), Q6 (6), Q7 (5), Q8 (6), Q9 (5), Q10 (10) = <strong>55 pts</strong><br/>
+              Extra credit: <strong>+4 pts</strong>
+            </td>
+            <td>
+              Q1 (2), Q2 (6), Q3 (3), Q4 (4), Q5 (8), Q6 (6), Q7 (5), Q8 (6), Q9 (5), Q10 (10) = <strong>55 pont</strong><br/>
+              Pluszpont: <strong>+4 pont</strong>
+            </td>
+          </tr>
+          <tr>
+            <td class="small">Tip: Keep the game’s “Show Labels” on; use panel rows to highlight regions while counting.</td>
+            <td class="small">Tipp: Hagyd bekapcsolva a „Show Labels” opciót; számoláshoz használd a panelek kiemelését.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+</body>
+</html>
