@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Translating English to Symbols — “But” & “Neither–Nor” — EN / HU — University of Szeged</title>
+<title>Translating to Symbols — “But” & “Neither–Nor” + Inequalities — EN / HU — University of Szeged</title>
 <style>
   :root{
     --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
     --accent:#2563eb; --accent-2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
-    --shade:rgba(15,23,42,.06); --info:#0ea5e9; --good:#16a34a;
+    --shade:rgba(15,23,42,.06);
   }
   @media (prefers-color-scheme: dark){
     :root{
       --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
       --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
-      --shade:rgba(255,255,255,.06); --info:#38bdf8; --good:#22c55e;
+      --shade:rgba(255,255,255,.06);
     }
   }
   *{box-sizing:border-box}
@@ -48,7 +48,6 @@
   .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600}
   .btn:hover{border-color:var(--accent); color:var(--accent)}
   .note{color:var(--muted); font-size:.95rem}
-  .call{border-left:4px solid var(--info); background:rgba(14,165,233,.08); padding:.7rem .9rem; border-radius:10px}
 
   /* TABLES */
   table.twocol{width:100%; border-collapse:separate; border-spacing:0}
@@ -70,7 +69,7 @@
       <div class="header-top">
         <div class="title">
           <span class="badge">University of Szeged</span>
-          <h1>Translating English to Symbols — “But” &amp; “Neither–Nor” — English &amp; Hungarian</h1>
+          <h1>Translating to Symbols — “But” &amp; “Neither–Nor” + Inequalities — English &amp; Hungarian</h1>
         </div>
         <div class="logo-row" aria-label="Department and University logos">
           <span class="logo-chip logo-dept" title="Department logo">
@@ -84,82 +83,76 @@
       <h2>Department of Atmospheric and Geospatial Data Science</h2>
     </header>
 
-    <!-- STEP 1 -->
-    <section class="card" aria-labelledby="s1">
+    <!-- EXERCISE -->
+    <section class="card" aria-labelledby="ex">
       <div class="bar">
         <div>
-          <span id="s1" class="subtitle">🧠 Step 1: The setup / Kiindulás</span>
-          <div class="hint">Define simple statements and use symbols to make reasoning precise.</div>
+          <span id="ex" class="subtitle">Translating from English to Symbols: “But” &amp; “Neither–Nor” / Fordítás jelekre: „de” és „sem–sem”</span>
+          <div class="hint">Let <span class="sym">h</span> = “It is hot”, <span class="sym">s</span> = “It is sunny”. / Legyen <span class="sym">h</span> = „Meleg van”, <span class="sym">s</span> = „Napos az idő”.</div>
         </div>
         <div><button class="btn" onclick="printPage()">Print</button></div>
       </div>
-      <table class="twocol" role="table" aria-describedby="s1">
+
+      <table class="twocol" role="table" aria-describedby="ex">
         <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
-        <thead><tr><th>English <span class="lang-label">EN</span></th><th>Magyar <span class="lang-label">HU</span></th></tr></thead>
+        <thead>
+          <tr>
+            <th>English prompt <span class="lang-label">EN</span></th>
+            <th>Magyar feladat <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
         <tbody>
           <tr>
-            <td>
-              Let <span class="sym">h</span> = “It is hot.” &nbsp;&nbsp; Let <span class="sym">s</span> = “It is sunny.”<br/>
-              We will translate full English sentences into symbolic logic.
-            </td>
-            <td>
-              Legyen <span class="sym">h</span> = „Meleg van.” &nbsp;&nbsp; Legyen <span class="sym">s</span> = „Napos az idő.”<br/>
-              Ezeket a mondatokat lefordítjuk logikai jelekre.
-            </td>
+            <td>Write each sentence symbolically (using <span class="sym">¬</span> or comma for NOT, <span class="sym">`</span> for AND, <span class="sym">~</span> for OR).</td>
+            <td>Írd fel a mondatokat jelöléssel (használható <span class="sym">¬</span> vagy vessző a NEM‑hez, <span class="sym">`</span> az ÉS‑hez, <span class="sym">~</span> a VAGY‑hoz).</td>
           </tr>
           <tr>
-            <td class="note">Symbols used here: <span class="sym">¬</span> (NOT), <span class="sym">`</span> (AND), <span class="sym">~</span> (OR). You may also meet <span class="sym">∧</span> and <span class="sym">∨</span>.</td>
-            <td class="note">Használt jelek: <span class="sym">¬</span> (NEM), <span class="sym">`</span> (ÉS), <span class="sym">~</span> (VAGY). Előfordulhat még: <span class="sym">∧</span>, <span class="sym">∨</span>.</td>
+            <td>a) It is not hot but it is sunny.</td>
+            <td>a) Nem meleg, de napos.</td>
+          </tr>
+          <tr>
+            <td>b) It is neither hot nor sunny.</td>
+            <td>b) Sem meleg, sem napos.</td>
           </tr>
         </tbody>
       </table>
     </section>
 
-    <!-- STEP 2 -->
-    <section class="card" aria-labelledby="s2">
+    <!-- SOLUTION -->
+    <section class="card" aria-labelledby="sol">
       <div class="bar">
         <div>
-          <span id="s2" class="subtitle">🔤 Step 2: Example (a) — “but” means “and” / A „de” logikailag „és”</span>
-          <div class="hint">“But” adds contrast in tone; the logic is still AND.</div>
+          <span id="sol" class="subtitle">Solution / Megoldás</span>
+          <div class="hint">Both <span class="sym">¬</span> and leading comma “,” are accepted for NOT.</div>
         </div>
       </div>
-      <table class="twocol" role="table" aria-describedby="s2">
+
+      <table class="twocol" role="table" aria-describedby="sol">
         <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
-        <thead><tr><th>EN</th><th>HU</th></tr></thead>
+        <thead>
+          <tr>
+            <th>English <span class="lang-label">EN</span></th>
+            <th>Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
         <tbody>
           <tr>
             <td>
-              “It is <em>not</em> hot <strong>but</strong> it is sunny.” → same as “not hot <strong>and</strong> sunny.”<br/>
-              <strong>Symbolic form:</strong> <span class="sym">¬h ` s</span> (or <span class="sym">,h ` s</span>).
+              a) “It is <em>not</em> hot <strong>but</strong> it is sunny” ≡ “not hot <strong>and</strong> sunny”.<br/>
+              <strong>Symbolic:</strong> <span class="sym">¬h ` s</span> (or <span class="sym">,h ` s</span>).
             </td>
             <td>
-              „<em>Nem</em> meleg van, <strong>de</strong> napos.” → ugyanaz, mint „nem meleg <strong>és</strong> napos.”<br/>
+              a) „<em>Nem</em> meleg, <strong>de</strong> napos” ≡ „nem meleg <strong>és</strong> napos”.<br/>
               <strong>Jelölés:</strong> <span class="sym">¬h ` s</span> (vagy <span class="sym">,h ` s</span>).
             </td>
           </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- STEP 3 -->
-    <section class="card" aria-labelledby="s3">
-      <div class="bar">
-        <div>
-          <span id="s3" class="subtitle">🔤 Step 3: Example (b) — “neither … nor …” / „sem … sem …”</span>
-          <div class="hint">Means NOT the first AND NOT the second.</div>
-        </div>
-      </div>
-      <table class="twocol" role="table" aria-describedby="s3">
-        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
-        <thead><tr><th>EN</th><th>HU</th></tr></thead>
-        <tbody>
           <tr>
             <td>
-              “It is neither hot nor sunny.” → “not hot <strong>and</strong> not sunny.”<br/>
-              <strong>Symbolic form:</strong> <span class="sym">¬h ` ¬s</span> (or <span class="sym">,h ` ,s</span>).
+              b) “Neither hot nor sunny” means “not hot <strong>and</strong> not sunny”.<br/>
+              <strong>Symbolic:</strong> <span class="sym">¬h ` ¬s</span> (or <span class="sym">,h ` ,s</span>).
             </td>
             <td>
-              „Sem meleg nincs, sem napsütés.” → „nem meleg <strong>és</strong> nem napos.”<br/>
+              b) „Sem meleg, sem napos” azt jelenti: „nem meleg <strong>és</strong> nem napos”.<br/>
               <strong>Jelölés:</strong> <span class="sym">¬h ` ¬s</span> (vagy <span class="sym">,h ` ,s</span>).
             </td>
           </tr>
@@ -167,127 +160,59 @@
       </table>
     </section>
 
-    <!-- STEP 4: GEOSCIENCE CONNECTIONS -->
-    <section class="card" aria-labelledby="s4">
+    <!-- INEQUALITIES AS LOGIC -->
+    <section class="card" aria-labelledby="ineq">
       <div class="bar">
         <div>
-          <span id="s4" class="subtitle">🪨 Step 4: Connect to geoscience / Kapcsolódás a földtudományhoz</span>
-          <div class="hint">Same logic, domain‑specific words.</div>
+          <span id="ineq" class="subtitle">Inequalities as AND/OR statements / Egyenlőtlenségek ÉS/VAGY állításként</span>
+          <div class="hint">Assume <span class="sym">x, a, b</span> are particular real numbers. / Tegyük fel, hogy <span class="sym">x, a, b</span> konkrét valós számok.</div>
         </div>
       </div>
-      <table class="twocol" role="table" aria-describedby="s4">
+
+      <table class="twocol" role="table" aria-describedby="ineq">
         <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
         <thead><tr><th>English <span class="lang-label">EN</span></th><th>Magyar <span class="lang-label">HU</span></th></tr></thead>
         <tbody>
           <tr>
-            <td><strong>“It is not hot but it is sunny.”</strong> → <span class="sym">¬h ` s</span><br/><em>Analogy:</em> The rock is <strong>not porous</strong> but <strong>permeable</strong>.</td>
-            <td><strong>„Nem meleg, de napos.”</strong> → <span class="sym">¬h ` s</span><br/><em>Analógia:</em> A kőzet <strong>nem porózus</strong>, de <strong>áteresztő</strong>.</td>
+            <td><span class="sym">x &le; a</span> means <span class="sym">x &lt; a</span> <strong>or</strong> <span class="sym">x = a</span> (uses OR <span class="sym">~</span>).</td>
+            <td><span class="sym">x &le; a</span> jelentése: <span class="sym">x &lt; a</span> <strong>vagy</strong> <span class="sym">x = a</span> (VAGY <span class="sym">~</span>).</td>
           </tr>
           <tr>
-            <td><strong>“It is neither hot nor sunny.”</strong> → <span class="sym">¬h ` ¬s</span><br/><em>Analogy:</em> The sample is <strong>neither</strong> limestone <strong>nor</strong> dolomite.</td>
-            <td><strong>„Sem meleg, sem napos.”</strong> → <span class="sym">¬h ` ¬s</span><br/><em>Analógia:</em> A minta <strong>sem</strong> mészkő, <strong>sem</strong> dolomit.</td>
+            <td><span class="sym">a &le; x &le; b</span> means <span class="sym">a &le; x</span> <strong>and</strong> <span class="sym">x &le; b</span> (uses AND <span class="sym">`</span>).</td>
+            <td><span class="sym">a &le; x &le; b</span> azt jelenti: <span class="sym">a &le; x</span> <strong>és</strong> <span class="sym">x &le; b</span> (ÉS <span class="sym">`</span>).</td>
           </tr>
           <tr>
-            <td><strong>“It is hot or sunny.”</strong> → <span class="sym">h ~ s</span><br/><em>Analogy:</em> The deposit formed by <strong>wind or water</strong>.</td>
-            <td><strong>„Meleg vagy napos.”</strong> → <span class="sym">h ~ s</span><br/><em>Analógia:</em> A lerakódást <strong>szél vagy víz</strong> hozta létre.</td>
-          </tr>
-          <tr>
-            <td><strong>“It is not hot or sunny.”</strong> → <span class="sym">¬h ~ s</span><br/><em>Analogy:</em> The mineral is <strong>not</strong> feldspar <strong>or</strong> it is quartz.</td>
-            <td><strong>„Nem meleg vagy napos.”</strong> → <span class="sym">¬h ~ s</span><br/><em>Analógia:</em> Az ásvány <strong>nem</strong> földpát, <strong>vagy</strong> kvarc.</td>
-          </tr>
-          <tr>
-            <td class="note">Computer logic variants: <span class="sym">¬</span>, <span class="sym">&amp;&amp;</span>, <span class="sym">||</span>.</td>
-            <td class="note">Számítógépes jelek: <span class="sym">¬</span>, <span class="sym">&amp;&amp;</span>, <span class="sym">||</span>.</td>
+            <td>
+              Note: <span class="sym">2 &le; x &le; 1</span> is not satisfied by any real number<br/>
+              because it means <span class="sym">2 &le; x</span> <strong>and</strong> <span class="sym">x &le; 1</span>, which can’t both be true.
+            </td>
+            <td>
+              Megjegyzés: <span class="sym">2 &le; x &le; 1</span> egyetlen valós számmal sem teljesül,<br/>
+              mert azt jelenti: <span class="sym">2 &le; x</span> <strong>és</strong> <span class="sym">x &le; 1</span>, ami nem lehet egyszerre igaz.
+            </td>
           </tr>
         </tbody>
       </table>
     </section>
 
-    <!-- STEP 5: INEQUALITIES -->
-    <section class="card" aria-labelledby="s5">
+    <!-- META NOTE -->
+    <section class="card" aria-labelledby="note">
       <div class="bar">
-        <div>
-          <span id="s5" class="subtitle">📏 Step 5: Inequalities as logic / Egyenlőtlenségek mint logika</span>
-          <div class="hint">Math “and/or” maps directly to logic.</div>
-        </div>
+        <div><span id="note" class="subtitle">Why specify “real numbers”? / Miért „valós számok”?</span></div>
       </div>
-      <table class="twocol" role="table" aria-describedby="s5">
-        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
-        <thead><tr><th>EN</th><th>HU</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><span class="sym">x ≤ a</span> reads “<span class="sym">x &lt; a</span> <strong>or</strong> <span class="sym">x = a</span>” → uses <span class="sym">~</span>.</td>
-            <td><span class="sym">x ≤ a</span> jelentése „<span class="sym">x &lt; a</span> <strong>vagy</strong> <span class="sym">x = a</span>” → <span class="sym">~</span>.</td>
-          </tr>
-          <tr>
-            <td><span class="sym">a ≤ x ≤ b</span> means “<span class="sym">a ≤ x</span> <strong>and</strong> <span class="sym">x ≤ b</span>” → uses <span class="sym">`</span>.</td>
-            <td><span class="sym">a ≤ x ≤ b</span> azt jelenti: „<span class="sym">a ≤ x</span> <strong>és</strong> <span class="sym">x ≤ b</span>” → <span class="sym">`</span>.</td>
-          </tr>
-          <tr>
-            <td><span class="sym">2 ≤ x ≤ 1</span> is false — no number satisfies both conditions.</td>
-            <td><span class="sym">2 ≤ x ≤ 1</span> hamis — nincs szám, amely mindkettőnek megfelel.</td>
-          </tr>
-          <tr>
-            <td class="call"><em>Geoscience example:</em> “Grain size ≥ 0.5 mm <strong>and</strong> ≤ 2 mm” → sand‑sized → use <span class="sym">`</span>.</td>
-            <td class="call"><em>Geós példa:</em> „Szemcseméret ≥ 0,5 mm <strong>és</strong> ≤ 2 mm” → homokfrakció → <span class="sym">`</span>.</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- MINI ASSIGNMENTS -->
-    <section class="card" aria-labelledby="assign">
-      <div class="bar">
-        <div>
-          <span id="assign" class="subtitle">📚 Mini‑assignments / Rövid feladatok</span>
-          <div class="hint">Write symbols using <span class="sym">¬</span> for NOT, <span class="sym">`</span> for AND, <span class="sym">~</span> for OR.</div>
-        </div>
-      </div>
-      <table class="twocol" role="table" aria-describedby="assign">
+      <table class="twocol" role="table" aria-describedby="note">
         <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
         <thead><tr><th>English <span class="lang-label">EN</span></th><th>Magyar <span class="lang-label">HU</span></th></tr></thead>
         <tbody>
           <tr>
             <td>
-              <strong>A) Translate to symbols</strong><br/>
-              1) “It is not hot but windy.” (use <span class="sym">h</span> = hot, <span class="sym">w</span> = windy) → _______<br/>
-              2) “Neither limestone nor dolomite.” (use <span class="sym">L</span>, <span class="sym">D</span>) → _______<br/>
-              3) “Porosity ≥ 0.25 or permeability ≥ 100 mD.” (use <span class="sym">P</span>, <span class="sym">K</span>) → _______
+              Specifying <span class="sym">x, a, b</span> are real numbers ensures sentences like <span class="sym">“x &lt; a”</span> and
+              <span class="sym">“x &ge; b”</span> are either true or false — hence they are <em>statements</em>.
             </td>
             <td>
-              <strong>A) Fordítsd jelölésre</strong><br/>
-              1) „Nem meleg, de szeles.” ( <span class="sym">h</span> = meleg, <span class="sym">w</span> = szeles ) → _______<br/>
-              2) „Sem mészkő, sem dolomit.” ( <span class="sym">L</span>, <span class="sym">D</span> ) → _______<br/>
-              3) „Porozitás ≥ 0,25 vagy permeabilitás ≥ 100 mD.” ( <span class="sym">P</span>, <span class="sym">K</span> ) → _______
+              Ha kikötjük, hogy <span class="sym">x, a, b</span> valós számok, akkor a <span class="sym">„x &lt; a”</span> és
+              <span class="sym">„x &ge; b”</span> típusú mondatok egyértelműen igazak vagy hamisak — vagyis <em>állítások</em>.
             </td>
-          </tr>
-          <tr>
-            <td>
-              <strong>B) Parentheses practice</strong><br/>
-              Write symbols so that only <span class="sym">h</span> is negated: “not h and s” → _______<br/>
-              Now negate the whole conjunction: “not (h and s)” → _______
-            </td>
-            <td>
-              <strong>B) Zárójeles gyakorlás</strong><br/>
-              Csak a <span class="sym">h</span> legyen tagadva: „nem h és s” → _______<br/>
-              Most az egész együttest tagadd: „nem (h és s)” → _______
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <strong>C) True/False with a scenario</strong><br/>
-              Assume: it is not hot, but sunny (<span class="sym">¬h</span> true, <span class="sym">s</span> true). Mark T/F:<br/>
-              1) <span class="sym">¬h ` s</span> ____ &nbsp; 2) <span class="sym">h ~ s</span> ____ &nbsp; 3) <span class="sym">¬(h ` s)</span> ____
-            </td>
-            <td>
-              <strong>C) Igaz/Hamis helyzettel</strong><br/>
-              Tegyük fel: nem meleg, de napos (<span class="sym">¬h</span> igaz, <span class="sym">s</span> igaz). Jelöld I/H:<br/>
-              1) <span class="sym">¬h ` s</span> ____ &nbsp; 2) <span class="sym">h ~ s</span> ____ &nbsp; 3) <span class="sym">¬(h ` s)</span> ____
-            </td>
-          </tr>
-          <tr>
-            <td class="note">Tip: “but” → AND; “neither–nor” → NOT‑A AND NOT‑B; inequalities often hide AND/OR.</td>
-            <td class="note">Tipp: „de” → ÉS; „sem–sem” → NEM‑A ÉS NEM‑B; az egyenlőtlenségekben gyakran ÉS/VAGY van elrejtve.</td>
           </tr>
         </tbody>
       </table>
