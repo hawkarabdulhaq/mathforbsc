@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Logical Symbols & Geology — EN / HU — University of Szeged</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+    --accent:#2563eb; --accent-2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --shade:rgba(15,23,42,.06); --info:#0ea5e9; --good:#16a34a;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
+      --shade:rgba(255,255,255,.06); --info:#38bdf8; --good:#22c55e;
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+    font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  /* HEADER */
+  header{
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#fff; border-radius:16px; padding:1rem 1.25rem; box-shadow:var(--shadow);
+  }
+  .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .badge{font-size:.8rem; letter-spacing:.04em; text-transform:uppercase; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:.25rem .5rem; border-radius:999px}
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow)}
+  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain}
+  .logo-chip.logo-dept img{height:55px}
+  .logo-chip.logo-szte img{height:42px}
+
+  /* CARDS */
+  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; margin-top:1rem; box-shadow:var(--shadow); overflow:hidden}
+  .bar{padding:.9rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .subtitle{font-weight:600}
+  .hint{color:var(--muted); font-size:.92rem}
+  .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600}
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+
+  /* TABLES */
+  table.twocol{width:100%; border-collapse:separate; border-spacing:0}
+  thead th{background:linear-gradient(180deg, rgba(37,99,235,.08), rgba(56,189,248,.08)); padding:.85rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border)}
+  tbody td{padding:.85rem 1rem; vertical-align:top; border-bottom:1px solid var(--border)}
+  tbody tr:nth-child(odd) td{background:var(--shade)}
+  .lang-label{display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em; padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,.15); color:#0369a1; margin-left:.5rem}
+  .sym, code, kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+  .note{color:var(--muted); font-size:.95rem}
+  ul,ol{margin:0; padding-left:1.2rem}
+  .ok{color:var(--good); font-weight:700}
+</style>
+<script>
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <!-- HEADER -->
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>Logical Symbols for Geoscience — English & Hungarian</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>Department of Atmospheric and Geospatial Data Science</h2>
+    </header>
+
+    <!-- STEP 2: MAIN LOGICAL SYMBOLS -->
+    <section class="card" aria-labelledby="step2">
+      <div class="bar">
+        <div>
+          <span id="step2" class="subtitle">🔤 Step 2: The main logical symbols / A fő logikai jelek</span>
+          <div class="hint">We use <span class="sym">¬</span> (not), <span class="sym">`</span> (and), <span class="sym">~</span> (or). In math you may also see <span class="sym">∧</span> and <span class="sym">∨</span>.</div>
+        </div>
+        <div><button class="btn" onclick="printPage()">Print</button></div>
+      </div>
+
+      <table class="twocol" role="table" aria-describedby="step2">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead>
+          <tr>
+            <th>English <span class="lang-label">EN</span></th>
+            <th>Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Symbol — Read — Meaning — Example (geology)</strong><br/>
+              <ul>
+                <li><span class="sym">¬p</span> (or <span class="sym">,p</span>) — “not p” — Negation — e.g., <span class="sym">p</span> = “The rock is basalt.” → <span class="sym">¬p</span> = “The rock is not basalt.”</li>
+                <li><span class="sym">p ` q</span> — “p and q” — Both true — “The layer is sandstone and it has ripple marks.”</li>
+                <li><span class="sym">p ~ q</span> — “p or q” — At least one true — “The deposit formed by wind or water.”</li>
+              </ul>
+              <p class="note">In computer logic you may see <span class="sym">¬</span>, <span class="sym">&amp;&amp;</span>, <span class="sym">||</span> instead.</p>
+            </td>
+            <td>
+              <strong>Jel — Olvasd — Jelentés — Példa (geológia)</strong><br/>
+              <ul>
+                <li><span class="sym">¬p</span> (vagy <span class="sym">,p</span>) — „nem p” — Tagadás — pl. <span class="sym">p</span> = „A kőzet bazalt.” → <span class="sym">¬p</span> = „A kőzet nem bazalt.”</li>
+                <li><span class="sym">p ` q</span> — „p és q” — Mindkettő igaz — „A réteg homokkő és hullámfodrok látszanak.”</li>
+                <li><span class="sym">p ~ q</span> — „p vagy q” — Legalább az egyik igaz — „A képződményt szél vagy víz hozta létre.”</li>
+              </ul>
+              <p class="note">Számítógépes környezetben gyakori: <span class="sym">¬</span>, <span class="sym">&amp;&amp;</span>, <span class="sym">||</span>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- STEP 3: ORDER OF OPERATIONS -->
+    <section class="card" aria-labelledby="step3">
+      <div class="bar">
+        <div>
+          <span id="step3" class="subtitle">⚙️ Step 3: Order of operations / Műveleti sorrend</span>
+          <div class="hint">Negation first, then AND / OR. Parentheses override.</div>
+        </div>
+      </div>
+
+      <table class="twocol" role="table" aria-describedby="step3">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead>
+          <tr>
+            <th>EN</th><th>HU</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              1️⃣ <strong>Negation</strong> (<span class="sym">¬p</span>) comes first.<br/>
+              2️⃣ Then <strong>AND</strong> (<span class="sym">`</span>) and <strong>OR</strong> (<span class="sym">~</span>).<br/><br/>
+              Examples:<br/>
+              <span class="sym">¬ p ` q</span> means <span class="sym">(¬p) ` q</span>.<br/>
+              <span class="sym">¬ (p ` q)</span> means “not (p and q)”.
+            </td>
+            <td>
+              1️⃣ <strong>A tagadás</strong> (<span class="sym">¬p</span>) az első.<br/>
+              2️⃣ Utána <strong>ÉS</strong> (<span class="sym">`</span>) és <strong>VAGY</strong> (<span class="sym">~</span>).<br/><br/>
+              Példák:<br/>
+              <span class="sym">¬ p ` q</span> jelentése: <span class="sym">(¬p) ` q</span>.<br/>
+              <span class="sym">¬ (p ` q)</span> jelentése: „nem (p és q)”.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- STEP 4: LANGUAGE TO LOGIC -->
+    <section class="card" aria-labelledby="step4">
+      <div class="bar">
+        <div>
+          <span id="step4" class="subtitle">🪨 Step 4: Everyday language → logic / Köznyelv → logika</span>
+          <div class="hint">Translate common phrases into symbols with geology anchors.</div>
+        </div>
+      </div>
+
+      <table class="twocol" role="table" aria-describedby="step4">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead>
+          <tr>
+            <th>English <span class="lang-label">EN</span></th>
+            <th>Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>“Not p”</strong> → <span class="sym">¬p</span> — “The sample is not limestone.”</td>
+            <td><strong>„Nem p”</strong> → <span class="sym">¬p</span> — „A minta nem mészkő.”</td>
+          </tr>
+          <tr>
+            <td><strong>“p and q”</strong> → <span class="sym">p ` q</span> — “The rock is fine‑grained and fossil‑rich.”</td>
+            <td><strong>„p és q”</strong> → <span class="sym">p ` q</span> — „A kőzet finomszemcsés és gazdag fosszíliákban.”</td>
+          </tr>
+          <tr>
+            <td><strong>“p or q”</strong> → <span class="sym">p ~ q</span> — “The mineral is quartz or feldspar.”</td>
+            <td><strong>„p vagy q”</strong> → <span class="sym">p ~ q</span> — „Az ásvány kvarc vagy földpát.”</td>
+          </tr>
+          <tr>
+            <td><strong>“p but q”</strong> → <span class="sym">p ` q</span> — “The soil is sandy but still holds water.”</td>
+            <td><strong>„p de q”</strong> → <span class="sym">p ` q</span> — „A talaj homokos, de mégis tartja a vizet.”</td>
+          </tr>
+          <tr>
+            <td><strong>“Neither p nor q”</strong> → <span class="sym">¬p ` ¬q</span> — “The core shows neither shale nor coal.”</td>
+            <td><strong>„Sem p, sem q”</strong> → <span class="sym">¬p ` ¬q</span> — „A magban sem pala, sem kőszén nincs.”</td>
+          </tr>
+          <tr>
+            <td class="note">Used in filters: <span class="sym">(depth &gt; 50 m) ` (porosity &gt; 0.25)</span>.</td>
+            <td class="note">Adatszűrőkben: <span class="sym">(mélység &gt; 50 m) ` (porozitás &gt; 0,25)</span>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- STEP 5: WHY IT MATTERS -->
+    <section class="card" aria-labelledby="step5">
+      <div class="bar">
+        <div>
+          <span id="step5" class="subtitle">🌋 Step 5: Why it matters in geoscience / Miért fontos a földtudományban?</span>
+        </div>
+      </div>
+      <table class="twocol" role="table" aria-describedby="step5">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead><tr><th>EN</th><th>HU</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Logical connectors help combine field evidence into testable interpretations and reproducible data filters.</td>
+            <td>A logikai kötőjelek segítenek a terepi bizonyítékokat tesztelhető értelmezéssé és megismételhető szűrőkké alakítani.</td>
+          </tr>
+          <tr>
+            <td>They prevent ambiguity in notes and reports — everyone reads the same meaning.</td>
+            <td>Csökkentik a félreértést a jegyzetekben és jelentésekben — mindenki ugyanazt érti.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- MINI ASSIGNMENTS -->
+    <section class="card" aria-labelledby="assign">
+      <div class="bar">
+        <div>
+          <span id="assign" class="subtitle">📚 Mini‑assignments / Rövid feladatok</span>
+          <div class="hint">Answer on paper or in your doc. Use the symbols <span class="sym">¬</span>, <span class="sym">`</span>, <span class="sym">~</span>.</div>
+        </div>
+      </div>
+
+      <table class="twocol" role="table" aria-describedby="assign">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead><tr><th>English <span class="lang-label">EN</span></th><th>Magyar <span class="lang-label">HU</span></th></tr></thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>A) Translate to logic (3 items)</strong><br/>
+              1) “The bed is sandstone and has cross‑bedding.” → _______<br/>
+              2) “The sample is not basalt.” → _______<br/>
+              3) “Ripple marks or mud cracks are present.” → _______
+            </td>
+            <td>
+              <strong>A) Fordítsd logikára (3 tétel)</strong><br/>
+              1) „A réteg homokkő és áthalmozódási (keresztrétegződés) jelek látszanak.” → _______<br/>
+              2) „A minta nem bazalt.” → _______<br/>
+              3) „Hullámfodrok vagy repedések vannak.” → _______
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>B) Translate to English (symbols → words)</strong><br/>
+              1) <span class="sym">¬p ` q</span> → _______________________________<br/>
+              2) <span class="sym">p ~ q</span> → _______________________________
+            </td>
+            <td>
+              <strong>B) Fordítás magyarra (jelek → mondat)</strong><br/>
+              1) <span class="sym">¬p ` q</span> → _______________________________<br/>
+              2) <span class="sym">p ~ q</span> → _______________________________
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>C) Parentheses practice</strong><br/>
+              Add parentheses to match the meaning:<br/>
+              1) not p and q (negate p only) → _______<br/>
+              2) not (p and q) → _______
+            </td>
+            <td>
+              <strong>C) Zárójel‑gyakorlás</strong><br/>
+              Tegyél zárójeleket a kívánt jelentéshez:<br/>
+              1) „nem p és q” (csak p tagadása) → _______<br/>
+              2) „nem (p és q)” → _______
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>D) Truth check (choose T/F)</strong><br/>
+              Let <span class="sym">p</span> = “rock is basalt”, <span class="sym">q</span> = “layer has ripple marks”.<br/>
+              Scenario: rock is not basalt; ripple marks present.<br/>
+              1) <span class="sym">¬p</span> (T/F): ____ &nbsp; 2) <span class="sym">p ` q</span> (T/F): ____ &nbsp; 3) <span class="sym">¬(p ` q)</span> (T/F): ____
+            </td>
+            <td>
+              <strong>D) Igazság‑ellenőrzés (I/H)</strong><br/>
+              Legyen <span class="sym">p</span> = „a kőzet bazalt”, <span class="sym">q</span> = „vannak hullámfodrok”.<br/>
+              Helyzet: nem bazalt; hullámfodrok vannak.<br/>
+              1) <span class="sym">¬p</span> (I/H): ____ &nbsp; 2) <span class="sym">p ` q</span> (I/H): ____ &nbsp; 3) <span class="sym">¬(p ` q)</span> (I/H): ____
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>E) Build a filter</strong><br/>
+              “Select samples where depth &gt; 50 m and (porosity &gt; 0.25 or permeability &gt; 100 mD).”<br/>
+              Logic: ____________________________
+            </td>
+            <td>
+              <strong>E) Szűrő megfogalmazása</strong><br/>
+              „Válaszd ki azokat, ahol mélység &gt; 50 m és (porozitás &gt; 0,25 vagy permeabilitás &gt; 100 mD).”<br/>
+              Logika: ____________________________
+            </td>
+          </tr>
+
+          <tr>
+            <td class="note">
+              Hint: Use <span class="sym">¬</span> for NOT, <span class="sym">`</span> for AND, <span class="sym">~</span> for OR. Parentheses control grouping.
+            </td>
+            <td class="note">
+              Tipp: Használd a <span class="sym">¬</span> (NEM), <span class="sym">`</span> (ÉS), <span class="sym">~</span> (VAGY) jeleket. A zárójelek csoportosítanak.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="note" style="margin-top:.75rem;">
+      <span class="ok">Teacher tip:</span> Define concrete <span class="sym">p, q</span> for your field site before students attempt the tasks, so their sentences match your context.
+    </p>
+  </div>
+</body>
+</html>
