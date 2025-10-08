@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Truth Table — (p ` q) ~ ,r — EN / HU — University of Szeged</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+    --accent:#2563eb; --accent-2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --shade:rgba(15,23,42,.06); --info:#0ea5e9; --good:#16a34a;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
+      --shade:rgba(255,255,255,.06); --info:#38bdf8; --good:#22c55e;
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+    font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  /* HEADER */
+  header{
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#fff; border-radius:16px; padding:1rem 1.25rem; box-shadow:var(--shadow);
+  }
+  .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .badge{font-size:.8rem; letter-spacing:.04em; text-transform:uppercase; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:.25rem .5rem; border-radius:999px}
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow)}
+  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain}
+  .logo-chip.logo-dept img{height:55px}
+  .logo-chip.logo-szte img{height:42px}
+
+  /* CARDS */
+  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; margin-top:1rem; box-shadow:var(--shadow); overflow:hidden}
+  .bar{padding:.9rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .subtitle{font-weight:600}
+  .hint{color:var(--muted); font-size:.92rem}
+  .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600}
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+  .call{border-left:4px solid var(--info); background:rgba(14,165,233,.08); padding:.7rem .9rem; border-radius:10px}
+  .note{color:var(--muted); font-size:.95rem}
+
+  /* TWO-COL TABLE */
+  table.twocol{width:100%; border-collapse:separate; border-spacing:0}
+  thead th{background:linear-gradient(180deg, rgba(37,99,235,.08), rgba(56,189,248,.08)); padding:.85rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border)}
+  tbody td{padding:.85rem 1rem; vertical-align:top; border-bottom:1px solid var(--border)}
+  tbody tr:nth-child(odd) td{background:var(--shade)}
+  .lang-label{display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em; padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,.15); color:#0369a1; margin-left:.5rem}
+
+  /* TRUTH TABLE */
+  .ttable{width:100%; border-collapse:separate; border-spacing:0; margin:0}
+  .ttable th, .ttable td{border-bottom:1px solid var(--border); padding:.6rem .7rem; text-align:center}
+  .ttable thead th{background:linear-gradient(180deg, rgba(37,99,235,.08), rgba(56,189,248,.08)); font-weight:800}
+  .ttable tbody tr:nth-child(odd) td{background:var(--shade)}
+  .sym, code, kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+</style>
+<script>
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <!-- HEADER -->
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>Truth Table for (p ` q) ~ ,r — English &amp; Hungarian</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>Department of Atmospheric and Geospatial Data Science</h2>
+    </header>
+
+    <!-- SYMBOLS -->
+    <section class="card" aria-labelledby="symb">
+      <div class="bar">
+        <div>
+          <span id="symb" class="subtitle">Symbols &amp; conventions / Jelek és konvenciók</span>
+          <div class="hint">NOT = leading comma <span class="sym">,</span> (also <span class="sym">¬</span>), AND = backtick <span class="sym">`</span>, OR = tilde <span class="sym">~</span>. Truth values: <strong>T</strong> / <strong>F</strong>.</div>
+        </div>
+        <div><button class="btn" onclick="printPage()">Print</button></div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="card" aria-labelledby="prob">
+      <div class="bar">
+        <div>
+          <span id="prob" class="subtitle">Problem / Feladat</span>
+          <div class="hint">Construct a truth table for <span class="sym">(p ` q) ~ ,r</span>.</div>
+        </div>
+      </div>
+      <table class="twocol" role="table" aria-describedby="prob">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead><tr><th>English <span class="lang-label">EN</span></th><th>Magyar <span class="lang-label">HU</span></th></tr></thead>
+        <tbody>
+          <tr>
+            <td>
+              Make columns: <span class="sym">p, q, r, p ` q, ,r, (p ` q) ~ ,r</span>. Enter the eight combinations for <span class="sym">p, q, r</span>, then fill <span class="sym">p ` q</span> and <span class="sym">,r</span>. Finally compute <span class="sym">(p ` q) ~ ,r</span> using that OR is false only when <em>both</em> parts are false.
+            </td>
+            <td>
+              Készíts oszlopokat: <span class="sym">p, q, r, p ` q, ,r, (p ` q) ~ ,r</span>. Írd be a <span class="sym">p, q, r</span> nyolc lehetséges kombinációját, majd töltsd ki a <span class="sym">p ` q</span> és <span class="sym">,r</span> oszlopot. Végül számold ki a <span class="sym">(p ` q) ~ ,r</span> értékét; a VAGY csak akkor hamis, ha <em>mindkét</em> rész hamis.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TRUTH TABLE -->
+    <section class="card" aria-labelledby="tt">
+      <div class="bar">
+        <div>
+          <span id="tt" class="subtitle">Truth table / Igazságtábla</span>
+          <div class="hint">False rows are exactly those with <span class="sym">r = T</span> and <span class="sym">p ` q = F</span> (rows 3, 5, 7).</div>
+        </div>
+      </div>
+      <table class="ttable" aria-label="Truth table for (p ` q) ~ ,r">
+        <thead>
+          <tr>
+            <th>p</th>
+            <th>q</th>
+            <th>r</th>
+            <th><span class="sym">p ` q</span></th>
+            <th><span class="sym">,r</span></th>
+            <th><span class="sym">(p ` q) ~ ,r</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>F</td><td>T</td></tr>
+          <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
+          <tr><td>T</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
+          <tr><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td></tr>
+          <tr><td>F</td><td>T</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
+          <tr><td>F</td><td>T</td><td>F</td><td>F</td><td>T</td><td>T</td></tr>
+          <tr><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
+          <tr><td>F</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SOLUTION EXPLANATION -->
+    <section class="card" aria-labelledby="soln">
+      <div class="bar">
+        <div><span id="soln" class="subtitle">Solution idea / Megoldási ötlet</span></div>
+      </div>
+      <table class="twocol" role="table" aria-describedby="soln">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead><tr><th>English</th><th>Magyar</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>
+              OR is false only when <span class="sym">(p ` q)</span> and <span class="sym">,r</span> are both <strong>F</strong>. That happens in rows 3, 5, and 7. All other rows are <strong>T</strong>.
+            </td>
+            <td>
+              A VAGY pontosan akkor hamis, ha <span class="sym">(p ` q)</span> és <span class="sym">,r</span> is <strong>H</strong>. Ez a 3., 5. és 7. sorban történik; minden más sor <strong>I</strong>.
+            </td>
+          </tr>
+          <tr>
+            <td class="call">
+              Key idea: assigning truth values lets you judge a compound statement using only the truth of its parts. Logic doesn’t decide the parts; it links them into a coherent whole.
+            </td>
+            <td class="call">
+              Lényeg: az igazságérték‑hozzárendelés lehetővé teszi az összetett kijelentés megítélését a részek igazsága alapján. A logika nem dönti el a részek igazságát; összekapcsolja őket koherens egésszé.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ASSIGNMENTS -->
+    <section class="card" aria-labelledby="assn">
+      <div class="bar">
+        <div>
+          <span id="assn" class="subtitle">📚 Mini‑assignments / Rövid feladatok</span>
+          <div class="hint">Use the notation: NOT = <span class="sym">,</span>, AND = <span class="sym">`</span>, OR = <span class="sym">~</span>.</div>
+        </div>
+      </div>
+      <table class="twocol" role="table" aria-describedby="assn">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead><tr><th>English <span class="lang-label">EN</span></th><th>Magyar <span class="lang-label">HU</span></th></tr></thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>A) Spot the false rows (2 pts)</strong><br/>
+              Circle or list the rows where <span class="sym">(p ` q) ~ ,r</span> is <strong>F</strong>.
+            </td>
+            <td>
+              <strong>A) Hamis sorok bejelölése (2 pont)</strong><br/>
+              Karikázd be vagy sorold fel, mely sorokban <span class="sym">(p ` q) ~ ,r</span> <strong>H</strong>.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>B) Equivalence (3 pts)</strong><br/>
+              Show with one sentence why <span class="sym">(p ` q) ~ ,r ≡ r → (p ` q)</span> using the rule <span class="sym">x → y ≡ ,x ~ y</span>.
+            </td>
+            <td>
+              <strong>B) Ekvivalencia (3 pont)</strong><br/>
+              Egy mondatban indokold, hogy <span class="sym">(p ` q) ~ ,r ≡ r → (p ` q)</span>, felhasználva a <span class="sym">x → y ≡ ,x ~ y</span> szabályt.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>C) Quick evaluations (3 pts)</strong><br/>
+              Compute <span class="sym">(p ` q) ~ ,r</span> for:<br/>
+              (i) <span class="sym">p=T, q=F, r=T</span> → _______<br/>
+              (ii) <span class="sym">p=F, q=F, r=F</span> → _______
+            </td>
+            <td>
+              <strong>C) Gyors kiértékelés (3 pont)</strong><br/>
+              Számold ki <span class="sym">(p ` q) ~ ,r</span> értékét:<br/>
+              (i) <span class="sym">p=I, q=H, r=I</span> → _______<br/>
+              (ii) <span class="sym">p=H, q=H, r=H</span> → _______
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TEACHER KEY -->
+    <section class="card" aria-labelledby="key">
+      <div class="bar">
+        <div><span id="key" class="subtitle">Teacher quick check / Tanári gyors ellenőrzés</span></div>
+      </div>
+      <table class="twocol" role="table" aria-describedby="key">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead><tr><th>English</th><th>Magyar</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>
+              A) Rows <strong>3, 5, 7</strong> are F. &nbsp;
+              B) <span class="sym">(p ` q) ~ ,r = ,r ~ (p ` q) ≡ r → (p ` q)</span>. &nbsp;
+              C) (i) <strong>F</strong>, (ii) <strong>T</strong>.
+            </td>
+            <td>
+              A) A <strong>3., 5., 7.</strong> sorok H. &nbsp;
+              B) <span class="sym">(p ` q) ~ ,r = ,r ~ (p ` q) ≡ r → (p ` q)</span>. &nbsp;
+              C) (i) <strong>H</strong>, (ii) <strong>I</strong>.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+</body>
+</html>
