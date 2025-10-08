@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Truth Tables — NAND, NOR, →, ↔, XOR — EN / HU — University of Szeged</title>
+<title>Truth Tables — NAND, NOR (worked) + Quiz 3–5 — EN / HU — University of Szeged</title>
 <style>
   :root{
     --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
     --accent:#2563eb; --accent-2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
-    --shade:rgba(15,23,42,.06); --info:#0ea5e9;
+    --shade:rgba(15,23,42,.06); --info:#0ea5e9; --warn:#f59e0b;
   }
   @media (prefers-color-scheme: dark){
     :root{
       --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
       --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
-      --shade:rgba(255,255,255,.06); --info:#38bdf8;
+      --shade:rgba(255,255,255,.06); --info:#38bdf8; --warn:#fbbf24;
     }
   }
   *{box-sizing:border-box}
@@ -48,6 +48,7 @@
   .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600}
   .btn:hover{border-color:var(--accent); color:var(--accent)}
   .call{border-left:4px solid var(--info); background:rgba(14,165,233,.08); padding:.7rem .9rem; border-radius:10px}
+  .warn{border-left:4px solid var(--warn); background:rgba(245,158,11,.08); padding:.7rem .9rem; border-radius:10px}
   .note{color:var(--muted); font-size:.95rem}
 
   /* TWO-COL TABLE */
@@ -62,8 +63,10 @@
   .ttable th, .ttable td{border-bottom:1px solid var(--border); padding:.6rem .7rem; text-align:center}
   .ttable thead th{background:linear-gradient(180deg, rgba(37,99,235,.08), rgba(56,189,248,.08)); font-weight:800}
   .ttable tbody tr:nth-child(odd) td{background:var(--shade)}
-  .left{text-align:left}
   .sym, code, kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+
+  /* QUIZ CELLS */
+  .blank{min-width:28px; height:22px; display:inline-block; border-bottom:2px dotted #cbd5e1;}
 </style>
 <script>
   function printPage(){ window.print(); }
@@ -76,7 +79,7 @@
       <div class="header-top">
         <div class="title">
           <span class="badge">University of Szeged</span>
-          <h1>Truth Tables — NAND, NOR, Implication, Biconditional, XOR — English &amp; Hungarian</h1>
+          <h1>Truth Tables — 1–2 Worked, 3–5 Assignment Quiz — English &amp; Hungarian</h1>
         </div>
         <div class="logo-row" aria-label="Department and University logos">
           <span class="logo-chip logo-dept" title="Department logo">
@@ -99,36 +102,22 @@
         </div>
         <div><button class="btn" onclick="printPage()">Print</button></div>
       </div>
-      <table class="twocol" role="table" aria-describedby="symb">
-        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
-        <thead><tr><th>English <span class="lang-label">EN</span></th><th>Magyar <span class="lang-label">HU</span></th></tr></thead>
-        <tbody>
-          <tr>
-            <td class="call">
-              Use the same four columns pattern shown for each problem. Read comma as NOT, backtick as AND, tilde as OR.
-            </td>
-            <td class="call">
-              Minden feladatnál ugyanazt az oszlopsorrendet kövesd. A vessző = NEM, a backtick = ÉS, a hullámjel = VAGY.
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="call">
+        <strong>English:</strong> #1–2 are fully worked. #3–5 are a <em>quiz</em>: fill the missing columns and truth values.<br/>
+        <strong>Magyar:</strong> Az 1–2 feladat megoldott példa. A 3–5 <em>kvíz</em>: töltsd ki a hiányzó oszlopokat és igazságértékeket.
+      </div>
     </section>
 
-    <!-- 1) NAND -->
+    <!-- 1) NAND (worked) -->
     <section class="card" aria-labelledby="nand">
       <div class="bar">
         <div>
           <span id="nand" class="subtitle">1) Truth Table for <strong>NAND</strong> / NAND (nem-ÉS)</span>
-          <div class="hint">Statement: <span class="sym">,(p ` q)</span> &nbsp; | &nbsp; Setup columns: <span class="sym">p, q, p ` q, ,(p ` q)</span></div>
+          <div class="hint">Statement: <span class="sym">,(p ` q)</span> | Setup: <span class="sym">p, q, p ` q, ,(p ` q)</span></div>
         </div>
       </div>
       <table class="ttable" aria-label="NAND truth table">
-        <thead>
-          <tr>
-            <th>p</th><th>q</th><th><span class="sym">p ` q</span></th><th><span class="sym">,(p ` q)</span></th>
-          </tr>
-        </thead>
+        <thead><tr><th>p</th><th>q</th><th><span class="sym">p ` q</span></th><th><span class="sym">,(p ` q)</span></th></tr></thead>
         <tbody>
           <tr><td>T</td><td>T</td><td>T</td><td>F</td></tr>
           <tr><td>T</td><td>F</td><td>F</td><td>T</td></tr>
@@ -138,20 +127,16 @@
       </table>
     </section>
 
-    <!-- 2) NOR -->
+    <!-- 2) NOR (worked) -->
     <section class="card" aria-labelledby="nor">
       <div class="bar">
         <div>
           <span id="nor" class="subtitle">2) Truth Table for <strong>NOR</strong> / NOR (nem-VAGY)</span>
-          <div class="hint">Statement: <span class="sym">,(p ~ q)</span> &nbsp; | &nbsp; Setup columns: <span class="sym">p, q, p ~ q, ,(p ~ q)</span></div>
+          <div class="hint">Statement: <span class="sym">,(p ~ q)</span> | Setup: <span class="sym">p, q, p ~ q, ,(p ~ q)</span></div>
         </div>
       </div>
       <table class="ttable" aria-label="NOR truth table">
-        <thead>
-          <tr>
-            <th>p</th><th>q</th><th><span class="sym">p ~ q</span></th><th><span class="sym">,(p ~ q)</span></th>
-          </tr>
-        </thead>
+        <thead><tr><th>p</th><th>q</th><th><span class="sym">p ~ q</span></th><th><span class="sym">,(p ~ q)</span></th></tr></thead>
         <tbody>
           <tr><td>T</td><td>T</td><td>T</td><td>F</td></tr>
           <tr><td>T</td><td>F</td><td>T</td><td>F</td></tr>
@@ -161,71 +146,76 @@
       </table>
     </section>
 
-    <!-- 3) IMPLICATION -->
+    <!-- 3) IMPLICATION (QUIZ) -->
     <section class="card" aria-labelledby="impl">
       <div class="bar">
         <div>
-          <span id="impl" class="subtitle">3) Truth Table for <strong>Implication</strong> (p → q) / Implikáció (ha p, akkor q)</span>
-          <div class="hint">Statement: <span class="sym">,p ~ q</span> &nbsp; | &nbsp; Setup columns: <span class="sym">p, q, ,p, ,p ~ q</span></div>
+          <span id="impl" class="subtitle">3) Quiz — Truth Table for <strong>Implication</strong> (p → q) / Kvíz — Implikáció</span>
+          <div class="hint">Statement: <span class="sym">,p ~ q</span> | Setup: <span class="sym">p, q, ,p, ,p ~ q</span></div>
         </div>
       </div>
-      <table class="ttable" aria-label="Implication truth table">
-        <thead>
-          <tr>
-            <th>p</th><th>q</th><th><span class="sym">,p</span></th><th><span class="sym">,p ~ q</span></th>
-          </tr>
-        </thead>
+      <div class="warn">
+        <strong>Task / Feladat:</strong> Fill the blanks with T or F; compute the helper column <span class="sym">,p</span> and the final column <span class="sym">,p ~ q</span>.
+      </div>
+      <table class="ttable" aria-label="Implication truth table (quiz)">
+        <thead><tr><th>p</th><th>q</th><th><span class="sym">,p</span></th><th><span class="sym">,p ~ q</span></th></tr></thead>
         <tbody>
-          <tr><td>T</td><td>T</td><td>F</td><td>T</td></tr>
-          <tr><td>T</td><td>F</td><td>F</td><td>F</td></tr>
-          <tr><td>F</td><td>T</td><td>T</td><td>T</td></tr>
-          <tr><td>F</td><td>F</td><td>T</td><td>T</td></tr>
+          <tr><td>T</td><td>T</td><td><span class="blank"></span></td><td><span class="blank"></span></td></tr>
+          <tr><td>T</td><td>F</td><td><span class="blank"></span></td><td><span class="blank"></span></td></tr>
+          <tr><td>F</td><td>T</td><td><span class="blank"></span></td><td><span class="blank"></span></td></tr>
+          <tr><td>F</td><td>F</td><td><span class="blank"></span></td><td><span class="blank"></span></td></tr>
         </tbody>
       </table>
     </section>
 
-    <!-- 4) BICONDITIONAL -->
+    <!-- 4) BICONDITIONAL (QUIZ) -->
     <section class="card" aria-labelledby="bicond">
       <div class="bar">
         <div>
-          <span id="bicond" class="subtitle">4) Truth Table for <strong>Biconditional</strong> (p ↔ q) / Ekvivalencia (p akkor és csak akkor, ha q)</span>
-          <div class="hint">Statement: <span class="sym">(p ` q) ~ (,p ` ,q)</span> &nbsp; | &nbsp; Setup columns: <span class="sym">p, q, p ` q, ,p, ,q, ,p ` ,q, (p ` q) ~ (,p ` ,q)</span></div>
+          <span id="bicond" class="subtitle">4) Quiz — Truth Table for <strong>Biconditional</strong> (p ↔ q) / Kvíz — Ekvivalencia</span>
+          <div class="hint">Statement: <span class="sym">(p ` q) ~ (,p ` ,q)</span> | Setup: <span class="sym">p, q, p ` q, ,p, ,q, ,p ` ,q, (p ` q) ~ (,p ` ,q)</span></div>
         </div>
       </div>
-      <table class="ttable" aria-label="Biconditional truth table">
+      <div class="warn">
+        <strong>Task / Feladat:</strong> Fill all helper columns first (<span class="sym">p ` q</span>, <span class="sym">,p</span>, <span class="sym">,q</span>, <span class="sym">,p ` ,q</span>), then the final column.
+      </div>
+      <table class="ttable" aria-label="Biconditional truth table (quiz)">
         <thead>
           <tr>
             <th>p</th><th>q</th><th><span class="sym">p ` q</span></th><th><span class="sym">,p</span></th><th><span class="sym">,q</span></th><th><span class="sym">,p ` ,q</span></th><th><span class="sym">(p ` q) ~ (,p ` ,q)</span></th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>T</td><td>T</td><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td></tr>
-          <tr><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td></tr>
-          <tr><td>F</td><td>T</td><td>F</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
-          <tr><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td>T</td><td>T</td></tr>
+          <tr><td>T</td><td>T</td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td></tr>
+          <tr><td>T</td><td>F</td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td></tr>
+          <tr><td>F</td><td>T</td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td></tr>
+          <tr><td>F</td><td>F</td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td></tr>
         </tbody>
       </table>
     </section>
 
-    <!-- 5) XOR (alternate form) -->
+    <!-- 5) XOR (QUIZ) -->
     <section class="card" aria-labelledby="xor">
       <div class="bar">
         <div>
-          <span id="xor" class="subtitle">5) Truth Table for <strong>Exclusive OR</strong> (XOR, alternate form) / Kizáró VAGY (XOR)</span>
-          <div class="hint">Statement: <span class="sym">(p ` ,q) ~ (,p ` q)</span> &nbsp; | &nbsp; Setup columns: <span class="sym">p, q, ,p, ,q, p ` ,q, ,p ` q, (p ` ,q) ~ (,p ` q)</span></div>
+          <span id="xor" class="subtitle">5) Quiz — Truth Table for <strong>Exclusive OR</strong> (XOR) / Kvíz — Kizáró VAGY</span>
+          <div class="hint">Statement: <span class="sym">(p ` ,q) ~ (,p ` q)</span> | Setup: <span class="sym">p, q, ,p, ,q, p ` ,q, ,p ` q, (p ` ,q) ~ (,p ` q)</span></div>
         </div>
       </div>
-      <table class="ttable" aria-label="XOR truth table">
+      <div class="warn">
+        <strong>Task / Feladat:</strong> Compute <span class="sym">,p</span>, <span class="sym">,q</span>, then the two partial conjunctions, then the final XOR column.
+      </div>
+      <table class="ttable" aria-label="XOR truth table (quiz)">
         <thead>
           <tr>
             <th>p</th><th>q</th><th><span class="sym">,p</span></th><th><span class="sym">,q</span></th><th><span class="sym">p ` ,q</span></th><th><span class="sym">,p ` q</span></th><th><span class="sym">(p ` ,q) ~ (,p ` q)</span></th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>T</td><td>T</td><td>F</td><td>F</td><td>F</td><td>F</td><td>F</td></tr>
-          <tr><td>T</td><td>F</td><td>F</td><td>T</td><td>T</td><td>F</td><td>T</td></tr>
-          <tr><td>F</td><td>T</td><td>T</td><td>F</td><td>F</td><td>T</td><td>T</td></tr>
-          <tr><td>F</td><td>F</td><td>T</td><td>T</td><td>F</td><td>F</td><td>F</td></tr>
+          <tr><td>T</td><td>T</td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td></tr>
+          <tr><td>T</td><td>F</td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td></tr>
+          <tr><td>F</td><td>T</td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td></tr>
+          <tr><td>F</td><td>F</td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td><td><span class="blank"></span></td></tr>
         </tbody>
       </table>
     </section>
@@ -235,18 +225,11 @@
       <div class="bar">
         <div><span id="tip" class="subtitle">Teacher tip / Tanári tipp</span></div>
       </div>
-      <table class="twocol" role="table" aria-describedby="tip">
-        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
-        <thead><tr><th>English <span class="lang-label">EN</span></th><th>Magyar <span class="lang-label">HU</span></th></tr></thead>
-        <tbody>
-          <tr>
-            <td>For each problem, ask students to <strong>name the connective</strong> (NAND, NOR, implication, equivalence, XOR) and mark <strong>which rows are T</strong>, then compare to the completed table.</td>
-            <td>Minden feladatnál kérd meg a diákokat, hogy <strong>nevezzék meg a kötőjelet</strong> (NAND, NOR, implikáció, ekvivalencia, XOR), és jelöljék meg, <strong>mely sorok igazak (T)</strong>, majd hasonlítsák össze a kész táblával.</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="call">
+        <strong>EN:</strong> For #3–5, have students <em>name the connective</em> and shade/highlight the <strong>T</strong> rows after computing columns.<br/>
+        <strong>HU:</strong> A 3–5. feladatnál a diákok <em>nevezzék meg a kötőjelet</em>, és jelöljék ki az <strong>I</strong> sorokat a részoszlopok kiszámítása után.
+      </div>
     </section>
-
   </div>
 </body>
 </html>
