@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Relations & Functions (Porosity Log) — University of Szeged</title>
+<style>
+  :root{
+    --bg: #f7f9fb;
+    --card: #ffffff;
+    --ink: #0f172a;
+    --muted: #475569;
+    --accent: #2563eb;
+    --accent-2: #38bdf8;
+    --border: #e2e8f0;
+    --shadow: 0 10px 30px rgba(2,6,23,0.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+    font: 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  /* HEADER */
+  header{
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:white; border-radius:16px; padding:1rem 1.25rem 1rem; box-shadow:var(--shadow);
+  }
+  .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;}
+  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;}
+  .badge{
+    font-size:.8rem; letter-spacing:.04em; text-transform:uppercase;
+    background: rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+    padding:.25rem .5rem; border-radius:999px;
+  }
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow);}
+  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain}
+  .logo-chip.logo-dept img{height:55px}
+  .logo-chip.logo-szte img{height:42px}
+
+  /* HERO GEOLOGICAL FORMATION IMAGE */
+  .hero{
+    position:relative; margin-top:1rem; border-radius:16px; overflow:hidden;
+    box-shadow:var(--shadow); border:1px solid var(--border); background:#000;
+  }
+  .hero img{
+    display:block; width:100%; height:min(48vh, 460px); object-fit:cover;
+  }
+  .hero .overlay{
+    position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.45));
+    pointer-events:none;
+  }
+  .hero .label{
+    position:absolute; left:1rem; bottom:1rem; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.6);
+    background: rgba(2,6,23,.45); backdrop-filter: blur(4px);
+    border:1px solid rgba(255,255,255,.25); border-radius:10px;
+    padding:.5rem .65rem; font-size:.95rem; line-height:1.25;
+  }
+  .hero .label strong{font-weight:700}
+  .hero .label .hu{opacity:.9; display:block; font-size:.9em}
+
+  /* CARD + TABLE */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    margin-top:1rem; box-shadow:var(--shadow); overflow:hidden;
+  }
+  .bar{
+    padding:.9rem 1rem; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  }
+  .subtitle{font-weight:600}
+  .hint{color:var(--muted); font-size:.92rem}
+  .btn{
+    border:1px solid var(--border); background:transparent; color:var(--ink);
+    padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600;
+  }
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+
+  table.twocol{width:100%; border-collapse:separate; border-spacing:0}
+  thead th{
+    background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(56,189,248,0.08));
+    padding:.85rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border);
+  }
+  tbody td{padding:1rem; vertical-align:top; border-bottom:1px solid var(--border);}
+  tbody tr:nth-child(odd) td{background: rgba(148,163,184,0.06)}
+  .lang-label{
+    display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em;
+    padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,0.15); color:#0369a1; margin-left:.5rem;
+  }
+
+  /* inner glossary tables */
+  .gloss{width:100%; border-collapse:separate; border-spacing:0}
+  .gloss th, .gloss td{padding:.55rem .6rem; border-bottom:1px dashed var(--border); vertical-align:top}
+  .gloss thead th{background:transparent; border-bottom:2px solid var(--border); font-weight:800}
+
+  /* code blocks */
+  pre{
+    margin:.55rem 0; padding:.7rem .85rem; background:#0f172a0d; border:1px solid var(--border);
+    border-radius:10px; overflow:auto;
+  }
+  code, kbd, .sym{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+  .note{color:var(--muted); font-size:.95rem}
+
+  @media (max-width:720px){
+    body{padding:1rem}
+    thead th{font-size:.95rem}
+    tbody td{font-size:.98rem}
+    .logo-chip img{height:38px}
+    .logo-chip.logo-dept img{height:48px}
+  }
+</style>
+<script>
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>Department of Atmospheric and Geospatial Data Science</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>ABDULHAQ Hawkar — Relations & Functions with a Porosity Log (EN/HU)</h2>
+    </header>
+
+    <!-- HERO Geological formation image -->
+    <figure class="hero" aria-labelledby="hero-cap">
+      <img src="https://farm1.staticflickr.com/556/32050811986_e194358289_o.jpg"
+           alt="Geological formation: rocky outcrop landscape (illustrative)" />
+      <div class="overlay" aria-hidden="true"></div>
+      <figcaption id="hero-cap" class="label">
+        <strong>Geological formation</strong> — rocky outcrop (illustrative)
+        <span class="hu">Geológiai formáció — sziklás feltárás (illusztráció)</span>
+      </figcaption>
+    </figure>
+
+    <section class="card" aria-labelledby="slide-title">
+      <div class="bar">
+        <div>
+          <div id="slide-title" class="subtitle">Slide — Glossary → Data → Functions → Quantifiers</div>
+          <div class="hint">Bilingual (English / Magyar) with a tiny porosity example</div>
+        </div>
+        <div><button class="btn" onclick="printPage()">Print</button></div>
+      </div>
+
+      <table class="twocol" role="table" aria-describedby="slide-title">
+        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <thead>
+          <tr>
+            <th scope="col">English <span class="lang-label">EN</span></th>
+            <th scope="col">Magyar <span class="lang-label">HU</span></th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- 1) Glossary -->
+          <tr>
+            <td>
+              <h3>1) Quick glossary (math ⇄ programming ⇄ geology)</h3>
+              <table class="gloss" aria-label="Glossary EN">
+                <thead>
+                  <tr><th>Math word</th><th>Programming idea</th><th>Geology meaning</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Set</strong></td><td>a list/collection (no duplicates)</td><td>depths you measured; possible porosities</td></tr>
+                  <tr><td><strong>Pair (x, y)</strong></td><td>a 2‑item tuple</td><td>(depth, porosity)</td></tr>
+                  <tr><td><strong>Relation</strong></td><td>a set of pairs</td><td>the pairs that are <strong>true</strong> in your log</td></tr>
+                  <tr><td><strong>Function</strong></td><td>a mapping / dictionary</td><td>each depth has <strong>one</strong> porosity</td></tr>
+                  <tr><td><strong>Domain</strong></td><td>the keys of the dictionary</td><td>all measured depths</td></tr>
+                  <tr><td><strong>Codomain</strong></td><td>allowed output type</td><td>porosity values (0…1)</td></tr>
+                  <tr><td><strong>Range</strong></td><td>the values actually used</td><td>porosities you really saw</td></tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <h3>1) Gyors szójegyzék (matematika ⇄ programozás ⇄ geológia)</h3>
+              <table class="gloss" aria-label="Glossary HU">
+                <thead>
+                  <tr><th>Matematikai kifejezés</th><th>Programozási ötlet</th><th>Geológiai jelentés</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Halmaz</strong></td><td>lista/gyűjtemény (duplikátum nélkül)</td><td>mért mélységek; lehetséges porozitások</td></tr>
+                  <tr><td><strong>Rendezett pár (x, y)</strong></td><td>2 elemű n‑es</td><td>(mélység, porozitás)</td></tr>
+                  <tr><td><strong>Reláció</strong></td><td>párok halmaza</td><td>a naplóban ténylegesen <strong>igaz</strong> párok</td></tr>
+                  <tr><td><strong>Függvény</strong></td><td>leképezés / „szótár”</td><td>minden mélységhez <strong>egy</strong> porozitás tartozik</td></tr>
+                  <tr><td><strong>Értelmezési tartomány</strong></td><td>a szótár kulcsai</td><td>összes mért mélység</td></tr>
+                  <tr><td><strong>Kódomain (céltartomány)</strong></td><td>megengedett kimenettípus</td><td>porozitásértékek (0…1)</td></tr>
+                  <tr><td><strong>Képhalmaz (range)</strong></td><td>ténylegesen használt értékek</td><td>a valójában kapott porozitások</td></tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- 2) Data -->
+          <tr>
+            <td>
+              <h3>2) Tiny porosity log (our data)</h3>
+              <pre><code># Depths (domain A) and possible porosities (codomain B)
+A = {1198, 1200, 1203}
+B = {0.19, 0.21, 0.24}
+
+# The measurements (a relation = set of true pairs)
+M = {(1198, 0.19), (1200, 0.24), (1203, 0.21)}</code></pre>
+              <ul class="note">
+                <li><strong>M</strong> is a <strong>relation</strong> because it’s some pairs from all possibilities (<span class="sym">A × B</span>).</li>
+                <li>In words: “at 1198 m → 0.19; at 1200 m → 0.24; at 1203 m → 0.21.”</li>
+              </ul>
+            </td>
+            <td>
+              <h3>2) Mini porozitás‑napló (adataink)</h3>
+              <pre><code># Értelmezési tartomány (A) és kódomain (B)
+A = {1198, 1200, 1203}
+B = {0.19, 0.21, 0.24}
+
+# Mérések (reláció = igaz párok halmaza)
+M = {(1198, 0.19), (1200, 0.24), (1203, 0.21)}</code></pre>
+              <ul class="note">
+                <li><strong>M</strong> egy <strong>reláció</strong>, mert az összes lehetőségből (<span class="sym">A × B</span>) néhány pár igaz.</li>
+                <li>Szavakban: „1198 m → 0.19; 1200 m → 0.24; 1203 m → 0.21”.</li>
+              </ul>
+            </td>
+          </tr>
+
+          <!-- 3) When is a function -->
+          <tr>
+            <td>
+              <h3>3) When is a relation a <em>function</em>?</h3>
+              <p>If <strong>each input depth appears once with one output</strong>. In code, think a <strong>dictionary</strong>:</p>
+              <pre><code>phi = {1198: 0.19, 1200: 0.24, 1203: 0.21}   # function: porosity at depth
+phi[1200]  # -> 0.24</code></pre>
+              <p class="note">This passes the “one depth → one porosity” rule (like the vertical‑line test).</p>
+              <p><strong>Not a function</strong> example (conflicting outputs for the same depth):</p>
+              <pre><code>M_bad = {(1200, 0.22), (1200, 0.24)}  # two outputs for 1200 -> not a function</code></pre>
+            </td>
+            <td>
+              <h3>3) Mikor <em>függvény</em> egy reláció?</h3>
+              <p>Ha <strong>minden bemenet (mélység) pontosan egyszer</strong> szerepel <strong>egy</strong> kimenettel. Kódban ez egy <strong>szótár</strong>:</p>
+              <pre><code>phi = {1198: 0.19, 1200: 0.24, 1203: 0.21}   # függvény: porozitás mélységhez
+phi[1200]  # -> 0.24</code></pre>
+              <p class="note">Ez megfelel az „egy mélység → egy porozitás” szabálynak (mint a „függőleges egyenes” próba).</p>
+              <p><strong>Nem függvény</strong> példa (ugyanahhoz a mélységhez több kimenet):</p>
+              <pre><code>M_bad = {(1200, 0.22), (1200, 0.24)}  # két kimenet 1200-hoz -> nem függvény</code></pre>
+            </td>
+          </tr>
+
+          <!-- 4) Domain/Codomain/Range -->
+          <tr>
+            <td>
+              <h3>4) Domain, Codomain, Range (super short)</h3>
+              <ul>
+                <li><strong>Domain A</strong> = <code>{1198, 1200, 1203}</code> (depths you put in).</li>
+                <li><strong>Codomain B</strong> = allowed porosity numbers (here <code>{0.19, 0.21, 0.24}</code>, but in science usually <code>[0…1]</code>).</li>
+                <li><strong>Range</strong> = <code>{0.19, 0.24, 0.21}</code> (values you actually got).</li>
+              </ul>
+              <pre><code>domain   = set(phi.keys())    # {1198, 1200, 1203}
+range_   = set(phi.values())  # {0.19, 0.21, 0.24}
+codomain = B                   # allowed porosity values</code></pre>
+            </td>
+            <td>
+              <h3>4) Értelmezési tartomány, kódomain, képhalmaz (röviden)</h3>
+              <ul>
+                <li><strong>A tartomány</strong> = <code>{1198, 1200, 1203}</code> (beadott mélységek).</li>
+                <li><strong>B kódomain</strong> = megengedett porozitások (itt <code>{0.19, 0.21, 0.24}</code>, általában <code>[0…1]</code>).</li>
+                <li><strong>Képhalmaz</strong> = <code>{0.19, 0.24, 0.21}</code> (a ténylegesen kapott értékek).</li>
+              </ul>
+              <pre><code>domain   = set(phi.keys())    # {1198, 1200, 1203}
+range_   = set(phi.values())  # {0.19, 0.21, 0.24}
+codomain = B                   # megengedett porozitásértékek</code></pre>
+            </td>
+          </tr>
+
+          <!-- 5) Any/All -->
+          <tr>
+            <td>
+              <h3>5) “Any” and “All” checks (quantifiers made easy)</h3>
+              <p>“<strong>There exists</strong> a depth with porosity ≥ 0.25?” → <code>any(...)</code></p>
+              <pre><code>any(v >= 0.25 for v in phi.values())  # False on our data</code></pre>
+              <p>“<strong>For all</strong> depths, porosity ≤ 0.30?” → <code>all(...)</code></p>
+              <pre><code>all(v <= 0.30 for v in phi.values())  # True on our data</code></pre>
+              <p class="note">Think: <code>any</code> = some, <code>all</code> = every.</p>
+            </td>
+            <td>
+              <h3>5) „Van‑e” és „minden” ellenőrzések (kvantorok egyszerűen)</h3>
+              <p>„<strong>Létezik‑e</strong> olyan mélység, ahol porozitás ≥ 0.25?” → <code>any(...)</code></p>
+              <pre><code>any(v >= 0.25 for v in phi.values())  # Hamis ezekre az adatokra</code></pre>
+              <p>„<strong>Minden</strong> mélységre porozitás ≤ 0.30?” → <code>all(...)</code></p>
+              <pre><code>all(v <= 0.30 for v in phi.values())  # Igaz ezekre az adatokra</code></pre>
+              <p class="note">Gondolat: <code>any</code> = van olyan, <code>all</code> = mindegyik.</p>
+            </td>
+          </tr>
+
+          <!-- 6) Another relation -->
+          <tr>
+            <td>
+              <h3>6) One other relation (depth vs depth)</h3>
+              <p>“<strong>Shallower than</strong>” is a relation (not a function):</p>
+              <pre><code>R_shallow = {(x, y) for x in A for y in A if x &lt; y}
+# {(1198,1200), (1198,1203), (1200,1203)}</code></pre>
+            </td>
+            <td>
+              <h3>6) Egy másik reláció (mélység vs. mélység)</h3>
+              <p>A „<strong>sekélyebb mint</strong>” egy reláció (nem függvény):</p>
+              <pre><code>R_shallow = {(x, y) for x in A for y in A if x &lt; y}
+# {(1198,1200), (1198,1203), (1200,1203)}</code></pre>
+            </td>
+          </tr>
+
+          <!-- Mini quiz -->
+          <tr>
+            <td>
+              <h3>Mini‑quiz (1 quick question)</h3>
+              <p>If we <strong>add</strong> the pair <code>(1203, 0.25)</code> to the measurements, is it still a <strong>function</strong> from depths to porosity?<br>
+              <em>Answer in one sentence: why or why not?</em></p>
+            </td>
+            <td>
+              <h3>Mini kvíz (1 gyors kérdés)</h3>
+              <p>Ha <strong>hozzáadjuk</strong> a <code>(1203, 0.25)</code> párt a mérésekhez, az továbbra is <strong>függvény</strong> lesz‑e a mélységekről porozitásra?<br>
+              <em>Válasz egy mondatban: miért igen / miért nem?</em></p>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <p class="hint" style="margin-top:.75rem;">
+      Tip: Read left (EN) then right (HU). Keep the distinction clear: <strong>domain</strong> = inputs (depths), 
+      <strong>codomain</strong> = allowed outputs, <strong>range</strong> = outputs actually seen.
+    </p>
+  </div>
+</body>
+</html>
