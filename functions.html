@@ -70,7 +70,7 @@
   .hero .label strong{font-weight:700}
   .hero .label .hu{opacity:.9; display:block; font-size:.9em}
 
-  /* CARD + TABLE */
+  /* CARD */
   .card{
     background:var(--card); border:1px solid var(--border); border-radius:16px;
     margin-top:1rem; box-shadow:var(--shadow); overflow:hidden;
@@ -87,37 +87,33 @@
   }
   .btn:hover{border-color:var(--accent); color:var(--accent)}
 
-  table.twocol{width:100%; border-collapse:separate; border-spacing:0}
-  thead th{
-    background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(56,189,248,0.08));
-    padding:.85rem 1rem; text-align:left; font-weight:700; border-bottom:1px solid var(--border);
+  /* STACKED BILINGUAL BLOCKS */
+  .block{padding:1rem}
+  .block + .block{border-top:1px solid var(--border)}
+  .lang-head{
+    display:flex; align-items:center; gap:.5rem; margin:.25rem 0 .4rem;
   }
-  tbody td{padding:1rem; vertical-align:top; border-bottom:1px solid var(--border);}
-  tbody tr:nth-child(odd) td{background: rgba(148,163,184,0.06)}
-  .lang-label{
-    display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em;
-    padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,0.15); color:#0369a1; margin-left:.5rem;
+  .lang-chip{
+    display:inline-block; font-size:.75rem; font-weight:800; letter-spacing:.04em;
+    padding:.2rem .5rem; border-radius:6px; background:rgba(56,189,248,0.15); color:#0369a1;
+    border:1px solid var(--border);
   }
+  h3{margin:.2rem 0 .6rem; font-size:1.05rem}
+  ul{margin:.45rem 0 .2rem 1.2rem}
+  .note{color:var(--muted); font-size:.95rem}
+  pre{
+    margin:.55rem 0; padding:.7rem .85rem; background:#0f172a0d; border:1px solid var(--border);
+    border-radius:10px; overflow:auto;
+  }
+  code, kbd, .sym{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
 
   /* inner glossary tables */
   .gloss{width:100%; border-collapse:separate; border-spacing:0}
   .gloss th, .gloss td{padding:.55rem .6rem; border-bottom:1px dashed var(--border); vertical-align:top}
   .gloss thead th{background:transparent; border-bottom:2px solid var(--border); font-weight:800}
 
-  /* code blocks */
-  pre{
-    margin:.55rem 0; padding:.7rem .85rem; background:#0f172a0d; border:1px solid var(--border);
-    border-radius:10px; overflow:auto;
-  }
-  code, kbd, .sym{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
-  .note{color:var(--muted); font-size:.95rem}
-
   @media (max-width:720px){
     body{padding:1rem}
-    thead th{font-size:.95rem}
-    tbody td{font-size:.98rem}
-    .logo-chip img{height:38px}
-    .logo-chip.logo-dept img{height:48px}
   }
 </style>
 <script>
@@ -159,194 +155,173 @@
       <div class="bar">
         <div>
           <div id="slide-title" class="subtitle">Slide — Glossary → Data → Functions → Quantifiers</div>
-          <div class="hint">Bilingual (English / Magyar) with a tiny porosity example</div>
+          <div class="hint">Bilingual (English / Magyar), stacked per section for easier reading</div>
         </div>
         <div><button class="btn" onclick="printPage()">Print</button></div>
       </div>
 
-      <table class="twocol" role="table" aria-describedby="slide-title">
-        <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
-        <thead>
-          <tr>
-            <th scope="col">English <span class="lang-label">EN</span></th>
-            <th scope="col">Magyar <span class="lang-label">HU</span></th>
-          </tr>
-        </thead>
-        <tbody>
+      <!-- 1) Glossary -->
+      <div class="block" aria-labelledby="sec1-en">
+        <div class="lang-head"><span class="lang-chip">English</span></div>
+        <h3 id="sec1-en">1) Quick glossary (math ⇄ programming ⇄ geology)</h3>
+        <table class="gloss" aria-label="Glossary EN">
+          <thead>
+            <tr><th>Math word</th><th>Programming idea</th><th>Geology meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Set</strong></td><td>a list/collection (no duplicates)</td><td>depths you measured; possible porosities</td></tr>
+            <tr><td><strong>Pair (x, y)</strong></td><td>a 2‑item tuple</td><td>(depth, porosity)</td></tr>
+            <tr><td><strong>Relation</strong></td><td>a set of pairs</td><td>the pairs that are <strong>true</strong> in your log</td></tr>
+            <tr><td><strong>Function</strong></td><td>a mapping / dictionary</td><td>each depth has <strong>one</strong> porosity</td></tr>
+            <tr><td><strong>Domain</strong></td><td>the keys of the dictionary</td><td>all measured depths</td></tr>
+            <tr><td><strong>Codomain</strong></td><td>allowed output type</td><td>porosity values (0…1)</td></tr>
+            <tr><td><strong>Range</strong></td><td>the values actually used</td><td>porosities you really saw</td></tr>
+          </tbody>
+        </table>
+        <div class="lang-head" style="margin-top:.9rem;"><span class="lang-chip">Magyar</span></div>
+        <h3>1) Gyors szójegyzék (matematika ⇄ programozás ⇄ geológia)</h3>
+        <table class="gloss" aria-label="Glossary HU">
+          <thead>
+            <tr><th>Matematikai kifejezés</th><th>Programozási ötlet</th><th>Geológiai jelentés</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Halmaz</strong></td><td>lista/gyűjtemény (duplikátum nélkül)</td><td>mért mélységek; lehetséges porozitások</td></tr>
+            <tr><td><strong>Rendezett pár (x, y)</strong></td><td>2 elemű n‑es</td><td>(mélység, porozitás)</td></tr>
+            <tr><td><strong>Reláció</strong></td><td>párok halmaza</td><td>a naplóban ténylegesen <strong>igaz</strong> párok</td></tr>
+            <tr><td><strong>Függvény</strong></td><td>leképezés / „szótár”</td><td>minden mélységhez <strong>egy</strong> porozitás tartozik</td></tr>
+            <tr><td><strong>Értelmezési tartomány</strong></td><td>a szótár kulcsai</td><td>összes mért mélység</td></tr>
+            <tr><td><strong>Kódomain (céltartomány)</strong></td><td>megengedett kimenettípus</td><td>porozitásértékek (0…1)</td></tr>
+            <tr><td><strong>Képhalmaz (range)</strong></td><td>ténylegesen használt értékek</td><td>a valójában kapott porozitások</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-          <!-- 1) Glossary -->
-          <tr>
-            <td>
-              <h3>1) Quick glossary (math ⇄ programming ⇄ geology)</h3>
-              <table class="gloss" aria-label="Glossary EN">
-                <thead>
-                  <tr><th>Math word</th><th>Programming idea</th><th>Geology meaning</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td><strong>Set</strong></td><td>a list/collection (no duplicates)</td><td>depths you measured; possible porosities</td></tr>
-                  <tr><td><strong>Pair (x, y)</strong></td><td>a 2‑item tuple</td><td>(depth, porosity)</td></tr>
-                  <tr><td><strong>Relation</strong></td><td>a set of pairs</td><td>the pairs that are <strong>true</strong> in your log</td></tr>
-                  <tr><td><strong>Function</strong></td><td>a mapping / dictionary</td><td>each depth has <strong>one</strong> porosity</td></tr>
-                  <tr><td><strong>Domain</strong></td><td>the keys of the dictionary</td><td>all measured depths</td></tr>
-                  <tr><td><strong>Codomain</strong></td><td>allowed output type</td><td>porosity values (0…1)</td></tr>
-                  <tr><td><strong>Range</strong></td><td>the values actually used</td><td>porosities you really saw</td></tr>
-                </tbody>
-              </table>
-            </td>
-            <td>
-              <h3>1) Gyors szójegyzék (matematika ⇄ programozás ⇄ geológia)</h3>
-              <table class="gloss" aria-label="Glossary HU">
-                <thead>
-                  <tr><th>Matematikai kifejezés</th><th>Programozási ötlet</th><th>Geológiai jelentés</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td><strong>Halmaz</strong></td><td>lista/gyűjtemény (duplikátum nélkül)</td><td>mért mélységek; lehetséges porozitások</td></tr>
-                  <tr><td><strong>Rendezett pár (x, y)</strong></td><td>2 elemű n‑es</td><td>(mélység, porozitás)</td></tr>
-                  <tr><td><strong>Reláció</strong></td><td>párok halmaza</td><td>a naplóban ténylegesen <strong>igaz</strong> párok</td></tr>
-                  <tr><td><strong>Függvény</strong></td><td>leképezés / „szótár”</td><td>minden mélységhez <strong>egy</strong> porozitás tartozik</td></tr>
-                  <tr><td><strong>Értelmezési tartomány</strong></td><td>a szótár kulcsai</td><td>összes mért mélység</td></tr>
-                  <tr><td><strong>Kódomain (céltartomány)</strong></td><td>megengedett kimenettípus</td><td>porozitásértékek (0…1)</td></tr>
-                  <tr><td><strong>Képhalmaz (range)</strong></td><td>ténylegesen használt értékek</td><td>a valójában kapott porozitások</td></tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-
-          <!-- 2) Data -->
-          <tr>
-            <td>
-              <h3>2) Tiny porosity log (our data)</h3>
-              <pre><code># Depths (domain A) and possible porosities (codomain B)
+      <!-- 2) Data -->
+      <div class="block" aria-labelledby="sec2-en">
+        <div class="lang-head"><span class="lang-chip">English</span></div>
+        <h3 id="sec2-en">2) Tiny porosity log (our data)</h3>
+        <pre><code># Depths (domain A) and possible porosities (codomain B)
 A = {1198, 1200, 1203}
 B = {0.19, 0.21, 0.24}
 
 # The measurements (a relation = set of true pairs)
 M = {(1198, 0.19), (1200, 0.24), (1203, 0.21)}</code></pre>
-              <ul class="note">
-                <li><strong>M</strong> is a <strong>relation</strong> because it’s some pairs from all possibilities (<span class="sym">A × B</span>).</li>
-                <li>In words: “at 1198 m → 0.19; at 1200 m → 0.24; at 1203 m → 0.21.”</li>
-              </ul>
-            </td>
-            <td>
-              <h3>2) Mini porozitás‑napló (adataink)</h3>
-              <pre><code># Értelmezési tartomány (A) és kódomain (B)
+        <ul class="note">
+          <li><strong>M</strong> is a <strong>relation</strong> because it’s some pairs from all possibilities (<span class="sym">A × B</span>).</li>
+          <li>In words: “at 1198 m → 0.19; at 1200 m → 0.24; at 1203 m → 0.21.”</li>
+        </ul>
+
+        <div class="lang-head" style="margin-top:.9rem;"><span class="lang-chip">Magyar</span></div>
+        <h3>2) Mini porozitás‑napló (adataink)</h3>
+        <pre><code># Értelmezési tartomány (A) és kódomain (B)
 A = {1198, 1200, 1203}
 B = {0.19, 0.21, 0.24}
 
 # Mérések (reláció = igaz párok halmaza)
 M = {(1198, 0.19), (1200, 0.24), (1203, 0.21)}</code></pre>
-              <ul class="note">
-                <li><strong>M</strong> egy <strong>reláció</strong>, mert az összes lehetőségből (<span class="sym">A × B</span>) néhány pár igaz.</li>
-                <li>Szavakban: „1198 m → 0.19; 1200 m → 0.24; 1203 m → 0.21”.</li>
-              </ul>
-            </td>
-          </tr>
+        <ul class="note">
+          <li><strong>M</strong> egy <strong>reláció</strong>, mert az összes lehetőségből (<span class="sym">A × B</span>) néhány pár igaz.</li>
+          <li>Szavakban: „1198 m → 0.19; 1200 m → 0.24; 1203 m → 0.21”.</li>
+        </ul>
+      </div>
 
-          <!-- 3) When is a function -->
-          <tr>
-            <td>
-              <h3>3) When is a relation a <em>function</em>?</h3>
-              <p>If <strong>each input depth appears once with one output</strong>. In code, think a <strong>dictionary</strong>:</p>
-              <pre><code>phi = {1198: 0.19, 1200: 0.24, 1203: 0.21}   # function: porosity at depth
+      <!-- 3) Function -->
+      <div class="block" aria-labelledby="sec3-en">
+        <div class="lang-head"><span class="lang-chip">English</span></div>
+        <h3 id="sec3-en">3) When is a relation a <em>function</em>?</h3>
+        <p>If <strong>each input depth appears once with one output</strong>. In code, think a <strong>dictionary</strong>:</p>
+        <pre><code>phi = {1198: 0.19, 1200: 0.24, 1203: 0.21}   # function: porosity at depth
 phi[1200]  # -> 0.24</code></pre>
-              <p class="note">This passes the “one depth → one porosity” rule (like the vertical‑line test).</p>
-              <p><strong>Not a function</strong> example (conflicting outputs for the same depth):</p>
-              <pre><code>M_bad = {(1200, 0.22), (1200, 0.24)}  # two outputs for 1200 -> not a function</code></pre>
-            </td>
-            <td>
-              <h3>3) Mikor <em>függvény</em> egy reláció?</h3>
-              <p>Ha <strong>minden bemenet (mélység) pontosan egyszer</strong> szerepel <strong>egy</strong> kimenettel. Kódban ez egy <strong>szótár</strong>:</p>
-              <pre><code>phi = {1198: 0.19, 1200: 0.24, 1203: 0.21}   # függvény: porozitás mélységhez
-phi[1200]  # -> 0.24</code></pre>
-              <p class="note">Ez megfelel az „egy mélység → egy porozitás” szabálynak (mint a „függőleges egyenes” próba).</p>
-              <p><strong>Nem függvény</strong> példa (ugyanahhoz a mélységhez több kimenet):</p>
-              <pre><code>M_bad = {(1200, 0.22), (1200, 0.24)}  # két kimenet 1200-hoz -> nem függvény</code></pre>
-            </td>
-          </tr>
+        <p class="note">This passes the “one depth → one porosity” rule (like the vertical‑line test).</p>
+        <p><strong>Not a function</strong> example (conflicting outputs for the same depth):</p>
+        <pre><code>M_bad = {(1200, 0.22), (1200, 0.24)}  # two outputs for 1200 -> not a function</code></pre>
 
-          <!-- 4) Domain/Codomain/Range -->
-          <tr>
-            <td>
-              <h3>4) Domain, Codomain, Range (super short)</h3>
-              <ul>
-                <li><strong>Domain A</strong> = <code>{1198, 1200, 1203}</code> (depths you put in).</li>
-                <li><strong>Codomain B</strong> = allowed porosity numbers (here <code>{0.19, 0.21, 0.24}</code>, but in science usually <code>[0…1]</code>).</li>
-                <li><strong>Range</strong> = <code>{0.19, 0.24, 0.21}</code> (values you actually got).</li>
-              </ul>
-              <pre><code>domain   = set(phi.keys())    # {1198, 1200, 1203}
+        <div class="lang-head" style="margin-top:.9rem;"><span class="lang-chip">Magyar</span></div>
+        <h3>3) Mikor <em>függvény</em> egy reláció?</h3>
+        <p>Ha <strong>minden bemenet (mélység) pontosan egyszer</strong> szerepel <strong>egy</strong> kimenettel. Kódban ez egy <strong>szótár</strong>:</p>
+        <pre><code>phi = {1198: 0.19, 1200: 0.24, 1203: 0.21}   # függvény: porozitás mélységhez
+phi[1200]  # -> 0.24</code></pre>
+        <p class="note">Ez megfelel az „egy mélység → egy porozitás” szabálynak (mint a „függőleges egyenes” próba).</p>
+        <p><strong>Nem függvény</strong> példa (ugyanahhoz a mélységhez több kimenet):</p>
+        <pre><code>M_bad = {(1200, 0.22), (1200, 0.24)}  # két kimenet 1200-hoz -> nem függvény</code></pre>
+      </div>
+
+      <!-- 4) Domain/Codomain/Range -->
+      <div class="block" aria-labelledby="sec4-en">
+        <div class="lang-head"><span class="lang-chip">English</span></div>
+        <h3 id="sec4-en">4) Domain, Codomain, Range (super short)</h3>
+        <ul>
+          <li><strong>Domain A</strong> = <code>{1198, 1200, 1203}</code> (depths you put in).</li>
+          <li><strong>Codomain B</strong> = allowed porosity numbers (here <code>{0.19, 0.21, 0.24}</code>, but in science usually <code>[0…1]</code>).</li>
+          <li><strong>Range</strong> = <code>{0.19, 0.24, 0.21}</code> (values you actually got).</li>
+        </ul>
+        <pre><code>domain   = set(phi.keys())    # {1198, 1200, 1203}
 range_   = set(phi.values())  # {0.19, 0.21, 0.24}
 codomain = B                   # allowed porosity values</code></pre>
-            </td>
-            <td>
-              <h3>4) Értelmezési tartomány, kódomain, képhalmaz (röviden)</h3>
-              <ul>
-                <li><strong>A tartomány</strong> = <code>{1198, 1200, 1203}</code> (beadott mélységek).</li>
-                <li><strong>B kódomain</strong> = megengedett porozitások (itt <code>{0.19, 0.21, 0.24}</code>, általában <code>[0…1]</code>).</li>
-                <li><strong>Képhalmaz</strong> = <code>{0.19, 0.24, 0.21}</code> (a ténylegesen kapott értékek).</li>
-              </ul>
-              <pre><code>domain   = set(phi.keys())    # {1198, 1200, 1203}
+
+        <div class="lang-head" style="margin-top:.9rem;"><span class="lang-chip">Magyar</span></div>
+        <h3>4) Értelmezési tartomány, kódomain, képhalmaz (röviden)</h3>
+        <ul>
+          <li><strong>A tartomány</strong> = <code>{1198, 1200, 1203}</code> (beadott mélységek).</li>
+          <li><strong>B kódomain</strong> = megengedett porozitások (itt <code>{0.19, 0.21, 0.24}</code>, általában <code>[0…1]</code>).</li>
+          <li><strong>Képhalmaz</strong> = <code>{0.19, 0.24, 0.21}</code> (a ténylegesen kapott értékek).</li>
+        </ul>
+        <pre><code>domain   = set(phi.keys())    # {1198, 1200, 1203}
 range_   = set(phi.values())  # {0.19, 0.21, 0.24}
 codomain = B                   # megengedett porozitásértékek</code></pre>
-            </td>
-          </tr>
+      </div>
 
-          <!-- 5) Any/All -->
-          <tr>
-            <td>
-              <h3>5) “Any” and “All” checks (quantifiers made easy)</h3>
-              <p>“<strong>There exists</strong> a depth with porosity ≥ 0.25?” → <code>any(...)</code></p>
-              <pre><code>any(v >= 0.25 for v in phi.values())  # False on our data</code></pre>
-              <p>“<strong>For all</strong> depths, porosity ≤ 0.30?” → <code>all(...)</code></p>
-              <pre><code>all(v <= 0.30 for v in phi.values())  # True on our data</code></pre>
-              <p class="note">Think: <code>any</code> = some, <code>all</code> = every.</p>
-            </td>
-            <td>
-              <h3>5) „Van‑e” és „minden” ellenőrzések (kvantorok egyszerűen)</h3>
-              <p>„<strong>Létezik‑e</strong> olyan mélység, ahol porozitás ≥ 0.25?” → <code>any(...)</code></p>
-              <pre><code>any(v >= 0.25 for v in phi.values())  # Hamis ezekre az adatokra</code></pre>
-              <p>„<strong>Minden</strong> mélységre porozitás ≤ 0.30?” → <code>all(...)</code></p>
-              <pre><code>all(v <= 0.30 for v in phi.values())  # Igaz ezekre az adatokra</code></pre>
-              <p class="note">Gondolat: <code>any</code> = van olyan, <code>all</code> = mindegyik.</p>
-            </td>
-          </tr>
+      <!-- 5) Any/All -->
+      <div class="block" aria-labelledby="sec5-en">
+        <div class="lang-head"><span class="lang-chip">English</span></div>
+        <h3 id="sec5-en">5) “Any” and “All” checks (quantifiers made easy)</h3>
+        <p>“<strong>There exists</strong> a depth with porosity ≥ 0.25?” → <code>any(...)</code></p>
+        <pre><code>any(v >= 0.25 for v in phi.values())  # False on our data</code></pre>
+        <p>“<strong>For all</strong> depths, porosity ≤ 0.30?” → <code>all(...)</code></p>
+        <pre><code>all(v <= 0.30 for v in phi.values())  # True on our data</code></pre>
+        <p class="note">Think: <code>any</code> = some, <code>all</code> = every.</p>
 
-          <!-- 6) Another relation -->
-          <tr>
-            <td>
-              <h3>6) One other relation (depth vs depth)</h3>
-              <p>“<strong>Shallower than</strong>” is a relation (not a function):</p>
-              <pre><code>R_shallow = {(x, y) for x in A for y in A if x &lt; y}
+        <div class="lang-head" style="margin-top:.9rem;"><span class="lang-chip">Magyar</span></div>
+        <h3>5) „Van‑e” és „minden” ellenőrzések (kvantorok egyszerűen)</h3>
+        <p>„<strong>Létezik‑e</strong> olyan mélység, ahol porozitás ≥ 0.25?” → <code>any(...)</code></p>
+        <pre><code>any(v >= 0.25 for v in phi.values())  # Hamis ezekre az adatokra</code></pre>
+        <p>„<strong>Minden</strong> mélységre porozitás ≤ 0.30?” → <code>all(...)</code></p>
+        <pre><code>all(v <= 0.30 for v in phi.values())  # Igaz ezekre az adatokra</code></pre>
+        <p class="note">Gondolat: <code>any</code> = van olyan, <code>all</code> = mindegyik.</p>
+      </div>
+
+      <!-- 6) Another relation -->
+      <div class="block" aria-labelledby="sec6-en">
+        <div class="lang-head"><span class="lang-chip">English</span></div>
+        <h3 id="sec6-en">6) One other relation (depth vs depth)</h3>
+        <p>“<strong>Shallower than</strong>” is a relation (not a function):</p>
+        <pre><code>R_shallow = {(x, y) for x in A for y in A if x &lt; y}
 # {(1198,1200), (1198,1203), (1200,1203)}</code></pre>
-            </td>
-            <td>
-              <h3>6) Egy másik reláció (mélység vs. mélység)</h3>
-              <p>A „<strong>sekélyebb mint</strong>” egy reláció (nem függvény):</p>
-              <pre><code>R_shallow = {(x, y) for x in A for y in A if x &lt; y}
+
+        <div class="lang-head" style="margin-top:.9rem;"><span class="lang-chip">Magyar</span></div>
+        <h3>6) Egy másik reláció (mélység vs. mélység)</h3>
+        <p>A „<strong>sekélyebb mint</strong>” egy reláció (nem függvény):</p>
+        <pre><code>R_shallow = {(x, y) for x in A for y in A if x &lt; y}
 # {(1198,1200), (1198,1203), (1200,1203)}</code></pre>
-            </td>
-          </tr>
+      </div>
 
-          <!-- Mini quiz -->
-          <tr>
-            <td>
-              <h3>Mini‑quiz (1 quick question)</h3>
-              <p>If we <strong>add</strong> the pair <code>(1203, 0.25)</code> to the measurements, is it still a <strong>function</strong> from depths to porosity?<br>
-              <em>Answer in one sentence: why or why not?</em></p>
-            </td>
-            <td>
-              <h3>Mini kvíz (1 gyors kérdés)</h3>
-              <p>Ha <strong>hozzáadjuk</strong> a <code>(1203, 0.25)</code> párt a mérésekhez, az továbbra is <strong>függvény</strong> lesz‑e a mélységekről porozitásra?<br>
-              <em>Válasz egy mondatban: miért igen / miért nem?</em></p>
-            </td>
-          </tr>
+      <!-- Mini quiz -->
+      <div class="block" aria-labelledby="quiz-en">
+        <div class="lang-head"><span class="lang-chip">English</span></div>
+        <h3 id="quiz-en">Mini‑quiz (1 quick question)</h3>
+        <p>If we <strong>add</strong> the pair <code>(1203, 0.25)</code> to the measurements, is it still a <strong>function</strong> from depths to porosity?<br>
+        <em>Answer in one sentence: why or why not?</em></p>
 
-        </tbody>
-      </table>
+        <div class="lang-head" style="margin-top:.9rem;"><span class="lang-chip">Magyar</span></div>
+        <h3>Mini kvíz (1 gyors kérdés)</h3>
+        <p>Ha <strong>hozzáadjuk</strong> a <code>(1203, 0.25)</code> párt a mérésekhez, az továbbra is <strong>függvény</strong> lesz‑e a mélységekről porozitásra?<br>
+        <em>Válasz egy mondatban: miért igen / miért nem?</em></p>
+      </div>
+
     </section>
 
     <p class="hint" style="margin-top:.75rem;">
-      Tip: Read left (EN) then right (HU). Keep the distinction clear: <strong>domain</strong> = inputs (depths), 
-      <strong>codomain</strong> = allowed outputs, <strong>range</strong> = outputs actually seen.
+      Tip: Each section shows English first, then Hungarian. This stacked layout avoids wide tables on small screens.
     </p>
   </div>
 </body>
