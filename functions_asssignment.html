@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kickoff Exam / Poll (10 Questions) — Functions & Well Logs (EN/HU) — University of Szeged</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+    --accent:#2563eb; --accent-2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --choice:#0b1220; --choice-bg:rgba(148,163,184,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
+      --choice:#e6ebf5; --choice-bg:rgba(148,163,184,.12);
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+    font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  /* HEADER */
+  header{
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:#fff; border-radius:16px; padding:1rem 1.25rem; box-shadow:var(--shadow);
+  }
+  .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .badge{
+    font-size:.8rem; letter-spacing:.04em; text-transform:uppercase;
+    background: rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+    padding:.25rem .5rem; border-radius:999px;
+  }
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow)}
+  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain}
+  .logo-chip.logo-dept img{height:55px}
+  .logo-chip.logo-szte img{height:42px}
+
+  /* CARD + QUESTIONS */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    margin-top:1rem; box-shadow:var(--shadow); overflow:hidden;
+  }
+  .bar{
+    padding:.9rem 1rem; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  }
+  .subtitle{font-weight:600}
+  .hint{color:var(--muted); font-size:.92rem}
+  .btn{
+    border:1px solid var(--border); background:transparent; color:var(--ink);
+    padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600;
+  }
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+  .btn.primary{background:var(--accent); color:#fff; border-color:transparent}
+  .btn.primary:hover{filter:brightness(1.05)}
+  .btn.ghost{background:transparent}
+
+  .question{padding:1rem}
+  .question + .question{border-top:1px solid var(--border)}
+  .q-head{display:flex; align-items:center; gap:.6rem; margin-bottom:.25rem}
+  .q-num{
+    width:34px; height:34px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center;
+    background:rgba(56,189,248,.15); color:#0369a1; font-weight:800; border:1px solid var(--border);
+  }
+  .q-title{font-weight:700}
+  .q-lines{margin:.25rem 0 .4rem}
+  .line{margin:.15rem 0}
+  .lang-chip{
+    display:inline-block; font-size:.72rem; font-weight:800; letter-spacing:.04em;
+    padding:.18rem .5rem; border-radius:6px; background:rgba(56,189,248,0.15); color:#0369a1; border:1px solid var(--border);
+    margin-right:.45rem;
+  }
+
+  .choices{display:grid; grid-template-columns:1fr; gap:.5rem; margin:.5rem 0}
+  .choice{
+    display:flex; align-items:flex-start; gap:.6rem; padding:.65rem .7rem; border-radius:10px;
+    background:var(--choice-bg); border:1px solid var(--border);
+  }
+  .choice label{cursor:pointer; color:var(--choice)}
+  .choice input{margin-top:.2rem}
+
+  textarea, input[type="text"], input[type="number"]{
+    width:100%; padding:.7rem .8rem; border:1px solid var(--border); border-radius:10px; font:inherit; background:transparent; color:inherit;
+  }
+  textarea{min-height:90px; resize:vertical}
+
+  /* slider row */
+  .slider-row{display:flex; align-items:center; gap:.8rem; flex-wrap:wrap}
+  input[type="range"]{width:280px}
+
+  /* word cloud */
+  .cloud-wrap{display:grid; grid-template-columns: 1fr; gap:.6rem}
+  .cloud{
+    min-height:110px; border:1px dashed var(--border); border-radius:10px; padding:.6rem .7rem; display:flex; flex-wrap:wrap; gap:.45rem; align-items:flex-start;
+    background:rgba(148,163,184,.06);
+  }
+  .tag{padding:.15rem .4rem; border-radius:999px; border:1px solid var(--border)}
+  small.note{color:var(--muted)}
+
+  /* footer */
+  .actions{display:flex; gap:.5rem; padding:1rem; border-top:1px solid var(--border); flex-wrap:wrap; justify-content:flex-end}
+  .summary{padding:1rem; background:rgba(148,163,184,.06); border-top:1px solid var(--border); display:none}
+  .summary pre{margin:0; white-space:pre-wrap}
+
+  @media (max-width:720px){ body{padding:1rem} }
+</style>
+<script>
+  function $(sel, root=document){ return root.querySelector(sel); }
+  function $all(sel, root=document){ return Array.from(root.querySelectorAll(sel)); }
+
+  function serializeForm() {
+    const data = {};
+    // Q1
+    data.q1 = (document.querySelector('input[name="q1"]:checked')||{}).value || null;
+    // Q2
+    data.q2 = (document.querySelector('input[name="q2"]:checked')||{}).value || null;
+    // Q3 open text
+    data.q3 = $('#q3text').value.trim();
+    // Q4
+    data.q4 = (document.querySelector('input[name="q4"]:checked')||{}).value || null;
+    // Q5 word cloud (array of words)
+    data.q5_words = $all('.cloud .tag').map(t => t.textContent);
+
+    // Q6 multi-select (checkboxes)
+    data.q6 = $all('input[name="q6"]:checked').map(x=>x.value);
+
+    // Q7 slider numeric
+    data.q7_threshold_pct = Number($('#q7range').value);
+
+    // Q8 radio
+    data.q8 = (document.querySelector('input[name="q8"]:checked')||{}).value || null;
+
+    // Q9 open text
+    data.q9 = $('#q9text').value.trim();
+
+    // Q10 radio
+    data.q10 = (document.querySelector('input[name="q10"]:checked')||{}).value || null;
+
+    return data;
+  }
+
+  function submitExam(){
+    const data = serializeForm();
+    localStorage.setItem('exam_fun_porosity_v2', JSON.stringify(data));
+    const sum = $('#summary');
+    sum.style.display = 'block';
+    $('#summaryPre').textContent = JSON.stringify(data, null, 2);
+    window.scrollTo({ top: sum.offsetTop - 16, behavior: 'smooth' });
+  }
+
+  function clearExam(){
+    localStorage.removeItem('exam_fun_porosity_v2');
+    $all('input[type="radio"]').forEach(r => r.checked = false);
+    $all('input[type="checkbox"]').forEach(c => c.checked = false);
+    $('#q3text').value = '';
+    $('#q9text').value = '';
+    $('.cloud').innerHTML = '';
+    $('#q7range').value = 20;
+    $('#q7out').value = '20%';
+    $('#summary').style.display = 'none';
+    Object.keys(counts).forEach(k => delete counts[k]);
+  }
+
+  // Word cloud helpers
+  const counts = {};
+  function addWords(){
+    const raw = $('#cloudInput').value.trim();
+    if(!raw) return;
+    const parts = raw.split(/[,\s]+/).filter(Boolean);
+    parts.forEach(w => {
+      const key = w.toLowerCase();
+      counts[key] = (counts[key] || 0) + 1;
+    });
+    $('#cloudInput').value = '';
+    renderCloud();
+  }
+  function renderCloud(){
+    const wrap = $('.cloud');
+    wrap.innerHTML = '';
+    const entries = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,60);
+    if(entries.length === 0){
+      wrap.innerHTML = '<small class="note">Word cloud will appear here. / A szófelhő itt fog megjelenni.</small>';
+      return;
+    }
+    const max = entries[0][1] || 1;
+    entries.forEach(([w,c])=>{
+      const span = document.createElement('span');
+      const size = 12 + Math.round(18 * (c/max));
+      span.className = 'tag';
+      span.style.fontSize = size+'px';
+      span.textContent = w;
+      wrap.appendChild(span);
+    });
+  }
+
+  function printPage(){ window.print(); }
+
+  window.addEventListener('DOMContentLoaded', ()=>{
+    // slider output binding
+    const rng = $('#q7range');
+    const out = $('#q7out');
+    rng.addEventListener('input', ()=> out.value = rng.value + '%');
+
+    // Restore saved
+    try{
+      const saved = JSON.parse(localStorage.getItem('exam_fun_porosity_v2')||'null');
+      if(saved){
+        // radios
+        ['q1','q2','q4','q8','q10'].forEach(k=>{
+          if(saved[k]){
+            const el = document.querySelector(`input[name="${k}"][value="${saved[k]}"]`);
+            if(el) el.checked = true;
+          }
+        });
+        // q3 / q9
+        $('#q3text').value = saved.q3 || '';
+        $('#q9text').value = saved.q9 || '';
+        // q5 words
+        if(Array.isArray(saved.q5_words)){
+          saved.q5_words.forEach(w=>{
+            const key = String(w).toLowerCase();
+            counts[key] = (counts[key]||0)+1;
+          });
+        }
+        renderCloud();
+        // q6 checkboxes
+        if(Array.isArray(saved.q6)){
+          saved.q6.forEach(v=>{
+            const el = document.querySelector(`input[name="q6"][value="${v}"]`);
+            if(el) el.checked = true;
+          });
+        }
+        // q7 slider
+        if(typeof saved.q7_threshold_pct === 'number'){
+          rng.value = saved.q7_threshold_pct;
+          out.value = saved.q7_threshold_pct + '%';
+        } else {
+          out.value = rng.value + '%';
+        }
+      } else {
+        renderCloud();
+        out.value = rng.value + '%';
+      }
+    }catch(e){
+      renderCloud();
+      out.value = $('#q7range').value + '%';
+    }
+  });
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>Department of Atmospheric and Geospatial Data Science</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>Kickoff Exam / Poll — Functions & Porosity Logs (10 Questions, EN/HU)</h2>
+    </header>
+
+    <section class="card" aria-labelledby="slide-title">
+      <div class="bar" style="background:linear-gradient(180deg, rgba(37,99,235,0.08), rgba(56,189,248,0.08));">
+        <div>
+          <div id="slide-title" class="subtitle">Use as multiple‑choice or open‑text polls (stacked bilingual prompts)</div>
+          <div class="hint">English first, then Hungarian for the same question.</div>
+        </div>
+        <div><button class="btn ghost" onclick="printPage()">Print</button></div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="question" id="q1">
+        <div class="q-head"><span class="q-num">1</span><div class="q-title">Identity &amp; mindset / Szemlélet</div></div>
+        <div class="q-lines">
+          <div class="line"><span class="lang-chip">English</span>“Which sentence feels closest to how you see geology?”</div>
+          <div class="line"><span class="lang-chip">Magyar</span>„Melyik mondat áll a legközelebb ahhoz, ahogyan a földtant látod?”</div>
+        </div>
+        <div class="choices" role="group" aria-label="Q1 choices">
+          <div class="choice"><input id="q1a" name="q1" type="radio" value="a"><label for="q1a"><strong>a)</strong> Geology is mostly pictures and layers. / A földtan főleg képek és rétegek.</label></div>
+          <div class="choice"><input id="q1b" name="q1" type="radio" value="b"><label for="q1b"><strong>b)</strong> Geology is numbers and equations. / A földtan számok és egyenletek.</label></div>
+          <div class="choice"><input id="q1c" name="q1" type="radio" value="c"><label for="q1c"><strong>c)</strong> Geology is both stories and data — they need each other. / A földtan történetek és adatok együtt.</label></div>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question" id="q2">
+        <div class="q-head"><span class="q-num">2</span><div class="q-title">First look at a log / Első kérdés a szelvényről</div></div>
+        <div class="q-lines">
+          <div class="line"><span class="lang-chip">English</span>“When you look at a well log, what’s your first question?”</div>
+          <div class="line"><span class="lang-chip">Magyar</span>„Amikor egy kútszelvényt nézel, mi az első kérdésed?”</div>
+        </div>
+        <div class="choices" role="group" aria-label="Q2 choices">
+          <div class="choice"><input id="q2a" name="q2" type="radio" value="a"><label for="q2a"><strong>a)</strong> What do these numbers even mean? / Mit jelentenek ezek a számok?</label></div>
+          <div class="choice"><input id="q2b" name="q2" type="radio" value="b"><label for="q2b"><strong>b)</strong> How does this change with depth? / Hogyan változik a mélységgel?</label></div>
+          <div class="choice"><input id="q2c" name="q2" type="radio" value="c"><label for="q2c"><strong>c)</strong> Which part of the rock is most interesting? / Melyik kőzetrész a legérdekesebb?</label></div>
+          <div class="choice"><input id="q2d" name="q2" type="radio" value="d"><label for="q2d"><strong>d)</strong> How do we compare it with other wells? / Hogyan hasonlítjuk más kutakhoz?</label></div>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question" id="q3">
+        <div class="q-head"><span class="q-num">3</span><div class="q-title">Open text / Nyílt szöveg</div></div>
+        <div class="q-lines">
+          <div class="line"><span class="lang-chip">English</span>“Why might we need functions in geology?” (Open text — e.g., to find patterns, to predict, to compare data.)</div>
+          <div class="line"><span class="lang-chip">Magyar</span>„Miért lehet szükségünk függvényekre a földtanban?” (Nyílt szöveg — pl. mintázatkeresés, előrejelzés, összevetés.)</div>
+        </div>
+        <textarea id="q3text" placeholder="Type your answer / Írd ide a válaszod…"></textarea>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question" id="q4">
+        <div class="q-head"><span class="q-num">4</span><div class="q-title">Rule‑breaker / Szabálytörő eset</div></div>
+        <div class="q-lines">
+          <div class="line"><span class="lang-chip">English</span>“If each depth gives one porosity, what could break that rule?”</div>
+          <div class="line"><span class="lang-chip">Magyar</span>„Ha egy mélységhez egy porozitás tartozik, mi sértheti meg ezt a szabályt?”</div>
+        </div>
+        <div class="choices" role="group" aria-label="Q4 choices">
+          <div class="choice"><input id="q4a" name="q4" type="radio" value="a"><label for="q4a"><strong>a)</strong> A tool error / Műszerhiba</label></div>
+          <div class="choice"><input id="q4b" name="q4" type="radio" value="b"><label for="q4b"><strong>b)</strong> Two rocks mixed at one depth / Két kőzet keveredése ugyanott</label></div>
+          <div class="choice"><input id="q4c" name="q4" type="radio" value="c"><label for="q4c"><strong>c)</strong> Gas in the pore space / Gáz a pórustérben</label></div>
+          <div class="choice"><input id="q4d" name="q4" type="radio" value="d"><label for="q4d"><strong>d)</strong> All of the above / Mindegyik</label></div>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question" id="q5">
+        <div class="q-head"><span class="q-num">5</span><div class="q-title">Word cloud / Szófelhő</div></div>
+        <div class="q-lines">
+          <div class="line"><span class="lang-chip">English</span>“What do you expect to learn from today’s topic?” (One‑word hopes: patterns, math, prediction, logic, simplicity.)</div>
+          <div class="line"><span class="lang-chip">Magyar</span>„Mit vársz a mai témától?” (Egy‑szavas remények: mintázatok, matematika, előrejelzés, logika, egyszerűség.)</div>
+        </div>
+        <div class="cloud-wrap">
+          <input id="cloudInput" type="text" placeholder="Type a word (or several) / Írj szavakat…">
+          <div style="display:flex; gap:.5rem; flex-wrap:wrap">
+            <button class="btn" type="button" onclick="addWords()">Add / Hozzáadás</button>
+            <small class="note">Live add students’ words to build a cloud. / Építs szófelhőt élőben.</small>
+          </div>
+          <div class="cloud" aria-label="Word cloud area"><small class="note">Word cloud will appear here. / A szófelhő itt jelenik meg.</small></div>
+        </div>
+      </div>
+
+      <!-- Q6 (multi-select) -->
+      <div class="question" id="q6">
+        <div class="q-head"><span class="q-num">6</span><div class="q-title">“One input → one output”? / „Egy bemenet → egy kimenet”?</div></div>
+        <div class="q-lines">
+          <div class="line"><span class="lang-chip">English</span>Select all that are functions (one input gives one output):</div>
+          <div class="line"><span class="lang-chip">Magyar</span>Válaszd ki mindet, ami függvény (egy bemenethez egy kimenet):</div>
+        </div>
+        <div class="choices" role="group" aria-label="Q6 choices (multi)">
+          <div class="choice"><input id="q6a" name="q6" type="checkbox" value="a"><label for="q6a"><strong>a)</strong> depth → porosity (same well) / mélység → porozitás (ugyanazon kút)</label></div>
+          <div class="choice"><input id="q6b" name="q6" type="checkbox" value="b"><label for="q6b"><strong>b)</strong> porosity → depth / porozitás → mélység</label></div>
+          <div class="choice"><input id="q6c" name="q6" type="checkbox" value="c"><label for="q6c"><strong>c)</strong> depth → porosity (core only) / mélység → porozitás (csak magmérés)</label></div>
+          <div class="choice"><input id="q6d" name="q6" type="checkbox" value="d"><label for="q6d"><strong>d)</strong> sample ID → depth / mintaazonosító → mélység</label></div>
+        </div>
+      </div>
+
+      <!-- Q7 (slider) -->
+      <div class="question" id="q7">
+        <div class="q-head"><span class="q-num">7</span><div class="q-title">Threshold sense check / Küszöb‑érzet</div></div>
+        <div class="q-lines">
+          <div class="line"><span class="lang-chip">English</span>What porosity do you consider “good reservoir”? (percent)</div>
+          <div class="line"><span class="lang-chip">Magyar</span>Szerinted hány % porozitás „jó tároló”?</div>
+        </div>
+        <div class="slider-row">
+          <input id="q7range" type="range" min="0" max="35" step="1" value="20" aria-label="Good reservoir threshold (%)">
+          <output id="q7out" for="q7range">20%</output>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="question" id="q8">
+        <div class="q-head"><span class="q-num">8</span><div class="q-title">Domain vs. codomain / Tartomány vs. kódomain</div></div>
+        <div class="q-lines">
+          <div class="line"><span class="lang-chip">English</span>Which statement is correct?</div>
+          <div class="line"><span class="lang-chip">Magyar</span>Melyik állítás helyes?</div>
+        </div>
+        <div class="choices" role="group" aria-label="Q8 choices">
+          <div class="choice"><input id="q8a" name="q8" type="radio" value="a"><label for="q8a"><strong>a)</strong> Domain = depths; Codomain = allowed porosity values (0…1). / Tartomány = mélységek; Kódomain = megengedett porozitások (0…1).</label></div>
+          <div class="choice"><input id="q8b" name="q8" type="radio" value="b"><label for="q8b"><strong>b)</strong> Domain = porosity; Codomain = depths. / Tartomány = porozitás; Kódomain = mélység.</label></div>
+          <div class="choice"><input id="q8c" name="q8" type="radio" value="c"><label for="q8c"><strong>c)</strong> Domain = depths; Codomain = measured values only. / Tartomány = mélységek; Kódomain = csak a mért értékek.</label></div>
+        </div>
+      </div>
+
+      <!-- Q9 open text -->
+      <div class="question" id="q9">
+        <div class="q-head"><span class="q-num">9</span><div class="q-title">Your question / A te kérdésed</div></div>
+        <div class="q-lines">
+          <div class="line"><span class="lang-chip">English</span>Write one question you want functions to answer in this course.</div>
+          <div class="line"><span class="lang-chip">Magyar</span>Írj egy kérdést, amire a függvényektől vársz választ a kurzus során.</div>
+        </div>
+        <textarea id="q9text" placeholder="Type your question / Írd ide a kérdésed…"></textarea>
+      </div>
+
+      <!-- Q10 -->
+      <div class="question" id="q10">
+        <div class="q-head"><span class="q-num">10</span><div class="q-title">Calibration QC / Kalibrációs ellenőrzés</div></div>
+        <div class="q-lines">
+          <div class="line"><span class="lang-chip">English</span>For φ_core vs. φ_log at the same depth, which acceptance rule is most practical?</div>
+          <div class="line"><span class="lang-chip">Magyar</span>Azonos mélységnél φ_mag vs. φ_log: melyik elfogadási szabály a leggyakorlatiasabb?</div>
+        </div>
+        <div class="choices" role="group" aria-label="Q10 choices">
+          <div class="choice"><input id="q10a" name="q10" type="radio" value="a"><label for="q10a"><strong>a)</strong> |φ_core − φ_log| ≤ 0.02 for most points. / A legtöbb ponton |φ_mag − φ_log| ≤ 0,02.</label></div>
+          <div class="choice"><input id="q10b" name="q10" type="radio" value="b"><label for="q10b"><strong>b)</strong> φ_core must always be &gt; φ_log. / φ_mag mindig legyen nagyobb.</label></div>
+          <div class="choice"><input id="q10c" name="q10" type="radio" value="c"><label for="q10c"><strong>c)</strong> They must be exactly equal. / Pontosan egyezniük kell.</label></div>
+          <div class="choice"><input id="q10d" name="q10" type="radio" value="d"><label for="q10d"><strong>d)</strong> No consistent rule is useful. / Nincs hasznos következetes szabály.</label></div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button class="btn" type="button" onclick="clearExam()" title="Clear all answers">Clear / Törlés</button>
+        <button class="btn primary" type="button" onclick="submitExam()">Submit / Mentés</button>
+      </div>
+
+      <!-- Summary -->
+      <div id="summary" class="summary" aria-live="polite">
+        <strong>Saved response / Mentett válasz:</strong>
+        <pre id="summaryPre"></pre>
+        <small class="note">Saved locally in your browser (no upload). / Helyben mentve a böngészőben (nincs feltöltés).</small>
+      </div>
+    </section>
+
+    <p class="hint" style="margin-top:.75rem;">
+      Tip: If you want something interactive but fast, start with Q3 (open text) and Q5 (word cloud) to surface student ideas.
+    </p>
+  </div>
+</body>
+</html>
