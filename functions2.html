@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Motivation — Why Learn Functions in Geology? (EN/HU) — University of Szeged</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+    --accent:#2563eb; --accent-2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --chipbg:rgba(56,189,248,.15);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
+      --chipbg:rgba(96,165,250,.18);
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+    font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  /* HEADER */
+  header{
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:#fff; border-radius:16px; padding:1rem 1.25rem; box-shadow:var(--shadow);
+  }
+  .header-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .title{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .badge{
+    font-size:.8rem; letter-spacing:.04em; text-transform:uppercase;
+    background: rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+    padding:.25rem .5rem; border-radius:999px;
+  }
+  h1{margin:0; font-size:1.35rem; font-weight:700}
+  h2{margin:.25rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .logo-row{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap}
+  .logo-chip{display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:10px; padding:.35rem .5rem; box-shadow:var(--shadow)}
+  .logo-chip img{display:block; height:42px; width:auto; object-fit:contain}
+  .logo-chip.logo-dept img{height:55px}
+  .logo-chip.logo-szte img{height:42px}
+
+  /* CARD + CONTENT */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    margin-top:1rem; box-shadow:var(--shadow); overflow:hidden;
+  }
+  .bar{
+    padding:.9rem 1rem; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  }
+  .subtitle{font-weight:600}
+  .hint{color:var(--muted); font-size:.92rem}
+  .btn{
+    border:1px solid var(--border); background:transparent; color:#fff;
+    padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600;
+  }
+  .btn:hover{border-color:#fff}
+  .btn-dark{color:var(--ink)} .btn-dark:hover{border-color:var(--accent); color:var(--accent)}
+
+  /* MOTIVATION LIST */
+  .block{padding:1rem}
+  .block + .block{border-top:1px solid var(--border)}
+  .stacked-note{color:var(--muted); font-size:.92rem; margin:.2rem 0 .6rem}
+
+  ol.mot-list{
+    margin:0; padding:0; list-style:none;
+    display:grid; grid-template-columns:1fr; gap:.75rem;
+  }
+  @media (min-width:860px){
+    ol.mot-list{grid-template-columns:1fr 1fr}
+  }
+  .mot{
+    border:1px solid var(--border); border-radius:12px; padding:.85rem .95rem; background:rgba(148,163,184,.06);
+    display:grid; grid-template-columns:auto 1fr; gap:.6rem .8rem; align-items:start;
+  }
+  .n{
+    grid-row: span 2;
+    display:inline-flex; align-items:center; justify-content:center;
+    width:32px; height:32px; border-radius:999px; background:var(--chipbg); border:1px solid var(--border);
+    font-weight:800; font-size:.98rem; color:#0369a1;
+  }
+  .lang-chip{
+    display:inline-block; font-size:.72rem; font-weight:800; letter-spacing:.04em;
+    padding:.18rem .5rem; border-radius:6px; background:var(--chipbg); color:#0369a1; border:1px solid var(--border);
+    margin-right:.45rem;
+  }
+  .en, .hu{line-height:1.45}
+  .en strong, .hu strong{font-weight:700}
+  .en{margin-top:.05rem}
+  .hu{margin-top:.15rem}
+  .sep{height:1px; background:var(--border); margin:.4rem 0 .2rem}
+
+  @media (max-width:720px){
+    body{padding:1rem}
+  }
+</style>
+<script>
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="header-top">
+        <div class="title">
+          <span class="badge">University of Szeged</span>
+          <h1>Department of Atmospheric and Geospatial Data Science</h1>
+        </div>
+        <div class="logo-row" aria-label="Department and University logos">
+          <span class="logo-chip logo-dept" title="Department logo">
+            <img src="https://geosci.u-szeged.hu/site/upload/2024/10/logo_v2_2_64x55.png" alt="Department of Atmospheric and Geospatial Data Science logo" />
+          </span>
+          <span class="logo-chip logo-szte" title="SZTE logo">
+            <img src="https://u-szeged.hu/site/design3/img/szte_logo_en.jpg" alt="University of Szeged logo (English)" />
+          </span>
+        </div>
+      </div>
+      <h2>ABDULHAQ Hawkar — Motivation: Why learn functions in geology? / Miért kellenek a függvények a földtanban?</h2>
+    </header>
+
+    <section class="card" aria-labelledby="slide-title">
+      <div class="bar" style="background:linear-gradient(180deg, rgba(37,99,235,0.08), rgba(56,189,248,0.08));">
+        <div>
+          <div id="slide-title" class="subtitle">Motivation Slide — English &amp; Hungarian (stacked per point)</div>
+          <div class="hint">Each card shows the English line first, then the Hungarian line for the same idea.</div>
+        </div>
+        <div><button class="btn btn-dark" onclick="printPage()">Print</button></div>
+      </div>
+
+      <div class="block">
+        <ol class="mot-list">
+          <!-- 1 -->
+          <li class="mot">
+            <span class="n">1</span>
+            <div class="en"><span class="lang-chip">English</span><strong>Turn measurements into meaning.</strong> How does porosity change with depth?</div>
+            <div class="hu"><span class="lang-chip">Magyar</span><strong>A mérésekből érthető kép.</strong> Hogyan változik a porozitás a mélységgel?</div>
+          </li>
+
+          <!-- 2 -->
+          <li class="mot">
+            <span class="n">2</span>
+            <div class="en"><span class="lang-chip">English</span><strong>Spot trends and speed.</strong> How fast is it going up or down?</div>
+            <div class="hu"><span class="lang-chip">Magyar</span><strong>Trend és ütem felismerése.</strong> Milyen gyorsan nő vagy csökken?</div>
+          </li>
+
+          <!-- 3 -->
+          <li class="mot">
+            <span class="n">3</span>
+            <div class="en"><span class="lang-chip">English</span><strong>Compare wells fairly.</strong> How can we line up the same layer across different wells?</div>
+            <div class="hu"><span class="lang-chip">Magyar</span><strong>Kutak korrekt összevetése.</strong> Hogyan igazítjuk egymáshoz ugyanazt a réteget a kutak között?</div>
+          </li>
+
+          <!-- 4 -->
+          <li class="mot">
+            <span class="n">4</span>
+            <div class="en"><span class="lang-chip">English</span><strong>Fill the gaps.</strong> How can we estimate porosity where we did not measure?</div>
+            <div class="hu"><span class="lang-chip">Magyar</span><strong>Hézagok kitöltése.</strong> Hogyan becsüljük meg a porozitást ott, ahol nincs mérés?</div>
+          </li>
+
+          <!-- 5 -->
+          <li class="mot">
+            <span class="n">5</span>
+            <div class="en"><span class="lang-chip">English</span><strong>Total the resources.</strong> How much water or oil could this layer hold?</div>
+            <div class="hu"><span class="lang-chip">Magyar</span><strong>Összmennyiség becslése.</strong> Mennyi víz vagy olaj lehet ebben a rétegben?</div>
+          </li>
+
+          <!-- 6 -->
+          <li class="mot">
+            <span class="n">6</span>
+            <div class="en"><span class="lang-chip">English</span><strong>Find the sweet spots.</strong> Where is porosity highest?</div>
+            <div class="hu"><span class="lang-chip">Magyar</span><strong>A legjobb helyek keresése.</strong> Hol a legnagyobb a porozitás?</div>
+          </li>
+
+          <!-- 7 -->
+          <li class="mot">
+            <span class="n">7</span>
+            <div class="en"><span class="lang-chip">English</span><strong>Check data quality.</strong> How do we know if a tool reading is wrong?</div>
+            <div class="hu"><span class="lang-chip">Magyar</span><strong>Adatminőség ellenőrzése.</strong> Honnan tudjuk, ha hibás a műszerérték?</div>
+          </li>
+
+          <!-- 8 -->
+          <li class="mot">
+            <span class="n">8</span>
+            <div class="en"><span class="lang-chip">English</span><strong>Link causes and effects.</strong> How are porosity, pressure, and temperature connected?</div>
+            <div class="hu"><span class="lang-chip">Magyar</span><strong>Ok–okozat összekötése.</strong> Hogyan függ össze a porozitás, a nyomás és a hőmérséklet?</div>
+          </li>
+
+          <!-- 9 -->
+          <li class="mot">
+            <span class="n">9</span>
+            <div class="en"><span class="lang-chip">English</span><strong>Predict and plan.</strong> How deep should we drill next?</div>
+            <div class="hu"><span class="lang-chip">Magyar</span><strong>Előrejelzés és tervezés.</strong> Meddig érdemes tovább fúrni?</div>
+          </li>
+
+          <!-- 10 -->
+          <li class="mot">
+            <span class="n">10</span>
+            <div class="en"><span class="lang-chip">English</span><strong>Communicate clearly.</strong> How do we say our findings so everyone understands?</div>
+            <div class="hu"><span class="lang-chip">Magyar</span><strong>Világos kommunikáció.</strong> Hogyan mondjuk el úgy az eredményeket, hogy mindenki értse?</div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <p class="hint" style="margin-top:.75rem;">
+      Tip: This stacked layout shows English first, then Hungarian for each numbered point — easy to read in class and on mobile.
+    </p>
+  </div>
+</body>
+</html>
