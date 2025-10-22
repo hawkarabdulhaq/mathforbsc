@@ -3,308 +3,187 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Assignment — Functions &amp; Relations (Porosity Grid) · Feladat — Függvények &amp; Relációk (Porozitás-rács)</title>
+<title>Assignment — Functions & Relations (Porosity Grid) / Feladat — Függvények & Relációk (Porozitás rács)</title>
 <style>
   :root{
     --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
-    --accent:#2563eb; --accent2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
-    --pill:#eef2ff;
+    --accent:#2563eb; --accent-2:#38bdf8; --border:#e2e8f0;
+    --shadow:0 10px 30px rgba(2,6,23,0.08);
   }
   @media (prefers-color-scheme: dark){
-    :root{ --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#94a3b8; --accent:#60a5fa; --accent2:#22d3ee; --border:#1f2a44; --pill:#0b1220; }
-  }
-  *{box-sizing:border-box}
-  body{margin:0; font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans"; color:var(--ind); background:var(--bg)}
-  .wrap{max-width:1100px; margin:0 auto; padding:24px}
-  header{background:linear-gradient(135deg,var(--accent),var:-accent2); color:#fff; padding:18px 20px; border-radius:16px; box-shadow:var(--shadow)}
-  header h1{margin:0;font-size:1.4rem}
-  header h2{margin:.25rem 0 0;font-weight:500;font-size:1rem;opacity:.95}
-  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); margin-top:16px; overflow:hidden}
-  .bar{padding:12px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:.75rem}
-  .title{font-weight:700}
-  .section{padding:16px}
-  .hint{color:var(--muted); font-size:.92rem}
-  pre{background:#0b1220; color:#e5e7eb; padding:12px; border-radius:10px; overflow:auto}
-  code,kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
-  .q-list{counter-reset:q}
-  .q{margin:14px 0; padding:12px; background:var(--pill); border-radius:10px}
-  .q::before{counter-increment:q; content: counter(q) ". "; font-weight:700; margin-right:.25rem}
-  .q .qtype{font-size:.75rem; color:var(--muted); background:#e2e8f0; padding:2px 8px; border-radius:999px; display:inline-block; margin-bottom:8px}
-  .row{margin:.4rem 0}
-  .opts{list-style:none; padding-left:0; margin:.25rem 0}
-  .opts li{margin:.25rem 0}
-  .flex{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
-  .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.5rem .8rem; border-radius:10px; font-weight:600; cursor:pointer}
-  .btn:hover{border-color:var(--accent); color:var(--accent)}
-  .answers{display:none; background:#f1f5f9; border-top:1px dashed var(--border)}
-  .ans{padding:10px 16px; border-top:1px dashed var(--border)}
-  .answers h3{margin:0 0 .5rem 0}
-  .ok{color:#16a34a}
-  .muted{color:var(--muted)}
-  .two-col{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
-</style>
-<script>
-  function reveal() {
-    const input = document.getElementById('pw');
-    const gate  = document.getElementById('answers');
-    const msg   = document.getElementById('pwmsg');
-    if ((input.value || '').trim().toLowerCase() === 'hama1234') {
-      gate.style.display = 'block';
-      msg.textContent = 'Answers unlocked / Megoldások megjelenítve.';
-      msg.classList.add('ok');
-    } else {
-      msg.textContent = 'Wrong password / Hibás jelszó.';
-      msg.classList.remove('ok');
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent-2:#22d3ee; --border:#1f2a44;
+      --shadow:0 10px 30px rgba(0,0,0,0.5);
     }
   }
-  function printPage(){ window.print(); }
-</script>
+  *{box-sizing:border-box}
+  body{margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+       font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans";}
+  .wrap{max-width:1100px; margin-inline:auto}
+  header{
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:#fff; border-radius:16px; padding:1rem 1.25rem; box-shadow:var(--shadow);
+  }
+  h1{margin:0; font-size:1.35rem}
+  h2{margin:.3rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    margin-top:1rem; box-shadow:var(--shadow); overflow:hidden;
+  }
+  .bar{
+    padding:.9rem 1rem; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  }
+  .subtitle{font-weight:700}
+  .hint{color:var(--muted); font-size:.92rem}
+  .section{padding:1rem}
+  .section + .section{border-top:1px solid var(--border)}
+  ol{margin:0; padding-left:1.25rem}
+  li{margin-bottom:1rem}
+  .item-title{font-weight:700}
+  code, pre{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+  pre{background:rgba(148,163,184,.08); padding:.7rem; border-radius:8px; overflow:auto}
+  .options{margin:.5rem 0 0 1rem}
+  .opt{margin:.15rem 0}
+  .num{font-weight:700; color:var(--accent)}
+  .hl{color:var(--accent)}
+</style>
 </head>
 <body>
 <div class="wrap">
-
   <header>
-    <h1>Assignment — <em>Functions &amp; Relations (Porosity Grid)</em> · Feladat — <em>Függvények &amp; Relációk (Porozitás-rács)</em></h1>
-    <h2>
-      EN: 10 items aligned with the Porosity Grid UI (no pair-grid used). ·
-      HU: 10 feladat a Porozitás-rács felülethez (nincs pair-grid).
-    </h2>
+    <h1>Assignment — Functions & Relations (Porosity Grid)</h1>
+    <h2>Feladat — Függvények &amp; Relációk (Porozitás rács)</h2>
   </header>
 
   <section class="card">
     <div class="bar">
-      <div class="title">Context / Háttér</div>
+      <div class="subtitle">Context / Háttér</div>
     </div>
     <div class="section">
-      <p class="hint">
-        <strong>EN:</strong> Use the <em>Porosity Grid</em> controls: <kbd>Load Measurements M</kbd>, <kbd>Clear All</kbd>,
-        <kbd>Single-valued mode</kbd>, <em>Active Domain A</em> (checkboxes), <kbd>Save Solution (JSON)</kbd>.  
-        “<em>Function on active A? ✓</em>” checks the row-rule: every checked depth has exactly one φ in its row.
-        <em>Range size</em> is the number of distinct φ in the current selection. The grid shows the Cartesian product A×T (with T ⊂ B).
-      </p>
-      <p class="hint">
-        <strong>HU:</strong> Használd a <em>Porozitás-rács</em> vezérlőit: <kbd>M betöltése</kbd>, <kbd>Mind törlése</kbd>,
-        <kbd>Egyértékes mód</kbd>, <em>Aktív tartomány A</em> (jelölőnégyzetek), <kbd>Megoldás mentése (JSON)</kbd>.  
-        A „<em>Függvény az aktív A-n? ✓</em>” a sor-szabályt vizsgálja: minden bejelölt mélységhez pontosan egy φ tartozzon.
-        Az <em>Értékkészlet mérete</em> a kiválasztott cellák különböző φ-inek száma. A rács az A×T Descartes-szorzatát mutatja (T ⊂ B).
-      </p>
-      <p class="hint">
-        <strong>Hint:</strong> Use a decimal point (e.g., <code>0.24</code>). ·
-        <strong>Tipp:</strong> Tizedeshez pontot használj (pl. <code>0.24</code>).
-      </p>
-
-      <h3>Data to load / Betöltendő adatok</h3>
-      <div class="two-col">
-        <pre>A = [980, 1000, 1001, 1002, 1050, 1100, 1150, 1198, 1203]
-T = [0.15, 0.16, 0.17, 0.18, 0.19, 0.20, 0.21, 0.22, 0.23, 0.24]</pre>
-        <pre>M = [(980,0.16),(1000,0.18),(1001,0.22),(1002,0.21),
-     (1050,0.20),(1100,0.24),(1150,0.20),(1198,0.19),(1203,0.21)]
-
-R = [(980,0.15),(1000,0.16),(1001,0.17),(1002,0.18),
-     (1010,0.19),(1050,0.20),(1100,0.21),(1150,0.22),
-     (1198,0.22),(1203,0.23)]</pre>
-      </div>
+      <p><strong>EN:</strong> Use the Porosity Grid controls: Load Measurements <code>M</code>, Clear All, Single-valued mode, Active Domain <code>A</code> (checkboxes), Save Solution (JSON). “Function on active A? ✓” checks the row rule: each checked depth has exactly one φ. Range size = number of unique φ values in the current selection. The grid shows <code>A×T</code> (T ⊂ B).</p>
+      <p><strong>HU:</strong> Használd a Porozitás rács vezérlőit: <code>M</code> betöltése, Mind törlése, Egyértékes mód, Aktív tartomány <code>A</code> (jelölőnégyzetek), Megoldás mentése (JSON). A „Függvény az aktív A-n? ✓” a sor-szabályt vizsgálja: minden bejelölt mélységhez pontosan egy φ tartozik. Az Értékkészlet mérete = az aktuális kiválasztásban szereplő különböző φ-k száma. A rács az <code>A×T</code>-t mutatja (T ⊂ B).</p>
+      <p class="hint"><strong>Hint:</strong> EN: Use dot for decimals (e.g. 0.24). • HU: Tizedeshez pontot használj (pl. 0,24 helyett 0.24).</p>
     </div>
   </section>
 
-  <!-- Questions -->
   <section class="card">
     <div class="bar">
-      <div class="title">Tasks · Feladatok</div>
-      <button class="btn" onclick="printPage()">Print</button>
+      <div class="subtitle">Measurements and Reference / Mérések és referencia</div>
     </div>
     <div class="section">
-      <ol class="q-list">
-        <!-- Q1 MCQ -->
-        <li class="q">
-          <div class="qtype">MCQ</div>
-          <div class="row">
-            <strong>EN:</strong> Single-valued mode is ON. You click <code>φ = 0.18</code> at <code>1000&nbsp;m</code>, then click <code>φ = 0.22</code> in the same row. What happens?
+<pre>
+A = [980, 1000, 1001, 1002, 1010, 1050, 1100, 1150, 1198, 1203]
+M = [(980,0.16), (1000,0.18), (1001,0.22), (1002,0.21), (1010,0.20),
+     (1050,0.23), (1100,0.24), (1150,0.20), (1198,0.19), (1203,0.21)]
+R = [(980,0.15), (1000,0.16), (1001,0.17), (1002,0.18), (1010,0.19),
+     (1050,0.20), (1100,0.21), (1150,0.22), (1198,0.22), (1203,0.23)]
+</pre>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="bar"><div class="subtitle">Questions / Kérdések (10 items)</div></div>
+    <div class="section">
+      <ol>
+        <li>
+          <span class="item-title">1) Single-valued mode behavior</span><br>
+          EN: Single-valued mode is ON. You click φ=0.18 at 1000 m, then φ=0.22 in the same row. What happens?<br>
+          HU: Egyértékes mód BE. Előbb φ=0.18-ra kattintasz 1000 m-nél, majd ugyanabban a sorban φ=0.22-re. Mi történik?<br>
+          <div class="options">
+            <div class="opt">A) Both stay selected. / Mindkettő bent marad.</div>
+            <div class="opt">B) The new click replaces the old; the row keeps exactly one φ. / Az új kiválasztás felülírja a régit; a sorban pontosan egy φ marad.</div>
+            <div class="opt">C) Both are cleared. / Mindkettő törlődik.</div>
+            <div class="opt">D) Nothing changes. / Semmi sem változik.</div>
           </div>
-          <div class="row">
-            <strong>HU:</strong> Egyértékes mód BE. Előbb <code>φ = 0,18</code>-ra kattintasz <code>1000&nbsp;m</code>-nél, majd ugyanabban a sorban <code>φ = 0,22</code>-re. Mi történik?
-          </div>
-          <ul class="opts">
-            <li><label><input type="radio" name="q1"> A) EN) Both stay selected. • HU) Mindkettő bent marad.</label></li>
-            <li><label><input type="radio" name="q1"> B) EN) The new click replaces the old; the row keeps exactly one φ. • HU) Az új kiválasztás felülírja a régit; a sorban pontosan egy φ marad.</label></li>
-            <li><label><input type="radio" name="q1"> C) EN) Both are cleared. • HU) Mindkettő törlődik.</label></li>
-            <li><label><input type="radio" name="q1"> D) EN) Nothing changes. • HU) Semmi sem változik.</label></li>
-          </ul>
+          <p class="hint">Expected: <strong>B</strong></p>
         </li>
 
-        <!-- Q2 YES/NO -->
-        <li class="q">
-          <div class="qtype">YES/NO</div>
-          <div class="row">
-            <strong>EN:</strong> You uncheck <code>1150&nbsp;m</code> in Active Domain A. Does that depth still count in “Function on active A?”  
-          </div>
-          <div class="row">
-            <strong>HU:</strong> Kiveszed a pipát az <code>1150&nbsp;m</code>-ből az Aktív A listában. Beleszámít még a „Függvény az aktív A-n?” ellenőrzésbe?
-          </div>
-          <div class="flex">
-            <label><input type="radio" name="q2"> Yes / Igen</label>
-            <label><input type="radio" name="q2"> No / Nem</label>
-          </div>
+        <li>
+          <span class="item-title">2) Active Domain and Function ✓</span><br>
+          EN: You uncheck 1150 m in Active Domain A. Does that depth still count in “Function on active A?”<br>
+          HU: Kiveszed a pipát az 1150 m-ből az Aktív A listában. Beleszámít még a „Függvény az aktív A-n?” ellenőrzésbe?<br>
+          <p class="hint">Expected: <strong>No</strong></p>
         </li>
 
-        <!-- Q3 LONG TEXT + data -->
-        <li class="q">
-          <div class="qtype">LONG TEXT</div>
-          <div class="row"><strong>EN:</strong> Click <em>Load Measurements M</em> (see data below). In 1–2 sentences: is <code>M</code> a function on the active domain <code>A</code>? Why?</div>
-          <div class="row"><strong>HU:</strong> Kattints a <em>M betöltése</em> gombra (adatok lent). 1–2 mondatban: függvény-e az <code>M</code> az aktív <code>A</code>-n? Miért?</div>
-          <pre>A = [980, 1000, 1001, 1002, 1050, 1100, 1150, 1198, 1203]
-M = (980,0.16), (1000,0.18), (1001,0.22), (1002,0.21), (1050,0.20),
-    (1100,0.24), (1150,0.20), (1198,0.19), (1203,0.21)</pre>
-          <textarea rows="4" style="width:100%" placeholder="Your explanation / Válaszod ide…"></textarea>
+        <li>
+          <span class="item-title">3) Load Measurements M</span><br>
+          EN: Load Measurements M (below). In 1–2 sentences: is M a function on active A? Why?<br>
+          HU: Töltsd be az M méréseket (lent). 1–2 mondatban: függvény-e M az aktív A-n? Miért?<br>
+<pre>
+A = [980,...,1203]
+M = (980,0.16), (1000,0.18), (1001,0.22), (1002,0.21), (1010,0.20),
+    (1050,0.23), (1100,0.24), (1150,0.20), (1198,0.19), (1203,0.21)
+</pre>
+          <p class="hint">Expected: Yes, each depth appears once with one φ (single-valued).</p>
         </li>
 
-        <!-- Q4 SHORT NUMBER -->
-        <li class="q">
-          <div class="qtype">SHORT NUMBER</div>
-          <div class="row"><strong>EN:</strong> Using <code>M</code> above, how many distinct φ values are in <code>Range(M)</code>?</div>
-          <div class="row"><strong>HU:</strong> A fenti <code>M</code> alapján hány különböző <code>φ</code> szerepel az <em>Értékkészletben</em>?</div>
-          <div class="row"><input type="number" step="1" min="0" placeholder="e.g. 8" style="width:140px"></div>
+        <li>
+          <span class="item-title">4) Range size from M</span><br>
+          EN: Using M above, how many unique φ values are in Range(M)?<br>
+          HU: A fenti M alapján hány különböző φ érték van az Értékkészletben?<br>
+          <p class="hint">Expected: <strong>8</strong></p>
         </li>
 
-        <!-- Q5 CSV FLOAT SET -->
-        <li class="q">
-          <div class="qtype">CSV&nbsp;FLOAT&nbsp;SET</div>
-          <div class="row"><strong>EN:</strong> List <code>Range(M)</code> in ascending order (comma-separated decimals).</div>
-          <div class="row"><strong>HU:</strong> Írd fel az <em>Értékkészlet</em> (<code>M</code>) elemeit növekvő sorrendben, vesszőkkel elválasztva.</div>
-          <div class="row"><input type="text" placeholder="e.g. 0.16, 0.18, 0.19, 0.20, …" style="width:100%"></div>
-          <p class="hint">Use dot for decimals / Tizedes jel: <code>.</code></p>
+        <li>
+          <span class="item-title">5) List Range(M)</span><br>
+          EN: List Range(M) in ascending order (comma-separated).<br>
+          HU: Írd fel az Értékkészletet (M) növekvő sorrendben, vesszővel elválasztva.<br>
+          <p class="hint">Expected: <code>0.16, 0.18, 0.19, 0.20, 0.21, 0.22, 0.23, 0.24</code></p>
         </li>
 
-        <!-- Q6 YESNO+TEXT -->
-        <li class="q">
-          <div class="qtype">YES/NO + EXPLANATION</div>
-          <div class="row">
-            <strong>EN:</strong> Single-valued mode is OFF. You click <code>(1001,0.22)</code> and <code>(1001,0.17)</code>. Is the selection a function on active A? Why?
+        <li>
+          <span class="item-title">6) Single-valued OFF duplicate row</span><br>
+          EN: Single-valued mode is OFF. You click (1001,0.22) and (1001,0.17). Is your selection a function? Why?<br>
+          HU: Egyértékes mód KI. Rákattintasz (1001,0.22) és (1001,0.17). Függvény-e így a kijelölés? Miért?<br>
+          <p class="hint">Expected: <strong>No</strong> — same input (1001) maps to two outputs; violates rule.</p>
+        </li>
+
+        <li>
+          <span class="item-title">7) What does the green ✓ guarantee?</span><br>
+          EN: What does a green ✓ next to “Function on active A?” guarantee?<br>
+          HU: Mit garantál a zöld ✓ a „Függvény az aktív A-n?” mellett?<br>
+          <div class="options">
+            <div class="opt">A) Each checked depth has exactly one φ. / Minden bejelölt mélységhez pontosan egy φ tartozik.</div>
+            <div class="opt">B) Range size equals |A|. / Az értékkészlet mérete = |A|.</div>
+            <div class="opt">C) Values come only from M. / Az értékek csak M-ből származnak.</div>
+            <div class="opt">D) φ increases with depth. / A φ nő a mélységgel.</div>
           </div>
-          <div class="row">
-            <strong>HU:</strong> Egyértékes mód KI. Rákattintasz a <code>(1001,0,22)</code> és <code>(1001,0,17)</code> cellákra. Függvény-e így a kijelölés az aktív A-n? Miért?
-          </div>
-          <div class="flex">
-            <label><input type="radio" name="q6"> Yes / Igen</label>
-            <label><input type="radio" name="q6"> No / Nem</label>
-            <input type="text" placeholder="Reason / Indoklás…" style="flex:1; min-width:260px">
-          </div>
+          <p class="hint">Expected: <strong>A</strong></p>
         </li>
 
-        <!-- Q7 MCQ -->
-        <li class="q">
-          <div class="qtype">MCQ</div>
-          <div class="row">
-            <strong>EN:</strong> What does a green <strong>✓</strong> next to “Function on active A?” guarantee?
-          </div>
-          <div class="row">
-            <strong>HU:</strong> Mit garantál a zöld <strong>✓</strong> a „Függvény az aktív A-n?” felirat mellett?
-          </div>
-          <ul class="opts">
-            <li><label><input type="radio" name="q7"> A) EN) Each checked depth has exactly one φ. • HU) Minden bejelölt mélységhez pontosan egy φ tartozik.</label></li>
-            <li><label><input type="radio" name="q7"> B) EN) Range size equals |A|. • HU) Az értékkészlet mérete = |A|.</label></li>
-            <li><label><input type="radio" name="q7"> C) EN) Values come only from M. • HU) Az értékek csak M-ből származnak.</label></li>
-            <li><label><input type="radio" name="q7"> D) EN) φ increases with depth. • HU) A φ nő a mélységgel.</label></li>
-          </ul>
+        <li>
+          <span class="item-title">8) Range size interpretation</span><br>
+          EN: After selecting R, UI shows “Range size: 9”. In 2 sentences: what does this tell you, and what not?<br>
+          HU: Az R kijelölése után a UI „Értékkészlet mérete: 9” üzenetet ír. Két mondatban: mit jelent ez, és mit nem?<br>
+<pre>
+R = (980,0.15), (1000,0.16), (1001,0.17), (1002,0.18), (1010,0.19),
+    (1050,0.20), (1100,0.21), (1150,0.22), (1198,0.22), (1203,0.23)
+</pre>
+          <p class="hint">Expected: 9 distinct φ values; tells distinctness, not function/trend.</p>
         </li>
 
-        <!-- Q8 LONG TEXT + data -->
-        <li class="q">
-            <div class="qtype">LONG TEXT</div>
-            <div class="row"><strong>EN:</strong> After selecting <code>R</code> (see below), the UI shows <em>“Range size: 9”</em>. In two sentences: what does this tell you, and what does it <u>not</u> tell you?</div>
-            <div class="row"><strong>HU:</strong> Miután kijelölted az <code>R</code> halmazt (lásd lent), a felület ezt írja: <em>„Értékkészlet mérete: 9”</em>. Két mondatban: ez mit jelent, és mit <u>nem</u> jelent?</div>
-            <pre>R = (980,0.15), (1000,0.16), (1001,0.17), (1002,0.18),
-    (1010,0.19), (1050,0.20), (1100,0.21), (1150,0.22),
-    (1198,0.22), (1203,0.23)</pre>
-            <textarea rows="4" style="width:100%" placeholder="Your explanation / Magyarázat…"></textarea>
+        <li>
+          <span class="item-title">9) A×T size</span><br>
+          EN: With |A|=10 and |T|=10, how many cells are in A×T?<br>
+          HU: Ha |A|=10 és |T|=10, hány cella van az A×T rácsban?<br>
+          <p class="hint">Expected: <strong>100</strong></p>
         </li>
 
-        <!-- Q9 INTEGER -->
-        <li class="q">
-          <div class="qtype">INTEGER</div>
-          <div class="row"><strong>EN:</strong> With <code>|A| = 10</code> and <code>|T| = 10</code>, how many cells are in <code>A×T</code>?</div>
-          <div class="row"><strong>HU:</strong> Ha <code>|A| = 10</code> és <code>|T| = 10</code>, hány cella van az <code>A×T</code> rácsban?</div>
-          <div class="row"><input type="number" step="1" min="0" placeholder="e.g. 100" style="width:140px"></div>
-        </li>
-
-        <!-- Q10 LONG TEXT -->
-        <li class="q">
-          <div class="qtype">LONG TEXT</div>
-          <div class="row"><strong>EN:</strong> “Save Solution (JSON)” exports your selection. In 2 lines, name two fields you expect (e.g., <code>active_domain</code>, <code>selected_pairs</code>) and how you would verify from the JSON that depth → φ is a function.</div>
-          <div class="row"><strong>HU:</strong> A „Megoldás mentése (JSON)” a kijelölést exportálja. Írj 2 sort: két mező, amit vársz (pl. <code>active_domain</code>, <code>selected_pairs</code>), és hogyan ellenőriznéd a JSON-ból, hogy a mélység → φ valóban függvény.</div>
-          <textarea rows="4" style="width:100%" placeholder="Your answer / Válaszod…"></textarea>
+        <li>
+          <span class="item-title">10) Save JSON & verify function</span><br>
+          EN: “Save Solution (JSON)” exports your selection. Name two fields expected in JSON (e.g. active domain, selected pairs) and how to verify depth→φ is a function.<br>
+          HU: A „Megoldás mentése (JSON)” exportálja a kijelölést. Nevezz meg két mezőt a JSON-ban (pl. aktív tartomány, kiválasztott párok) és írd le, hogyan ellenőrzöd, hogy a mélység→φ függvény.<br>
+          <p class="hint">Expected: Fields like <code>active_domain</code> &amp; <code>selected_pairs</code>; each depth appears once with one φ.</p>
         </li>
       </ol>
     </div>
   </section>
 
-  <!-- Answers (password-gated) -->
-  <section class="card">
-    <div class="bar">
-      <div class="title">Answer key (password required) · Megoldókulcs (jelszó szükséges)</div>
-      <div class="flex">
-        <input id="pw" type="password" placeholder="Password / Jelszó: hama1234" />
-        <button class="btn" onclick="reveal()">Unlock / Megnyit</button>
-        <span id="pwmsg" class="muted"></span>
-      </div>
-    </div>
-    <div id="answers" class="answers">
-      <div class="section">
-        <h3>Solutions · Megoldások</h3>
-
-        <div class="ans"><strong>1.</strong><br>
-          EN: <em>B. New click replaces the old one; that row keeps exactly one porosity.</em><br>
-          HU: <em>B. Az új kattintás felülírja a régit; abban a sorban egyetlen porozitás marad.</em>
-        </div>
-
-        <div class="ans"><strong>2.</strong><br>
-          EN: <em>No. Unchecked depth is not in the active domain, so it doesn’t count.</em><br>
-          HU: <em>Nem. Ha nincs bejelölve, nem része az aktív tartománynak, nem számít bele.</em>
-        </div>
-
-        <div class="ans"><strong>3.</strong><br>
-          EN: <em>Yes. Each active depth in M has exactly one porosity → it is a function.</em><br>
-          HU: <em>Igen. Minden aktív mélységhez pontosan egy porozitás tartozik → ez függvény.</em>
-        </div>
-
-        <div class="ans"><strong>4.</strong><br>
-          <code>8</code><br>
-          <span class="muted">EN: Distinct φ in M are 0.16, 0.18, 0.19, 0.20, 0.21, 0.22, 0.23, 0.24.</span><br>
-          <span class="muted">HU: Az M-ben ezek a különböző φ-k: 0.16, 0.18, 0.19, 0.20, 0.21, 0.22, 0.23, 0.24.</span>
-        </div>
-
-        <div class="ans"><strong>5.</strong><br>
-          EN: <code>0.16, 0.18, 0.19, 0.20, 0.21, 0.22, 0.23, 0.24</code><br>
-          HU: <code>0.16, 0.18, 0.19, 0.20, 0.21, 0.22, 0.23, 0.24</code>
-        </div>
-
-        <div class="ans"><strong>6.</strong><br>
-          EN: <em>No. Same depth (1001 m) has two different porosities → not single-valued.</em><br>
-          HU: <em>Nem. Ugyanahhoz a mélységhez (1001 m) két különböző φ tartozik → nem függvény.</em>
-        </div>
-
-        <div class="ans"><strong>7.</strong><br>
-          EN: <em>A. It guarantees: each checked depth has exactly one porosity.</em><br>
-          HU: <em>A. Azt jelenti, hogy minden bejelölt mélységhez pontosan egy porozitás tartozik.</em>
-        </div>
-
-        <div class="ans"><strong>8.</strong><br>
-          EN: <em>It means you selected 9 different φ values. It does not by itself prove a function or a trend.</em><br>
-          HU: <em>Azt jelenti, hogy 9 különböző porozitásérték van a kijelölésben. Nem jelenti önmagában, hogy ez függvény vagy hogy nő/csökken a trend.</em>
-        </div>
-
-        <div class="ans"><strong>9.</strong><br>
-          <code>100</code> <span class="muted">(|A|=10, |T|=10 → 10×10)</span>
-        </div>
-
-        <div class="ans"><strong>10.</strong><br>
-          EN: <em>Expect fields like <code>"active_domain": [980,1000,…]</code>, <code>"selected_pairs": [[980,0.16],…]</code>. To verify function: for every depth in <code>active_domain</code> there is exactly one matching φ in <code>selected_pairs</code> (no duplicate depths).</em><br>
-          HU: <em>Várt mezők pl.: <code>"active_domain": [980,1000,…]</code>, <code>"selected_pairs": [[980,0.16],…]</code>. Ellenőrzés: minden aktív mélységhez pontosan egyetlen φ szerepel a <code>selected_pairs</code> listában (nincs duplikátum).</em>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <p class="hint" style="margin-top:.75rem;">
+    Tip: Each question aligns with the Porosity Grid UI. Practice toggling rows and verifying function status visually.
+  </p>
 </div>
 </body>
 </html>
