@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Logic Assignment — Build the Formula (EN/HU) — University of Szeged</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+    --accent:#2563eb; --accent2:#38bdf8; --border:#e2e8f0; --shadow:0 10px 30px rgba(2,6,23,.08);
+    --ok:#10b981; --err:#ef4444; --info:#0ea5e9;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220; --card:#101726; --ink:#e6ebf5; --muted:#95a3b8;
+      --accent:#60a5fa; --accent2:#22d3ee; --border:#1f2a44; --shadow:0 10px 30px rgba(0,0,0,.5);
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; padding:2rem; background:var(--bg); color:var(--ink);
+       font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";}
+  .wrap{max-width:1100px; margin-inline:auto}
+
+  header{
+    background:linear-gradient(135deg, var(--accent), var(--accent2));
+    color:#fff; border-radius:16px; padding:1rem 1.25rem; box-shadow:var(--shadow);
+  }
+  h1{margin:0; font-size:1.35rem}
+  h2{margin:.3rem 0 0; font-size:1rem; font-weight:500; opacity:.95}
+
+  .card{background:var(--card); border:1px solid var(--border); border-radius:16px; margin-top:1rem; box-shadow:var(--shadow); overflow:hidden}
+  .bar{padding:.9rem 1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:.75rem; flex-wrap:wrap}
+  .subtitle{font-weight:700}
+  .hint{color:var(--muted); font-size:.92rem}
+  .section{padding:1rem}
+  .section + .section{border-top:1px solid var(--border)}
+
+  .defs{display:grid; grid-template-columns:1fr; gap:.5rem}
+  .row{display:flex; gap:.8rem; align-items:flex-start}
+  .lit{display:inline-block; min-width:2.2rem; font-weight:800; color:#0369a1}
+  code, kbd, .sym{font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+
+  ol.qs{margin:0; padding-left:1.2rem}
+  ol.qs li{margin:.4rem 0 .6rem}
+  .lang{display:block; margin:.1rem 0}
+  .en strong, .hu strong{font-weight:700}
+
+  /* Answers (locked) */
+  .answers{display:none; background:rgba(148,163,184,.08)}
+  .answers .ansitem{padding:.6rem .8rem; border-top:1px dashed var(--border)}
+  .answers .ansitem:first-child{border-top:none}
+  .unlock{display:flex; gap:.5rem; align-items:center; flex-wrap:wrap}
+  .unlock input{padding:.45rem .6rem; border:1px solid var(--border); border-radius:8px; font:inherit; min-width:220px}
+  .btn{border:1px solid var(--border); background:transparent; color:var(--ink); padding:.45rem .7rem; border-radius:10px; cursor:pointer; font-weight:600}
+  .btn:hover{border-color:var(--accent); color:var(--accent)}
+  #msg{font-weight:600}
+
+  /* symbol legend */
+  .legend{display:flex; flex-wrap:wrap; gap:.5rem}
+  .chip{border:1px solid var(--border); border-radius:10px; padding:.25rem .5rem; background:rgba(148,163,184,.10)}
+</style>
+<script>
+  function unlock(){
+    const ok = 'Hama1234';
+    const code = document.getElementById('code').value.trim();
+    const msg = document.getElementById('msg');
+    if(code === ok){
+      document.getElementById('answers').style.display = 'block';
+      msg.textContent = 'Answers unlocked / Megoldások megjelenítve';
+      msg.style.color = 'var(--ok)';
+    } else {
+      msg.textContent = 'Wrong code / Hibás kód';
+      msg.style.color = 'var(--err)';
+    }
+  }
+  function printPage(){ window.print(); }
+</script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Logic Assignment — Build the Formula (EN/HU)</h1>
+      <h2>Use only: p, q, r, o, y, i, ¬, ∧, ∨, →, ↔, ( )</h2>
+    </header>
+
+    <!-- Symbols & variables -->
+    <section class="card">
+      <div class="bar">
+        <div class="subtitle">Variables &amp; symbols / Változók és jelek</div>
+        <div class="legend" aria-label="symbol legend">
+          <span class="chip"><span class="sym">¬</span> not / nem</span>
+          <span class="chip"><span class="sym">∧</span> and / és</span>
+          <span class="chip"><span class="sym">∨</span> or / vagy</span>
+          <span class="chip"><span class="sym">→</span> implies / implikál</span>
+          <span class="chip"><span class="sym">↔</span> iff / akkor és csak akkor</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="defs">
+          <div class="row"><span class="lit">p</span><span>EN: the rock is sandstone &nbsp;|&nbsp; HU: a kőzet homokkő</span></div>
+          <div class="row"><span class="lit">q</span><span>EN: it contains fossils &nbsp;|&nbsp; HU: fosszíliákat tartalmaz</span></div>
+          <div class="row"><span class="lit">r</span><span>EN: it formed in a shallow marine environment &nbsp;|&nbsp; HU: sekély tengeri környezetben képződött</span></div>
+          <div class="row"><span class="lit">o</span><span>EN: the sample contains olivine &nbsp;|&nbsp; HU: a minta olivint tartalmaz</span></div>
+          <div class="row"><span class="lit">y</span><span>EN: the sample contains pyroxene &nbsp;|&nbsp; HU: a minta piroxént tartalmaz</span></div>
+          <div class="row"><span class="lit">i</span><span>EN: the sample is igneous &nbsp;|&nbsp; HU: a minta magmás</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Student version -->
+    <section class="card">
+      <div class="bar">
+        <div class="subtitle">Student version — write the formula / Hallgatói változat — írd fel a formulát</div>
+        <button class="btn" onclick="printPage()">Print</button>
+      </div>
+
+      <div class="section">
+        <ol class="qs">
+          <li>
+            <span class="lang en"><strong>EN:</strong> If the rock is sandstone and it contains fossils, then it formed in a shallow marine environment.</span>
+            <span class="lang hu"><strong>HU:</strong> Ha a kőzet homokkő és fosszíliákat tartalmaz, akkor sekély tengeri környezetben képződött.</span>
+          </li>
+          <li>
+            <span class="lang en"><strong>EN:</strong> The rock is sandstone exactly when it contains fossils.</span>
+            <span class="lang hu"><strong>HU:</strong> A kőzet akkor és csak akkor homokkő, ha fosszíliákat tartalmaz.</span>
+          </li>
+          <li>
+            <span class="lang en"><strong>EN:</strong> If it did not form in a shallow marine environment, then it is not sandstone or it does not contain fossils.</span>
+            <span class="lang hu"><strong>HU:</strong> Ha nem sekély tengeri környezetben képződött, akkor nem homokkő, vagy nem tartalmaz fosszíliákat.</span>
+          </li>
+          <li>
+            <span class="lang en"><strong>EN:</strong> If the sample contains olivine or pyroxene, then it is igneous.</span>
+            <span class="lang hu"><strong>HU:</strong> Ha a minta olivint vagy piroxént tartalmaz, akkor magmás.</span>
+          </li>
+          <li>
+            <span class="lang en"><strong>EN:</strong> Exactly one of these holds: the rock is sandstone, it contains fossils.</span>
+            <span class="lang hu"><strong>HU:</strong> Pontosan az egyik igaz: a kőzet homokkő, a kőzet fosszíliás.</span>
+          </li>
+          <li>
+            <span class="lang en"><strong>EN:</strong> The sample contains neither olivine nor pyroxene.</span>
+            <span class="lang hu"><strong>HU:</strong> A minta sem olivint, sem piroxént nem tartalmaz.</span>
+          </li>
+          <li>
+            <span class="lang en"><strong>EN:</strong> If the sample is igneous, then it contains olivine or pyroxene; and if it contains olivine, then it is igneous. <em>(write both, joined by “and”)</em></span>
+            <span class="lang hu"><strong>HU:</strong> Ha a minta magmás, akkor olivint vagy piroxént tartalmaz; és ha olivint tartalmaz, akkor magmás. <em>(mindkettőt írd fel, „és”-sel összekötve)</em></span>
+          </li>
+          <li>
+            <span class="lang en"><strong>EN:</strong> If sandstone implies fossils, and fossils imply shallow marine, then sandstone implies shallow marine. <em>(write this as one implication using parentheses)</em></span>
+            <span class="lang hu"><strong>HU:</strong> Ha a homokkő implikálja a fosszíliát, és a fosszíliák implikálják a sekély tengert, akkor a homokkő implikálja a sekély tengert. <em>(egy implikációként, zárójelekkel)</em></span>
+          </li>
+          <li>
+            <span class="lang en"><strong>EN:</strong> Show that “If it contains olivine or pyroxene, then it is igneous” is equivalent to its contrapositive “If it is not igneous, then it contains neither olivine nor pyroxene.” <em>(write a single ↔ formula)</em></span>
+            <span class="lang hu"><strong>HU:</strong> Mutasd meg, hogy „Ha olivint vagy piroxént tartalmaz, akkor magmás” ekvivalens a kontrapozitívjával: „Ha nem magmás, akkor sem olivint, sem piroxént nem tartalmaz.” <em>(egy ↔ formulában)</em></span>
+          </li>
+          <li>
+            <span class="lang en"><strong>EN:</strong> It formed in a shallow marine environment iff it is sandstone and contains fossils.</span>
+            <span class="lang hu"><strong>HU:</strong> Sekély tengeri környezetben képződött akkor és csak akkor, ha homokkő és fosszíliás.</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Answer key (locked) -->
+    <section class="card">
+      <div class="bar">
+        <div class="subtitle">Answer key (password required) / Megoldások (jelszó szükséges)</div>
+        <div class="unlock">
+          <input id="code" type="password" placeholder="Password (Hama1234)" />
+          <button class="btn" type="button" onclick="unlock()">Unlock / Megnyit</button>
+          <span id="msg" class="hint" aria-live="polite"></span>
+        </div>
+      </div>
+      <div id="answers" class="answers">
+        <div class="section">
+          <div class="ansitem">
+            <strong>1.</strong>
+            <div><code>(p∧q)→r</code></div>
+          </div>
+          <div class="ansitem">
+            <strong>2.</strong>
+            <div><code>p↔q</code></div>
+          </div>
+          <div class="ansitem">
+            <strong>3.</strong>
+            <div><code>¬r→(¬p∨¬q)</code></div>
+          </div>
+          <div class="ansitem">
+            <strong>4.</strong>
+            <div><code>(o∨y)→i</code></div>
+          </div>
+          <div class="ansitem">
+            <strong>5.</strong>
+            <div><code>(p∧¬q)∨(¬p∧q)</code></div>
+          </div>
+          <div class="ansitem">
+            <strong>6.</strong>
+            <div><code>¬o∧¬y</code> &nbsp;<span class="hint">(also acceptable / elfogadható: <code>¬(o∨y)</code>)</span></div>
+          </div>
+          <div class="ansitem">
+            <strong>7.</strong>
+            <div><code>[i→(o∨y)]∧[o→i]</code></div>
+          </div>
+          <div class="ansitem">
+            <strong>8.</strong>
+            <div><code>[(p→q)∧(q→r)]→(p→r)</code></div>
+          </div>
+          <div class="ansitem">
+            <s
